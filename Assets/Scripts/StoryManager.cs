@@ -71,6 +71,7 @@ public class StoryManager : MonoBehaviour
         {
             endStory = false;
         }
+        Debug.Log(currentStoryNum);
         if (storyLine.story[sencenairoNum].storyOrder.Length <= currentStoryNum) return;
         GameManager.Inst.UI.StartWrite(GetNowStory().mainStory);
     }

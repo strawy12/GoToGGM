@@ -78,15 +78,13 @@ public class UIManager : MonoBehaviour
         if(!GameManager.Inst.Story.IsEndStory && isWriting)
         {
             currentWriteSpeed = 0f;
-            Debug.Log("¿¿æ÷");
             ActiveTouchScreen(false);
             return;
         }
         else if (!GameManager.Inst.Story.IsEndStory) return;
 
-
-        GameManager.Inst.Story.StartStory();
         ActiveTouchScreen(false);
+        GameManager.Inst.Story.StartStory();
     }
 
     public void ActiveTouchScreen(bool isActive)

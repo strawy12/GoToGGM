@@ -62,7 +62,7 @@ MonoBehaviour:
   - eventStoryID: 21
     increaseStatType: 0
     increaseStat: 0
-    skipRouteCnt: 2
+    skipRouteCnt: 1
     isSuccess: 1
     eventMainStory: "\uB2F9\uC2E0\uC740 \uB9DD\uC124\uC784 \uC5C6\uC774 \uBC84\uC2A4\uC5D0
       \uBC1C\uC744 \uB0B4\uB51B\uC2B5\uB2C8\uB2E4\r\n\n\uBB38\uC774 \uB2EB\uD788\uACE0,
@@ -103,7 +103,7 @@ MonoBehaviour:
   - eventStoryID: 23
     increaseStatType: 0
     increaseStat: 0
-    skipRouteCnt: -1
+    skipRouteCnt: 0
     isSuccess: 0
     eventMainStory: "\uB2F9\uC2E0\uC740 \uC544\uC8FC \uBE60\uB974\uACE0 \uC12C\uC138\uD558\uAC8C
       \uC5D4\uC9C4\uC744 \uC190\uBCF8\uD6C4 \uBC84\uC2A4\uC5D0 \uD0D1\uC2B9\uD569\uB2C8\uB2E4.\r\n\n\uC5ED\uC2DC\uB098
