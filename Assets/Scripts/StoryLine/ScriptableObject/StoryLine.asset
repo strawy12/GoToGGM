@@ -12,11 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52f047afbe1ced9499132b5cdd5c4658, type: 3}
   m_Name: StoryLine
   m_EditorClassIdentifier: 
-  storyName: 
-  story:
-  - sceneName: "\uAE30\uD68D \uC2A4\uD1A0\uB9AC"
+  storyLines:
+  - sceneName: "\uAE30\uD68D\uC790"
     sceneNum: 0
     storyOrder: 000000000100000002000000
-  - sceneName: "\uAC1C\uBC1C \uC2A4\uD1A0\uB9AC"
-    sceneNum: 0
-    storyOrder: 010000000000000002000000

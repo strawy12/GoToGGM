@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private SeletingBtnBase[] selectBtns = new SeletingBtnBase[3];
 
     private bool isWriting = false;
+    private bool isSkip = false;
     private float currentWriteSpeed = 0f;
 
     public void StartWrite(string message, Action action = null, float writeSpeed = 0.03f)
@@ -28,16 +29,27 @@ public class UIManager : MonoBehaviour
         string messageText = "";
         foreach (var c in message)
         {
+            if (isSkip) break;
+
             messageText = string.Format("{0}{1}", messageText, c);
             storyText.text = messageText;
             yield return new WaitForSeconds(currentWriteSpeed);
             if (c == '\n')
             {
-                yield return new WaitForSeconds(currentWriteSpeed * 2f);
+                yield return new WaitForSeconds(0.5f);
             }
         }
 
+        if (!isSkip)
+        {
             yield return new WaitForSeconds(1.25f);
+        }
+        else
+        {
+            storyText.text = message;
+            yield return new WaitForSeconds(0.5f);
+            isSkip = false;
+        }
 
         if (action == null)
         {
@@ -46,9 +58,9 @@ public class UIManager : MonoBehaviour
 
         else
         {
-
             action();
         }
+
         isWriting = false;
     }
 
@@ -57,7 +69,7 @@ public class UIManager : MonoBehaviour
     {
         SelectLine[] selectLines = GameManager.Inst.Story.GetNowStory().selectLines;
 
-        for (int i = 0; i< 3; i++)
+        for (int i = 0; i < 3; i++)
         {
             selectBtns[i].gameObject.SetActive(true);
             selectBtns[i].SettingBtn(selectLines[i]);
@@ -74,10 +86,10 @@ public class UIManager : MonoBehaviour
 
     public void OnClickTouchScreen()
     {
-        
-        if(!GameManager.Inst.Story.IsEndStory && isWriting)
+
+        if (!GameManager.Inst.Story.IsEndStory && isWriting)
         {
-            currentWriteSpeed = 0f;
+            isSkip = true;
             ActiveTouchScreen(false);
             return;
         }

@@ -17,9 +17,18 @@ public enum EStatType
     Wit
 }
 
+public enum EStoryOrder
+{
+    Prologue,
+    Bus,
+    Subway
+}
+
+//public enum btnState { Special, Normal, Good }
+
 public class GameManager : MonoSingleTon<GameManager>
 {
-    public enum btnState { Special, Normal, Good }
+
     private UIManager uiManager;
     private StoryManager storyManager;
     public UIManager UI { get { return uiManager; } }

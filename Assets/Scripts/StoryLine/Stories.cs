@@ -24,14 +24,20 @@ public class SelectLine
 public class Story
 {
     public string storyName;
-    public int storyNum;
     [TextArea(7, 10)] public string mainStory;
     public SelectLine[] selectLines;
+}
+
+[System.Serializable]
+public class Scenario
+{
+    public string scenarioName;
+    public Story[] stories;
 }
 
 
 [CreateAssetMenu(fileName = "Stories", menuName = "Sprictable Object/Stories")]
 public class Stories : ScriptableObject
 {
-    public Story[] stories;
+    public Scenario[] stories;
 }

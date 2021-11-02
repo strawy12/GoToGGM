@@ -20,8 +20,22 @@ public class EventStory
     [TextArea(3, 5)] public string eventStory;
 }
 
+[System.Serializable]
+public class EventStoryLine
+{
+    public string storyLineName;
+    public EventStory[] eventStories;
+}
+
+[System.Serializable]
+public class EventScenario
+{
+    public string scenarioName;
+    public EventStoryLine[] eventStoryLines;
+}
+
 [CreateAssetMenu(fileName = "EventStories", menuName = "Sprictable Object/EventStories")]
 public class EventStories : ScriptableObject
 {
-    public EventStory[] eventStories;
+    public EventScenario[] eventScenarios;
 }

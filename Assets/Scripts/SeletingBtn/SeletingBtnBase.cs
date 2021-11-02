@@ -15,7 +15,6 @@ public class SeletingBtnBase : MonoBehaviour
     private ESelectType currentSelectState;
     protected Button button = null;
 
-    protected int increaseStoryNum = 1;
 
     public void SettingBtn(SelectLine selectLine)
     {
@@ -48,14 +47,7 @@ public class SeletingBtnBase : MonoBehaviour
         {
             // 대충 스탯 찾아서 스탯 추가하는 코드 작성해주세요 응애
         }
-        if(currentEventStory.skipRouteCnt != 0)
-        {
-            increaseStoryNum = currentEventStory.skipRouteCnt;
-        }
-        else
-        {
-            increaseStoryNum = 1;
-        }
+
     }
 
     public void SetBtnState()
@@ -82,6 +74,6 @@ public class SeletingBtnBase : MonoBehaviour
     {
         string storyLine = currentEventStory.eventStory;
         GameManager.Inst.UI.StartWrite(storyLine, GameManager.Inst.Story.EndStory);
-        GameManager.Inst.Story.SetStoryNum(increaseStoryNum);
+        GameManager.Inst.Story.SetStoryNum();
     }
 }

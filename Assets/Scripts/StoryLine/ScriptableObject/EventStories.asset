@@ -12,146 +12,306 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c153cf573ab8c7745a5fcfdf65c7b31c, type: 3}
   m_Name: EventStories
   m_EditorClassIdentifier: 
-  eventStories:
-  - eventStoryID: 11
-    increaseStatType: 3
-    increaseStat: 2
-    skipRouteCnt: 0
-    isSuccess: 0
-    eventMainStory: "\uB2F9\uC2E0\uC740 \uC544\uC774\uC640 \uD568\uAED8 \uC0B0\uB538\uAE30\uB97C
-      \uAD6C\uCD9C\uD558\uB294 \uB180\uC774\uB97C \uD569\uB2C8\uB2E4.\r\n\n\uADF8\uB7EC\uB358
-      \uC911, \uC544\uC774\uAC00 \uB9D0\uD569\uB2C8\uB2E4\n \"\uC0B0\u2026\uB098\u2026\uBC29?,
-      \uC640 \uC2DC\uACC4\uAC00 \uAC70\uAFB8\uB85C \uAC00!!\" \r\n\n\uB2F9\uC2E0\uC740
-      \uC544\uC774\uAC00 \uAC00\uC838\uB2E4 \uC900 \uC2DC\uACC4\uB97C \uBC14\uB77C\uBD05\uB2C8\uB2E4.\r\n\n\"\uC774\uAC70
-      \uC2E0\uAE30\uD55C\uB370?\" \uB2F9\uC2E0\uC740 \uC0AC\uC9C4 \uBA87\uC7A5\uC744
-      \uCC0D\uACE0 \uC544\uC774\uC640 \uC791\uBCC4\uC778\uC0AC\uB97C \uD55C \uB4A4
-      \uBC84\uC2A4\uC5D0 \uD0D1\uC2B9\uD569\uB2C8\uB2E4\r"
-    eventStory: "??: \uADF8\uAC70 \uC704\uD5D8\uD558\uB2C8\uAE4C \uC5BC\uB978 \uB5A8\uC5B4\uC838!
-      [\uC7AC\uCE58 +2]\r"
-  - eventStoryID: 12
-    increaseStatType: 0
-    increaseStat: 0
-    skipRouteCnt: 0
-    isSuccess: 0
-    eventMainStory: "\uB2F9\uC2E0\uC740 \uC544\uC774\uB97C \uD5A5\uD574 \uB2E4\uB978\uB370
-      \uAC00\uC11C \uB180\uB77C\uACE0 \uD569\uB2C8\uB2E4.\r\n\n\"\uC544..\uC54C\uC558\uC5B4...\"
-      \uC544\uC774\uB294 \uC11C\uC6B4\uD55C\uB4EF \uD130\uB35C\uD130\uB35C \uBC1C\uAC78\uC74C\uC744
-      \uC62E\uAE41\uB2C8\uB2E4.\r\n\n\uBED8\uCB58\uD574\uC9C4 \uB2F9\uC2E0\uC740
-      \uC544\uC774\uB97C \uBD88\uB7EC \uAC8C\uC784\uAE30\uB97C \uBE4C\uB824\uC90D\uB2C8\uB2E4\r\n\n\"\uB2E4\uC74C\uC5D0\uB294
-      \uAF2D \uAC19\uC774 \uB180\uC790!\" \uB2F9\uC2E0\uC740 \uADF8\uB807\uAC8C \uC57D\uC18D\uD569\uB2C8\uB2E4.\r\n\uBC84\uC2A4\uAC00
-      \uB2E4\uAC00\uC624\uC790 \uD574\uB9D1\uAC8C \uC6C3\uB294 \uC544\uC774\uC5D0\uAC8C
-      \uC778\uC0AC\uB97C \uD55C\uB4A4 \uBC84\uC2A4\uC5D0 \uD0D1\uC2B9\uD569\uB2C8\uB2E4.\r"
-    eventStory: "\uC774\uC81C\uB294 \uC6B0\uB9AC\uAC00 \uD574\uC5B4\uC838\uC57C \uD560
-      \uC2DC\uAC04~\r"
-  - eventStoryID: 13
-    increaseStatType: 1
-    increaseStat: 2
-    skipRouteCnt: 0
-    isSuccess: 0
-    eventMainStory: "\uB2F9\uC2E0\uC774 \uCF67\uC218\uC5FC\uC774 \uB09C \uBC30\uAD00\uACF5\uC758
-      \uC774\uC57C\uAE30\uB97C \uC544\uC774\uC5D0\uAC8C \uB4E4\uB824\uC8FC\uC790
-      \uC7AC\uBC0C\uB294 \uB4EF \uAE54\uAE54 \uC6C3\uC2B5\uB2C8\uB2E4.\r\n\n\uBC84\uC2A4\uAC00
-      \uC62C \uC2DC\uAC04\uC774 \uB418\uC790 \uC544\uC774\uB294 \uAC10\uC0AC\uC758
-      \uD45C\uC2DC\uB85C \uB2F9\uC2E0\uC5D0\uAC8C \uAC00\uC9C0\uACE0 \uC788\uB358
-      \uB3D9\uD654\uCC45\uC744 \uC120\uBB3C\uD569\uB2C8\uB2E4.\r\n\n\uB2F9\uC2E0\uC740
-      \uACE0\uB9C8\uC6CC \uD558\uBA70 \uCD08\uB85D\uC0C9 \uC637\uC744 \uC785\uC740
-      \uC6A9\uC0AC\uAC00 \uADF8\uB824\uC9C4 \uB3D9\uD654\uCC45\uC744 \uB4E4\uACE0
-      \uBC84\uC2A4\uC5D0 \uC62C\uB77C\uD0D1\uB2C8\uB2E4.\r"
-    eventStory: "\uADF8\uB798\uC11C \uCD08\uB85D\uC0C9 \uC637\uC774 \uC824\uB2E4\uC8E0?
-      [\uC12C\uC138 +2]\r"
-  - eventStoryID: 21
-    increaseStatType: 0
-    increaseStat: 0
-    skipRouteCnt: 1
-    isSuccess: 1
-    eventMainStory: "\uB2F9\uC2E0\uC740 \uB9DD\uC124\uC784 \uC5C6\uC774 \uBC84\uC2A4\uC5D0
-      \uBC1C\uC744 \uB0B4\uB51B\uC2B5\uB2C8\uB2E4\r\n\n\uBB38\uC774 \uB2EB\uD788\uACE0,
-      \uBC84\uC2A4\uAC00 \uCD9C\uBC1C\uD558\uC790 \uC5C4\uCCAD\uB09C \uC18D\uB3C4\uAC00
-      \uB290\uAEF4\uC9D1\uB2C8\uB2E4\u2026!\r\n\n\uC5C4\uCCAD\uB09C \uC18D\uB3C4\uB85C\uBD80\uD130
-      \uAC04\uC2E0\uD788 \uBAB8\uC744 \uACA8\uB208 \uB2F9\uC2E0\uC740  \uACA8\uC6B0
-      \uBAA9\uC801\uC9C0\uC5D0 \uB3C4\uCC29\uD558\uAC8C \uB429\uB2C8\uB2E4...\r"
-    eventStory: "\uC0C8..\uC0D0\uB7EC\uB9E8\uB354\uBCF4\uB2E4 \uD6E8\uC2E0 \uBE68\uB77C\u2026!
-      [\uB8E8\uD2B8 +1]\r"
-  - eventStoryID: 21
-    increaseStatType: 3
-    increaseStat: -3
-    skipRouteCnt: 0
-    isSuccess: 0
-    eventMainStory: "\uB2F9\uC2E0\uC740 \uC57D\uAC04\uC758 \uB9DD\uC124\uC784 \uB05D\uC5D0
-      \uBC84\uC2A4\uC5D0 \uC62C\uB77C\uD0D1\uB2C8\uB2E4\r\n\n\uB2F9\uC2E0\uC740 \uAE68\uB2EC\uC558\uC5B4\uC57C
-      \uD569\uB2C8\uB2E4.. \uC774 \uBC84\uC2A4\uC5D0\uC11C \uB0B4\uB838\uC5B4\uC57C
-      \uD558\uB294 \uAC83\uC744..\r\n\n\uC555\uB3C4\uC801\uC778 \uBC84\uC2A4\uC758
-      \uC18D\uB3C4\uC5D0 \uACB0\uAD6D \uB2F9\uC2E0\uC740 \uCC3D\uBB38 \uBC16\uC73C\uB85C
-      \uB0A0\uC544\uAC00\uBC84\uB838\uC2B5\uB2C8\uB2E4.\r\n\n\uB0A0\uC544\uAC00\uB358
-      \uB3C4\uC911\uC5D0\uB3C4 \uBA4B\uC9C4 \uCC29\uC9C0\uB97C \uD558\uB824\uB358
-      \uB2F9\uC2E0\uC740 \uACB0\uAD6D \uC190\uBAA9\uC774 \uC090\uC774\uACE0 \uB9D0\uC558\uC2B5\uB2C8\uB2E4..\r"
-    eventStory: "\uC288\uD37C \uD788\uC5B4\uB85C \uB79C\uB529.. \uC544\uC57C! [\uC12C\uC138
-      -3]\r"
-  - eventStoryID: 22
-    increaseStatType: 0
-    increaseStat: 0
-    skipRouteCnt: -1
-    isSuccess: 0
-    eventMainStory: "\uBC84\uC2A4\uAE30\uC0AC\uB2D8\uC758 \uB208\uBE5B\uC744 \uBCF4\uC790\uB9C8\uC790
-      \uBAA9\uC228\uC758 \uC704\uD611\uC744 \uB290\uB080 \uB2F9\uC2E0\uC740 \uACB0\uAD6D
-      \uBC84\uC2A4\uB97C \uD0C0\uC9C0 \uBABB\uD588\uC2B5\uB2C8\uB2E4\r\n\n\"\uC5B4,
-      \uC544\uC9C1 \uC548\uAC14\uB124?\" \uB2F9\uC2E0\uC740 \uC8FC\uBCC0\uC5D0 \uC788\uB358
-      \uC544\uC774\uC640 \uC7A0\uC2DC \uB180\uC544\uC8FC\uB2E4 \uB2E4\uC74C \uBC84\uC2A4\uB97C
-      \uD0C0\uACE0 \uCD9C\uBC1C\uD569\uB2C8\uB2E4.\r"
-    eventStory: "\uC778\uC0DD\uC740 \uD56D\uC0C1 \uC5EC\uC720\uB86D\uAC8C [\uB8E8\uD2B8
-      -1]\r\n"
-  - eventStoryID: 23
-    increaseStatType: 0
-    increaseStat: 0
-    skipRouteCnt: 0
-    isSuccess: 0
-    eventMainStory: "\uB2F9\uC2E0\uC740 \uC544\uC8FC \uBE60\uB974\uACE0 \uC12C\uC138\uD558\uAC8C
-      \uC5D4\uC9C4\uC744 \uC190\uBCF8\uD6C4 \uBC84\uC2A4\uC5D0 \uD0D1\uC2B9\uD569\uB2C8\uB2E4.\r\n\n\uC5ED\uC2DC\uB098
-      \uBC84\uC2A4\uAE30\uC0AC\uB2D8\uC740 \uC561\uC140\uC744 \uC138\uAC8C \uBC1F\uC558\uACE0
-      \uC5C4\uCCAD\uB09C \uC18D\uB3C4\uB85C \uCD9C\uBC1C\u2026\uD558\uB824\uB294
-      \uB4EF \uD588\uC2B5\uB2C8\uB2E4.\r\n\n\uB2F9\uC2E0\uC774 \uC5D4\uC9C4\uC744
-      \uC190\uBCF8 \uB355\uC5D0 \uBC84\uC2A4\uB294 \uAD50\uD1B5 \uADDC\uC815\uC5D0
-      \uB9DE\uAC8C \uC6B4\uD589\uD558\uBA70 \uC548\uC804\uD558\uAC8C \uB3C4\uCC29\uD588\uC2B5\uB2C8\uB2E4.
-      \uD734!\r"
-    eventStory: "\uC548 \uC804 \uC81C \uC77C !\r"
-  - eventStoryID: 31
-    increaseStatType: 1
-    increaseStat: 2
-    skipRouteCnt: 0
-    isSuccess: 0
-    eventMainStory: "\uC0AC\uB78C\uB4E4 \uC55E\uC5D0\uC11C \uB2F9\uC2E0\uC740 \uB9D0\uD569\uB2C8\uB2E4
-      \"\uBC14\uBCF4\uAC19\uC740 \uBF08\uB2E4\uADC0\uB97C \uBB50\uB77C\uACE0 \uBD80\uB974\uAC8C\uC694?
-      '\uACE8'\uBE48 \uBF08\uB2E4\uADC0!\"\r\n\n\uBC18\uC751\uC774 \uC2F8\uB298\uD558\uC790
-      \uB2F9\uC2E0\uC740 \uB2E4\uC2DC\uD55C\uBC88 \uB18D\uB2F4\uC744 \uB358\uC9D1\uB2C8\uB2E4\r\n\n\"\uC5ED\uC2DC
-      \uC774\uB7F0 \uB18D\uB2F4\uC744 \uB4E4\uC744 '\uBC14'\uC5D0\uB294 '\uBC14'\uC5D0\uC11C
-      \uC704\uC2A4\uD0A4\uB098 \uBA39\uB294\uAC8C \uB0AB\uACA0\uC8E0?\"\r\n\n\uB05D\uB0B4
-      \uC0AC\uB78C\uB4E4\uC740 \uB5A0\uB0AC\uC9C0\uB9CC \uBD95\uC5B4\uBE75 \uC0AC\uC7A5\uB2D8\uB9CC\uC774
-      \uBD95\uC5B4\uBE75\uC774 \uB4E0 \uBD09\uD22C\uB97C \uB2F9\uC2E0\uC55E\uC5D0
-      \uB193\uACE0 \uAC11\uB2C8\uB2E4.\r"
-    eventStory: "\uC0AC\uC7A5\uB2D8, \uBBFF\uACE0\uC788\uC5C8\uB2E4\uACE0 \uC820\uC7A5!!
-      [\uC12C\uC138 +2]\r"
-  - eventStoryID: 32
-    increaseStatType: 0
-    increaseStat: 0
-    skipRouteCnt: -1
-    isSuccess: 0
-    eventMainStory: "\uB2F9\uC2E0\uC740 \uD654\uB824\uD55C \uC5B8\uBCC0\uC73C\uB85C
-      \uC0AC\uC7A5\uB2D8\uC744 \uC124\uB4DD\uD569\uB2C8\uB2E4.\r\n\n\"\uC0AC\uC7A5\uB2D8,
-      \uC81C\uAC8C \uBD95\uC5B4\uBE75\uC744 \uC8FC\uC2DC\uBA74 \uC789\uC5B4\uBE75\uC73C\uB85C
-      \uAC1A\uC544\uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4!\"\r\n\n\"\uBBF8\uC548\uD558\uB124,
-      \uC789\uC5B4\uBE75\uC740 \uAD00\uC2EC \uC5C6\uC5B4\uC11C \uB9D0\uC77C\uC138\"
-      \r\n\n\uACB0\uAD6D \uB2F9\uC2E0\uC740 \uAF2C\uB974\uB975 \uC18C\uB9AC\uC640
-      \uD568\uAED8 \uAE38\uC744 \uB098\uC12D\uB2C8\uB2E4.. \uC660\uC9C0 \uBC1C\uC774
-      \uBB34\uAC81\uC2B5\uB2C8\uB2E4.\r"
-    eventStory: "\uBC30\uC18D\uC774 \uAF2C\uB974\uB975\uAF2C\uB974\uB975.. [\uB8E8\uD2B8
-      -1]\r"
-  - eventStoryID: 33
-    increaseStatType: 3
-    increaseStat: -1
-    skipRouteCnt: 0
-    isSuccess: 0
-    eventMainStory: "\uB2F9\uC2E0\uC740 \uBD95\uC5B4\uBE75\uC744 \uD3EC\uAE30\uD558\uACE0
-      \uBC1C\uAC78\uC74C\uC744 \uB3CC\uB9BD\uB2C8\uB2E4.\r\n\n\uBC30\uAC00 \uACE0\uD30C\uC11C
-      \uADF8\uB7F0\uC9C0 \uBA38\uB9BF\uC18D\uC774 \uD145 \uBE48 \uB290\uB08C\uC774
-      \uB4ED\uB2C8\uB2E4..\r"
-    eventStory: "\uBA38\uB9AC\uAC00 \uB775! [\uC7AC\uCE58 -1]\r"
+  eventScenarios:
+  - scenarioName: "\uD504\uB864\uB85C\uADF8"
+    eventStoryLines:
+    - storyLineName: "\uC7A0\uC5D0\uC11C \uAE6C \uC815\uBC30"
+      eventStories:
+      - eventStoryID: 11
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uD504\uB864\uB85C\uADF8 1"
+        eventStory: "\uD504\uB864\uB85C\uADF8 1 \uD504\uB864\uB85C\uADF8 1"
+      - eventStoryID: 12
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uD504\uB864\uB85C\uADF8 2"
+        eventStory: "\uD504\uB864\uB85C\uADF8 2 \uD504\uB864\uB85C\uADF8 2"
+      - eventStoryID: 13
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uD504\uB864\uB85C\uADF8 3 "
+        eventStory: "\uD504\uB864\uB85C\uADF8 3 \uD504\uB864\uB85C\uADF8 3"
+    - storyLineName: "\uD559\uAD50\uAC08 \uC900\uBE44\uB97C \uD558\uB294 \uC815\uBC30"
+      eventStories:
+      - eventStoryID: 21
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uD504\uB864\uB85C\uADF8 1 \uD504\uB864\uB85C\uADF8 1"
+        eventStory: "\uD504\uB864\uB85C\uADF8 1"
+      - eventStoryID: 22
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uD504\uB864\uB85C\uADF8 2 \uD504\uB864\uB85C\uADF8 2"
+        eventStory: "\uD504\uB864\uB85C\uADF8 2"
+      - eventStoryID: 23
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uD504\uB864\uB85C\uADF8 3 \uD504\uB864\uB85C\uADF8 3"
+        eventStory: "\uD504\uB864\uB85C\uADF8 3"
+    - storyLineName: "\uC9C1\uC5C5 \uC120\uD0DD"
+      eventStories:
+      - eventStoryID: 31
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uAE30\uD68D \uC120\uD0DD"
+        eventStory: "\uAE30\uD68D \uC120\uD0DD \uAE30\uD68D \uC120\uD0DD"
+      - eventStoryID: 32
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uAC1C\uBC1C \uC120\uD0DD"
+        eventStory: "\uAC1C\uBC1C \uC120\uD0DD \uAC1C\uBC1C \uC120\uD0DD"
+      - eventStoryID: 33
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uC544\uD2B8 \uC120\uD0DD"
+        eventStory: "\uC544\uD2B8 \uC120\uD0DD \uC544\uD2B8 \uC120\uD0DD"
+  - scenarioName: "\uBC84\uC2A4"
+    eventStoryLines:
+    - storyLineName: "\uC544\uC774\uAC00 \uC870\uB984"
+      eventStories:
+      - eventStoryID: 41
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uB2F9\uC2E0\uC740 \uC544\uC774\uC640 \uD568\uAED8 \uC0B0\uB538\uAE30\uB97C
+          \uAD6C\uCD9C\uD558\uB294 \uB180\uC774\uB97C \uD569\uB2C8\uB2E4.\r\n\r\n\uADF8\uB7EC\uB358
+          \uC911, \uC544\uC774\uAC00 \uB9D0\uD569\uB2C8\uB2E4\r\n \"\uC0B0\u2026\uB098\u2026\uBC29?,
+          \uC640 \uC2DC\uACC4\uAC00 \uAC70\uAFB8\uB85C \uAC00!!\" \r\n\r\n\uB2F9\uC2E0\uC740
+          \uC544\uC774\uAC00 \uAC00\uC838\uB2E4 \uC900 \uC2DC\uACC4\uB97C \uBC14\uB77C\uBD05\uB2C8\uB2E4.\r\n\r\n\"\uC774\uAC70
+          \uC2E0\uAE30\uD55C\uB370?\" \uB2F9\uC2E0\uC740 \uC0AC\uC9C4 \uBA87\uC7A5\uC744
+          \uCC0D\uACE0 \uC544\uC774\uC640 \uC791\uBCC4\uC778\uC0AC\uB97C \uD55C \uB4A4
+          \uBC84\uC2A4\uC5D0 \uD0D1\uC2B9\uD569\uB2C8\uB2E4\r"
+        eventStory: "??: \uADF8\uAC70 \uC704\uD5D8\uD558\uB2C8\uAE4C \uC5BC\uB978
+          \uB5A8\uC5B4\uC838! [\uC7AC\uCE58 +2]\r"
+      - eventStoryID: 42
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uB2F9\uC2E0\uC740 \uC544\uC774\uB97C \uD5A5\uD574 \uB2E4\uB978\uB370
+          \uAC00\uC11C \uB180\uB77C\uACE0 \uD569\uB2C8\uB2E4.\r\n\r\n\"\uC544..\uC54C\uC558\uC5B4...\"
+          \uC544\uC774\uB294 \uC11C\uC6B4\uD55C\uB4EF \uD130\uB35C\uD130\uB35C \uBC1C\uAC78\uC74C\uC744
+          \uC62E\uAE41\uB2C8\uB2E4.\r\n\r\n\uBED8\uCB58\uD574\uC9C4 \uB2F9\uC2E0\uC740
+          \uC544\uC774\uB97C \uBD88\uB7EC \uAC8C\uC784\uAE30\uB97C \uBE4C\uB824\uC90D\uB2C8\uB2E4\r\n\r\n\"\uB2E4\uC74C\uC5D0\uB294
+          \uAF2D \uAC19\uC774 \uB180\uC790!\" \uB2F9\uC2E0\uC740 \uADF8\uB807\uAC8C
+          \uC57D\uC18D\uD569\uB2C8\uB2E4.\r\n\uBC84\uC2A4\uAC00 \uB2E4\uAC00\uC624\uC790
+          \uD574\uB9D1\uAC8C \uC6C3\uB294 \uC544\uC774\uC5D0\uAC8C \uC778\uC0AC\uB97C
+          \uD55C\uB4A4 \uBC84\uC2A4\uC5D0 \uD0D1\uC2B9\uD569\uB2C8\uB2E4."
+        eventStory: "\uC774\uC81C\uB294 \uC6B0\uB9AC\uAC00 \uD5E4\uC5B4\uC838\uC57C
+          \uD560 \uC2DC\uAC04~"
+      - eventStoryID: 43
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uB2F9\uC2E0\uC774 \uCF67\uC218\uC5FC\uC774 \uB09C \uBC30\uAD00\uACF5\uC758
+          \uC774\uC57C\uAE30\uB97C \uC544\uC774\uC5D0\uAC8C \uB4E4\uB824\uC8FC\uC790
+          \uC7AC\uBC0C\uB294 \uB4EF \uAE54\uAE54 \uC6C3\uC2B5\uB2C8\uB2E4.\r\n\r\n\uBC84\uC2A4\uAC00
+          \uC62C \uC2DC\uAC04\uC774 \uB418\uC790 \uC544\uC774\uB294 \uAC10\uC0AC\uC758
+          \uD45C\uC2DC\uB85C \uB2F9\uC2E0\uC5D0\uAC8C \uAC00\uC9C0\uACE0 \uC788\uB358
+          \uB3D9\uD654\uCC45\uC744 \uC120\uBB3C\uD569\uB2C8\uB2E4.\r\n\r\n\uB2F9\uC2E0\uC740
+          \uACE0\uB9C8\uC6CC \uD558\uBA70 \uCD08\uB85D\uC0C9 \uC637\uC744 \uC785\uC740
+          \uC6A9\uC0AC\uAC00 \uADF8\uB824\uC9C4 \uB3D9\uD654\uCC45\uC744 \uB4E4\uACE0
+          \uBC84\uC2A4\uC5D0 \uC62C\uB77C\uD0D1\uB2C8\uB2E4."
+        eventStory: "\uADF8\uB798\uC11C \uCD08\uB85D\uC0C9 \uC637\uC774 \uC824\uB2E4\uC8E0?
+          [\uC12C\uC138 +2]"
+    - storyLineName: "\uBC84\uC2A4 \uC544\uC800\uC528\uC758 \uBB34\uC11C\uC6B4 \uC5BC\uAD74"
+      eventStories:
+      - eventStoryID: 41
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 1
+        eventMainStory: "\uB2F9\uC2E0\uC740 \uB9DD\uC124\uC784 \uC5C6\uC774 \uBC84\uC2A4\uC5D0
+          \uBC1C\uC744 \uB0B4\uB51B\uC2B5\uB2C8\uB2E4\r\n\r\n\uBB38\uC774 \uB2EB\uD788\uACE0,
+          \uBC84\uC2A4\uAC00 \uCD9C\uBC1C\uD558\uC790 \uC5C4\uCCAD\uB09C \uC18D\uB3C4\uAC00
+          \uB290\uAEF4\uC9D1\uB2C8\uB2E4\u2026!\r\n\r\n\uC5C4\uCCAD\uB09C \uC18D\uB3C4\uB85C\uBD80\uD130
+          \uAC04\uC2E0\uD788 \uBAB8\uC744 \uACA8\uB208 \uB2F9\uC2E0\uC740  \uACA8\uC6B0
+          \uBAA9\uC801\uC9C0\uC5D0 \uB3C4\uCC29\uD558\uAC8C \uB429\uB2C8\uB2E4..."
+        eventStory: "\uC0C8..\uC0D0\uB7EC\uB9E8\uB354\uBCF4\uB2E4 \uD6E8\uC2E0 \uBE68\uB77C\u2026!
+          [\uB8E8\uD2B8 +1]"
+      - eventStoryID: 41
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uB2F9\uC2E0\uC740 \uC57D\uAC04\uC758 \uB9DD\uC124\uC784
+          \uB05D\uC5D0 \uBC84\uC2A4\uC5D0 \uC62C\uB77C\uD0D1\uB2C8\uB2E4\r\n\r\n\uB2F9\uC2E0\uC740
+          \uAE68\uB2EC\uC558\uC5B4\uC57C \uD569\uB2C8\uB2E4.. \uC774 \uBC84\uC2A4\uC5D0\uC11C
+          \uB0B4\uB838\uC5B4\uC57C \uD558\uB294 \uAC83\uC744..\r\n\r\n\uC555\uB3C4\uC801\uC778
+          \uBC84\uC2A4\uC758 \uC18D\uB3C4\uC5D0 \uACB0\uAD6D \uB2F9\uC2E0\uC740 \uCC3D\uBB38
+          \uBC16\uC73C\uB85C \uB0A0\uC544\uAC00\uBC84\uB838\uC2B5\uB2C8\uB2E4.\r\n\r\n\uB0A0\uC544\uAC00\uB358
+          \uB3C4\uC911\uC5D0\uB3C4 \uBA4B\uC9C4 \uCC29\uC9C0\uB97C \uD558\uB824\uB358
+          \uB2F9\uC2E0\uC740 \uACB0\uAD6D \uC190\uBAA9\uC774 \uC090\uC774\uACE0 \uB9D0\uC558\uC2B5\uB2C8\uB2E4.."
+        eventStory: "\uC288\uD37C \uD788\uC5B4\uB85C \uB79C\uB529.. \uC544\uC57C!
+          [\uC12C\uC138 -3]"
+      - eventStoryID: 42
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uBC84\uC2A4\uAE30\uC0AC\uB2D8\uC758 \uB208\uBE5B\uC744
+          \uBCF4\uC790\uB9C8\uC790 \uBAA9\uC228\uC758 \uC704\uD611\uC744 \uB290\uB080
+          \uB2F9\uC2E0\uC740 \uACB0\uAD6D \uBC84\uC2A4\uB97C \uD0C0\uC9C0 \uBABB\uD588\uC2B5\uB2C8\uB2E4\r\n\r\n\"\uC5B4,
+          \uC544\uC9C1 \uC548\uAC14\uB124?\" \uB2F9\uC2E0\uC740 \uC8FC\uBCC0\uC5D0
+          \uC788\uB358 \uC544\uC774\uC640 \uC7A0\uC2DC \uB180\uC544\uC8FC\uB2E4 \uB2E4\uC74C
+          \uBC84\uC2A4\uB97C \uD0C0\uACE0 \uCD9C\uBC1C\uD569\uB2C8\uB2E4."
+        eventStory: "\uC778\uC0DD\uC740 \uD56D\uC0C1 \uC5EC\uC720\uB86D\uAC8C [\uB8E8\uD2B8
+          -1]"
+      - eventStoryID: 43
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uB2F9\uC2E0\uC740 \uC544\uC8FC \uBE60\uB974\uACE0 \uC12C\uC138\uD558\uAC8C
+          \uC5D4\uC9C4\uC744 \uC190\uBCF8\uD6C4 \uBC84\uC2A4\uC5D0 \uD0D1\uC2B9\uD569\uB2C8\uB2E4.\r\n\r\n\uC5ED\uC2DC\uB098
+          \uBC84\uC2A4\uAE30\uC0AC\uB2D8\uC740 \uC561\uC140\uC744 \uC138\uAC8C \uBC1F\uC558\uACE0
+          \uC5C4\uCCAD\uB09C \uC18D\uB3C4\uB85C \uCD9C\uBC1C\u2026\uD558\uB824\uB294
+          \uB4EF \uD588\uC2B5\uB2C8\uB2E4.\r\n\r\n\uB2F9\uC2E0\uC774 \uC5D4\uC9C4\uC744
+          \uC190\uBCF8 \uB355\uC5D0 \uBC84\uC2A4\uB294 \uAD50\uD1B5 \uADDC\uC815\uC5D0
+          \uB9DE\uAC8C \uC6B4\uD589\uD558\uBA70 \uC548\uC804\uD558\uAC8C \uB3C4\uCC29\uD588\uC2B5\uB2C8\uB2E4.
+          \uD734!"
+        eventStory: "\uC548 \uC804 \uC81C \uC77C !"
+    - storyLineName: "\uBD95\uC5B4\uBE75\uC9D1 \uC544\uC800\uC528 \uC0AC\uB791\uD574\uC6A9"
+      eventStories:
+      - eventStoryID: 51
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 1
+        eventMainStory: "\uC0AC\uB78C\uB4E4 \uC55E\uC5D0\uC11C \uB2F9\uC2E0\uC740
+          \uB9D0\uD569\uB2C8\uB2E4 \"\uBC14\uBCF4\uAC19\uC740 \uBF08\uB2E4\uADC0\uB97C
+          \uBB50\uB77C\uACE0 \uBD80\uB974\uAC8C\uC694? '\uACE8'\uBE48 \uBF08\uB2E4\uADC0!\"\r\n\r\n\uBC18\uC751\uC774
+          \uC2F8\uB298\uD558\uC790 \uB2F9\uC2E0\uC740 \uB2E4\uC2DC\uD55C\uBC88 \uB18D\uB2F4\uC744
+          \uB358\uC9D1\uB2C8\uB2E4\r\n\r\n\"\uC5ED\uC2DC \uC774\uB7F0 \uB18D\uB2F4\uC744
+          \uB4E4\uC744 '\uBC14'\uC5D0\uB294 '\uBC14'\uC5D0\uC11C \uC704\uC2A4\uD0A4\uB098
+          \uBA39\uB294\uAC8C \uB0AB\uACA0\uC8E0?\"\r\n\r\n\uB05D\uB0B4 \uC0AC\uB78C\uB4E4\uC740
+          \uB5A0\uB0AC\uC9C0\uB9CC \uBD95\uC5B4\uBE75 \uC0AC\uC7A5\uB2D8\uB9CC\uC774
+          \uBD95\uC5B4\uBE75\uC774 \uB4E0 \uBD09\uD22C\uB97C \uB2F9\uC2E0\uC55E\uC5D0
+          \uB193\uACE0 \uAC11\uB2C8\uB2E4."
+        eventStory: "\uC0AC\uC7A5\uB2D8, \uBBFF\uACE0\uC788\uC5C8\uB2E4\uACE0 \uC820\uC7A5!!
+          [\uC12C\uC138 +2]"
+      - eventStoryID: 52
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uB2F9\uC2E0\uC740 \uD654\uB824\uD55C \uC5B8\uBCC0\uC73C\uB85C
+          \uC0AC\uC7A5\uB2D8\uC744 \uC124\uB4DD\uD569\uB2C8\uB2E4.\r\n\r\n\"\uC0AC\uC7A5\uB2D8,
+          \uC81C\uAC8C \uBD95\uC5B4\uBE75\uC744 \uC8FC\uC2DC\uBA74 \uC789\uC5B4\uBE75\uC73C\uB85C
+          \uAC1A\uC544\uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4!\"\r\n\r\n\"\uBBF8\uC548\uD558\uB124,
+          \uC789\uC5B4\uBE75\uC740 \uAD00\uC2EC \uC5C6\uC5B4\uC11C \uB9D0\uC77C\uC138\"
+          \r\n\r\n\uACB0\uAD6D \uB2F9\uC2E0\uC740 \uAF2C\uB974\uB975 \uC18C\uB9AC\uC640
+          \uD568\uAED8 \uAE38\uC744 \uB098\uC12D\uB2C8\uB2E4.. \uC660\uC9C0 \uBC1C\uC774
+          \uBB34\uAC81\uC2B5\uB2C8\uB2E4."
+        eventStory: "\uBC30\uC18D\uC774 \uAF2C\uB974\uB975\uAF2C\uB974\uB975.. [\uB8E8\uD2B8
+          -1]\r"
+      - eventStoryID: 53
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uB2F9\uC2E0\uC740 \uBD95\uC5B4\uBE75\uC744 \uD3EC\uAE30\uD558\uACE0
+          \uBC1C\uAC78\uC74C\uC744 \uB3CC\uB9BD\uB2C8\uB2E4.\r\n\r\n\uBC30\uAC00
+          \uACE0\uD30C\uC11C \uADF8\uB7F0\uC9C0 \uBA38\uB9BF\uC18D\uC774 \uD145 \uBE48
+          \uB290\uB08C\uC774 \uB4ED\uB2C8\uB2E4.."
+        eventStory: "\uBA38\uB9AC\uAC00 \uB775! [\uC7AC\uCE58 -1]"
+  - scenarioName: "\uC9C0\uD558\uCCA0"
+    eventStoryLines:
+    - storyLineName: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 1"
+      eventStories:
+      - eventStoryID: 71
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 1"
+        eventStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 1\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30
+          1"
+      - eventStoryID: 72
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 1\uC9C0\uD558\uCCA0
+          \uC774\uC57C\uAE30 1"
+        eventStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 1"
+      - eventStoryID: 73
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 1\uC9C0\uD558\uCCA0
+          \uC774\uC57C\uAE30 1\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 1"
+        eventStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 1"
+    - storyLineName: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 2"
+      eventStories:
+      - eventStoryID: 81
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 2"
+        eventStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 2\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30
+          2"
+      - eventStoryID: 72
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 2\uC9C0\uD558\uCCA0
+          \uC774\uC57C\uAE30 2"
+        eventStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 2"
+      - eventStoryID: 73
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 2\uC9C0\uD558\uCCA0
+          \uC774\uC57C\uAE30 2\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 2"
+        eventStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 2"
+    - storyLineName: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 3"
+      eventStories:
+      - eventStoryID: 91
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 1
+        eventMainStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 3\uC9C0\uD558\uCCA0
+          \uC774\uC57C\uAE30 3\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 3"
+        eventStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 3"
+      - eventStoryID: 92
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 3\uC9C0\uD558\uCCA0
+          \uC774\uC57C\uAE30 3"
+        eventStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 3"
+      - eventStoryID: 93
+        increaseStatType: 0
+        increaseStat: 0
+        skipRouteCnt: 0
+        isSuccess: 0
+        eventMainStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 3"
+        eventStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 3"
