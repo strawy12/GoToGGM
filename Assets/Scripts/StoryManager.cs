@@ -58,6 +58,7 @@ public class StoryManager : MonoBehaviour
         return stories.stories[storyNum].stories[currentStoryNum];
     }
 
+
     public void SetStoryNum()
     {
         int maxStoryNum = stories.stories[GetCurrentScenarioNum()].stories.Length - 1;
@@ -83,8 +84,19 @@ public class StoryManager : MonoBehaviour
         {
             endStory = false;
         }
-        Debug.Log(currentScenarioCnt);
         if (storyLine.storyLines[storyLineNum].storyOrder.Length <= currentScenarioCnt) return;
+        Story story = GetNowStory();
+
+        Debug.Log(story.storyName);
+
+        if (story.storyName.Contains("직업 선택"))
+        {
+            GameManager.Inst.SelectJob();
+
+            GameManager.Inst.UI.StartWrite(GetNowStory().mainStory);
+            return;
+        }
+
         GameManager.Inst.UI.StartWrite(GetNowStory().mainStory);
     }
 
@@ -93,7 +105,7 @@ public class StoryManager : MonoBehaviour
         endStory = true;
         GameManager.Inst.UI.ActiveTouchScreen(true);
         GameManager.Inst.UI.UnShowSelectBtn();
-
+        GameManager.Inst.UI.SetStatText();
     }
 
 }

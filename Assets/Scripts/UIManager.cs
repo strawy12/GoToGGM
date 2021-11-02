@@ -8,6 +8,8 @@ using DG.Tweening;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Text storyText = null;
+    [SerializeField] private Text jobStatusText = null;
+    [SerializeField] private Text statText = null;
     [SerializeField] private GameObject touchScreen = null;
     [SerializeField] private SeletingBtnBase[] selectBtns = new SeletingBtnBase[3];
 
@@ -15,6 +17,10 @@ public class UIManager : MonoBehaviour
     private bool isSkip = false;
     private float currentWriteSpeed = 0f;
 
+    private void Start()
+    {
+
+    }
     public void StartWrite(string message, Action action = null, float writeSpeed = 0.03f)
     {
         StartCoroutine(WriteText(message, action, writeSpeed));
@@ -72,7 +78,7 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             selectBtns[i].gameObject.SetActive(true);
-            selectBtns[i].SettingBtn(selectLines[i]);
+            selectBtns[i].SettingBtn(selectLines[i], i);
         }
     }
     public void UnShowSelectBtn(SeletingBtnBase seletingBtn = null)
@@ -102,6 +108,29 @@ public class UIManager : MonoBehaviour
     public void ActiveTouchScreen(bool isActive)
     {
         touchScreen.SetActive(isActive);
+    }
+
+    public void SetEventToSelectBtn(bool isRemove)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            selectBtns[i].SetEvent(selectBtns[i].SetPlayerJob, isRemove);
+        }
+    }
+
+    public void SetJobText()
+    {
+        jobStatusText.text = GameManager.Inst.CurrentPlayer.playerjob;
+    }
+
+    public void SetStatText()
+    {
+        int wit = GameManager.Inst.CurrentPlayer.stat_Wit;
+        int knowledge = GameManager.Inst.CurrentPlayer.stat_Knowledge;
+        int sencetive = GameManager.Inst.CurrentPlayer.stat_Sencetive;
+
+        statText.text = string.Format("재치: {0} / 섬세: {1} / 지식: {2}", wit, sencetive, knowledge);
+
     }
 
     private void FadeObject(Image obj)

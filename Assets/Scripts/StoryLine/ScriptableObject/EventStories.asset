@@ -68,29 +68,29 @@ MonoBehaviour:
         increaseStat: 0
         skipRouteCnt: 0
         isSuccess: 0
-        eventMainStory: "\uAE30\uD68D \uC120\uD0DD"
-        eventStory: "\uAE30\uD68D \uC120\uD0DD \uAE30\uD68D \uC120\uD0DD"
+        eventMainStory: "\uB2F9\uC2E0\uC740 \uC774\uC81C\uBD80\uD130 \uAE30\uD68D\uC7A1\uB2C8\uB2E4!"
+        eventStory: "\uC6CC\uB4DC\uC2F8\uAC1C \uC77C\uD574\uB77C"
       - eventStoryID: 32
         increaseStatType: 0
         increaseStat: 0
         skipRouteCnt: 0
         isSuccess: 0
-        eventMainStory: "\uAC1C\uBC1C \uC120\uD0DD"
-        eventStory: "\uAC1C\uBC1C \uC120\uD0DD \uAC1C\uBC1C \uC120\uD0DD"
+        eventMainStory: "\uB2F9\uC2E0\uC740 \uC774\uC81C\uBD80\uD130 \uD504\uB85C\uADF8\uB798\uBA38\uC785\uB2C8\uB2E4!"
+        eventStory: "\uBC84\uADF8\uC758 \uC232\uC5D0 \uC628\uAC78 \uD658\uC601\uD574~"
       - eventStoryID: 33
         increaseStatType: 0
         increaseStat: 0
         skipRouteCnt: 0
         isSuccess: 0
-        eventMainStory: "\uC544\uD2B8 \uC120\uD0DD"
-        eventStory: "\uC544\uD2B8 \uC120\uD0DD \uC544\uD2B8 \uC120\uD0DD"
+        eventMainStory: "\uB2F9\uC2E0\uC740 \uC774\uC81C\uBD80\uD130 \uC544\uD2F0\uC2A4\uD2B8\uC785\uB2C8\uB2E4!"
+        eventStory: "\uC77C\uD574\uB77C \uB178\uC608\uC57C"
   - scenarioName: "\uBC84\uC2A4"
     eventStoryLines:
     - storyLineName: "\uC544\uC774\uAC00 \uC870\uB984"
       eventStories:
       - eventStoryID: 41
-        increaseStatType: 0
-        increaseStat: 0
+        increaseStatType: 3
+        increaseStat: 2
         skipRouteCnt: 0
         isSuccess: 0
         eventMainStory: "\uB2F9\uC2E0\uC740 \uC544\uC774\uC640 \uD568\uAED8 \uC0B0\uB538\uAE30\uB97C
@@ -120,8 +120,8 @@ MonoBehaviour:
         eventStory: "\uC774\uC81C\uB294 \uC6B0\uB9AC\uAC00 \uD5E4\uC5B4\uC838\uC57C
           \uD560 \uC2DC\uAC04~"
       - eventStoryID: 43
-        increaseStatType: 0
-        increaseStat: 0
+        increaseStatType: 1
+        increaseStat: 2
         skipRouteCnt: 0
         isSuccess: 0
         eventMainStory: "\uB2F9\uC2E0\uC774 \uCF67\uC218\uC5FC\uC774 \uB09C \uBC30\uAD00\uACF5\uC758
@@ -137,10 +137,10 @@ MonoBehaviour:
           [\uC12C\uC138 +2]"
     - storyLineName: "\uBC84\uC2A4 \uC544\uC800\uC528\uC758 \uBB34\uC11C\uC6B4 \uC5BC\uAD74"
       eventStories:
-      - eventStoryID: 41
+      - eventStoryID: 51
         increaseStatType: 0
         increaseStat: 0
-        skipRouteCnt: 0
+        skipRouteCnt: 1
         isSuccess: 1
         eventMainStory: "\uB2F9\uC2E0\uC740 \uB9DD\uC124\uC784 \uC5C6\uC774 \uBC84\uC2A4\uC5D0
           \uBC1C\uC744 \uB0B4\uB51B\uC2B5\uB2C8\uB2E4\r\n\r\n\uBB38\uC774 \uB2EB\uD788\uACE0,
@@ -150,9 +150,9 @@ MonoBehaviour:
           \uBAA9\uC801\uC9C0\uC5D0 \uB3C4\uCC29\uD558\uAC8C \uB429\uB2C8\uB2E4..."
         eventStory: "\uC0C8..\uC0D0\uB7EC\uB9E8\uB354\uBCF4\uB2E4 \uD6E8\uC2E0 \uBE68\uB77C\u2026!
           [\uB8E8\uD2B8 +1]"
-      - eventStoryID: 41
-        increaseStatType: 0
-        increaseStat: 0
+      - eventStoryID: 51
+        increaseStatType: 1
+        increaseStat: -3
         skipRouteCnt: 0
         isSuccess: 0
         eventMainStory: "\uB2F9\uC2E0\uC740 \uC57D\uAC04\uC758 \uB9DD\uC124\uC784
@@ -165,10 +165,10 @@ MonoBehaviour:
           \uB2F9\uC2E0\uC740 \uACB0\uAD6D \uC190\uBAA9\uC774 \uC090\uC774\uACE0 \uB9D0\uC558\uC2B5\uB2C8\uB2E4.."
         eventStory: "\uC288\uD37C \uD788\uC5B4\uB85C \uB79C\uB529.. \uC544\uC57C!
           [\uC12C\uC138 -3]"
-      - eventStoryID: 42
+      - eventStoryID: 52
         increaseStatType: 0
         increaseStat: 0
-        skipRouteCnt: 0
+        skipRouteCnt: -1
         isSuccess: 0
         eventMainStory: "\uBC84\uC2A4\uAE30\uC0AC\uB2D8\uC758 \uB208\uBE5B\uC744
           \uBCF4\uC790\uB9C8\uC790 \uBAA9\uC228\uC758 \uC704\uD611\uC744 \uB290\uB080
@@ -178,7 +178,7 @@ MonoBehaviour:
           \uBC84\uC2A4\uB97C \uD0C0\uACE0 \uCD9C\uBC1C\uD569\uB2C8\uB2E4."
         eventStory: "\uC778\uC0DD\uC740 \uD56D\uC0C1 \uC5EC\uC720\uB86D\uAC8C [\uB8E8\uD2B8
           -1]"
-      - eventStoryID: 43
+      - eventStoryID: 53
         increaseStatType: 0
         increaseStat: 0
         skipRouteCnt: 0
@@ -194,9 +194,9 @@ MonoBehaviour:
         eventStory: "\uC548 \uC804 \uC81C \uC77C !"
     - storyLineName: "\uBD95\uC5B4\uBE75\uC9D1 \uC544\uC800\uC528 \uC0AC\uB791\uD574\uC6A9"
       eventStories:
-      - eventStoryID: 51
-        increaseStatType: 0
-        increaseStat: 0
+      - eventStoryID: 61
+        increaseStatType: 1
+        increaseStat: 2
         skipRouteCnt: 0
         isSuccess: 1
         eventMainStory: "\uC0AC\uB78C\uB4E4 \uC55E\uC5D0\uC11C \uB2F9\uC2E0\uC740
@@ -211,10 +211,10 @@ MonoBehaviour:
           \uB193\uACE0 \uAC11\uB2C8\uB2E4."
         eventStory: "\uC0AC\uC7A5\uB2D8, \uBBFF\uACE0\uC788\uC5C8\uB2E4\uACE0 \uC820\uC7A5!!
           [\uC12C\uC138 +2]"
-      - eventStoryID: 52
+      - eventStoryID: 62
         increaseStatType: 0
         increaseStat: 0
-        skipRouteCnt: 0
+        skipRouteCnt: -1
         isSuccess: 0
         eventMainStory: "\uB2F9\uC2E0\uC740 \uD654\uB824\uD55C \uC5B8\uBCC0\uC73C\uB85C
           \uC0AC\uC7A5\uB2D8\uC744 \uC124\uB4DD\uD569\uB2C8\uB2E4.\r\n\r\n\"\uC0AC\uC7A5\uB2D8,
@@ -226,9 +226,9 @@ MonoBehaviour:
           \uBB34\uAC81\uC2B5\uB2C8\uB2E4."
         eventStory: "\uBC30\uC18D\uC774 \uAF2C\uB974\uB975\uAF2C\uB974\uB975.. [\uB8E8\uD2B8
           -1]\r"
-      - eventStoryID: 53
-        increaseStatType: 0
-        increaseStat: 0
+      - eventStoryID: 63
+        increaseStatType: 2
+        increaseStat: -1
         skipRouteCnt: 0
         isSuccess: 0
         eventMainStory: "\uB2F9\uC2E0\uC740 \uBD95\uC5B4\uBE75\uC744 \uD3EC\uAE30\uD558\uACE0

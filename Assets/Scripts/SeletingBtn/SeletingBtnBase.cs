@@ -15,37 +15,45 @@ public class SeletingBtnBase : MonoBehaviour
     private ESelectType currentSelectState;
     protected Button button = null;
 
+    protected int btnNum = 0;
 
-    public void SettingBtn(SelectLine selectLine)
+    public void SettingBtn(SelectLine selectLine, int num)
     {
         if (button == null)
         {
             button = GetComponent<Button>();
         }
+
         currentSelectLine = selectLine;
         currentSelectState = selectLine.selectType;
+        btnNum = num;
         if (currentSelectState == ESelectType.Gread)
         {
             currentEventStory = GameManager.Inst.Story.GetEventStory(currentSelectLine.eventStoryID, true, Random.Range(0, 2) == 0);
         }
-        //else if(currentSelectState == ESelectType.Special)
-        //{
-        //    // 대충 스탯 체크 해서 락 시키는 코드 작성 하기
-        //}
         else
         {
             currentEventStory = GameManager.Inst.Story.GetEventStory(currentSelectLine.eventStoryID);
         }
+        if (currentSelectState == ESelectType.Special)
+        {
+            button.interactable = GameManager.Inst.CheckPlayerStat(currentSelectLine.needStatType, currentSelectLine.needStat);
+        }
+        else
+        {
+            button.interactable = true;
+        }
+        
 
         SetBtnState();
-        CheckInfo();
+        
     }
 
     public void CheckInfo()
     {
         if (currentEventStory.increaseStatType != EStatType.None)
         {
-            // 대충 스탯 찾아서 스탯 추가하는 코드 작성해주세요 응애
+            GameManager.Inst.SetPlayerStat(currentEventStory.increaseStatType, currentEventStory.increaseStat);
         }
 
     }
@@ -68,6 +76,7 @@ public class SeletingBtnBase : MonoBehaviour
         string storyLine = currentEventStory.eventMainStory;
         GameManager.Inst.UI.StartWrite(storyLine, FinallyMention);
         GameManager.Inst.UI.UnShowSelectBtn(this);
+        CheckInfo();
     }
 
     public void FinallyMention()
@@ -75,5 +84,27 @@ public class SeletingBtnBase : MonoBehaviour
         string storyLine = currentEventStory.eventStory;
         GameManager.Inst.UI.StartWrite(storyLine, GameManager.Inst.Story.EndStory);
         GameManager.Inst.Story.SetStoryNum();
+    }
+
+    public void SetEvent(Action action, bool isRemove)
+    {
+        if (isRemove)
+        {
+            button.onClick.RemoveListener(() => action());
+        }
+        else
+        {
+            button.onClick.AddListener(() => action());
+        }
+    }
+
+    public void ChangeLockImage()
+    {
+
+    }
+
+    public void SetPlayerJob()
+    {
+        GameManager.Inst.SetPlayerJob(btnNum);
     }
 }

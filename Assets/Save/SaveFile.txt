@@ -1,0 +1,6 @@
+﻿{
+    "playerjob": "고등학생",
+    "stat_Sencetive": 0,
+    "stat_Knowledge": 0,
+    "stat_Wit": 0
+}
