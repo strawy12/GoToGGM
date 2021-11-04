@@ -4,16 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class SeletingBtnBase : MonoBehaviour
 {
     [SerializeField] protected Text seletingText;
     [SerializeField] private Text btnStateText;
 
+    protected CanvasGroup canvasGroup;
     protected SelectLine currentSelectLine;
     protected EventStory currentEventStory;
     private ESelectType currentSelectState;
     protected Button button = null;
+
+    public ESelectType SelectType { get { return currentSelectState; } }
 
     protected int btnNum = 0;
 
@@ -22,6 +26,11 @@ public class SeletingBtnBase : MonoBehaviour
         if (button == null)
         {
             button = GetComponent<Button>();
+        }
+
+        if(canvasGroup == null)
+        {
+            canvasGroup = GetComponent<CanvasGroup>();
         }
 
         currentSelectLine = selectLine;
@@ -46,7 +55,7 @@ public class SeletingBtnBase : MonoBehaviour
         
 
         SetBtnState();
-        
+
     }
 
     public void CheckInfo()
@@ -73,18 +82,34 @@ public class SeletingBtnBase : MonoBehaviour
 
     public void OnClickBtn()
     {
-        string storyLine = currentEventStory.eventMainStory;
-        GameManager.Inst.UI.StartWrite(storyLine, FinallyMention);
-        GameManager.Inst.UI.UnShowSelectBtn(this);
-        CheckInfo();
+        if(currentSelectState == ESelectType.Final)
+        {
+
+            GameManager.Inst.Story.StartStory();
+            GameManager.Inst.UI.UnShowSelectBtn();
+
+            CheckInfo();
+        }
+
+        else
+        {
+            string storyLine = currentEventStory.eventMainStory;
+            GameManager.Inst.UI.StartWrite(storyLine, GameManager.Inst.UI.ActiveFinalSelectBtn);
+            GameManager.Inst.UI.UnShowSelectBtn();
+
+            ChangeFinalSelect();
+        }
+        
     }
 
-    public void FinallyMention()
+    public void ChangeFinalSelect()
     {
-        string storyLine = currentEventStory.eventStory;
-        GameManager.Inst.UI.StartWrite(storyLine, GameManager.Inst.Story.EndStory);
-        GameManager.Inst.Story.SetStoryNum();
+        seletingText.text = currentEventStory.eventFinalStory[GameManager.Inst.StoryLine];
+        btnStateText.text = "F";
+        currentSelectState = ESelectType.Final;
     }
+
+
 
     public void SetEvent(Action action, bool isRemove)
     {
@@ -96,6 +121,26 @@ public class SeletingBtnBase : MonoBehaviour
         {
             button.onClick.AddListener(() => action());
         }
+    }
+
+    public void ActiveBtn(bool isActive)
+    {
+        if (canvasGroup == null)
+        {
+            canvasGroup = GetComponent<CanvasGroup>();
+        }
+
+        if (isActive)
+        {
+            gameObject.SetActive(true);
+            canvasGroup.DOFade(1f, 1f);
+        }
+        else
+        {
+            canvasGroup.alpha = 0f;
+            gameObject.SetActive(false);
+        }
+
     }
 
     public void ChangeLockImage()

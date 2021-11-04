@@ -1,5 +1,8 @@
 ﻿{
     "playerjob": "고등학생",
+    "storyLineNum": 0,
+    "currentScenarioCnt": 0,
+    "currentStoryNum": 1,
     "stat_Sencetive": 0,
     "stat_Knowledge": 0,
     "stat_Wit": 0

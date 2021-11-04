@@ -3,16 +3,14 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class StoryManager : MonoBehaviour
 {
     [SerializeField] private StoryLines storyLine;
     [SerializeField] private Stories stories;
     [SerializeField] private EventStories eventStories;
     private SeletingBtnBase nowSelectBtn;
-    private int storyLineNum = 0;
-    private int currentScenarioCnt = 0;
-    private int currentStoryNum = 0;
+
+
     private bool endStory = false;
 
     public bool IsEndStory
@@ -30,7 +28,7 @@ public class StoryManager : MonoBehaviour
 
     public int GetCurrentScenarioNum()
     {
-        return (int)storyLine.storyLines[storyLineNum].storyOrder[currentScenarioCnt];
+        return (int)storyLine.storyLines[GameManager.Inst.StoryLine].storyOrder[GameManager.Inst.CurrentPlayer.currentScenarioCnt];
     }
 
 
@@ -41,11 +39,11 @@ public class StoryManager : MonoBehaviour
 
         if (isGreed)
         {
-            eventStory = Array.Find(eventStoryLines[currentStoryNum].eventStories, x => x.eventStoryID == storyID && x.isSuccess == isSuccess);
+            eventStory = Array.Find(eventStoryLines[GameManager.Inst.CurrentPlayer.currentStoryNum].eventStories, x => x.eventStoryID == storyID && x.isSuccess == isSuccess);
         }
         else
         {
-            eventStory = Array.Find(eventStoryLines[currentStoryNum].eventStories, x => x.eventStoryID == storyID);
+            eventStory = Array.Find(eventStoryLines[GameManager.Inst.CurrentPlayer.currentStoryNum].eventStories, x => x.eventStoryID == storyID);
         }
 
 
@@ -55,21 +53,21 @@ public class StoryManager : MonoBehaviour
     public Story GetNowStory()
     {
         int storyNum = GetCurrentScenarioNum();
-        return stories.stories[storyNum].stories[currentStoryNum];
+        return stories.stories[storyNum].stories[GameManager.Inst.CurrentPlayer.currentStoryNum];
     }
 
 
     public void SetStoryNum()
     {
         int maxStoryNum = stories.stories[GetCurrentScenarioNum()].stories.Length - 1;
-        if (currentStoryNum < maxStoryNum)
+        if (GameManager.Inst.CurrentPlayer.currentStoryNum < maxStoryNum)
         {
-            currentStoryNum++;
+            GameManager.Inst.CurrentPlayer.currentStoryNum++;
             return;
         }
 
-        currentScenarioCnt++;
-        currentStoryNum = 0;
+        GameManager.Inst.CurrentPlayer.currentScenarioCnt++;
+        GameManager.Inst.CurrentPlayer.currentStoryNum = 0;
     }
 
     public void SetSelectBtn(SeletingBtnBase seletingBtn)
@@ -82,9 +80,11 @@ public class StoryManager : MonoBehaviour
     {
         if (endStory)
         {
+            Debug.Log("²°´ç");
+
             endStory = false;
         }
-        if (storyLine.storyLines[storyLineNum].storyOrder.Length <= currentScenarioCnt) return;
+        if (storyLine.storyLines[GameManager.Inst.StoryLine].storyOrder.Length <= GameManager.Inst.CurrentPlayer.currentScenarioCnt) return;
         Story story = GetNowStory();
 
         Debug.Log(story.storyName);
@@ -102,9 +102,9 @@ public class StoryManager : MonoBehaviour
 
     public void EndStory()
     {
+        Debug.Log("Ä×´ç");
         endStory = true;
         GameManager.Inst.UI.ActiveTouchScreen(true);
-        GameManager.Inst.UI.UnShowSelectBtn();
         GameManager.Inst.UI.SetStatText();
     }
 

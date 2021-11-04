@@ -17,7 +17,8 @@ public class EventStory
 
     [Header("Ω∫≈‰∏Æ")]
     [TextArea(7, 10)] public string eventMainStory;
-    [TextArea(3, 5)] public string eventStory;
+
+    public string[] eventFinalStory;
 }
 
 [System.Serializable]

@@ -4,6 +4,11 @@ using System.Collections;
 public class Player
 {
     public string playerjob;
+
+    public int storyLineNum = 0;
+    public int currentScenarioCnt = 0;
+    public int currentStoryNum = 0;
+
     public int stat_Sencetive;
     public int stat_Knowledge;
     public int stat_Wit;

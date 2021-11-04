@@ -7,7 +7,8 @@ public enum ESelectType
 {
     Normal,
     Gread,
-    Special
+    Special,
+    Final
 }
 
 public enum EStatType
@@ -34,12 +35,14 @@ public class GameManager : MonoSingleTon<GameManager>
 
     [SerializeField] private Player player;
     public Player CurrentPlayer { get { return player; } }
-    
+
     private UIManager uiManager;
     private StoryManager storyManager;
+    public int stat;
     public UIManager UI { get { return uiManager; } }
     public StoryManager Story { get { return storyManager; } }
-    public int stat;
+
+    public int StoryLine { get { return player.storyLineNum; } }
     void Awake()
     {
         SAVE_PATH = Application.dataPath + "/Save";
@@ -50,7 +53,7 @@ public class GameManager : MonoSingleTon<GameManager>
 
         uiManager = GetComponent<UIManager>();
         storyManager = GetComponent<StoryManager>();
-        
+
         LoadFromJson();
     }
 
@@ -58,6 +61,11 @@ public class GameManager : MonoSingleTon<GameManager>
     {
         UI.SetJobText();
         UI.SetStatText();
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveToJson();
     }
 
     private void LoadFromJson()
@@ -91,7 +99,7 @@ public class GameManager : MonoSingleTon<GameManager>
 
     public void SetPlayerJob(int jobNum)
     {
-        if(jobNum == 0)
+        if (jobNum == 0)
         {
             player.playerjob = "±âÈ¹ÀÚ";
         }
@@ -111,7 +119,7 @@ public class GameManager : MonoSingleTon<GameManager>
     public void SetPlayerStat(EStatType type, int increaseStat)
     {
         Debug.Log("±×·¡");
-        switch(type)
+        switch (type)
         {
             case EStatType.Knowledge:
                 player.stat_Knowledge += increaseStat;

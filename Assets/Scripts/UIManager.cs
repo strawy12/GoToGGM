@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text statText = null;
     [SerializeField] private GameObject touchScreen = null;
     [SerializeField] private SeletingBtnBase[] selectBtns = new SeletingBtnBase[3];
+    [SerializeField] private SeletingBtnBase finalSelectBtn = null;
 
     private bool isWriting = false;
     private bool isSkip = false;
@@ -33,6 +34,9 @@ public class UIManager : MonoBehaviour
         currentWriteSpeed = writeSpeed;
         float waitTime = currentWriteSpeed * 2f;
         string messageText = "";
+
+        if(isSkip) isSkip = false;
+
         foreach (var c in message)
         {
             if (isSkip) break;
@@ -77,32 +81,46 @@ public class UIManager : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            selectBtns[i].gameObject.SetActive(true);
+            selectBtns[i].ActiveBtn(true);
             selectBtns[i].SettingBtn(selectLines[i], i);
         }
     }
     public void UnShowSelectBtn(SeletingBtnBase seletingBtn = null)
     {
+        Debug.Log("ÀÀ");
         for (int i = 0; i < 3; i++)
         {
             if (seletingBtn == selectBtns[i]) continue;
-            selectBtns[i].gameObject.SetActive(false);
+            selectBtns[i].ActiveBtn(false);
+        }
+    }
+
+    public void ActiveFinalSelectBtn()
+    {
+        for(int i = 0; i < 3; i ++)
+        {
+            if(selectBtns[i].SelectType == ESelectType.Final)
+            {
+                selectBtns[i].ActiveBtn(true);
+
+                GameManager.Inst.Story.EndStory();
+                GameManager.Inst.Story.SetStoryNum();
+                return;
+            }
         }
     }
 
     public void OnClickTouchScreen()
     {
-
         if (!GameManager.Inst.Story.IsEndStory && isWriting)
         {
             isSkip = true;
             ActiveTouchScreen(false);
+        }
+        else
+        {
             return;
         }
-        else if (!GameManager.Inst.Story.IsEndStory) return;
-
-        ActiveTouchScreen(false);
-        GameManager.Inst.Story.StartStory();
     }
 
     public void ActiveTouchScreen(bool isActive)
