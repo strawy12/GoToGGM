@@ -1,4 +1,5 @@
 ﻿{
+    "nickname": "유하준",
     "playerjob": "고등학생",
     "storyLineNum": 0,
     "currentScenarioCnt": 0,

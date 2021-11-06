@@ -22,6 +22,8 @@ public class SelectLine
 public class Story
 {
     public string storyName;
+    public int storyID;
+    public bool usedFunc;
     [TextArea(7, 10)] public string mainStory;
     public SelectLine[] selectLines;
 }

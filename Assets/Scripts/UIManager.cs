@@ -11,23 +11,84 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text jobStatusText = null;
     [SerializeField] private Text statText = null;
     [SerializeField] private GameObject touchScreen = null;
-    [SerializeField] private SeletingBtnBase[] selectBtns = new SeletingBtnBase[3];
+    [SerializeField] private CanvasGroup nicknameInputPanal = null;
+    [SerializeField] private SeletingBtnBase[] selectBtns;
+    [SerializeField] private Sprite[] selectBtnSprites;
     [SerializeField] private SeletingBtnBase finalSelectBtn = null;
+
+    private InputField nicknameInputField = null;
 
     private bool isWriting = false;
     private bool isSkip = false;
     private float currentWriteSpeed = 0f;
 
+    private void Awake()
+    {
+        nicknameInputField = nicknameInputPanal.GetComponentInChildren<InputField>();
+    }
     private void Start()
     {
 
     }
+
     public void StartWrite(string message, Action action = null, float writeSpeed = 0.03f)
     {
         StartCoroutine(WriteText(message, action, writeSpeed));
     }
 
+    public void StartWrite<T>(string message, Action<T> action, T param, float writeSpeed = 0.03f)
+    {
+        StartCoroutine(WriteText(message, action, param, writeSpeed));
+    }
+
     public IEnumerator WriteText(string message, Action action, float writeSpeed)
+    {
+        isWriting = true;
+        ActiveTouchScreen(true);
+        currentWriteSpeed = writeSpeed;
+        float waitTime = currentWriteSpeed * 2f;
+        string messageText = "";
+
+        if (isSkip) isSkip = false;
+
+        foreach (var c in message)
+        {
+            if (isSkip) break;
+
+            messageText = string.Format("{0}{1}", messageText, c);
+            storyText.text = messageText;
+            yield return new WaitForSeconds(currentWriteSpeed);
+            if (c == '\n')
+            {
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
+
+        if (!isSkip)
+        {
+            yield return new WaitForSeconds(1.25f);
+        }
+        else
+        {
+            storyText.text = message;
+            yield return new WaitForSeconds(0.5f);
+            isSkip = false;
+        }
+
+        if (action == null)
+        {
+            ShowSelectBtn();
+        }
+
+        else
+        {
+            action();
+        }
+
+        isWriting = false;
+    }
+
+    public  IEnumerator WriteText<T>(string message, Action<T> action,T param, float writeSpeed)
     {
         isWriting = true;
         ActiveTouchScreen(true);
@@ -68,12 +129,28 @@ public class UIManager : MonoBehaviour
 
         else
         {
-            action();
+            action(param);
         }
 
         isWriting = false;
     }
 
+    public void ActiveNameInputField(bool isActive)
+    {
+        nicknameInputPanal.DOFade(isActive? 1f : 0f, 1f);
+        GameManager.Inst.Story.EndStory();
+    }
+
+    public void OnClickNickNameInput()
+    {
+        if (nicknameInputField.text == "") return;
+
+        GameManager.Inst.CurrentPlayer.nickname = nicknameInputField.text;
+        ActiveNameInputField(false);
+
+        GameManager.Inst.Story.SetStoryNum();
+        GameManager.Inst.Story.StartStory();
+    }
 
     public void ShowSelectBtn()
     {
@@ -87,7 +164,6 @@ public class UIManager : MonoBehaviour
     }
     public void UnShowSelectBtn(SeletingBtnBase seletingBtn = null)
     {
-        Debug.Log("¿¿");
         for (int i = 0; i < 3; i++)
         {
             if (seletingBtn == selectBtns[i]) continue;
@@ -104,7 +180,6 @@ public class UIManager : MonoBehaviour
                 selectBtns[i].ActiveBtn(true);
 
                 GameManager.Inst.Story.EndStory();
-                GameManager.Inst.Story.SetStoryNum();
                 return;
             }
         }
@@ -134,6 +209,12 @@ public class UIManager : MonoBehaviour
         {
             selectBtns[i].SetEvent(selectBtns[i].SetPlayerJob, isRemove);
         }
+    }
+
+    public void ChangeSelectBtnSprite(Image image, ESelectType type)
+    {
+        int num = (int)type;
+        image.sprite = selectBtnSprites[num];
     }
 
     public void SetJobText()

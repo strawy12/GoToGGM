@@ -75,25 +75,32 @@ public class StoryManager : MonoBehaviour
         nowSelectBtn = seletingBtn;
     }
 
+    public void StartEvent(int storyID)
+    {
+        switch (storyID)
+        {
+            case 11:
+                Action<bool> action = GameManager.Inst.UI.ActiveNameInputField;
+                GameManager.Inst.UI.StartWrite(GetNowStory().mainStory, action, true);
+                break;
+        }
+
+    }
 
     public void StartStory()
     {
         if (endStory)
         {
-            Debug.Log("껐당");
-
             endStory = false;
         }
         if (storyLine.storyLines[GameManager.Inst.StoryLine].storyOrder.Length <= GameManager.Inst.CurrentPlayer.currentScenarioCnt) return;
+        
         Story story = GetNowStory();
 
-        Debug.Log(story.storyName);
 
-        if (story.storyName.Contains("직업 선택"))
+        if (story.usedFunc)
         {
-            GameManager.Inst.SelectJob();
-
-            GameManager.Inst.UI.StartWrite(GetNowStory().mainStory);
+            StartEvent(story.storyID);
             return;
         }
 

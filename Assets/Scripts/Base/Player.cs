@@ -3,6 +3,7 @@ using System.Collections;
 [System.Serializable]
 public class Player
 {
+    public string nickname;
     public string playerjob;
 
     public int storyLineNum = 0;

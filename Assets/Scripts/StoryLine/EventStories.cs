@@ -16,7 +16,7 @@ public class EventStory
     public bool isSuccess;
 
     [Header("Ω∫≈‰∏Æ")]
-    [TextArea(7, 10)] public string eventMainStory;
+    [TextArea(6, 10)] public string eventMainStory;
 
     public string[] eventFinalStory;
 }

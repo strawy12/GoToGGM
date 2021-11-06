@@ -9,9 +9,9 @@ using DG.Tweening;
 public class SeletingBtnBase : MonoBehaviour
 {
     [SerializeField] protected Text seletingText;
-    [SerializeField] private Text btnStateText;
 
     protected CanvasGroup canvasGroup;
+    protected Image btnImage;
     protected SelectLine currentSelectLine;
     protected EventStory currentEventStory;
     private ESelectType currentSelectState;
@@ -26,6 +26,11 @@ public class SeletingBtnBase : MonoBehaviour
         if (button == null)
         {
             button = GetComponent<Button>();
+        }
+
+        if(btnImage == null)
+        {
+            btnImage = GetComponent<Image>();
         }
 
         if(canvasGroup == null)
@@ -52,7 +57,6 @@ public class SeletingBtnBase : MonoBehaviour
         {
             button.interactable = true;
         }
-        
 
         SetBtnState();
 
@@ -69,22 +73,15 @@ public class SeletingBtnBase : MonoBehaviour
 
     public void SetBtnState()
     {
-        int endStringCnt = 1;
-
-        if (currentSelectLine.selectType == ESelectType.Special)
-        {
-            endStringCnt = 2;
-        }
-
         seletingText.text = currentSelectLine.selectLine;
-        btnStateText.text = currentSelectLine.selectType.ToString().Substring(0, endStringCnt);
+        GameManager.Inst.UI.ChangeSelectBtnSprite(btnImage, currentSelectState);
     }
 
     public void OnClickBtn()
     {
         if(currentSelectState == ESelectType.Final)
         {
-
+            GameManager.Inst.Story.SetStoryNum();
             GameManager.Inst.Story.StartStory();
             GameManager.Inst.UI.UnShowSelectBtn();
 
@@ -104,8 +101,9 @@ public class SeletingBtnBase : MonoBehaviour
 
     public void ChangeFinalSelect()
     {
+        Debug.Log(GameManager.Inst.StoryLine);
         seletingText.text = currentEventStory.eventFinalStory[GameManager.Inst.StoryLine];
-        btnStateText.text = "F";
+        GameManager.Inst.UI.ChangeSelectBtnSprite(btnImage, currentSelectState);
         currentSelectState = ESelectType.Final;
     }
 

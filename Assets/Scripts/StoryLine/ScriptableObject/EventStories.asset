@@ -33,14 +33,20 @@ MonoBehaviour:
         skipRouteCnt: 0
         isSuccess: 0
         eventMainStory: "\uD504\uB864\uB85C\uADF8 2"
-        eventFinalStory: []
+        eventFinalStory:
+        - "\uAE30\uD68D\uC790"
+        - "\uAC1C\uBC1C\uC790"
+        - "\uC544\uD2F0\uC2A4\uD2B8"
       - eventStoryID: 13
         increaseStatType: 0
         increaseStat: 0
         skipRouteCnt: 0
         isSuccess: 0
         eventMainStory: "\uD504\uB864\uB85C\uADF8 3 "
-        eventFinalStory: []
+        eventFinalStory:
+        - "\uAE30\uD68D\uC790"
+        - "\uAC1C\uBC1C\uC790"
+        - "\uC544\uD2F0\uC2A4\uD2B8"
     - storyLineName: "\uD559\uAD50\uAC08 \uC900\uBE44\uB97C \uD558\uB294 \uC815\uBC30"
       eventStories:
       - eventStoryID: 21
@@ -49,21 +55,30 @@ MonoBehaviour:
         skipRouteCnt: 0
         isSuccess: 0
         eventMainStory: "\uD504\uB864\uB85C\uADF8 1 \uD504\uB864\uB85C\uADF8 1"
-        eventFinalStory: []
+        eventFinalStory:
+        - "\uAE30\uD68D\uC790"
+        - "\uAC1C\uBC1C\uC790"
+        - "\uC544\uD2F0\uC2A4\uD2B8"
       - eventStoryID: 22
         increaseStatType: 0
         increaseStat: 0
         skipRouteCnt: 0
         isSuccess: 0
         eventMainStory: "\uD504\uB864\uB85C\uADF8 2 \uD504\uB864\uB85C\uADF8 2"
-        eventFinalStory: []
+        eventFinalStory:
+        - "\uAE30\uD68D\uC790"
+        - "\uAC1C\uBC1C\uC790"
+        - "\uC544\uD2F0\uC2A4\uD2B8"
       - eventStoryID: 23
         increaseStatType: 0
         increaseStat: 0
         skipRouteCnt: 0
         isSuccess: 0
         eventMainStory: "\uD504\uB864\uB85C\uADF8 3 \uD504\uB864\uB85C\uADF8 3"
-        eventFinalStory: []
+        eventFinalStory:
+        - "\uAE30\uD68D\uC790"
+        - "\uAC1C\uBC1C\uC790"
+        - "\uC544\uD2F0\uC2A4\uD2B8"
     - storyLineName: "\uC9C1\uC5C5 \uC120\uD0DD"
       eventStories:
       - eventStoryID: 31
@@ -86,7 +101,10 @@ MonoBehaviour:
         skipRouteCnt: 0
         isSuccess: 0
         eventMainStory: "\uB2F9\uC2E0\uC740 \uC774\uC81C\uBD80\uD130 \uC544\uD2F0\uC2A4\uD2B8\uC785\uB2C8\uB2E4!"
-        eventFinalStory: []
+        eventFinalStory:
+        - "\uAE30\uD68D\uC790"
+        - "\uAC1C\uBC1C\uC790"
+        - "\uC544\uD2F0\uC2A4\uD2B8"
   - scenarioName: "\uBC84\uC2A4"
     eventStoryLines:
     - storyLineName: "\uC544\uC774\uAC00 \uC870\uB984"

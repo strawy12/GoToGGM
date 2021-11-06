@@ -15,35 +15,21 @@ MonoBehaviour:
   stories:
   - scenarioName: "\uD504\uB864\uB85C\uADF8"
     stories:
-    - storyName: "\uBE44\uD0C0\uBBFC D \uCDA9\uC804 \uD558\uB294 \uC815\uBC30"
-      mainStory: "\uB2F9\uC2E0\uC740 \uB208\uC5D0 \uAC15\uB82C\uD55C \uBE44\uD0C0\uBBFC
-        D\uC744 \uBC1B\uC73C\uBA70 \uC7A0\uC5D0\uC11C \uAE68\uC5B4\uB0A9\uB2C8\uB2E4.\r\n\n\uC7A0\uC5D0\uC11C
-        \uAE68\uC5B4\uB09C \uB2F9\uC2E0\uC740 \uB2F9\uC2E0\uC744 \uBC18\uAE30\uACE0
-        \uC788\uB294 \uC54C\uB78C\uC2DC\uACC4\uAC00 \uC790\uC7A5\uAC00\uB97C \uBD88\uB7EC\uC8FC\uACE0
-        \uC788\uC5C8\uC2B5\uB2C8\uB2E4.\r\n\r\n[\uBE60\uBE60\uBE60\uBE70\uBE70 \uBE60\uBC14\uBC14\uBE70!]
-        (\u3145\u3142... \uC880 \uC77C\uC5B4\uB098\uB77C)\r\n\r\n\uC5B4\uB5BB\uAC8C
-        \uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
-      selectLines:
-      - selectLine: "\uC54C\uB78C\uC2DC\uACC4\uB97C \uBD80\uC218\uACE0 \uC640\uC11C
-          \uC794\uB2E4"
-        selectType: 0
-        needStatType: 0
-        needStat: 0
-        eventStoryID: 11
-      - selectLine: "\uC790\uC7A5\uAC00\uB97C \uBD88\uB7EC\uC8FC\uB2C8 \uD589\uBCF5\uD558\uB124,
-          \uACC4\uC18D \uC794\uB2E4"
-        selectType: 0
-        needStatType: 0
-        needStat: 0
-        eventStoryID: 12
-      - selectLine: "\uC77C\uC5B4\uB098\uC11C \uC54C\uB78C\uC2DC\uACC4\uC5D0\uAC8C
-          \uAD7F\uBAA8\uB2DD \uD0A4\uC2A4\uB97C \uD574\uC900\uB2E4."
-        selectType: 0
-        needStatType: 0
-        needStat: 0
-        eventStoryID: 13
+    - storyName: "\uC548\uC580 \uC655\uAD6D\uC758 \uC6A9\uC0AC"
+      storyID: 11
+      usedFunc: 1
+      mainStory: "\uC548\uC580 \uC655\uAD6D\uC758 \uC6A9\uC0AC\uC778 \uB2F9\uC2E0\uC740
+        \uB2E4\uC2DC \uD55C \uBC88 \uC801\uC9C4\uC5D0\uC11C \uC2B9\uB9AC\uB97C \uAC70\uB461\uB2C8\uB2E4.\r\n\n\"\uD558\uD558\uD558
+        \uB0B4\uAC00 10415\uBC88\uC9F8 \uC2B9\uB9AC\uD55C \uC774 \uD611\uACE1\uC758
+        \uC774\uB984\uC740 \uAC9C\uB9C8\uACE0 \uD611\uACE1\uC774\uB77C\uACE0 \uC815\uD558\uACA0\uB2E4!\"\r\n\uC804\uD22C\uB97C
+        \uCE58\uB918\uB358 \uD611\uACE1\uC758 \uC774\uB984\uC744 \uC815\uD55C \uB2F9\uC2E0\uC740
+        \uC790\uC2E0\uC758 \uC774\uB984\uC744 \uC678\uCE58\uB824\uACE0 \uD569\uB2C8\uB2E4.\r\n\n\uB2F9\uC2E0\uC758
+        \uC774\uB984\uC740?"
+      selectLines: []
     - storyName: "\uC9C0\uAC01\uC744 \uAE68\uB2EB\uACE0 \uACE0\uBBFC\uC911\uC778
         \uC815\uBC30"
+      storyID: 0
+      usedFunc: 0
       mainStory: "\uB208\uC744 \uB72C \uB2F9\uC2E0\uC740 \uAE30\uC219\uC0AC\uC5D0
         \uAC00\uC57C\uD55C\uB2E4\uB294 \uAC83\uC744 \uAE68\uB2EC\uACE0 \uD604\uC7AC
         \uC2DC\uAC04\uC744 \uBCF4\uC558\uB2E4\uAC00 \uB2F9\uC2E0\uC740 \uACBD\uC545\uC744
@@ -73,6 +59,8 @@ MonoBehaviour:
         needStat: 0
         eventStoryID: 23
     - storyName: "\uC9C1\uC5C5 \uC120\uD0DD"
+      storyID: 0
+      usedFunc: 0
       mainStory: "\uBAA8\uB4E0 \uC900\uBE44\uAC00 \uB05D\uB09C \uB2F9\uC2E0\uC740
         \uB4DC\uB514\uC5B4 \uC9D1\uC744 \uB098\uC12D\uB2C8\uB2E4. \uD558\uC9C0\uB9CC
         \uBB54\uAC00 \uD5C8\uC804\uD55C \uB290\uB08C\uC774 \uB4E4\uC5B4 \uB2E4\uC2DC
@@ -104,6 +92,8 @@ MonoBehaviour:
   - scenarioName: "\uBC84\uC2A4"
     stories:
     - storyName: "\uC5EC\uC790\uC544\uC774\uAC00 \uC870\uB974\uB294 \uC0C1\uD669"
+      storyID: 0
+      usedFunc: 0
       mainStory: "\uBC84\uC2A4\uB97C \uAE30\uB2E4\uB9AC\uB358 \uB3C4\uC911 \uC790\uADF8\uB9C8\uD55C
         \uC5EC\uC790\uC544\uC774\uAC00 \uB2E4\uAC00\uC635\uB2C8\uB2E4.\r\n\r\n\uC5EC\uC790\uC544\uC774\uB294
         \uAC00\uB9CC\uD788 \uC788\uAE30 \uC2EC\uC2EC\uD55C \uB4EF \uB2F9\uC2E0\uC5D0\uAC8C
@@ -127,6 +117,8 @@ MonoBehaviour:
         needStat: 7
         eventStoryID: 43
     - storyName: "\uC5B4\uBA4B! \uBC84\uC2A4 \uC544\uC800\uC528? \uD654\uB098\uC168\uC5B4\uC601??"
+      storyID: 0
+      usedFunc: 0
       mainStory: "\uBC84\uC2A4\uB97C \uD0C0\uB824\uB358 \uB2F9\uC2E0\uC740 \uD654\uB85C
         \uAC00\uB4DD\uD55C \uBC84\uC2A4\uAE30\uC0AC\uB2D8\uC758 \uC5BC\uAD74\uC744
         \uBCF4\uC558\uC2B5\uB2C8\uB2E4.\r\n\r\n\uADF8 \uC5BC\uAD74\uC740 \uB9C8\uCE58
@@ -155,6 +147,8 @@ MonoBehaviour:
         needStat: 7
         eventStoryID: 53
     - storyName: "\uB3C4\uCC29 \uD6C4 \uC990\uAE30\uB294 \uBD95\uC5B4\uBE75 \uB0C4\uC0C8"
+      storyID: 0
+      usedFunc: 0
       mainStory: "\uB2F9\uC2E0\uC774 \uBC84\uC2A4\uB97C \uB0B4\uB9AC\uC790 \uD5A5\uAE30\uB85C\uC6B4
         \uB0C4\uC0C8\uAC00 \uC194\uC194 \uD48D\uACA8\uC635\uB2C8\uB2E4.\r\n\r\n\uADF8
         \uB0C4\uC0C8\uC758 \uC815\uCCB4\uB294 \uBC14\uB85C \uBD95\uC5B4\uBE75!!\r\n\r\n\uD558\uC9C0\uB9CC
@@ -181,6 +175,8 @@ MonoBehaviour:
   - scenarioName: "\uC9C0\uD558\uCCA0"
     stories:
     - storyName: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE301"
+      storyID: 0
+      usedFunc: 0
       mainStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 1"
       selectLines:
       - selectLine: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 \uC120\uD0DD\uC9C0 1"
@@ -199,6 +195,8 @@ MonoBehaviour:
         needStat: 0
         eventStoryID: 73
     - storyName: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE302"
+      storyID: 0
+      usedFunc: 0
       mainStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 2"
       selectLines:
       - selectLine: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 \uC120\uD0DD\uC9C0 1"
@@ -217,6 +215,8 @@ MonoBehaviour:
         needStat: 0
         eventStoryID: 83
     - storyName: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE303"
+      storyID: 0
+      usedFunc: 0
       mainStory: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 3"
       selectLines:
       - selectLine: "\uC9C0\uD558\uCCA0 \uC774\uC57C\uAE30 \uC120\uD0DD\uC9C0 1"
