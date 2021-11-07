@@ -51,6 +51,10 @@ public class UIManager : MonoBehaviour
 
         if (isSkip) isSkip = false;
 
+        yield return new WaitForSeconds(0.05f);
+        message = message.Replace("&", GameManager.Inst.CurrentPlayer.nickname);
+        message = message.Replace("*", GameManager.Inst.CurrentPlayer.playerjob);
+
         foreach (var c in message)
         {
             if (isSkip) break;
@@ -88,7 +92,7 @@ public class UIManager : MonoBehaviour
         isWriting = false;
     }
 
-    public  IEnumerator WriteText<T>(string message, Action<T> action,T param, float writeSpeed)
+    public IEnumerator WriteText<T>(string message, Action<T> action, T param, float writeSpeed)
     {
         isWriting = true;
         ActiveTouchScreen(true);
@@ -96,7 +100,12 @@ public class UIManager : MonoBehaviour
         float waitTime = currentWriteSpeed * 2f;
         string messageText = "";
 
-        if(isSkip) isSkip = false;
+        if (isSkip) isSkip = false;
+
+        yield return new WaitForSeconds(0.05f);
+
+        message = message.Replace("&", GameManager.Inst.CurrentPlayer.nickname);
+        message = message.Replace("*", GameManager.Inst.CurrentPlayer.playerjob);
 
         foreach (var c in message)
         {
@@ -137,8 +146,20 @@ public class UIManager : MonoBehaviour
 
     public void ActiveNameInputField(bool isActive)
     {
-        nicknameInputPanal.DOFade(isActive? 1f : 0f, 1f);
-        GameManager.Inst.Story.EndStory();
+        if(isActive)
+        {
+            nicknameInputPanal.gameObject.SetActive(true);
+            nicknameInputPanal.DOFade(1f, 1f);
+            GameManager.Inst.Story.EndStory();
+        }
+
+        else
+        {
+            nicknameInputPanal.DOFade(0f, 1f);
+            nicknameInputPanal.gameObject.SetActive(false);
+        }
+
+
     }
 
     public void OnClickNickNameInput()
@@ -156,7 +177,7 @@ public class UIManager : MonoBehaviour
     {
         SelectLine[] selectLines = GameManager.Inst.Story.GetNowStory().selectLines;
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < selectLines.Length; i++)
         {
             selectBtns[i].ActiveBtn(true);
             selectBtns[i].SettingBtn(selectLines[i], i);
@@ -173,9 +194,9 @@ public class UIManager : MonoBehaviour
 
     public void ActiveFinalSelectBtn()
     {
-        for(int i = 0; i < 3; i ++)
+        for (int i = 0; i < 3; i++)
         {
-            if(selectBtns[i].SelectType == ESelectType.Final)
+            if (selectBtns[i].SelectType == ESelectType.Final)
             {
                 selectBtns[i].ActiveBtn(true);
 

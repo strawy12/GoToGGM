@@ -83,6 +83,10 @@ public class StoryManager : MonoBehaviour
                 Action<bool> action = GameManager.Inst.UI.ActiveNameInputField;
                 GameManager.Inst.UI.StartWrite(GetNowStory().mainStory, action, true);
                 break;
+            case 12:
+                GameManager.Inst.SelectJob();
+                GameManager.Inst.UI.StartWrite(GetNowStory().mainStory);
+                break;
         }
 
     }
@@ -109,7 +113,6 @@ public class StoryManager : MonoBehaviour
 
     public void EndStory()
     {
-        Debug.Log("дв╢Г");
         endStory = true;
         GameManager.Inst.UI.ActiveTouchScreen(true);
         GameManager.Inst.UI.SetStatText();

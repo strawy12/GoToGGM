@@ -61,6 +61,7 @@ public class GameManager : MonoSingleTon<GameManager>
     {
         UI.SetJobText();
         UI.SetStatText();
+
     }
 
     private void OnApplicationQuit()
@@ -102,23 +103,32 @@ public class GameManager : MonoSingleTon<GameManager>
         if (jobNum == 0)
         {
             player.playerjob = "기획자";
+            SetPlayerStat(EStatType.Sencetive, 5);
+            SetPlayerStat(EStatType.Knowledge, 5);
+            SetPlayerStat(EStatType.Wit, 10);
         }
         else if (jobNum == 1)
         {
             player.playerjob = "프로그래머";
+            SetPlayerStat(EStatType.Sencetive, 5);
+            SetPlayerStat(EStatType.Knowledge, 10);
+            SetPlayerStat(EStatType.Wit, 5);
         }
         else if (jobNum == 2)
         {
             player.playerjob = "아티스트";
+            SetPlayerStat(EStatType.Sencetive, 10);
+            SetPlayerStat(EStatType.Knowledge, 5);
+            SetPlayerStat(EStatType.Wit, 5);
         }
 
         UI.SetJobText();
+        UI.SetStatText();
         UI.SetEventToSelectBtn(true);
     }
 
     public void SetPlayerStat(EStatType type, int increaseStat)
     {
-        Debug.Log("그래");
         switch (type)
         {
             case EStatType.Knowledge:

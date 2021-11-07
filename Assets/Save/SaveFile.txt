@@ -1,10 +1,10 @@
 ﻿{
-    "nickname": "유하준",
-    "playerjob": "고등학생",
+    "nickname": "ㅍ",
+    "playerjob": "기획자",
     "storyLineNum": 0,
-    "currentScenarioCnt": 0,
-    "currentStoryNum": 1,
-    "stat_Sencetive": 0,
-    "stat_Knowledge": 0,
-    "stat_Wit": 0
+    "currentScenarioCnt": 1,
+    "currentStoryNum": 0,
+    "stat_Sencetive": 8,
+    "stat_Knowledge": 5,
+    "stat_Wit": 10
 }

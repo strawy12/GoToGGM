@@ -101,8 +101,12 @@ public class SeletingBtnBase : MonoBehaviour
 
     public void ChangeFinalSelect()
     {
-        Debug.Log(GameManager.Inst.StoryLine);
-        seletingText.text = currentEventStory.eventFinalStory[GameManager.Inst.StoryLine];
+        int index = 0;
+        if(currentEventStory.eventFinalStory.Length > 1)
+        {
+            index = GameManager.Inst.StoryLine;
+        }
+        seletingText.text = currentEventStory.eventFinalStory[index];
         GameManager.Inst.UI.ChangeSelectBtnSprite(btnImage, currentSelectState);
         currentSelectState = ESelectType.Final;
     }
@@ -111,14 +115,19 @@ public class SeletingBtnBase : MonoBehaviour
 
     public void SetEvent(Action action, bool isRemove)
     {
+        if(button == null)
+        {
+            button = GetComponent<Button>();
+        }
+
         if (isRemove)
         {
-            button.onClick.RemoveListener(() => action());
+            button.onClick.RemoveAllListeners();
         }
         else
         {
             button.onClick.AddListener(() => action());
-        }
+        }  
     }
 
     public void ActiveBtn(bool isActive)

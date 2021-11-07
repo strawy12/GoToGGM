@@ -853,7 +853,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -24, y: 65.75}
   m_SizeDelta: {x: 160, y: 31.1}
   m_Pivot: {x: -0.7, y: 7.5}
 --- !u!114 &463018442
@@ -1570,7 +1570,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 227.2, y: -0.000015258789}
+  m_AnchoredPosition: {x: 227.2, y: 0}
   m_SizeDelta: {x: 119.88, y: 107.68}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &921557908
@@ -1684,7 +1684,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &925824805
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1701,11 +1701,11 @@ RectTransform:
   m_Father: {fileID: 756873327}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 360, y: -975.728}
-  m_SizeDelta: {x: 574.28, y: 107.68}
-  m_Pivot: {x: 0.5, y: -0.2}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 574.28, y: 107.68005}
+  m_Pivot: {x: 0.5, y: -2.7}
 --- !u!114 &925824806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1917,8 +1917,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -105, y: -130}
+  m_AnchoredPosition: {x: 12.200012, y: -13.589996}
+  m_SizeDelta: {x: -127.64, y: -86.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1322508854
 MonoBehaviour:
@@ -1942,10 +1942,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 32
+    m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 2
     m_MaxSize: 49
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -1953,7 +1953,18 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: asdasdadsddadsadadasdasdadad
+  m_Text: "\"\uB098 &\uC740 10415 \uBC88\uC9F8 \uC2B9\uB9AC\uB97C \uAE30\uB150\uD558\uC5EC
+    \uC81C\uAD70\uB4E4\uC5D0\uAC8C \uC804\uB9AC\uD488\uC744 \uD558\uC0AC\uD558\uACA0\uB2E4!\"\n\n\uC790\uC2E0\uC758
+    \uBD80\uD558\uB4E4\uC5D0\uAC8C \uC804\uB9AC\uD488\uC744 \uC8FC\uB824\uB358 \uB2F9\uC2E0\uC758
+    \uBC1C\uBC11\uC5D0 \uBD88\uAE38\uC774 \uC0DD\uAE41\uB2C8\uB2E4.\n\n\"\uC820\uC7A5,
+    \uC81C\uAD6D\uB188\uB4E4, \uD568\uC815\uC744 \uD30C\uB2E4\uB2C8\u2026!\"\n\"\uD06C\uC544\uC544\uC545!\"\n\"\uB0B4\uAC00\u2026\uC8FD\uB2E4\u2026\uD750\uC544\uC554\u2026\uC9C0\uAE08
+    \uBA87\uC2DC..\uC9C0?\"\n\n\uB2F9\uC2E0\uC740 \uC7A0\uC5D0\uC11C \uAE68\uC5B4\uB098
+    \uD578\uB4DC\uD3F0\uC744 \uD0B5\uB2C8\uB2E4\n\uB2F9\uC2E0\uC740 \uAC15\uC544\uC9C0
+    \uC0AC\uC9C4\uC744 \uD504\uB85C\uD544\uC5D0 \uAC78\uC5B4\uB454 \uC120\uC0DD\uB2D8\uAED8\uC11C
+    \uBCF4\uB0B8 \uBA54\uC2DC\uC9C0\uB97C \uD655\uC778\uD569\uB2C8\uB2E4.\n\n\uC2DC\uBC14\uC324
+    : &\uC528, \uC9C0\uB9DD\uD558\uB294 \uC9C1\uC5C5\uC774 \uBB50\uB77C\uACE0 \uD558\uC168\uC8E0?]
+    - 10\uBD84 \uC804\n\n\uC120\uC0DD\uB2D8\uC758 \uC9C8\uBB38\uC5D0 \uC5B4\uB5BB\uAC8C
+    \uB300\uB2F5\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?\n"
 --- !u!222 &1322508855
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2154,8 +2165,8 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 680, y: 630}
-  m_Pivot: {x: 0.5, y: 0.25}
+  m_SizeDelta: {x: 700, y: 700}
+  m_Pivot: {x: 0.5, y: 0.3}
 --- !u!114 &1618681259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2551,7 +2562,7 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 574.28, y: 361.24}
-  m_Pivot: {x: 0.5, y: -0.2}
+  m_Pivot: {x: 0.5, y: -0.1}
 --- !u!114 &2109077527
 MonoBehaviour:
   m_ObjectHideFlags: 0
