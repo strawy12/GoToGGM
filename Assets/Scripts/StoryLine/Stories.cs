@@ -39,5 +39,5 @@ public class Scenario
 [CreateAssetMenu(fileName = "Stories", menuName = "Sprictable Object/Stories")]
 public class Stories : ScriptableObject
 {
-    public Scenario[] stories;
+    public Scenario[] scenarios;
 }

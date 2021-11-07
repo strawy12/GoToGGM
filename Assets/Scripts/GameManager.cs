@@ -21,7 +21,7 @@ public enum EStatType
 
 public enum EStoryOrder
 {
-    Prologue,
+    Room,
     Bus,
     Subway
 }
@@ -155,10 +155,10 @@ public class GameManager : MonoSingleTon<GameManager>
                 return player.stat_Knowledge >= needStat;
 
             case EStatType.Wit:
-                return player.stat_Knowledge >= needStat;
+                return player.stat_Wit >= needStat;
 
             case EStatType.Sencetive:
-                return player.stat_Knowledge >= needStat;
+                return player.stat_Sencetive >= needStat;
         }
 
         return true;

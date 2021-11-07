@@ -21,7 +21,7 @@ public class SeletingBtnBase : MonoBehaviour
 
     protected int btnNum = 0;
 
-    public void SettingBtn(SelectLine selectLine, int num)
+    public void SettingBtn(SelectLine selectLine, int num = 0)
     {
         if (button == null)
         {
@@ -45,10 +45,17 @@ public class SeletingBtnBase : MonoBehaviour
         {
             currentEventStory = GameManager.Inst.Story.GetEventStory(currentSelectLine.eventStoryID, true, Random.Range(0, 2) == 0);
         }
+
+        else if(currentSelectState == ESelectType.Final)
+        {
+            GameManager.Inst.Story.EndStory();
+        }
+
         else
         {
             currentEventStory = GameManager.Inst.Story.GetEventStory(currentSelectLine.eventStoryID);
         }
+
         if (currentSelectState == ESelectType.Special)
         {
             button.interactable = GameManager.Inst.CheckPlayerStat(currentSelectLine.needStatType, currentSelectLine.needStat);
@@ -107,8 +114,8 @@ public class SeletingBtnBase : MonoBehaviour
             index = GameManager.Inst.StoryLine;
         }
         seletingText.text = currentEventStory.eventFinalStory[index];
-        GameManager.Inst.UI.ChangeSelectBtnSprite(btnImage, currentSelectState);
         currentSelectState = ESelectType.Final;
+        GameManager.Inst.UI.ChangeSelectBtnSprite(btnImage, currentSelectState);
     }
 
 

@@ -7,8 +7,9 @@ public class Player
     public string playerjob;
 
     public int storyLineNum = 0;
-    public int currentScenarioCnt = 0;
-    public int currentStoryNum = 0;
+    public int crtScenarioCnt = 0;
+    public int crtEventStoryCnt = 0;
+    public int crtStoryNum = 0;
 
     public int stat_Sencetive;
     public int stat_Knowledge;

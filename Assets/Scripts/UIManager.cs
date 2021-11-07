@@ -25,6 +25,10 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         nicknameInputField = nicknameInputPanal.GetComponentInChildren<InputField>();
+        nicknameInputField.onEndEdit.AddListener(_ =>
+        {
+            OnClickNickNameInput();
+        });
     }
     private void Start()
     {
@@ -146,7 +150,7 @@ public class UIManager : MonoBehaviour
 
     public void ActiveNameInputField(bool isActive)
     {
-        if(isActive)
+        if (isActive)
         {
             nicknameInputPanal.gameObject.SetActive(true);
             nicknameInputPanal.DOFade(1f, 1f);
@@ -183,6 +187,25 @@ public class UIManager : MonoBehaviour
             selectBtns[i].SettingBtn(selectLines[i], i);
         }
     }
+
+    public void ShowSingleSelectBtn()
+    {
+        int num;
+        if (GameManager.Inst.CurrentPlayer.playerjob == "아티스트")
+        {
+            num = 1;
+        }
+        else
+        {
+            num = 0;
+        }
+
+        SelectLine selectLine = GameManager.Inst.Story.GetNowStory().selectLines[num];
+
+        selectBtns[0].ActiveBtn(true);
+        selectBtns[0].SettingBtn(selectLine);
+    }
+
     public void UnShowSelectBtn(SeletingBtnBase seletingBtn = null)
     {
         for (int i = 0; i < 3; i++)

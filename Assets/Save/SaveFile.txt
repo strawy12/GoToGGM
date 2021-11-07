@@ -1,10 +1,11 @@
 ﻿{
-    "nickname": "ㅍ",
-    "playerjob": "기획자",
+    "nickname": "정정배",
+    "playerjob": "프로그래머",
     "storyLineNum": 0,
-    "currentScenarioCnt": 1,
-    "currentStoryNum": 0,
-    "stat_Sencetive": 8,
-    "stat_Knowledge": 5,
-    "stat_Wit": 10
+    "crtScenarioCnt": 3,
+    "crtEventStoryCnt": 0,
+    "crtStoryNum": 0,
+    "stat_Sencetive": 12,
+    "stat_Knowledge": 15,
+    "stat_Wit": 8
 }
