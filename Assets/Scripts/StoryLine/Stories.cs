@@ -16,8 +16,6 @@ public class SelectLine
     public int eventStoryID;
 }
 
-
-
 [System.Serializable]
 public class Story
 {

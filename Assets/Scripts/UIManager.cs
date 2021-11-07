@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text statText = null;
     [SerializeField] private GameObject touchScreen = null;
     [SerializeField] private SeletingBtnBase[] selectBtns = new SeletingBtnBase[3];
+    [SerializeField] private Text timerTimeText = null;
 
     private bool isWriting = false;
     private bool isSkip = false;
@@ -136,5 +137,30 @@ public class UIManager : MonoBehaviour
     private void FadeObject(Image obj)
     {
 
+    }
+
+    public void SetTime(int add)
+    {
+        Debug.Log("setTime: " + add);
+        if(GameManager.Inst.Timer.minute + add >= 6)
+        {
+            GameManager.Inst.Timer.minute = add - (6 - GameManager.Inst.Timer.minute);
+            GameManager.Inst.Timer.hour++;
+        }
+        else if(GameManager.Inst.Timer.minute + add < 0)
+        {
+            GameManager.Inst.Timer.minute = (6 + GameManager.Inst.Timer.minute) + add;
+            GameManager.Inst.Timer.hour--;
+        }
+        else
+        {
+            GameManager.Inst.Timer.minute = GameManager.Inst.Timer.minute + add;
+        }
+
+        SetTimerUI();
+    }
+    public void SetTimerUI()
+    {
+        timerTimeText.text = string.Format("{00}:{1}0", GameManager.Inst.Timer.hour,GameManager.Inst.Timer.minute);
     }
 }

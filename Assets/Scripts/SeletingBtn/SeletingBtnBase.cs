@@ -55,7 +55,12 @@ public class SeletingBtnBase : MonoBehaviour
         {
             GameManager.Inst.SetPlayerStat(currentEventStory.increaseStatType, currentEventStory.increaseStat);
         }
-
+        if (currentEventStory.increaseTime != 0)
+        {
+            Debug.Log(currentEventStory.increaseTime);
+            GameManager.Inst.UI.SetTime(currentEventStory.increaseTime);
+            Debug.Log(currentEventStory.increaseTime);
+        }
     }
 
     public void SetBtnState()

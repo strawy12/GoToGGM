@@ -40,6 +40,8 @@ public class GameManager : MonoSingleTon<GameManager>
     public UIManager UI { get { return uiManager; } }
     public StoryManager Story { get { return storyManager; } }
     public int stat;
+    private Timer timer = new Timer();
+    public Timer Timer { get { return timer; } }
     void Awake()
     {
         SAVE_PATH = Application.dataPath + "/Save";
@@ -142,7 +144,6 @@ public class GameManager : MonoSingleTon<GameManager>
             case EStatType.Sencetive:
                 return player.stat_Knowledge >= needStat;
         }
-
         return true;
     }
 }
