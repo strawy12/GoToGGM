@@ -86,6 +86,7 @@ public class SeletingBtnBase : MonoBehaviour
 
     public void OnClickBtn()
     {
+        button.interactable = false;
         if(currentSelectState == ESelectType.Final)
         {
             GameManager.Inst.Story.SetStoryNum();
@@ -146,6 +147,7 @@ public class SeletingBtnBase : MonoBehaviour
 
         if (isActive)
         {
+            button.interactable = true;
             gameObject.SetActive(true);
             canvasGroup.DOFade(1f, 1f);
         }

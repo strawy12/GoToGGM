@@ -115,7 +115,6 @@ public class StoryManager : MonoBehaviour
 
     public void StartStory()
     {
-        Debug.Log("응애");
 
         if (endStory)
         {
@@ -123,7 +122,6 @@ public class StoryManager : MonoBehaviour
         }
         if (storyLine.storyLines[GameManager.Inst.StoryLine].storyOrder.Length <= GameManager.Inst.CurrentPlayer.crtScenarioCnt)
         {
-            Debug.Log("응애");
             return;
         }
 
@@ -137,7 +135,6 @@ public class StoryManager : MonoBehaviour
             StartEvent(story.storyID);
             return;
         }
-        Debug.Log("응애");
 
         GameManager.Inst.UI.StartWrite(GetNowStory().mainStory);
     }
