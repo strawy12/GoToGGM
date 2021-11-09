@@ -41,8 +41,14 @@ public class GameManager : MonoSingleTon<GameManager>
     public int stat;
     public UIManager UI { get { return uiManager; } }
     public StoryManager Story { get { return storyManager; } }
+<<<<<<< .merge_file_a20940
+
     public int StoryLine { get { return player.storyLineNum; } }
+=======
     public int stat;
+    private Timer timer = new Timer();
+    public Timer Timer { get { return timer; } }
+>>>>>>> .merge_file_a18368
     void Awake()
     {
         SAVE_PATH = Application.dataPath + "/Save";
