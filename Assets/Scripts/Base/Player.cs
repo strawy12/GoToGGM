@@ -14,6 +14,7 @@ public class Player
     public int stat_Sencetive;
     public int stat_Knowledge;
     public int stat_Wit;
+    public int arrivalTime;
 
     public Player(string playerjob, int stat_Sencetive, int stat_Knowledge, int stat_Wit)
     {

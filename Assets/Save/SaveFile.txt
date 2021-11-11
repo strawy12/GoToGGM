@@ -1,11 +1,12 @@
 ﻿{
     "nickname": "응애",
-    "playerjob": "기획자",
+    "playerjob": "아티스트",
     "storyLineNum": 0,
-    "crtScenarioCnt": 3,
-    "crtEventStoryCnt": 0,
-    "crtStoryNum": 0,
-    "stat_Sencetive": 12,
-    "stat_Knowledge": 13,
-    "stat_Wit": 10
+    "crtScenarioCnt": 2,
+    "crtEventStoryCnt": 2,
+    "crtStoryNum": 2,
+    "stat_Sencetive": 17,
+    "stat_Knowledge": 4,
+    "stat_Wit": 5,
+    "arrivalTime": 30
 }

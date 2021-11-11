@@ -10,15 +10,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text storyText = null;
     [SerializeField] private Text jobStatusText = null;
     [SerializeField] private Text statText = null;
+    [SerializeField] private Text arrivalTimeText = null;
     [SerializeField] private GameObject touchScreen = null;
     [SerializeField] private CanvasGroup nicknameInputPanal = null;
     [SerializeField] private SeletingBtnBase[] selectBtns;
     [SerializeField] private Sprite[] selectBtnSprites;
-    [SerializeField] private SeletingBtnBase finalSelectBtn = null;
+    [SerializeField] private SeletingBtnBase finalSelectBtn = null; 
 
     private InputField nicknameInputField = null;
-    [SerializeField] private SeletingBtnBase[] selectBtns = new SeletingBtnBase[3];
     [SerializeField] private Text timerTimeText = null;
+
 
     private bool isWriting = false;
     private bool isSkip = false;
@@ -273,8 +274,10 @@ public class UIManager : MonoBehaviour
         int wit = GameManager.Inst.CurrentPlayer.stat_Wit;
         int knowledge = GameManager.Inst.CurrentPlayer.stat_Knowledge;
         int sencetive = GameManager.Inst.CurrentPlayer.stat_Sencetive;
+        int arrivalTime = GameManager.Inst.CurrentPlayer.arrivalTime;
 
         statText.text = string.Format("재치: {0} / 섬세: {1} / 지식: {2}", wit, sencetive, knowledge);
+        arrivalTimeText.text = string.Format("도착 시간: {0}{1}분", arrivalTime >= 0 ? "+" : "-", arrivalTime);
 
     }
 

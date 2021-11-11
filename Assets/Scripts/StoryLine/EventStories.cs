@@ -14,7 +14,6 @@ public class EventStory
     public int increaseStat;
 
     [Header("욕심 선택지 전용")]
-    public int skipRouteCnt;
     public bool isSuccess;
 
     [Header("스토리")]

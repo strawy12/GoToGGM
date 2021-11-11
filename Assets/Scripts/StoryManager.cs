@@ -115,7 +115,6 @@ public class StoryManager : MonoBehaviour
 
     public void StartStory()
     {
-
         if (endStory)
         {
             endStory = false;
@@ -126,7 +125,6 @@ public class StoryManager : MonoBehaviour
         }
 
         Story story = GetNowStory();
-
 
         if (story.usedFunc)
         {

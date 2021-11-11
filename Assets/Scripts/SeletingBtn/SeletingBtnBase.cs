@@ -150,6 +150,11 @@ public class SeletingBtnBase : MonoBehaviour
             canvasGroup = GetComponent<CanvasGroup>();
         }
 
+        if(button == null)
+        {
+            button = GetComponent<Button>();
+        }
+
         if (isActive)
         {
             button.interactable = true;

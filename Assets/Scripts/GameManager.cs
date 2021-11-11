@@ -16,7 +16,8 @@ public enum EStatType
     None,
     Sencetive,
     Knowledge,
-    Wit
+    Wit,
+    ArrivalTime
 }
 
 public enum EStoryOrder
@@ -38,11 +39,13 @@ public class GameManager : MonoSingleTon<GameManager>
 
     private UIManager uiManager;
     private StoryManager storyManager;
+    private Timer timer = new Timer();
+
     public int stat;
     public UIManager UI { get { return uiManager; } }
     public StoryManager Story { get { return storyManager; } }
+    public Timer Timer { get { return timer; } }
     public int StoryLine { get { return player.storyLineNum; } }
-    public int stat;
     void Awake()
     {
         SAVE_PATH = Application.dataPath + "/Save";
@@ -141,6 +144,10 @@ public class GameManager : MonoSingleTon<GameManager>
 
             case EStatType.Sencetive:
                 player.stat_Sencetive += increaseStat;
+                break;
+
+            case EStatType.ArrivalTime:
+                player.arrivalTime += increaseStat;
                 break;
         }
 
