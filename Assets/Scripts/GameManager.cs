@@ -25,7 +25,6 @@ public enum EStoryOrder
     Bus,
     Subway
 }
-
 //public enum btnState { Special, Normal, Good }
 
 public class GameManager : MonoSingleTon<GameManager>
@@ -42,7 +41,9 @@ public class GameManager : MonoSingleTon<GameManager>
     public UIManager UI { get { return uiManager; } }
     public StoryManager Story { get { return storyManager; } }
     public int StoryLine { get { return player.storyLineNum; } }
-    public int stat;
+    private Timer timer = new Timer();
+    public Timer Timer { get { return timer; } }
+    
     void Awake()
     {
         SAVE_PATH = Application.dataPath + "/Save";

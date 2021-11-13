@@ -17,7 +17,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private SeletingBtnBase finalSelectBtn = null;
 
     private InputField nicknameInputField = null;
-    [SerializeField] private SeletingBtnBase[] selectBtns = new SeletingBtnBase[3];
     [SerializeField] private Text timerTimeText = null;
 
     private bool isWriting = false;
