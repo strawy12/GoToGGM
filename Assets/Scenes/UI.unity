@@ -769,12 +769,15 @@ MonoBehaviour:
   - title: "\uC5C5\uC8011"
     explanation: "\uBB50\uB77C\uB3C4 \uD558\uC138\uC694"
     isCleared: 0
+    ID: 0
   - title: "\uC5C5\uC8012"
     explanation: 2222222
     isCleared: 0
+    ID: 1
   - title: "\uC5C5\uC8013"
     explanation: 3333333
     isCleared: 0
+    ID: 2
 --- !u!4 &1124970686
 Transform:
   m_ObjectHideFlags: 0

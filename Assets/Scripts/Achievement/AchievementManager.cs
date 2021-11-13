@@ -9,6 +9,7 @@ public class AchievementBase
     public string title;
     public string explanation;
     public bool isCleared;
+    public int ID;
 }
 public class AchievementManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class AchievementManager : MonoBehaviour
     [SerializeField] Transform contentTransform = null;
     [SerializeField] ClearNoticeScript clearNotice = null;
     public List<AchievementBase> achievementPanels = new List<AchievementBase>();
+    private int testID = 0;
     private void Start()
     {
         foreach (AchievementBase achievement in achievementPanels)
@@ -26,13 +28,18 @@ public class AchievementManager : MonoBehaviour
             newObject.SetActive(true);
         }
     }
+    private void Clear(int ID)
+    {
+        if (achievementPanels[ID].isCleared) return;
+        achievementPanels[ID].isCleared = true;
+        AchievementPanel component = contentTransform.GetChild(ID).GetComponent<AchievementPanel>();
+        component.Clear();
+        contentTransform.GetChild(0).SetSiblingIndex(contentTransform.GetChild(ID).GetSiblingIndex() + contentTransform.GetChild(0).childCount);
+        clearNotice.ShowNotice(achievementPanels[ID].title);
+    }
     public void Test()//실험용 클리어함수
     {
-        if (achievementPanels[0].isCleared) return;
-        achievementPanels[0].isCleared = true;
-        AchievementPanel component = contentTransform.GetChild(0).GetComponent<AchievementPanel>();
-        component.Clear();
-        contentTransform.GetChild(0).SetSiblingIndex(contentTransform.GetChild(0).GetSiblingIndex() + contentTransform.GetChild(0).childCount);
-        clearNotice.ShowNotice(achievementPanels[0].title);
+        Clear(testID);
+        testID++;
     }
 }
