@@ -1,12 +1,12 @@
 ﻿{
-    "nickname": "응애",
-    "playerjob": "아티스트",
+    "nickname": "ㄴㅊㅌㅊㅍ",
+    "playerjob": "고등학생",
     "storyLineNum": 0,
-    "crtScenarioCnt": 2,
-    "crtEventStoryCnt": 2,
-    "crtStoryNum": 2,
-    "stat_Sencetive": 17,
-    "stat_Knowledge": 4,
-    "stat_Wit": 5,
-    "arrivalTime": 30
+    "crtScenarioCnt": 0,
+    "crtEventStoryCnt": 0,
+    "crtStoryNum": 1,
+    "stat_Sencetive": 0,
+    "stat_Knowledge": 0,
+    "stat_Wit": 0,
+    "arrivalTime": 0
 }

@@ -12,7 +12,6 @@ public class StoryManager : MonoBehaviour
 
 
     private bool endStory = false;
-
     public bool IsEndStory
     {
         get
@@ -23,7 +22,7 @@ public class StoryManager : MonoBehaviour
 
     private void Start()
     {
-        StartStory();
+        StartSceneStory();
     }
 
     public int GetCurrentScenarioNum()
@@ -55,6 +54,12 @@ public class StoryManager : MonoBehaviour
     {
         int storyNum = GetCurrentScenarioNum();
         return stories.scenarios[storyNum].stories[GameManager.Inst.CurrentPlayer.crtStoryNum];
+    }
+
+    public Scenario GetNowScenario()
+    {
+        int storyNum = GetCurrentScenarioNum();
+        return stories.scenarios[storyNum];
     }
 
 
@@ -113,6 +118,11 @@ public class StoryManager : MonoBehaviour
         }
     }
 
+    public void StartSceneStory()
+    {
+        GameManager.Inst.UI.MoveAnimScene();
+    }
+
     public void StartStory()
     {
         if (endStory)
@@ -128,8 +138,6 @@ public class StoryManager : MonoBehaviour
 
         if (story.usedFunc)
         {
-            Debug.Log(story.storyID);
-
             StartEvent(story.storyID);
             return;
         }

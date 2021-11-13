@@ -95,7 +95,7 @@ public class SeletingBtnBase : MonoBehaviour
         if(currentSelectState == ESelectType.Final)
         {
             GameManager.Inst.Story.SetStoryNum();
-            GameManager.Inst.Story.StartStory();
+            GameManager.Inst.Story.StartSceneStory();
             GameManager.Inst.UI.UnShowSelectBtn();
 
             CheckInfo();

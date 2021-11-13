@@ -15,7 +15,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CanvasGroup nicknameInputPanal = null;
     [SerializeField] private SeletingBtnBase[] selectBtns;
     [SerializeField] private Sprite[] selectBtnSprites;
-    [SerializeField] private SeletingBtnBase finalSelectBtn = null; 
+    [SerializeField] private SeletingBtnBase finalSelectBtn = null;
+    [SerializeField] private MoveAnimScene MoveAnimScenePanal = null;
 
     private InputField nicknameInputField = null;
     [SerializeField] private Text timerTimeText = null;
@@ -177,7 +178,7 @@ public class UIManager : MonoBehaviour
         ActiveNameInputField(false);
 
         GameManager.Inst.Story.SetStoryNum();
-        GameManager.Inst.Story.StartStory();
+        GameManager.Inst.Story.StartSceneStory();
     }
 
     public void ShowSelectBtn()
@@ -189,6 +190,12 @@ public class UIManager : MonoBehaviour
             selectBtns[i].ActiveBtn(true);
             selectBtns[i].SettingBtn(selectLines[i], i);
         }
+    }
+
+    public void MoveAnimScene()
+    {
+        MoveAnimScenePanal.gameObject.SetActive(true);
+        MoveAnimScenePanal.StartMoveAnim();
     }
 
     public void ShowSingleSelectBtn()
