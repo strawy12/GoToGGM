@@ -45,8 +45,6 @@ public class GameManager : MonoSingleTon<GameManager>
     public StoryManager Story { get { return storyManager; } }
     public Timer Timer { get { return timer; } }
     public int StoryLine { get { return player.storyLineNum; } }
-    private Timer timer = new Timer();
-    public Timer Timer { get { return timer; } }
     
     void Awake()
     {

@@ -323,7 +323,7 @@ public class UIManager : MonoBehaviour
     }
     public void CreatePoints()
     {
-        for (int i = 0; i < GameManager.Inst.Story.GetStoryLine().storyOrder.Length; i++ )
+        for (int i = 0; i < GameManager.Inst.Story.GetStoryLine().storyOrder.Length; i++)
         {
             GameObject newPoint = Instantiate(pointPrefab, points.transform);
             Image image = newPoint.GetComponent<Image>();
@@ -339,8 +339,8 @@ public class UIManager : MonoBehaviour
     public void CheckPlayerPoint()
     {
         if (points.transform.GetChild(currentPlayerPos+1) == null) return;
-        points.transform.GetChild(currentPlayerPos).gameObject.SetActive(false);
+        points.transform.GetChild(currentPlayerPos).GetChild(0).gameObject.SetActive(false);
         currentPlayerPos++;
-        points.transform.GetChild(currentPlayerPos).gameObject.SetActive(true);
+        points.transform.GetChild(currentPlayerPos).GetChild(0).gameObject.SetActive(true);
     }
 }

@@ -77,7 +77,6 @@ public class StoryManager : MonoBehaviour
         if (GameManager.Inst.CurrentPlayer.crtStoryNum < maxStoryNum)
         {
             GameManager.Inst.CurrentPlayer.crtStoryNum++;
-            GameManager.Inst.UI.CheckPlayerPoint();
             if(usedEventStory)
             {
                 GameManager.Inst.CurrentPlayer.crtEventStoryCnt++;
@@ -85,6 +84,7 @@ public class StoryManager : MonoBehaviour
             return;
         }
 
+        GameManager.Inst.UI.CheckPlayerPoint();
         GameManager.Inst.CurrentPlayer.crtScenarioCnt++;
         GameManager.Inst.CurrentPlayer.crtStoryNum = 0;
         GameManager.Inst.CurrentPlayer.crtEventStoryCnt = 0;

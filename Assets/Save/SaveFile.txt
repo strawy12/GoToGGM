@@ -1,12 +1,12 @@
 ﻿{
-    "nickname": "ㄴㅊㅌㅊㅍ",
-    "playerjob": "고등학생",
+    "nickname": "ㅇㅁㄴㅇㅁㅇㅁ",
+    "playerjob": "기획자",
     "storyLineNum": 0,
-    "crtScenarioCnt": 0,
-    "crtEventStoryCnt": 0,
+    "crtScenarioCnt": 1,
+    "crtEventStoryCnt": 1,
     "crtStoryNum": 1,
-    "stat_Sencetive": 0,
-    "stat_Knowledge": 0,
-    "stat_Wit": 0,
+    "stat_Sencetive": 11,
+    "stat_Knowledge": 5,
+    "stat_Wit": 12,
     "arrivalTime": 0
 }
