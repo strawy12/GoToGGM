@@ -26,6 +26,11 @@ public class StoryManager : MonoBehaviour
         StartStory();
     }
 
+    public StoryLine GetStoryLine()
+    {
+        return storyLine.storyLines[GameManager.Inst.StoryLine];
+    }
+
     public int GetCurrentScenarioNum()
     {
         return (int)storyLine.storyLines[GameManager.Inst.StoryLine].storyOrder[GameManager.Inst.CurrentPlayer.crtScenarioCnt];
@@ -67,7 +72,7 @@ public class StoryManager : MonoBehaviour
         if (GameManager.Inst.CurrentPlayer.crtStoryNum < maxStoryNum)
         {
             GameManager.Inst.CurrentPlayer.crtStoryNum++;
-
+            GameManager.Inst.UI.CheckPlayerPoint();
             if(usedEventStory)
             {
                 GameManager.Inst.CurrentPlayer.crtEventStoryCnt++;

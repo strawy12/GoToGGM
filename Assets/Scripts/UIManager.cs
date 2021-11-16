@@ -15,6 +15,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private SeletingBtnBase[] selectBtns;
     [SerializeField] private Sprite[] selectBtnSprites;
     [SerializeField] private SeletingBtnBase finalSelectBtn = null;
+    [SerializeField] private GameObject points = null;
+    [SerializeField] private GameObject pointPrefab = null;
+    [SerializeField] private Sprite[] pointSprites = null;
+    private int currentPlayerPos = 0;
 
     private InputField nicknameInputField = null;
     [SerializeField] private Text timerTimeText = null;
@@ -33,7 +37,7 @@ public class UIManager : MonoBehaviour
     }
     private void Start()
     {
-
+        CreatePoints();
     }
 
     public void StartWrite(string message, Action action = null, float writeSpeed = 0.03f)
@@ -305,5 +309,27 @@ public class UIManager : MonoBehaviour
     public void SetTimerUI()
     {
         timerTimeText.text = string.Format("{00}:{1}0", GameManager.Inst.Timer.hour,GameManager.Inst.Timer.minute);
+    }
+    public void CreatePoints()
+    {
+        for (int i = 0; i < GameManager.Inst.Story.GetStoryLine().storyOrder.Length; i++ )
+        {
+            GameObject newPoint = Instantiate(pointPrefab, points.transform);
+            Image image = newPoint.GetComponent<Image>();
+            if (i == 0) newPoint.transform.GetChild(0).gameObject.SetActive(true);
+            image.sprite = pointSprites[(int)GameManager.Inst.Story.GetStoryLine().storyOrder[i]];
+            newPoint.SetActive(true);
+        }
+        GameObject lastPoint = Instantiate(pointPrefab, points.transform);
+        Image lastimage = lastPoint.GetComponent<Image>();
+        lastimage.sprite = pointSprites[(int)GameManager.Inst.Story.GetStoryLine().storyOrder.Length];
+        lastPoint.SetActive(true);
+    }
+    public void CheckPlayerPoint()
+    {
+        if (points.transform.GetChild(currentPlayerPos+1) == null) return;
+        points.transform.GetChild(currentPlayerPos).gameObject.SetActive(false);
+        currentPlayerPos++;
+        points.transform.GetChild(currentPlayerPos).gameObject.SetActive(true);
     }
 }

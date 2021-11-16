@@ -797,6 +797,14 @@ MonoBehaviour:
   - {fileID: -2017180056958952233, guid: f9cbc0ba0298cc84f93e74b2400021ee, type: 3}
   - {fileID: -3718338870356111399, guid: 7b29e619c6648aa48903861481cd4f16, type: 3}
   finalSelectBtn: {fileID: 0}
+  points: {fileID: 0}
+  pointPrefab: {fileID: 0}
+  pointSprites:
+  - {fileID: 21300000, guid: 1c4d3ef982231c249a15f69be29fd47f, type: 3}
+  - {fileID: 21300000, guid: fb4c6808e9597d044ad76071510f4b1a, type: 3}
+  - {fileID: 21300000, guid: caa1942ca64adcf488fb5acf7aa2c38d, type: 3}
+  - {fileID: 21300000, guid: 6dd85b60f19dec84e90e807d30e08988, type: 3}
+  timerTimeText: {fileID: 0}
 --- !u!114 &459142902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -813,8 +821,9 @@ MonoBehaviour:
     nickname: 
     playerjob: 
     storyLineNum: 0
-    currentScenarioCnt: 0
-    currentStoryNum: 0
+    crtScenarioCnt: 0
+    crtEventStoryCnt: 0
+    crtStoryNum: 0
     stat_Sencetive: 0
     stat_Knowledge: 0
     stat_Wit: 0

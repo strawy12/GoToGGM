@@ -55,7 +55,7 @@ public class GameManager : MonoSingleTon<GameManager>
         uiManager = GetComponent<UIManager>();
         storyManager = GetComponent<StoryManager>();
 
-        LoadFromJson();
+        //LoadFromJson();
     }
 
     private void Start()

@@ -1,11 +1,11 @@
 ﻿{
-    "nickname": "응애",
-    "playerjob": "기획자",
+    "nickname": "123",
+    "playerjob": "",
     "storyLineNum": 0,
-    "crtScenarioCnt": 3,
+    "crtScenarioCnt": 0,
     "crtEventStoryCnt": 0,
-    "crtStoryNum": 0,
-    "stat_Sencetive": 12,
-    "stat_Knowledge": 13,
-    "stat_Wit": 10
+    "crtStoryNum": 1,
+    "stat_Sencetive": 0,
+    "stat_Knowledge": 0,
+    "stat_Wit": 0
 }
