@@ -292,11 +292,6 @@ public class UIManager : MonoBehaviour
 
     }
 
-    private void FadeObject(Image obj)
-    {
-
-    }
-
     public void SetTime(int add)
     {
         Debug.Log("setTime: " + add);
@@ -336,6 +331,7 @@ public class UIManager : MonoBehaviour
         lastimage.sprite = pointSprites[(int)GameManager.Inst.Story.GetStoryLine().storyOrder.Length];
         lastPoint.SetActive(true);
     }
+
     public void CheckPlayerPoint()
     {
         if (points.transform.GetChild(currentPlayerPos+1) == null) return;
@@ -343,4 +339,36 @@ public class UIManager : MonoBehaviour
         currentPlayerPos++;
         points.transform.GetChild(currentPlayerPos).GetChild(0).gameObject.SetActive(true);
     }
+
+    #region Sound Setting
+
+    public void BGMVolume(float value)
+    {
+        SoundManager.Inst.BGMVolume(value);
+    }
+
+    public void BGMMute(bool isMute)
+    {
+        SoundManager.Inst.BGMMute(isMute);
+    }
+
+    public void EffectMute(bool isMute)
+    {
+        SoundManager.Inst.EffectMute(isMute);
+    }
+
+    public void EffectVolume(float value)
+    {
+        SoundManager.Inst.EffectVolume(value);
+    }
+    public void SetBGM(int bgmNum)
+    {
+        SoundManager.Inst.SetBGM(bgmNum);
+    }
+    public void SetEffectSound(int effectNum)
+    {
+        SoundManager.Inst.SetEffectSound(effectNum);
+    }
+
+    #endregion
 }
