@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        
         nicknameInputField = nicknameInputPanal.GetComponentInChildren<InputField>();
         nicknameInputField.onEndEdit.AddListener(_ =>
         {

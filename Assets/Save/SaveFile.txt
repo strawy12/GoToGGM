@@ -1,12 +1,16 @@
 ﻿{
-    "nickname": "ㅇㅁㄴㅇㅁㅇㅁ",
+    "nickname": "csa",
     "playerjob": "기획자",
     "storyLineNum": 0,
-    "crtScenarioCnt": 1,
-    "crtEventStoryCnt": 1,
-    "crtStoryNum": 1,
-    "stat_Sencetive": 11,
+    "crtScenarioCnt": 3,
+    "crtEventStoryCnt": 0,
+    "crtStoryNum": 0,
+    "stat_Sencetive": 15,
     "stat_Knowledge": 5,
     "stat_Wit": 12,
-    "arrivalTime": 0
+    "arrivalTime": 0,
+    "bgmVolume": 0.0,
+    "effectVolume": 0.0,
+    "bgmMute": false,
+    "effectMute": false
 }
