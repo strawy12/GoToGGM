@@ -16,6 +16,9 @@ public class EventStory
     [Header("욕심 선택지 전용")]
     public bool isSuccess;
 
+    public EEffectType usedEffect;
+    public int effectNum;
+
     [Header("스토리")]
     [TextArea(6, 10)] public string eventMainStory;
 

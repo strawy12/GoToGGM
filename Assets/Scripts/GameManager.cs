@@ -8,7 +8,8 @@ public enum ESelectType
     Normal,
     Gread,
     Special,
-    Final
+    Final,
+    Hidden
 }
 
 public enum EStatType
@@ -26,6 +27,14 @@ public enum EStoryOrder
     Bus,
     Subway
 }
+
+public enum EEffectType
+{
+    BackGround,
+    Sound,
+    Effect
+}
+
 //public enum btnState { Special, Normal, Good }
 
 public class GameManager : MonoSingleTon<GameManager>
@@ -148,6 +157,8 @@ public class GameManager : MonoSingleTon<GameManager>
 
             case EStatType.ArrivalTime:
                 player.arrivalTime += increaseStat;
+                UI.ShowArriveTimeDangerMessage(player.arrivalTime, player.GetLastWord(), player.arrivalTime > 0);
+
                 break;
         }
 

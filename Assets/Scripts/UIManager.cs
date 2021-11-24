@@ -19,8 +19,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private MoveAnimScene MoveAnimScenePanal = null;
     [SerializeField] private GameObject points = null;
     [SerializeField] private GameObject pointPrefab = null;
+    [SerializeField] private Image bgFadePanal = null;
+    [SerializeField] private SpriteRenderer backGroundSp = null;
+    [SerializeField] private RectTransform messagePanal = null;
     [SerializeField] private Sprite[] pointSprites = null;
+    [SerializeField] private Sprite[] backGroundArray = null;
     private int currentPlayerPos = 0;
+
+    private Text messageText = null;
 
     private InputField nicknameInputField = null;
     [SerializeField] private Text timerTimeText = null;
@@ -32,7 +38,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        
+        messageText = messagePanal.transform.GetChild(0).GetComponent<Text>();
         nicknameInputField = nicknameInputPanal.GetComponentInChildren<InputField>();
         nicknameInputField.onEndEdit.AddListener(_ =>
         {
@@ -44,29 +50,32 @@ public class UIManager : MonoBehaviour
         CreatePoints();
     }
 
-    public void StartWrite(string message, Action action = null, float writeSpeed = 0.03f)
+    public void StartWrite(string message, bool usedEffect = false, Action action = null, float writeSpeed = 0.03f)
     {
-        StartCoroutine(WriteText(message, action, writeSpeed));
+        StartCoroutine(WriteText(message, usedEffect, action, writeSpeed));
     }
 
-    public void StartWrite<T>(string message, Action<T> action, T param, float writeSpeed = 0.03f)
+    public void StartWrite<T>(string message, Action<T> action, T param, float writeSpeed = 0.03f, bool usedEffect = false)
     {
-        StartCoroutine(WriteText(message, action, param, writeSpeed));
+        StartCoroutine(WriteText(message, action, param, writeSpeed, usedEffect));
     }
 
-    public IEnumerator WriteText(string message, Action action, float writeSpeed)
+    public IEnumerator WriteText(string message, bool usedEffect, Action action, float writeSpeed)
     {
         isWriting = true;
         ActiveTouchScreen(true);
         currentWriteSpeed = writeSpeed;
         float waitTime = currentWriteSpeed * 2f;
         string messageText = "";
-
+        int cnt = 1;
+        int storyCnt = 0;
         if (isSkip) isSkip = false;
 
         yield return new WaitForSeconds(0.05f);
         message = message.Replace("&", GameManager.Inst.CurrentPlayer.nickname);
         message = message.Replace("*", GameManager.Inst.CurrentPlayer.playerjob);
+
+        GameManager.Inst.Story.CheckEffect(storyCnt);
 
         foreach (var c in message)
         {
@@ -77,6 +86,18 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(currentWriteSpeed);
             if (c == '\n')
             {
+                if(usedEffect)
+                {
+                    cnt++;
+                    if (cnt == 2)
+                    {
+                        cnt = 0;
+                        storyCnt++;
+                    }
+
+                    GameManager.Inst.Story.CheckEffect(storyCnt);
+                }
+
                 yield return new WaitForSeconds(0.5f);
             }
         }
@@ -105,7 +126,7 @@ public class UIManager : MonoBehaviour
         isWriting = false;
     }
 
-    public IEnumerator WriteText<T>(string message, Action<T> action, T param, float writeSpeed)
+    public IEnumerator WriteText<T>(string message, Action<T> action, T param, float writeSpeed, bool usedEffect)
     {
         isWriting = true;
         ActiveTouchScreen(true);
@@ -192,13 +213,14 @@ public class UIManager : MonoBehaviour
 
         for (int i = 0; i < selectLines.Length; i++)
         {
-            selectBtns[i].ActiveBtn(true);
             selectBtns[i].SettingBtn(selectLines[i], i);
+            selectBtns[i].ActiveBtn(true);
         }
     }
 
-    public void MoveAnimScene()
+    public IEnumerator MoveAnimScene(float delay)
     {
+        yield return new WaitForSeconds(delay);
         MoveAnimScenePanal.gameObject.SetActive(true);
         MoveAnimScenePanal.StartMoveAnim();
     }
@@ -339,6 +361,100 @@ public class UIManager : MonoBehaviour
         points.transform.GetChild(currentPlayerPos).GetChild(0).gameObject.SetActive(false);
         currentPlayerPos++;
         points.transform.GetChild(currentPlayerPos).GetChild(0).gameObject.SetActive(true);
+    }
+
+    public void ShowMessagePanal(string message)
+    {
+        StartCoroutine(PlayMessage(message));
+    }
+
+    public void ShowArriveTimeDangerMessage(int arrivalTime, string lastWord, bool isLating)
+    {
+        string message = string.Format("현재 도착 예정 시간 : {0} {1}", arrivalTime, lastWord);
+
+        StartCoroutine(PlayMessage(message, isLating ? Color.blue : Color.red));
+
+    }
+
+    public void EffectBGFade(bool isFadeIn)
+    {
+        if(isFadeIn)
+        {
+            bgFadePanal.DOFade(1f, 0f);
+            bgFadePanal.gameObject.SetActive(true);
+            bgFadePanal.DOFade(0f, 1f).SetDelay(0.5f);
+        }
+
+        else
+        {
+            bgFadePanal.DOFade(0f, 0f);
+            bgFadePanal.gameObject.SetActive(true);
+            bgFadePanal.DOFade(0f, 1f).SetDelay(0.5f).OnComplete(() => bgFadePanal.gameObject.SetActive(false));
+        }
+    }
+
+    public IEnumerator PlayMessage(string message)
+    {
+        messageText.text = message;
+
+        messagePanal.gameObject.SetActive(true);
+        messagePanal.DOScale(Vector3.one, 0.5f);
+
+        yield return new WaitForSeconds(3f);
+
+        messagePanal.DOScale(Vector3.zero, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+
+        messagePanal.gameObject.SetActive(false);
+    }
+
+    public IEnumerator PlayMessage(string message, Color color)
+    {
+        Color currentColor = messageText.color;
+        messageText.color = color;
+        messageText.text = message;
+
+        messagePanal.gameObject.SetActive(true);
+        messagePanal.DOScale(Vector3.one, 0.5f);
+
+        yield return new WaitForSeconds(3f);
+
+        messagePanal.DOScale(Vector3.zero, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+
+        messagePanal.gameObject.SetActive(false);
+        messageText.color = currentColor;
+    }
+
+    public bool CheckWriting()
+    {
+        return isWriting;
+    }
+
+    public void ChangeBackGround(int backGroundNum)
+    {
+        backGroundSp.sprite = backGroundArray[backGroundNum];
+    }
+
+    public void PlayEffect(int effectNum)
+    {
+        switch (effectNum)
+        {
+            case 0:
+                EffectBGFade(true);
+                break;
+
+            case 1:
+                EffectBGFade(false);
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                break;
+        }
+        
     }
 
     #region Sound Setting

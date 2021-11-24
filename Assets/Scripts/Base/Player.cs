@@ -32,4 +32,22 @@ public class Player
         this.stat_Knowledge = stat_Knowledge;
         this.stat_Wit = stat_Wit;
     }
+
+    public string GetLastWord()
+    {
+        if(arrivalTime < 0)
+        {
+            return "오? 예상보다 빨리 도착하네??";
+        }
+
+        else if(arrivalTime == 0)
+        {
+            return "다행이다. 늦진 않겠다.";
+        }
+
+        else
+        {
+            return "이러다간 지각하겠어!!";
+        }
+    }
 }

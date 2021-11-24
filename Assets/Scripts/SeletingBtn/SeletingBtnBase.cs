@@ -41,6 +41,7 @@ public class SeletingBtnBase : MonoBehaviour
         currentSelectLine = selectLine;
         currentSelectState = selectLine.selectType;
         btnNum = num;
+
         if (currentSelectState == ESelectType.Gread)
         {
             currentEventStory = GameManager.Inst.Story.GetEventStory(currentSelectLine.eventStoryID, true, Random.Range(0, 2) == 0);
@@ -94,17 +95,26 @@ public class SeletingBtnBase : MonoBehaviour
         button.interactable = false;
         if(currentSelectState == ESelectType.Final)
         {
+            CheckInfo();
+
             GameManager.Inst.Story.SetStoryNum();
-            GameManager.Inst.Story.StartSceneStory();
             GameManager.Inst.UI.UnShowSelectBtn();
 
-            CheckInfo();
+            if(currentEventStory.increaseStatType == EStatType.ArrivalTime)
+            {
+                GameManager.Inst.Story.StartSceneStory(4f);
+            }
+            else
+            {
+                GameManager.Inst.Story.StartSceneStory();
+            }
+
         }
 
         else
         {
             string storyLine = currentEventStory.eventMainStory;
-            GameManager.Inst.UI.StartWrite(storyLine, GameManager.Inst.UI.ActiveFinalSelectBtn);
+            GameManager.Inst.UI.StartWrite(storyLine,false, GameManager.Inst.UI.ActiveFinalSelectBtn);
             GameManager.Inst.UI.UnShowSelectBtn();
 
             ChangeFinalSelect();

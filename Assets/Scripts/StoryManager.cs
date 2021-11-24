@@ -9,7 +9,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] private Stories stories;
     [SerializeField] private EventStories eventStories;
     private SeletingBtnBase nowSelectBtn;
-
+    private EffectSetting[] nowEffectSettings;
 
     private bool endStory = false;
     public bool IsEndStory
@@ -50,7 +50,7 @@ public class StoryManager : MonoBehaviour
             eventStory = Array.Find(eventStoryLines[GameManager.Inst.CurrentPlayer.crtEventStoryCnt].eventStories, x => x.eventStoryID == storyID);
         }
 
-        
+
 
         return eventStory;
     }
@@ -77,7 +77,7 @@ public class StoryManager : MonoBehaviour
         if (GameManager.Inst.CurrentPlayer.crtStoryNum < maxStoryNum)
         {
             GameManager.Inst.CurrentPlayer.crtStoryNum++;
-            if(usedEventStory)
+            if (usedEventStory)
             {
                 GameManager.Inst.CurrentPlayer.crtEventStoryCnt++;
             }
@@ -110,7 +110,7 @@ public class StoryManager : MonoBehaviour
             case 24:
                 string[] messages = GetNowStory().mainStory.Split('&');
                 string story = "";
-                if(GameManager.Inst.CurrentPlayer.playerjob == "아티스트")
+                if (GameManager.Inst.CurrentPlayer.playerjob == "아티스트")
                 {
                     story = messages[1];
                 }
@@ -118,14 +118,14 @@ public class StoryManager : MonoBehaviour
                 {
                     story = messages[0];
                 }
-                GameManager.Inst.UI.StartWrite(story, GameManager.Inst.UI.ShowSingleSelectBtn);
+                GameManager.Inst.UI.StartWrite(story, false, GameManager.Inst.UI.ShowSingleSelectBtn);
                 break;
         }
     }
 
-    public void StartSceneStory()
+    public void StartSceneStory(float delay = 0f)
     {
-        GameManager.Inst.UI.MoveAnimScene();
+        StartCoroutine(GameManager.Inst.UI.MoveAnimScene(delay));
     }
 
     public void StartStory()
@@ -141,13 +141,20 @@ public class StoryManager : MonoBehaviour
 
         Story story = GetNowStory();
 
+        bool usedEffect = story.effectSettings.Length != 0;
+        if (usedEffect)
+        {
+            Debug.Log("멋있다 이민영");
+            nowEffectSettings = story.effectSettings;
+        }
+
         if (story.usedFunc)
         {
             StartEvent(story.storyID);
             return;
         }
 
-        GameManager.Inst.UI.StartWrite(GetNowStory().mainStory);
+        GameManager.Inst.UI.StartWrite(GetNowStory().mainStory, usedEffect);
     }
 
     public void EndStory()
@@ -155,6 +162,35 @@ public class StoryManager : MonoBehaviour
         endStory = true;
         GameManager.Inst.UI.ActiveTouchScreen(true);
         GameManager.Inst.UI.SetStatText();
+    }
+
+    public void CheckEffect(int storyOrder)
+    {
+        for (int i = 0; i < nowEffectSettings.Length; i++)
+        {
+            if (storyOrder != nowEffectSettings[i].playStoryOrder) continue;
+
+            PlayEffect(nowEffectSettings[i].usedEffect, nowEffectSettings[i].effectNum);
+        }
+    }
+
+    public void PlayEffect(EEffectType type, int effectNum)
+    {
+        switch (type)
+        {
+            case EEffectType.BackGround:
+                GameManager.Inst.UI.ChangeBackGround(effectNum);
+                break;
+
+            case EEffectType.Sound:
+                GameManager.Inst.UI.SetEffectSound(effectNum);
+                break;
+
+            case EEffectType.Effect:
+                GameManager.Inst.UI.PlayEffect(effectNum);
+                break;
+
+        }
     }
 
 }
