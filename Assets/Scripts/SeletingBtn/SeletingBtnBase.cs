@@ -15,29 +15,23 @@ public class SeletingBtnBase : MonoBehaviour
     protected SelectLine currentSelectLine;
     protected EventStory currentEventStory;
     private ESelectType currentSelectState;
-    protected Button button = null;
+    protected Button currentButton = null;
 
     public ESelectType SelectType { get { return currentSelectState; } }
 
     protected int btnNum = 0;
 
+    public void Start()
+    {
+        currentButton = GetComponent<Button>();
+        btnImage = GetComponent<Image>();
+        canvasGroup = GetComponent<CanvasGroup>();
+        gameObject.SetActive(false);
+    }
+
+
     public void SettingBtn(SelectLine selectLine, int num = 0)
     {
-        if (button == null)
-        {
-            button = GetComponent<Button>();
-        }
-
-        if(btnImage == null)
-        {
-            btnImage = GetComponent<Image>();
-        }
-
-        if(canvasGroup == null)
-        {
-            canvasGroup = GetComponent<CanvasGroup>();
-        }
-
         currentSelectLine = selectLine;
         currentSelectState = selectLine.selectType;
         btnNum = num;
@@ -47,7 +41,7 @@ public class SeletingBtnBase : MonoBehaviour
             currentEventStory = GameManager.Inst.Story.GetEventStory(currentSelectLine.eventStoryID, true, Random.Range(0, 2) == 0);
         }
 
-        else if(currentSelectState == ESelectType.Final)
+        else if (currentSelectState == ESelectType.Final)
         {
             GameManager.Inst.Story.EndStory();
         }
@@ -59,11 +53,11 @@ public class SeletingBtnBase : MonoBehaviour
 
         if (currentSelectState == ESelectType.Special)
         {
-            button.interactable = GameManager.Inst.CheckPlayerStat(currentSelectLine.needStatType, currentSelectLine.needStat);
+            currentButton.interactable = GameManager.Inst.CheckPlayerStat(currentSelectLine.needStatType, currentSelectLine.needStat);
         }
         else
         {
-            button.interactable = true;
+            currentButton.interactable = true;
         }
 
         SetBtnState();
@@ -72,15 +66,15 @@ public class SeletingBtnBase : MonoBehaviour
 
     public void CheckInfo()
     {
+        if (currentEventStory == null) return;
+
         if (currentEventStory.increaseStatType != EStatType.None)
         {
             GameManager.Inst.SetPlayerStat(currentEventStory.increaseStatType, currentEventStory.increaseStat);
         }
         if (currentEventStory.increaseTime != 0)
         {
-            Debug.Log(currentEventStory.increaseTime);
             GameManager.Inst.UI.SetTime(currentEventStory.increaseTime);
-            Debug.Log(currentEventStory.increaseTime);
         }
     }
 
@@ -92,15 +86,16 @@ public class SeletingBtnBase : MonoBehaviour
 
     public void OnClickBtn()
     {
-        button.interactable = false;
-        if(currentSelectState == ESelectType.Final)
+        currentButton.interactable = false;
+        if (currentSelectState == ESelectType.Final)
         {
             CheckInfo();
 
             GameManager.Inst.Story.SetStoryNum();
             GameManager.Inst.UI.UnShowSelectBtn();
 
-            if(currentEventStory.increaseStatType == EStatType.ArrivalTime)
+
+            if (currentEventStory != null && currentEventStory.increaseStatType == EStatType.ArrivalTime)
             {
                 GameManager.Inst.Story.StartSceneStory(4f);
             }
@@ -114,18 +109,18 @@ public class SeletingBtnBase : MonoBehaviour
         else
         {
             string storyLine = currentEventStory.eventMainStory;
-            GameManager.Inst.UI.StartWrite(storyLine,false, GameManager.Inst.UI.ActiveFinalSelectBtn);
+            GameManager.Inst.UI.StartWrite(storyLine, false, GameManager.Inst.UI.ActiveFinalSelectBtn);
             GameManager.Inst.UI.UnShowSelectBtn();
 
             ChangeFinalSelect();
         }
-        
+
     }
 
     public void ChangeFinalSelect()
     {
         int index = 0;
-        if(currentEventStory.eventFinalStory.Length > 1)
+        if (currentEventStory.eventFinalStory.Length > 1)
         {
             index = GameManager.Inst.StoryLine;
         }
@@ -138,36 +133,21 @@ public class SeletingBtnBase : MonoBehaviour
 
     public void SetEvent(Action action, bool isRemove)
     {
-        if(button == null)
-        {
-            button = GetComponent<Button>();
-        }
-
         if (isRemove)
         {
-            button.onClick.RemoveAllListeners();
+            currentButton.onClick.RemoveAllListeners();
         }
         else
         {
-            button.onClick.AddListener(() => action());
-        }  
+            currentButton.onClick.AddListener(() => action());
+        }
     }
 
     public void ActiveBtn(bool isActive)
     {
-        if (canvasGroup == null)
-        {
-            canvasGroup = GetComponent<CanvasGroup>();
-        }
-
-        if(button == null)
-        {
-            button = GetComponent<Button>();
-        }
-
         if (isActive)
         {
-            button.interactable = true;
+            currentButton.interactable = true;
             gameObject.SetActive(true);
             canvasGroup.DOFade(1f, 1f);
         }

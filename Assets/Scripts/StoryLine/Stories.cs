@@ -37,6 +37,14 @@ public class Story
     public int storyID;
     public bool usedFunc;
 
+    public bool usedEffect
+    {
+        get
+        {
+            return effectSettings.Length != 0;
+        }
+    }
+
     public EffectSetting[] effectSettings;
 
     [TextArea(7, 25)] public string mainStory;

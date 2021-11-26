@@ -24,8 +24,12 @@ public enum EStatType
 public enum EStoryOrder
 {
     Room,
-    Bus,
-    Subway
+    Bus1,
+    Bus2,
+    Subway1,
+    Subway2,
+    Transfer,
+    Walk
 }
 
 public enum EEffectType
@@ -66,7 +70,7 @@ public class GameManager : MonoSingleTon<GameManager>
         uiManager = GetComponent<UIManager>();
         storyManager = GetComponent<StoryManager>();
 
-        //LoadFromJson();
+        LoadFromJson();
     }
 
     private void Start()
@@ -115,6 +119,7 @@ public class GameManager : MonoSingleTon<GameManager>
         if (jobNum == 0)
         {
             player.playerjob = "기획자";
+            player.storyLineNum = 0;
             SetPlayerStat(EStatType.Sencetive, 5);
             SetPlayerStat(EStatType.Knowledge, 5);
             SetPlayerStat(EStatType.Wit, 10);
@@ -122,6 +127,7 @@ public class GameManager : MonoSingleTon<GameManager>
         else if (jobNum == 1)
         {
             player.playerjob = "프로그래머";
+            player.storyLineNum = 1;
             SetPlayerStat(EStatType.Sencetive, 5);
             SetPlayerStat(EStatType.Knowledge, 10);
             SetPlayerStat(EStatType.Wit, 5);
@@ -129,6 +135,7 @@ public class GameManager : MonoSingleTon<GameManager>
         else if (jobNum == 2)
         {
             player.playerjob = "아티스트";
+            player.storyLineNum = 2;
             SetPlayerStat(EStatType.Sencetive, 10);
             SetPlayerStat(EStatType.Knowledge, 5);
             SetPlayerStat(EStatType.Wit, 5);

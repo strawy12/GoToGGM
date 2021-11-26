@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject points = null;
     [SerializeField] private GameObject pointPrefab = null;
     [SerializeField] private Image bgFadePanal = null;
-    [SerializeField] private SpriteRenderer backGroundSp = null;
+    [SerializeField] private Image backGroundImage = null;
     [SerializeField] private RectTransform messagePanal = null;
     [SerializeField] private Sprite[] pointSprites = null;
     [SerializeField] private Sprite[] backGroundArray = null;
@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
         StartCoroutine(WriteText(message, usedEffect, action, writeSpeed));
     }
 
-    public void StartWrite<T>(string message, Action<T> action, T param, float writeSpeed = 0.03f, bool usedEffect = false)
+    public void StartWrite<T>(string message, Action<T> action, T param, bool usedEffect = false, float writeSpeed = 0.03f)
     {
         StartCoroutine(WriteText(message, action, param, writeSpeed, usedEffect));
     }
@@ -69,13 +69,20 @@ public class UIManager : MonoBehaviour
         string messageText = "";
         int cnt = 1;
         int storyCnt = 0;
+        float delay = 0f;
         if (isSkip) isSkip = false;
 
         yield return new WaitForSeconds(0.05f);
         message = message.Replace("&", GameManager.Inst.CurrentPlayer.nickname);
         message = message.Replace("*", GameManager.Inst.CurrentPlayer.playerjob);
 
-        GameManager.Inst.Story.CheckEffect(storyCnt);
+        storyText.text = "";
+        if(usedEffect)
+        {
+             delay = GameManager.Inst.Story.CheckEffect(storyCnt);
+            yield return new WaitForSeconds(delay);
+        }
+
 
         foreach (var c in message)
         {
@@ -95,7 +102,9 @@ public class UIManager : MonoBehaviour
                         storyCnt++;
                     }
 
-                    GameManager.Inst.Story.CheckEffect(storyCnt);
+                    delay = GameManager.Inst.Story.CheckEffect(storyCnt);
+                    yield return new WaitForSeconds(delay);
+
                 }
 
                 yield return new WaitForSeconds(0.5f);
@@ -104,11 +113,44 @@ public class UIManager : MonoBehaviour
 
         if (!isSkip)
         {
-            yield return new WaitForSeconds(1.25f);
+            if (storyCnt == 0)
+            {
+                storyCnt = 1;
+            }
+
+            delay = GameManager.Inst.Story.CheckEffect(storyCnt);
+            yield return new WaitForSeconds(delay);
+
+            yield return new WaitForSeconds(1f);
         }
         else
         {
             storyText.text = message;
+            if(usedEffect)
+            {
+                for (int i = 0; i < message.Length; i++)
+                {
+                    if (message[i] == '\n')
+                    {
+                        cnt++;
+
+                        if (cnt == 2)
+                        {
+                            cnt = 0;
+                            storyCnt++;
+                        }
+                    }
+                }
+
+                if(storyCnt == 0)
+                {
+                    storyCnt = 1;
+                }
+
+                delay = GameManager.Inst.Story.CheckEffect(storyCnt);
+                yield return new WaitForSeconds(delay);
+            }
+            
             yield return new WaitForSeconds(0.5f);
             isSkip = false;
         }
@@ -133,6 +175,9 @@ public class UIManager : MonoBehaviour
         currentWriteSpeed = writeSpeed;
         float waitTime = currentWriteSpeed * 2f;
         string messageText = "";
+        int cnt = 1;
+        int storyCnt = 0;
+        float delay = 0f;
 
         if (isSkip) isSkip = false;
 
@@ -140,6 +185,14 @@ public class UIManager : MonoBehaviour
 
         message = message.Replace("&", GameManager.Inst.CurrentPlayer.nickname);
         message = message.Replace("*", GameManager.Inst.CurrentPlayer.playerjob);
+
+
+        storyText.text = "";
+        if (usedEffect)
+        {
+            delay = GameManager.Inst.Story.CheckEffect(storyCnt);
+            yield return new WaitForSeconds(delay);
+        }
 
         foreach (var c in message)
         {
@@ -150,17 +203,64 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(currentWriteSpeed);
             if (c == '\n')
             {
+                if (usedEffect)
+                {
+                    cnt++;
+                    if (cnt == 2)
+                    {
+                        cnt = 0;
+                        storyCnt++;
+                    }
+
+                    delay = GameManager.Inst.Story.CheckEffect(storyCnt);
+                    yield return new WaitForSeconds(delay);
+                }
+                    
                 yield return new WaitForSeconds(0.5f);
             }
         }
 
         if (!isSkip)
         {
-            yield return new WaitForSeconds(1.25f);
+            if (storyCnt == 0)
+            {
+                storyCnt = 1;
+            }
+
+            delay = GameManager.Inst.Story.CheckEffect(storyCnt);
+            yield return new WaitForSeconds(delay);
+
+            yield return new WaitForSeconds(1f);
         }
         else
         {
             storyText.text = message;
+
+            if (usedEffect)
+            {
+                for (int i = 0; i < message.Length; i++)
+                {
+                    if (message[i] == '\n')
+                    {
+                        cnt++;
+
+                        if (cnt == 2)
+                        {
+                            cnt = 0;
+                            storyCnt++;
+                        }
+                    }
+                }
+
+                if (storyCnt == 0)
+                {
+                    storyCnt = 1;
+                }
+
+                delay = GameManager.Inst.Story.CheckEffect(storyCnt);
+                yield return new WaitForSeconds(delay);
+            }
+
             yield return new WaitForSeconds(0.5f);
             isSkip = false;
         }
@@ -225,24 +325,27 @@ public class UIManager : MonoBehaviour
         MoveAnimScenePanal.StartMoveAnim();
     }
 
-    public void ShowSingleSelectBtn()
+    public void ShowSingleSelectBtn(int num)
     {
-        int num;
-        if (GameManager.Inst.CurrentPlayer.playerjob == "아티스트")
-        {
-            num = 1;
-        }
-        else
-        {
-            num = 0;
-        }
-
         SelectLine selectLine = GameManager.Inst.Story.GetNowStory().selectLines[num];
 
         selectBtns[0].ActiveBtn(true);
         selectBtns[0].SettingBtn(selectLine);
     }
 
+    public List<SeletingBtnBase> GetActiveSelectBtn()
+    {
+        List<SeletingBtnBase> seletingBtns = new List<SeletingBtnBase>();
+        for (int i = 0; i < 3; i++)
+        {
+            if (selectBtns[i].gameObject.activeSelf)
+            {
+                seletingBtns.Add(seletingBtns[i]);
+            }
+        }
+
+        return seletingBtns;
+    }
     public void UnShowSelectBtn(SeletingBtnBase seletingBtn = null)
     {
         for (int i = 0; i < 3; i++)
@@ -317,7 +420,6 @@ public class UIManager : MonoBehaviour
 
     public void SetTime(int add)
     {
-        Debug.Log("setTime: " + add);
         if(GameManager.Inst.Timer.minute + add >= 6)
         {
             GameManager.Inst.Timer.minute = add - (6 - GameManager.Inst.Timer.minute);
@@ -380,16 +482,20 @@ public class UIManager : MonoBehaviour
     {
         if(isFadeIn)
         {
-            bgFadePanal.DOFade(1f, 0f);
-            bgFadePanal.gameObject.SetActive(true);
-            bgFadePanal.DOFade(0f, 1f).SetDelay(0.5f);
+            float addDelay = 0f;
+            if(bgFadePanal.color.a == 0f)
+            {
+                bgFadePanal.DOFade(1f, 1f);
+                addDelay = 1f;
+            }
+
+            bgFadePanal.DOFade(0f, 1f).SetDelay(addDelay + 0.5f).OnComplete(() => bgFadePanal.gameObject.SetActive(false));
         }
 
         else
         {
-            bgFadePanal.DOFade(0f, 0f);
             bgFadePanal.gameObject.SetActive(true);
-            bgFadePanal.DOFade(0f, 1f).SetDelay(0.5f).OnComplete(() => bgFadePanal.gameObject.SetActive(false));
+            bgFadePanal.DOFade(1f, 1f).SetDelay(0.5f).OnComplete(()=> GameManager.Inst.Story.AutoSelectBtn());
         }
     }
 
@@ -433,20 +539,21 @@ public class UIManager : MonoBehaviour
 
     public void ChangeBackGround(int backGroundNum)
     {
-        backGroundSp.sprite = backGroundArray[backGroundNum];
+        backGroundImage.sprite = backGroundArray[backGroundNum];
     }
 
-    public void PlayEffect(int effectNum)
+    public float PlayEffect(int effectNum)
     {
         switch (effectNum)
         {
             case 0:
                 EffectBGFade(true);
-                break;
+                return 2f;
 
             case 1:
                 EffectBGFade(false);
-                break;
+                return 2f;
+
 
             case 2:
                 break;
@@ -454,7 +561,8 @@ public class UIManager : MonoBehaviour
             case 3:
                 break;
         }
-        
+                return 0f;
+
     }
 
     #region Sound Setting
