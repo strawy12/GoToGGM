@@ -18,9 +18,9 @@ public class AdMobManager : MonoBehaviour
     public void Start()
     {
         var requestConfiguration = new RequestConfiguration
-           .Builder()
-           .SetTestDeviceIds(new List<string>() { "701C6A44E143E895" })
-           .build();
+            .Builder()
+            .SetTestDeviceIds(new List<string>() { "701C6A44E143E895" }) 
+            .build();
 
         MobileAds.SetRequestConfiguration(requestConfiguration);
 
@@ -32,21 +32,6 @@ public class AdMobManager : MonoBehaviour
     {
         bannerAd = new BannerView(isTestMode ? BANNER_TEST_ID : BANNER_ID, AdSize.SmartBanner, AdPosition.Bottom);
         bannerAd.LoadAd(GetAdRequest());
-    }
-
-    public void ToggleBannerAd(bool isShow)
-    {
-        if (isShow == this.isShow) return;
-        this.isShow = isShow;
-        if (isShow)
-        {
-            bannerAd.Show();
-        }
-
-        else
-        {
-            bannerAd.Hide();
-        }
     }
 
     AdRequest GetAdRequest()

@@ -36,7 +36,8 @@ public enum EEffectType
 {
     BackGround,
     Sound,
-    Effect
+    Effect,
+    BGM
 }
 
 //public enum btnState { Special, Normal, Good }
@@ -61,7 +62,7 @@ public class GameManager : MonoSingleTon<GameManager>
     
     void Awake()
     {
-        SAVE_PATH = Application.dataPath + "/Save";
+        SAVE_PATH = Application.persistentDataPath + "/Save";
         if (!Directory.Exists(SAVE_PATH))
         {
             Directory.CreateDirectory(SAVE_PATH);

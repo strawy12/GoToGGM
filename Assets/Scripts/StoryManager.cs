@@ -251,6 +251,10 @@ public class StoryManager : MonoBehaviour
             case EEffectType.Effect:
                 return GameManager.Inst.UI.PlayEffect(effectNum);
 
+            case EEffectType.BGM:
+                GameManager.Inst.UI.SetBGM(effectNum);
+                return 0f;
+
         }
 
         return 0f;
