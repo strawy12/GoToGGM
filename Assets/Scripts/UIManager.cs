@@ -333,6 +333,14 @@ public class UIManager : MonoBehaviour
         selectBtns[0].SettingBtn(selectLine);
     }
 
+    public void CheckBGFade()
+    {
+        if(bgFadePanal.color.a <= 1f)
+        {
+            EffectBGFade(true);
+        }
+    }
+
     public List<SeletingBtnBase> GetActiveSelectBtn()
     {
         List<SeletingBtnBase> seletingBtns = new List<SeletingBtnBase>();
@@ -340,7 +348,7 @@ public class UIManager : MonoBehaviour
         {
             if (selectBtns[i].gameObject.activeSelf)
             {
-                seletingBtns.Add(seletingBtns[i]);
+                seletingBtns.Add(selectBtns[i]);
             }
         }
 
@@ -495,7 +503,7 @@ public class UIManager : MonoBehaviour
         else
         {
             bgFadePanal.gameObject.SetActive(true);
-            bgFadePanal.DOFade(1f, 1f).SetDelay(0.5f).OnComplete(()=> GameManager.Inst.Story.AutoSelectBtn());
+            bgFadePanal.DOFade(1f, 1f).SetDelay(0.5f).OnComplete(()=>StartCoroutine(GameManager.Inst.Story.AutoSelectBtn()));
         }
     }
 

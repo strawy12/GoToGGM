@@ -17,7 +17,7 @@ public class MoveAnimScene : MonoBehaviour
 
     public void StartMoveAnim()
     {
-        isFirst = GameManager.Inst.CurrentPlayer.crtStoryNum == 0;
+        isFirst = GameManager.Inst.CurrentPlayer.crtStoryNum == 0 || stageObjTemp.parent.childCount <= 1;
 
         if (rects != null && isFirst)
         {

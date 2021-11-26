@@ -162,8 +162,9 @@ public class StoryManager : MonoBehaviour
         StartCoroutine(GameManager.Inst.UI.MoveAnimScene(delay));
     }
 
-    public void AutoSelectBtn()
+    public IEnumerator AutoSelectBtn()
     {
+        yield return new WaitForSeconds(2.5f);
         List<SeletingBtnBase> seletingBtns = GameManager.Inst.UI.GetActiveSelectBtn();
 
         if (seletingBtns.Count > 0)
@@ -191,6 +192,8 @@ public class StoryManager : MonoBehaviour
         {
             return;
         }
+
+        GameManager.Inst.UI.CheckBGFade();
 
         Story story = GetNowStory();
 
