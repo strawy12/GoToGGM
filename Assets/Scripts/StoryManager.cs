@@ -39,7 +39,7 @@ public class StoryManager : MonoBehaviour
 
     public EventStory GetEventStory(int storyID, bool isGreed = false, bool isSuccess = false)
     {
-        GameManager.Inst.CheckLucky(isSuccess);
+        
         EventStory eventStory = null;
         EventStoryLine[] eventStoryLines = eventStories.eventScenarios[GetCurrentScenarioNum()].eventStoryLines;
 

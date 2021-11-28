@@ -13,18 +13,13 @@ public class Player
     public int crtEventStoryCnt = 0;
     public int crtStoryNum = 0;
 
-<<<<<<< HEAD
+    //InGame Stat
     public int stat_Sencetive;
     public int stat_Knowledge;
     public int stat_Wit;
     public int arrivalTime;
     public bool[] clears;
-=======
-    //InGame Stat
-    public int stat_Sencetive; 
-    public int stat_Knowledge; 
-    public int stat_Wit; 
-    public int arrivalTime; 
+
 
     //InGame Sound Info
     public float bgmVolume;
@@ -32,13 +27,13 @@ public class Player
     public bool bgmMute;
     public bool effectMute;
 
->>>>>>> develop
     public Player(string playerjob, int stat_Sencetive, int stat_Knowledge, int stat_Wit)
     {
         this.playerjob = playerjob;
         this.stat_Sencetive = stat_Sencetive;
         this.stat_Knowledge = stat_Knowledge;
         this.stat_Wit = stat_Wit;
+        clears = new bool[15];
     }
 
     public string GetLastWord()

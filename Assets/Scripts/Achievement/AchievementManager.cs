@@ -23,18 +23,18 @@ public class AchievementManager : MonoBehaviour
     private int luckPoint = 0;
     private void Start()
     {
+
         for(int i = 0; i < 15; i++)
         {
             GameObject newObject = Instantiate(panelObject, contentTransform);
             achievementPanels[i].achievementPanel = newObject.GetComponent<AchievementPanel>();
             achievementPanels[i].achievementPanel.SetValue(achievementPanels[i].title, achievementPanels[i].explanation);
             newObject.SetActive(true);
-
-            //achievementPanels[i].isCleared = GameManager.Inst.CurrentPlayer.clears[i];
-            //if (achievementPanels[i].isCleared)
-            //{
-            //    achievementPanels[i].achievementPanel.Clear(i);
-            //}
+            achievementPanels[i].isCleared = GameManager.Inst.CurrentPlayer.clears[i];
+            if (achievementPanels[i].isCleared)
+            {
+                achievementPanels[i].achievementPanel.Clear(i);
+            }
         }
     }
     private void Clear(int ID)
@@ -46,7 +46,7 @@ public class AchievementManager : MonoBehaviour
 
         clearNotice.ShowNotice(achievementPanels[ID].title);
 
-        //GameManager.Inst.SaveClears(ID);
+        GameManager.Inst.SaveClears(ID);
     }
     public void Test()//실험용 클리어함수
     {
@@ -95,7 +95,7 @@ public class AchievementManager : MonoBehaviour
             CheckWeaponMaster();
             return;
         }
-        if(GameManager.Inst.CurrentPlayer.stat_Knowledge + GameManager.Inst.CurrentPlayer.stat_Sencetive + GameManager.Inst.CurrentPlayer.stat_Wit >= 30)
+        if(GameManager.Inst.CurrentPlayer.stat_Knowledge >= 10 && GameManager.Inst.CurrentPlayer.stat_Sencetive >= 10 && GameManager.Inst.CurrentPlayer.stat_Wit >= 10)
         {
             Clear(12);
         }
@@ -103,7 +103,7 @@ public class AchievementManager : MonoBehaviour
 
     public void CheckWeaponMaster()
     {
-        if (GameManager.Inst.CurrentPlayer.stat_Knowledge + GameManager.Inst.CurrentPlayer.stat_Sencetive + GameManager.Inst.CurrentPlayer.stat_Wit >= 45)
+        if (GameManager.Inst.CurrentPlayer.stat_Knowledge >= 15 && GameManager.Inst.CurrentPlayer.stat_Sencetive >= 15 && GameManager.Inst.CurrentPlayer.stat_Wit >= 15)
         {
             Clear(13);
         }
@@ -120,6 +120,7 @@ public class AchievementManager : MonoBehaviour
             Clear(10);
         }
     }
+
     public void CheckUnlucky()
     {
         if (luckPoint >= 0)

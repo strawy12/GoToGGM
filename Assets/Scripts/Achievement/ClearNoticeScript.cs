@@ -19,7 +19,7 @@ public class ClearNoticeScript : MonoBehaviour
     }
     public void ShowNotice(string title)
     {
-        textClearTitle.text = string.Format("诀利 \"" + title + "\" 崔己");
+        textClearTitle.text = string.Format("诀利 \" {0} \" 崔己", title);
         rectTransform.DOAnchorPosX(Mathf.Clamp(rectTransform.anchoredPosition.x - rectTransform.rect.width, minPos, maxPos), 0.8f);
         Invoke(nameof(HideNotice), 2f);
     }
