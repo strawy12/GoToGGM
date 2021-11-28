@@ -105,6 +105,10 @@ public class SeletingBtnBase : MonoBehaviour
 
         else
         {
+            if(currentSelectState == ESelectType.Gread)
+            {
+                GameManager.Inst.CheckLucky(currentEventStory.isSuccess);
+            }    
 
             if(currentEventStory.usedEffect)
             {

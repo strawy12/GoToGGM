@@ -8,11 +8,8 @@ using DG.Tweening;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Image timeLimiter = null; private float limiterScaleY;
-    [SerializeField] private Text storyText = null;
-=======
     [SerializeField] private StoryText storyTextTemp = null;
     [SerializeField] private StoryScrollRect storyScrollRect = null;
->>>>>>> develop
     [SerializeField] private Text jobStatusText = null;
     [SerializeField] private Text statText = null;
     [SerializeField] private Text arrivalTimeText = null;
@@ -303,11 +300,21 @@ public class UIManager : MonoBehaviour
 
     public void ShowSelectBtn()
     {
-        int length = GameManager.Inst.Story.GetNowStory().selectLines.Length;
+        SelectLine[] selectLines = GameManager.Inst.Story.GetNowStory().selectLines;
 
-        for (int i = 0; i < length; i++)
+        for (int i = 0; i < selectLines.Length; i++)
         {
-            selectBtns[i].ActiveBtn(true);
+
+            if (selectLines[i].selectType != ESelectType.Hidden)
+            {
+                selectBtns[i].ActiveBtn(true);
+            }
+
+            else
+            {
+                StartCoroutine(ShowHiddenSelection(selectLines[i].timeLimit, i));
+            }
+
         }
     }
 
@@ -316,11 +323,7 @@ public class UIManager : MonoBehaviour
         SelectLine[] selectLines = GameManager.Inst.Story.GetNowStory().selectLines;
         for (int i = 0; i < selectLines.Length; i++)
         {
-<<<<<<< HEAD
-            if (selectLines[i].selectType != ESelectType.Hidden)
-                selectBtns[i].ActiveBtn(true);
-            else
-                StartCoroutine(ShowHiddenSelection(selectLines[i].timeLimit, i));
+            
             selectBtns[i].SettingBtn(selectLines[i], i);
         }
     }
@@ -338,14 +341,7 @@ public class UIManager : MonoBehaviour
         selectBtns[btnNum].ActiveBtn(true);
         selectBtns[btnNum].OnClickBtn();
     }
-    public void MoveAnimScene()
-=======
-            selectBtns[i].SettingBtn(selectLines[i], i);
-        }
-    }
-
     public IEnumerator MoveAnimScene(float delay)
->>>>>>> develop
     {
         yield return new WaitForSeconds(delay);
         MoveAnimScenePanal.gameObject.SetActive(true);

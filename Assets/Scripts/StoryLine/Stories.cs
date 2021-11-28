@@ -15,13 +15,11 @@ public class SelectLine
     [Header("이벤트 스토리")]
     public int eventStoryID;
 
-<<<<<<< HEAD
     [Header("제한 시간")]
     public float timeLimit;
-=======
+
     public bool useTimer;
     public float time;
->>>>>>> develop
 }
 
 [System.Serializable]
