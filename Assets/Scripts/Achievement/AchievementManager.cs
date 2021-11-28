@@ -17,24 +17,39 @@ public class AchievementManager : MonoBehaviour
     [SerializeField] GameObject panelObject = null;
     [SerializeField] Transform contentTransform = null;
     [SerializeField] ClearNoticeScript clearNotice = null;
+    [SerializeField] GameObject achievementScroll = null;
     public List<AchievementBase> achievementPanels = new List<AchievementBase>();
     private AchievementPanel component = null;
     private int testID = 0;
     private int luckPoint = 0;
+    private bool isShown = false;
     private void Start()
     {
-        for(int i = 0; i < 15; i++)
+        CreatePanels();
+    }
+
+    public void ShowPanels()
+    {
+        if (isShown)
+            achievementScroll.SetActive(false);
+        else
+            achievementScroll.SetActive(true);
+    }
+
+    private void CreatePanels()
+    {
+        for (int i = 0; i < 15; i++)
         {
             GameObject newObject = Instantiate(panelObject, contentTransform);
             achievementPanels[i].achievementPanel = newObject.GetComponent<AchievementPanel>();
             achievementPanels[i].achievementPanel.SetValue(achievementPanels[i].title, achievementPanels[i].explanation);
             newObject.SetActive(true);
 
-            //achievementPanels[i].isCleared = GameManager.Inst.CurrentPlayer.clears[i];
-            //if (achievementPanels[i].isCleared)
-            //{
-            //    achievementPanels[i].achievementPanel.Clear(i);
-            //}
+            achievementPanels[i].isCleared = GameManager.Inst.CurrentPlayer.clears[i];
+            if (achievementPanels[i].isCleared)
+            {
+                achievementPanels[i].achievementPanel.Clear(i);
+            }
         }
     }
     private void Clear(int ID)
@@ -46,7 +61,7 @@ public class AchievementManager : MonoBehaviour
 
         clearNotice.ShowNotice(achievementPanels[ID].title);
 
-        //GameManager.Inst.SaveClears(ID);
+        GameManager.Inst.SaveClears(ID);
     }
     public void Test()//실험용 클리어함수
     {
