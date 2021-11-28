@@ -15,17 +15,45 @@ public class SelectLine
     [Header("이벤트 스토리")]
     public int eventStoryID;
 
+<<<<<<< HEAD
     [Header("제한 시간")]
     public float timeLimit;
+=======
+    public bool useTimer;
+    public float time;
+>>>>>>> develop
 }
+
+[System.Serializable]
+public class EffectSetting
+{
+    public EEffectType usedEffect;
+    public int effectNum;
+
+    public int playStoryOrder;
+}
+
 
 [System.Serializable]
 public class Story
 {
+    [Header("Story Info")]
     public string storyName;
     public int storyID;
     public bool usedFunc;
+
+    public bool usedEffect
+    {
+        get
+        {
+            return effectSettings.Length != 0;
+        }
+    }
+
+    public EffectSetting[] effectSettings;
+
     [TextArea(7, 25)] public string mainStory;
+
     public SelectLine[] selectLines;
 }
 

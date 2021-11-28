@@ -17,6 +17,16 @@ public class EventStory
     [Header("욕심 선택지 전용")]
     public bool isSuccess;
 
+    public bool usedEffect
+    {
+        get
+        {
+            return effectSettings.Length != 0;
+        }
+    }
+
+    public EffectSetting[] effectSettings;
+
     [Header("스토리")]
     [TextArea(6, 10)] public string eventMainStory;
 

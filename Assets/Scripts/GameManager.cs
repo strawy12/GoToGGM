@@ -24,9 +24,22 @@ public enum EStatType
 public enum EStoryOrder
 {
     Room,
-    Bus,
-    Subway
+    Bus1,
+    Bus2,
+    Subway1,
+    Subway2,
+    Transfer,
+    Walk
 }
+
+public enum EEffectType
+{
+    BackGround,
+    Sound,
+    Effect,
+    BGM
+}
+
 //public enum btnState { Special, Normal, Good }
 
 public class GameManager : MonoSingleTon<GameManager>
@@ -50,7 +63,7 @@ public class GameManager : MonoSingleTon<GameManager>
     
     void Awake()
     {
-        SAVE_PATH = Application.dataPath + "/Save";
+        SAVE_PATH = Application.persistentDataPath + "/Save";
         if (!Directory.Exists(SAVE_PATH))
         {
             Directory.CreateDirectory(SAVE_PATH);
@@ -59,14 +72,14 @@ public class GameManager : MonoSingleTon<GameManager>
         uiManager = GetComponent<UIManager>();
         storyManager = GetComponent<StoryManager>();
 
-        //LoadFromJson();
+        LoadFromJson();
     }
 
     private void Start()
     {
+        Story.SettingStory();
         UI.SetJobText();
         UI.SetStatText();
-
     }
 
     private void OnApplicationQuit()
@@ -103,11 +116,13 @@ public class GameManager : MonoSingleTon<GameManager>
         UI.SetEventToSelectBtn(false);
     }
 
+    
     public void SetPlayerJob(int jobNum)
     {
         if (jobNum == 0)
         {
             player.playerjob = "기획자";
+            player.storyLineNum = 0;
             SetPlayerStat(EStatType.Sencetive, 5);
             SetPlayerStat(EStatType.Knowledge, 5);
             SetPlayerStat(EStatType.Wit, 10);
@@ -115,6 +130,7 @@ public class GameManager : MonoSingleTon<GameManager>
         else if (jobNum == 1)
         {
             player.playerjob = "프로그래머";
+            player.storyLineNum = 1;
             SetPlayerStat(EStatType.Sencetive, 5);
             SetPlayerStat(EStatType.Knowledge, 10);
             SetPlayerStat(EStatType.Wit, 5);
@@ -122,6 +138,7 @@ public class GameManager : MonoSingleTon<GameManager>
         else if (jobNum == 2)
         {
             player.playerjob = "아티스트";
+            player.storyLineNum = 2;
             SetPlayerStat(EStatType.Sencetive, 10);
             SetPlayerStat(EStatType.Knowledge, 5);
             SetPlayerStat(EStatType.Wit, 5);
@@ -150,6 +167,8 @@ public class GameManager : MonoSingleTon<GameManager>
 
             case EStatType.ArrivalTime:
                 player.arrivalTime += increaseStat;
+                UI.ShowArriveTimeDangerMessage(player.arrivalTime, player.GetLastWord(), player.arrivalTime > 0);
+
                 break;
         }
         achievementManager.CheckMacGyver();

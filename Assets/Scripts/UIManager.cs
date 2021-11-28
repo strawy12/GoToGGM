@@ -9,6 +9,10 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private Image timeLimiter = null; private float limiterScaleY;
     [SerializeField] private Text storyText = null;
+=======
+    [SerializeField] private StoryText storyTextTemp = null;
+    [SerializeField] private StoryScrollRect storyScrollRect = null;
+>>>>>>> develop
     [SerializeField] private Text jobStatusText = null;
     [SerializeField] private Text statText = null;
     [SerializeField] private Text arrivalTimeText = null;
@@ -20,8 +24,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] private MoveAnimScene MoveAnimScenePanal = null;
     [SerializeField] private GameObject points = null;
     [SerializeField] private GameObject pointPrefab = null;
+    [SerializeField] private Animator flameEffectPrefab = null;
+    [SerializeField] private Image bgFadePanal = null;
+    [SerializeField] private Image backGroundImage = null;
+    [SerializeField] private RectTransform messagePanal = null;
     [SerializeField] private Sprite[] pointSprites = null;
+    [SerializeField] private Sprite[] backGroundArray = null;
     private int currentPlayerPos = 0;
+
+    private Text messageText = null;
+    private List<StoryText> storyTextList = new List<StoryText>();
 
     private InputField nicknameInputField = null;
     [SerializeField] private Text timerTimeText = null;
@@ -29,10 +41,11 @@ public class UIManager : MonoBehaviour
 
     private bool isWriting = false;
     private bool isSkip = false;
-    private float currentWriteSpeed = 0f;
+    private bool currentUsedEffect = false;
 
     private void Awake()
     {
+        messageText = messagePanal.transform.GetChild(0).GetComponent<Text>();
         nicknameInputField = nicknameInputPanal.GetComponentInChildren<InputField>();
         nicknameInputField.onEndEdit.AddListener(_ =>
         {
@@ -46,29 +59,40 @@ public class UIManager : MonoBehaviour
          timeLimiter.rectTransform.localScale = new Vector2(timeLimiter.rectTransform.localScale.x, 0f);
     }
 
-    public void StartWrite(string message, Action action = null, float writeSpeed = 0.03f)
+    public void StartWrite(string message, bool usedEffect = false, Action action = null)
     {
-        StartCoroutine(WriteText(message, action, writeSpeed));
+        SettingSelectBtn();
+        currentUsedEffect = usedEffect;
+        StartCoroutine(WriteText(message, action));
     }
 
-    public void StartWrite<T>(string message, Action<T> action, T param, float writeSpeed = 0.03f)
+    public void StartWrite<T>(string message, Action<T> action, T param, bool usedEffect = false)
     {
-        StartCoroutine(WriteText(message, action, param, writeSpeed));
+        SettingSelectBtn();
+        currentUsedEffect = usedEffect;
+        StartCoroutine(WriteText(message, action, param));
     }
 
-    public IEnumerator WriteText(string message, Action action, float writeSpeed)
+    public IEnumerator CheckEffect(int storyCnt)
     {
-        isWriting = true;
-        ActiveTouchScreen(true);
-        currentWriteSpeed = writeSpeed;
-        float waitTime = currentWriteSpeed * 2f;
+        if (!currentUsedEffect) yield break;
+
+        float delay = 0f;
+
+        delay = GameManager.Inst.Story.CheckEffect(storyCnt);
+
+        yield return new WaitForSeconds(delay);
+
+    }
+
+    public IEnumerator WriteStoryText(string message)
+    {
+        StoryText storyText = InstantiateStoryText();
+
+        int cnt = 1;
+        int storyCnt = 0;
+
         string messageText = "";
-
-        if (isSkip) isSkip = false;
-
-        yield return new WaitForSeconds(0.05f);
-        message = message.Replace("&", GameManager.Inst.CurrentPlayer.nickname);
-        message = message.Replace("*", GameManager.Inst.CurrentPlayer.playerjob);
 
         foreach (var c in message)
         {
@@ -76,23 +100,70 @@ public class UIManager : MonoBehaviour
 
             messageText = string.Format("{0}{1}", messageText, c);
             storyText.text = messageText;
-            yield return new WaitForSeconds(currentWriteSpeed);
+            yield return new WaitForSeconds(0.03f);
+
             if (c == '\n')
             {
-                yield return new WaitForSeconds(0.5f);
+                cnt++;
+                if (cnt == 2)
+                {
+                    cnt = 0;
+                    storyCnt++;
+                }
+
+                yield return DelayEnter(cnt, storyCnt);
             }
         }
 
-        if (!isSkip)
-        {
-            yield return new WaitForSeconds(1.25f);
-        }
-        else
+        if (isSkip)
         {
             storyText.text = message;
-            yield return new WaitForSeconds(0.5f);
             isSkip = false;
         }
+    }
+
+    public IEnumerator DelayEnter(int cnt, int storyCnt)
+    {
+        if (currentUsedEffect)
+        {
+            yield return CheckEffect(storyCnt);
+        }
+
+        yield return new WaitForSeconds(0.3f);
+    }
+
+    public IEnumerator LastCheckEffect(string message)
+    {
+        if (!currentUsedEffect) yield break;
+
+        int lastCnt = (int)((message.Split('\n').Length - 1) * 0.5f);
+
+        if (lastCnt < 1)
+        {
+            yield return CheckEffect(1);
+        }
+    }
+
+
+    public IEnumerator WriteText(string message, Action action)
+    {
+        yield return new WaitForSeconds(0.05f);
+
+        isWriting = true;
+        ActiveTouchScreen(true);
+
+        if (isSkip) isSkip = false;
+
+        message = ReplaceMessage(message);
+
+        yield return CheckEffect(0);
+
+        yield return WriteStoryText(message);
+
+        yield return LastCheckEffect(message);
+
+        yield return new WaitForSeconds(isSkip ? 0.5f : 1f);
+
 
         if (action == null)
         {
@@ -107,44 +178,25 @@ public class UIManager : MonoBehaviour
         isWriting = false;
     }
 
-    public IEnumerator WriteText<T>(string message, Action<T> action, T param, float writeSpeed)
+    public IEnumerator WriteText<T>(string message, Action<T> action, T param)
     {
+        yield return new WaitForSeconds(0.05f);
+
         isWriting = true;
         ActiveTouchScreen(true);
-        currentWriteSpeed = writeSpeed;
-        float waitTime = currentWriteSpeed * 2f;
-        string messageText = "";
+        StoryText storyText = InstantiateStoryText();
 
         if (isSkip) isSkip = false;
 
-        yield return new WaitForSeconds(0.05f);
+        message = ReplaceMessage(message);
 
-        message = message.Replace("&", GameManager.Inst.CurrentPlayer.nickname);
-        message = message.Replace("*", GameManager.Inst.CurrentPlayer.playerjob);
+        yield return CheckEffect(0);
 
-        foreach (var c in message)
-        {
-            if (isSkip) break;
+        yield return WriteStoryText(message);
 
-            messageText = string.Format("{0}{1}", messageText, c);
-            storyText.text = messageText;
-            yield return new WaitForSeconds(currentWriteSpeed);
-            if (c == '\n')
-            {
-                yield return new WaitForSeconds(0.5f);
-            }
-        }
+        yield return LastCheckEffect(message);
 
-        if (!isSkip)
-        {
-            yield return new WaitForSeconds(1.25f);
-        }
-        else
-        {
-            storyText.text = message;
-            yield return new WaitForSeconds(0.5f);
-            isSkip = false;
-        }
+        yield return new WaitForSeconds(isSkip ? 0.5f : 1f);
 
         if (action == null)
         {
@@ -157,6 +209,67 @@ public class UIManager : MonoBehaviour
         }
 
         isWriting = false;
+    }
+
+    public StoryText InstantiateStoryText()
+    {
+
+        StoryText storyText = Instantiate(storyTextTemp, storyTextTemp.transform.parent);
+
+        if (storyTextList.Count != 0)
+        {
+            int index = storyTextList.Count - 1;
+            storyTextList[index].NextText();
+        }
+
+        storyTextList.Add(storyText);
+        storyText.text = "";
+        storyText.gameObject.SetActive(true);
+        storyScrollRect.SetContentPos();
+
+        return storyText;
+    }
+
+    public StoryText InstantiateStoryText(string message)
+    {
+
+        StoryText storyText = Instantiate(storyTextTemp, storyTextTemp.transform.parent);
+
+        message = ReplaceMessage(message);
+
+        storyText.text = message;
+
+        if (storyTextList.Count != 0)
+        {
+            int index = storyTextList.Count - 1;
+            storyTextList[index].NextText();
+        }
+
+        storyTextList.Add(storyText);
+
+        storyText.gameObject.SetActive(true);
+        storyScrollRect.SetContentPos();
+
+        return storyText;
+    }
+
+    public string ReplaceMessage(string message)
+    {
+        message = message.Replace("&", GameManager.Inst.CurrentPlayer.nickname);
+        message = message.Replace("*", GameManager.Inst.CurrentPlayer.playerjob);
+
+        return message;
+    }
+
+    public void ResetStoryText()
+    {
+        int cnt = storyTextList.Count;
+        for (int i = 0; i < storyTextList.Count; i++)
+        {
+            Destroy(storyTextList[i].gameObject);
+        }
+
+        storyTextList.Clear();
     }
 
     public void ActiveNameInputField(bool isActive)
@@ -190,9 +303,20 @@ public class UIManager : MonoBehaviour
 
     public void ShowSelectBtn()
     {
+        int length = GameManager.Inst.Story.GetNowStory().selectLines.Length;
+
+        for (int i = 0; i < length; i++)
+        {
+            selectBtns[i].ActiveBtn(true);
+        }
+    }
+
+    public void SettingSelectBtn()
+    {
         SelectLine[] selectLines = GameManager.Inst.Story.GetNowStory().selectLines;
         for (int i = 0; i < selectLines.Length; i++)
         {
+<<<<<<< HEAD
             if (selectLines[i].selectType != ESelectType.Hidden)
                 selectBtns[i].ActiveBtn(true);
             else
@@ -215,29 +339,40 @@ public class UIManager : MonoBehaviour
         selectBtns[btnNum].OnClickBtn();
     }
     public void MoveAnimScene()
+=======
+            selectBtns[i].SettingBtn(selectLines[i], i);
+        }
+    }
+
+    public IEnumerator MoveAnimScene(float delay)
+>>>>>>> develop
     {
+        yield return new WaitForSeconds(delay);
         MoveAnimScenePanal.gameObject.SetActive(true);
         MoveAnimScenePanal.StartMoveAnim();
     }
 
-    public void ShowSingleSelectBtn()
+    public void ShowSingleSelectBtn(int num)
     {
-        int num;
-        if (GameManager.Inst.CurrentPlayer.playerjob == "아티스트")
-        {
-            num = 1;
-        }
-        else
-        {
-            num = 0;
-        }
-
         SelectLine selectLine = GameManager.Inst.Story.GetNowStory().selectLines[num];
 
         selectBtns[0].ActiveBtn(true);
         selectBtns[0].SettingBtn(selectLine);
     }
 
+    public List<SeletingBtnBase> GetActiveSelectBtn()
+    {
+        List<SeletingBtnBase> seletingBtns = new List<SeletingBtnBase>();
+        for (int i = 0; i < 3; i++)
+        {
+            if (selectBtns[i].gameObject.activeSelf)
+            {
+                seletingBtns.Add(selectBtns[i]);
+            }
+        }
+
+        return seletingBtns;
+    }
     public void UnShowSelectBtn(SeletingBtnBase seletingBtn = null)
     {
         for (int i = 0; i < 3; i++)
@@ -310,20 +445,14 @@ public class UIManager : MonoBehaviour
 
     }
 
-    private void FadeObject(Image obj)
-    {
-
-    }
-
     public void SetTime(int add)
     {
-        Debug.Log("setTime: " + add);
-        if(GameManager.Inst.Timer.minute + add >= 6)
+        if (GameManager.Inst.Timer.minute + add >= 6)
         {
             GameManager.Inst.Timer.minute = add - (6 - GameManager.Inst.Timer.minute);
             GameManager.Inst.Timer.hour++;
         }
-        else if(GameManager.Inst.Timer.minute + add < 0)
+        else if (GameManager.Inst.Timer.minute + add < 0)
         {
             GameManager.Inst.Timer.minute = (6 + GameManager.Inst.Timer.minute) + add;
             GameManager.Inst.Timer.hour--;
@@ -337,7 +466,7 @@ public class UIManager : MonoBehaviour
     }
     public void SetTimerUI()
     {
-        timerTimeText.text = string.Format("{00}:{1}0", GameManager.Inst.Timer.hour,GameManager.Inst.Timer.minute);
+        timerTimeText.text = string.Format("{00}:{1}0", GameManager.Inst.Timer.hour, GameManager.Inst.Timer.minute);
     }
     public void CreatePoints()
     {
@@ -354,11 +483,123 @@ public class UIManager : MonoBehaviour
         lastimage.sprite = pointSprites[(int)GameManager.Inst.Story.GetStoryLine().storyOrder.Length];
         lastPoint.SetActive(true);
     }
+
     public void CheckPlayerPoint()
     {
-        if (points.transform.GetChild(currentPlayerPos+1) == null) return;
+        if (points.transform.GetChild(currentPlayerPos + 1) == null) return;
         points.transform.GetChild(currentPlayerPos).GetChild(0).gameObject.SetActive(false);
         currentPlayerPos++;
         points.transform.GetChild(currentPlayerPos).GetChild(0).gameObject.SetActive(true);
     }
+
+    public void ShowMessagePanal(string message)
+    {
+        StartCoroutine(PlayMessage(message));
+    }
+
+    public void ShowArriveTimeDangerMessage(int arrivalTime, string lastWord, bool isLating)
+    {
+        string message = string.Format("현재 도착 예정 시간 : {0} {1}", arrivalTime, lastWord);
+
+        StartCoroutine(PlayMessage(message, isLating ? Color.blue : Color.red));
+
+    }
+
+    public void EffectFlame()
+    {
+        Animator flameEffect = Instantiate(flameEffectPrefab);
+        flameEffect.Play("Flame Effect Anim");
+    }
+
+    public IEnumerator PlayMessage(string message)
+    {
+        messageText.text = message;
+
+        messagePanal.gameObject.SetActive(true);
+        messagePanal.DOScale(Vector3.one, 0.5f);
+
+        yield return new WaitForSeconds(3f);
+
+        messagePanal.DOScale(Vector3.zero, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+
+        messagePanal.gameObject.SetActive(false);
+    }
+
+    public IEnumerator PlayMessage(string message, Color color)
+    {
+        Color currentColor = messageText.color;
+        messageText.color = color;
+        messageText.text = message;
+
+        messagePanal.gameObject.SetActive(true);
+        messagePanal.DOScale(Vector3.one, 0.5f);
+
+        yield return new WaitForSeconds(3f);
+
+        messagePanal.DOScale(Vector3.zero, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+
+        messagePanal.gameObject.SetActive(false);
+        messageText.color = currentColor;
+    }
+
+    public bool CheckWriting()
+    {
+        return isWriting;
+    }
+
+    public void ChangeBackGround(int backGroundNum)
+    {
+        backGroundImage.sprite = backGroundArray[backGroundNum];
+    }
+
+    public float PlayEffect(int effectNum)
+    {
+        switch (effectNum)
+        {
+            case 2:
+                EffectFlame();
+                return 1f;
+
+            case 3:
+                break;
+        }
+        return 0f;
+
+    }
+
+
+
+    #region Sound Setting
+
+    public void BGMVolume(float value)
+    {
+        SoundManager.Inst.BGMVolume(value);
+    }
+
+    public void BGMMute(bool isMute)
+    {
+        SoundManager.Inst.BGMMute(isMute);
+    }
+
+    public void EffectMute(bool isMute)
+    {
+        SoundManager.Inst.EffectMute(isMute);
+    }
+
+    public void EffectVolume(float value)
+    {
+        SoundManager.Inst.EffectVolume(value);
+    }
+    public void SetBGM(int bgmNum)
+    {
+        SoundManager.Inst.SetBGM(bgmNum);
+    }
+    public void SetEffectSound(int effectNum)
+    {
+        SoundManager.Inst.SetEffectSound(effectNum);
+    }
+
+    #endregion
 }
