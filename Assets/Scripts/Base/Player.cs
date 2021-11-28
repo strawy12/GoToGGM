@@ -15,7 +15,7 @@ public class Player
     public int stat_Knowledge;
     public int stat_Wit;
     public int arrivalTime;
-
+    public bool[] clears;
     public Player(string playerjob, int stat_Sencetive, int stat_Knowledge, int stat_Wit)
     {
         this.playerjob = playerjob;

@@ -1,10 +1,8 @@
-using System.Collections;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using Random = UnityEngine.Random;
-using UnityEngine.UI;
 using DG.Tweening;
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class SeletingBtnBase : MonoBehaviour
 {
@@ -88,7 +86,6 @@ public class SeletingBtnBase : MonoBehaviour
         seletingText.text = currentSelectLine.selectLine;
         GameManager.Inst.UI.ChangeSelectBtnSprite(btnImage, currentSelectState);
     }
-
     public void OnClickBtn()
     {
         button.interactable = false;

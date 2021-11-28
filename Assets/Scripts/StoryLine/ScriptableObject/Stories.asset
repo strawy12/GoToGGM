@@ -47,16 +47,19 @@ MonoBehaviour:
         needStatType: 0
         needStat: 0
         eventStoryID: 111
+        timeLimit: 0
       - selectLine: "\uAC1C\uBC1C\uC790 \uC785\uB2C8\uB2E4"
         selectType: 0
         needStatType: 0
         needStat: 0
         eventStoryID: 111
+        timeLimit: 0
       - selectLine: "\uC544\uD2B8 \uC785\uB2C8\uB2E4"
         selectType: 0
         needStatType: 0
         needStat: 0
         eventStoryID: 111
+        timeLimit: 0
     - storyName: "\uC900\uBE44\uBB3C \uC900\uBE44"
       storyID: 13
       usedFunc: 0
@@ -72,16 +75,19 @@ MonoBehaviour:
         needStatType: 0
         needStat: 0
         eventStoryID: 121
+        timeLimit: 0
       - selectLine: "\uD504\uB85C\uADF8\uB798\uBC0D \uCC45"
         selectType: 0
         needStatType: 0
         needStat: 0
         eventStoryID: 122
+        timeLimit: 0
       - selectLine: "\uC544\uC774\uB514\uC5B4 \uB178\uD2B8"
         selectType: 0
         needStatType: 0
         needStat: 0
         eventStoryID: 123
+        timeLimit: 0
     - storyName: GoToGGM
       storyID: 14
       usedFunc: 0
@@ -93,6 +99,7 @@ MonoBehaviour:
         needStatType: 0
         needStat: 0
         eventStoryID: 0
+        timeLimit: 0
   - scenarioName: "\uBC84\uC2A4"
     stories:
     - storyName: "\uC5EC\uC790\uC544\uC774 \uB4F1\uC7A5"
@@ -109,17 +116,20 @@ MonoBehaviour:
         needStatType: 0
         needStat: 0
         eventStoryID: 211
+        timeLimit: 0
       - selectLine: "\uADC0\uCC2E\uC73C\uB2C8 \uAC00\uB77C\uACE0 \uD55C\uB2E4."
         selectType: 0
         needStatType: 0
         needStat: 0
         eventStoryID: 212
+        timeLimit: 0
       - selectLine: "\uC7AC\uBC0C\uB294 \uC774\uC57C\uAE30\uB97C \uB4E4\uB824\uC900\uB2E4
           (\uC7AC\uCE58 7 \uC774\uC0C1)"
         selectType: 2
         needStatType: 3
         needStat: 7
         eventStoryID: 213
+        timeLimit: 0
     - storyName: "\uBE61\uCCD0\uBCF4\uC774\uB294 \uBC84\uC2A4\uAE30\uC0AC"
       storyID: 22
       usedFunc: 0
@@ -138,18 +148,21 @@ MonoBehaviour:
         needStatType: 0
         needStat: 0
         eventStoryID: 221
+        timeLimit: 0
       - selectLine: "\uBC8C\uC810\uBCF4\uB2E4 \uB0B4 \uBAA9\uC228\uC774 \uB354 \uC18C\uC911\uD558\uB2E4.
           \uB2E4\uC74C \uBC84\uC2A4\uB97C \uD0C4\uB2E4"
         selectType: 0
         needStatType: 0
         needStat: 0
         eventStoryID: 222
+        timeLimit: 0
       - selectLine: "\uC815\uCC28\uC911\uC778 \uBC84\uC2A4\uC758 \uC5D4\uC9C4\uC744
           \uC190\uBCF4\uACE0 \uD0C4\uB2E4 (\uC12C\uC138 7 \uC774\uC0C1)"
         selectType: 2
         needStatType: 1
         needStat: 7
         eventStoryID: 223
+        timeLimit: 0
     - storyName: "\uBD95\uC5B4\uBE75 \uB0C4\uC0C8 \uC194\uC194..."
       storyID: 13
       usedFunc: 0
@@ -165,17 +178,20 @@ MonoBehaviour:
         needStatType: 3
         needStat: 9
         eventStoryID: 231
+        timeLimit: 0
       - selectLine: "\uBD95\uC5B4\uBE75 \uAC00\uAC8C \uC0AC\uC7A5\uB2D8\uC744 \uC124\uB4DD\uD55C\uB2E4
           (\uC9C0\uC2DD 7 \uC774\uC0C1)"
         selectType: 2
         needStatType: 2
         needStat: 7
         eventStoryID: 232
+        timeLimit: 0
       - selectLine: "\uD3EC\uAE30\uD558\uACE0 \uAC08\uAE38\uC744 \uAC04\uB2E4.."
         selectType: 0
         needStatType: 0
         needStat: 0
         eventStoryID: 233
+        timeLimit: 0
     - storyName: "\uACE7 \uB3C4\uCC29\uD558\uB294 \uB300\uC911\uAD50\uD1B5"
       storyID: 24
       usedFunc: 1
@@ -190,12 +206,14 @@ MonoBehaviour:
         needStatType: 0
         needStat: 0
         eventStoryID: 0
+        timeLimit: 0
       - selectLine: "\uB2E4\uC74C \uBC84\uC2A4\uB97C \uD5A5\uD558\uC5EC! [\uB2E4\uC74C
           \uC2A4\uD14C\uC774\uC9C0\uB85C]"
         selectType: 3
         needStatType: 0
         needStat: 0
         eventStoryID: 0
+        timeLimit: 0
   - scenarioName: "\uC9C0\uD558\uCCA0"
     stories:
     - storyName: "\uAC8C\uC784 \uD55C\uD310 \uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
@@ -216,17 +234,20 @@ MonoBehaviour:
         needStatType: 0
         needStat: 0
         eventStoryID: 311
+        timeLimit: 0
       - selectLine: "NO I DON\u2019T"
         selectType: 0
         needStatType: 0
         needStat: 0
         eventStoryID: 312
+        timeLimit: 0
       - selectLine: "\uAC8C\uC784\uC744 \uC2AC\uCA4D \uD55C\uB2E4..! (\uC12C\uC138
           9 \uC774\uC0C1)"
         selectType: 2
         needStatType: 1
         needStat: 9
         eventStoryID: 313
+        timeLimit: 0
     - storyName: "\uB274\uAE30\uB2C8 \uBD88\uAF43\uBC14\uC6B0\uC5B4 \uC0C8"
       storyID: 32
       usedFunc: 0
@@ -242,17 +263,20 @@ MonoBehaviour:
         needStatType: 0
         needStat: 0
         eventStoryID: 321
+        timeLimit: 0
       - selectLine: "\uBB34\uC2DC\uD558\uACE0 \uAC00\uB9CC\uD788 \uC788\uB294\uB2E4. "
         selectType: 0
         needStatType: 0
         needStat: 0
         eventStoryID: 322
+        timeLimit: 0
       - selectLine: "\uCDA4\uC744 \uCD94\uB294 \uADF8\uB140\uB97C \uADF8\uB9BC\uC73C\uB85C
           \uB2F4\uC544\uB0B8\uB2E4 (\uC12C\uC138 8 \uC774\uC0C1)"
         selectType: 2
         needStatType: 1
         needStat: 8
         eventStoryID: 323
+        timeLimit: 0
     - storyName: "\uD655\uB960\uC870\uC791\uC5C6\uB294 100% \uC778\uD615\uBF51\uAE30"
       storyID: 33
       usedFunc: 0
@@ -267,13 +291,16 @@ MonoBehaviour:
         needStatType: 1
         needStat: 8
         eventStoryID: 331
+        timeLimit: 0
       - selectLine: "\uBF51\uC744\uB54C\uAE4C\uC9C0 \uAC04\uB2E4!"
         selectType: 1
         needStatType: 0
         needStat: 0
         eventStoryID: 332
+        timeLimit: 0
       - selectLine: "\uC778\uD615 \uBF51\uAE30 = \uB3C8\uB0AD\uBE44"
         selectType: 0
         needStatType: 0
         needStat: 0
         eventStoryID: 333
+        timeLimit: 0

@@ -7,6 +7,7 @@ using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private Image timeLimiter = null; private float limiterScaleY;
     [SerializeField] private Text storyText = null;
     [SerializeField] private Text jobStatusText = null;
     [SerializeField] private Text statText = null;
@@ -40,7 +41,9 @@ public class UIManager : MonoBehaviour
     }
     private void Start()
     {
-        CreatePoints();
+         CreatePoints();
+         limiterScaleY = timeLimiter.rectTransform.localScale.y;
+         timeLimiter.rectTransform.localScale = new Vector2(timeLimiter.rectTransform.localScale.x, 0f);
     }
 
     public void StartWrite(string message, Action action = null, float writeSpeed = 0.03f)
@@ -188,14 +191,29 @@ public class UIManager : MonoBehaviour
     public void ShowSelectBtn()
     {
         SelectLine[] selectLines = GameManager.Inst.Story.GetNowStory().selectLines;
-
         for (int i = 0; i < selectLines.Length; i++)
         {
-            selectBtns[i].ActiveBtn(true);
+            if (selectLines[i].selectType != ESelectType.Hidden)
+                selectBtns[i].ActiveBtn(true);
+            else
+                StartCoroutine(ShowHiddenSelection(selectLines[i].timeLimit, i));
             selectBtns[i].SettingBtn(selectLines[i], i);
         }
     }
-
+    public IEnumerator ShowHiddenSelection(float time, int btnNum)//0.5초동안 y scale 늘리기 애니메이션 실행 후, time만큼 x scale 줄이기 애니메이션 실행
+    {
+        float currentTime = time;
+        float scaleX = timeLimiter.rectTransform.localScale.x;
+        timeLimiter.rectTransform.DOScaleY(limiterScaleY, 0.5f);
+        while(currentTime > 0)//TimerLimit의 1 프레임마다 time 동안 x scale 줄이기
+        {
+            currentTime -= Time.deltaTime;
+            timeLimiter.rectTransform.localScale = new Vector2(currentTime / time * scaleX, timeLimiter.rectTransform.localScale.y);
+            yield return null;
+        }
+        selectBtns[btnNum].ActiveBtn(true);
+        selectBtns[btnNum].OnClickBtn();
+    }
     public void MoveAnimScene()
     {
         MoveAnimScenePanal.gameObject.SetActive(true);

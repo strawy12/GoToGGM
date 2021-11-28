@@ -8,18 +8,23 @@ public class ClearNoticeScript : MonoBehaviour
 {
     [SerializeField] Text textClearTitle = null;
     RectTransform rectTransform = null;
+
+    float minPos;
+    float maxPos;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
+        minPos = rectTransform.anchoredPosition.x - rectTransform.rect.width;
+        maxPos = rectTransform.anchoredPosition.x;
     }
     public void ShowNotice(string title)
     {
         textClearTitle.text = string.Format("업적 \"" + title + "\" 달성");
-        rectTransform.DOAnchorPosX(rectTransform.anchoredPosition.x - rectTransform.rect.width, 0.8f);
+        rectTransform.DOAnchorPosX(Mathf.Clamp(rectTransform.anchoredPosition.x - rectTransform.rect.width, minPos, maxPos), 0.8f);
         Invoke(nameof(HideNotice), 2f);
     }
     private void HideNotice()
     {
-        rectTransform.DOAnchorPosX(rectTransform.anchoredPosition.x + rectTransform.rect.width, 0.8f);
+        rectTransform.DOAnchorPosX(Mathf.Clamp(rectTransform.anchoredPosition.x + rectTransform.rect.width, minPos, maxPos), 0.8f);
     }
 }

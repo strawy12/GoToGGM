@@ -8,7 +8,8 @@ public enum ESelectType
     Normal,
     Gread,
     Special,
-    Final
+    Final,
+    Hidden
 }
 
 public enum EStatType
@@ -36,6 +37,7 @@ public class GameManager : MonoSingleTon<GameManager>
     [SerializeField] private Player player;
     public Player CurrentPlayer { get { return player; } }
 
+    private AchievementManager achievementManager;
     private UIManager uiManager;
     private StoryManager storyManager;
     private Timer timer = new Timer();
@@ -53,7 +55,7 @@ public class GameManager : MonoSingleTon<GameManager>
         {
             Directory.CreateDirectory(SAVE_PATH);
         }
-
+        achievementManager = GetComponent<AchievementManager>();
         uiManager = GetComponent<UIManager>();
         storyManager = GetComponent<StoryManager>();
 
@@ -150,7 +152,7 @@ public class GameManager : MonoSingleTon<GameManager>
                 player.arrivalTime += increaseStat;
                 break;
         }
-
+        achievementManager.CheckMacGyver();
         UI.SetStatText();
     }
 
@@ -168,5 +170,18 @@ public class GameManager : MonoSingleTon<GameManager>
                 return player.stat_Sencetive >= needStat;
         }
         return true;
+    }
+
+    public void SaveClears(int ID)
+    {
+        player.clears[ID] = true;
+    }
+
+    public void CheckLucky(bool isSuccess)
+    {
+        if (isSuccess)
+            achievementManager.CheckLucky();
+        else
+            achievementManager.CheckUnlucky();
     }
 }

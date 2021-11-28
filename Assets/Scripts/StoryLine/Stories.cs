@@ -14,6 +14,9 @@ public class SelectLine
 
     [Header("이벤트 스토리")]
     public int eventStoryID;
+
+    [Header("제한 시간")]
+    public float timeLimit;
 }
 
 [System.Serializable]

@@ -6,6 +6,7 @@ using UnityEngine;
 public class EventStory
 {
     public int eventStoryID;
+
     [Header("증가 시간")]
     public int increaseTime;
 

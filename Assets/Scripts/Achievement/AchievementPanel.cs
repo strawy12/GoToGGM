@@ -9,19 +9,15 @@ public class AchievementPanel : MonoBehaviour
     [SerializeField] Text textTitle = null;
     [SerializeField] Text textExplanational = null;
     [SerializeField] GameObject clearScreen = null;
-    [SerializeField] ClearNoticeScript clearNotice = null;
 
-    private void Awake()
-    {
-        clearNotice = FindObjectOfType<ClearNoticeScript>();
-    }
     public void SetValue(string title, string explanation)
     {
         textTitle.text = string.Format(title);
         textExplanational.text = string.Format(explanation);
     }
-    public void Clear()
+    public void Clear(int ID)
     {
         clearScreen.SetActive(true);
+        transform.SetSiblingIndex(transform.GetSiblingIndex() + transform.parent.childCount);
     }
 }
