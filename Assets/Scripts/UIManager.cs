@@ -7,7 +7,8 @@ using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private Text storyText = null;
+    [SerializeField] private StoryText storyTextTemp = null;
+    [SerializeField] private StoryScrollRect storyScrollRect = null;
     [SerializeField] private Text jobStatusText = null;
     [SerializeField] private Text statText = null;
     [SerializeField] private Text arrivalTimeText = null;
@@ -19,6 +20,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private MoveAnimScene MoveAnimScenePanal = null;
     [SerializeField] private GameObject points = null;
     [SerializeField] private GameObject pointPrefab = null;
+    [SerializeField] private Animator flameEffectPrefab = null;
     [SerializeField] private Image bgFadePanal = null;
     [SerializeField] private Image backGroundImage = null;
     [SerializeField] private RectTransform messagePanal = null;
@@ -27,6 +29,7 @@ public class UIManager : MonoBehaviour
     private int currentPlayerPos = 0;
 
     private Text messageText = null;
+    private List<StoryText> storyTextList = new List<StoryText>();
 
     private InputField nicknameInputField = null;
     [SerializeField] private Text timerTimeText = null;
@@ -34,7 +37,7 @@ public class UIManager : MonoBehaviour
 
     private bool isWriting = false;
     private bool isSkip = false;
-    private float currentWriteSpeed = 0f;
+    private bool currentUsedEffect = false;
 
     private void Awake()
     {
@@ -50,39 +53,40 @@ public class UIManager : MonoBehaviour
         CreatePoints();
     }
 
-    public void StartWrite(string message, bool usedEffect = false, Action action = null, float writeSpeed = 0.03f)
+    public void StartWrite(string message, bool usedEffect = false, Action action = null)
     {
-        StartCoroutine(WriteText(message, usedEffect, action, writeSpeed));
+        SettingSelectBtn();
+        currentUsedEffect = usedEffect;
+        StartCoroutine(WriteText(message, action));
     }
 
-    public void StartWrite<T>(string message, Action<T> action, T param, bool usedEffect = false, float writeSpeed = 0.03f)
+    public void StartWrite<T>(string message, Action<T> action, T param, bool usedEffect = false)
     {
-        StartCoroutine(WriteText(message, action, param, writeSpeed, usedEffect));
+        SettingSelectBtn();
+        currentUsedEffect = usedEffect;
+        StartCoroutine(WriteText(message, action, param));
     }
 
-    public IEnumerator WriteText(string message, bool usedEffect, Action action, float writeSpeed)
+    public IEnumerator CheckEffect(int storyCnt)
     {
-        isWriting = true;
-        ActiveTouchScreen(true);
-        currentWriteSpeed = writeSpeed;
-        float waitTime = currentWriteSpeed * 2f;
-        string messageText = "";
+        if (!currentUsedEffect) yield break;
+
+        float delay = 0f;
+
+        delay = GameManager.Inst.Story.CheckEffect(storyCnt);
+
+        yield return new WaitForSeconds(delay);
+
+    }
+
+    public IEnumerator WriteStoryText(string message)
+    {
+        StoryText storyText = InstantiateStoryText();
+
         int cnt = 1;
         int storyCnt = 0;
-        float delay = 0f;
-        if (isSkip) isSkip = false;
 
-        yield return new WaitForSeconds(0.05f);
-        message = message.Replace("&", GameManager.Inst.CurrentPlayer.nickname);
-        message = message.Replace("*", GameManager.Inst.CurrentPlayer.playerjob);
-
-        storyText.text = "";
-        if(usedEffect)
-        {
-             delay = GameManager.Inst.Story.CheckEffect(storyCnt);
-            yield return new WaitForSeconds(delay);
-        }
-
+        string messageText = "";
 
         foreach (var c in message)
         {
@@ -90,70 +94,68 @@ public class UIManager : MonoBehaviour
 
             messageText = string.Format("{0}{1}", messageText, c);
             storyText.text = messageText;
-            yield return new WaitForSeconds(currentWriteSpeed);
+            yield return new WaitForSeconds(0.03f);
+
             if (c == '\n')
             {
-                if(usedEffect)
+                cnt++;
+                if (cnt == 2)
                 {
-                    cnt++;
-                    if (cnt == 2)
-                    {
-                        cnt = 0;
-                        storyCnt++;
-                    }
-
-                    delay = GameManager.Inst.Story.CheckEffect(storyCnt);
-                    yield return new WaitForSeconds(delay);
-
+                    cnt = 0;
+                    storyCnt++;
                 }
 
-                yield return new WaitForSeconds(0.5f);
+                yield return DelayEnter(cnt, storyCnt);
             }
         }
 
-        if (!isSkip)
-        {
-            if (storyCnt == 0)
-            {
-                storyCnt = 1;
-            }
-
-            delay = GameManager.Inst.Story.CheckEffect(storyCnt);
-            yield return new WaitForSeconds(delay);
-
-            yield return new WaitForSeconds(1f);
-        }
-        else
+        if (isSkip)
         {
             storyText.text = message;
-            if(usedEffect)
-            {
-                for (int i = 0; i < message.Length; i++)
-                {
-                    if (message[i] == '\n')
-                    {
-                        cnt++;
-
-                        if (cnt == 2)
-                        {
-                            cnt = 0;
-                            storyCnt++;
-                        }
-                    }
-                }
-
-                if(storyCnt == 0)
-                {
-                    storyCnt = 1;
-                }
-
-                delay = GameManager.Inst.Story.CheckEffect(storyCnt);
-                yield return new WaitForSeconds(delay);
-            }
-            
-            yield return new WaitForSeconds(0.5f);
             isSkip = false;
         }
+    }
+
+    public IEnumerator DelayEnter(int cnt, int storyCnt)
+    {
+        if (currentUsedEffect)
+        {
+            yield return CheckEffect(storyCnt);
+        }
+
+        yield return new WaitForSeconds(0.3f);
+    }
+
+    public IEnumerator LastCheckEffect(string message)
+    {
+        if (!currentUsedEffect) yield break;
+
+        int lastCnt = (int)((message.Split('\n').Length - 1) * 0.5f);
+
+        if (lastCnt < 1)
+        {
+            yield return CheckEffect(1);
+        }
+    }
+
+
+    public IEnumerator WriteText(string message, Action action)
+    {
+        isWriting = true;
+        ActiveTouchScreen(true);
+
+        if (isSkip) isSkip = false;
+
+        message = ReplaceMessage(message);
+
+        yield return CheckEffect(0);
+
+        yield return WriteStoryText(message);
+
+        yield return LastCheckEffect(message);
+
+        yield return new WaitForSeconds(isSkip ? 0.5f : 1f);
+
 
         if (action == null)
         {
@@ -168,102 +170,23 @@ public class UIManager : MonoBehaviour
         isWriting = false;
     }
 
-    public IEnumerator WriteText<T>(string message, Action<T> action, T param, float writeSpeed, bool usedEffect)
+    public IEnumerator WriteText<T>(string message, Action<T> action, T param)
     {
         isWriting = true;
         ActiveTouchScreen(true);
-        currentWriteSpeed = writeSpeed;
-        float waitTime = currentWriteSpeed * 2f;
-        string messageText = "";
-        int cnt = 1;
-        int storyCnt = 0;
-        float delay = 0f;
+        StoryText storyText = InstantiateStoryText();
 
         if (isSkip) isSkip = false;
 
-        yield return new WaitForSeconds(0.05f);
+        message = ReplaceMessage(message);
 
-        message = message.Replace("&", GameManager.Inst.CurrentPlayer.nickname);
-        message = message.Replace("*", GameManager.Inst.CurrentPlayer.playerjob);
+        yield return CheckEffect(0);
 
+        yield return WriteStoryText(message);
 
-        storyText.text = "";
-        if (usedEffect)
-        {
-            delay = GameManager.Inst.Story.CheckEffect(storyCnt);
-            yield return new WaitForSeconds(delay);
-        }
+        yield return LastCheckEffect(message);
 
-        foreach (var c in message)
-        {
-            if (isSkip) break;
-
-            messageText = string.Format("{0}{1}", messageText, c);
-            storyText.text = messageText;
-            yield return new WaitForSeconds(currentWriteSpeed);
-            if (c == '\n')
-            {
-                if (usedEffect)
-                {
-                    cnt++;
-                    if (cnt == 2)
-                    {
-                        cnt = 0;
-                        storyCnt++;
-                    }
-
-                    delay = GameManager.Inst.Story.CheckEffect(storyCnt);
-                    yield return new WaitForSeconds(delay);
-                }
-                    
-                yield return new WaitForSeconds(0.5f);
-            }
-        }
-
-        if (!isSkip)
-        {
-            if (storyCnt == 0)
-            {
-                storyCnt = 1;
-            }
-
-            delay = GameManager.Inst.Story.CheckEffect(storyCnt);
-            yield return new WaitForSeconds(delay);
-
-            yield return new WaitForSeconds(1f);
-        }
-        else
-        {
-            storyText.text = message;
-
-            if (usedEffect)
-            {
-                for (int i = 0; i < message.Length; i++)
-                {
-                    if (message[i] == '\n')
-                    {
-                        cnt++;
-
-                        if (cnt == 2)
-                        {
-                            cnt = 0;
-                            storyCnt++;
-                        }
-                    }
-                }
-
-                if (storyCnt == 0)
-                {
-                    storyCnt = 1;
-                }
-
-                delay = GameManager.Inst.Story.CheckEffect(storyCnt);
-                yield return new WaitForSeconds(delay);
-            }
-
-            yield return new WaitForSeconds(0.5f);
-            isSkip = false;
-        }
+        yield return new WaitForSeconds(isSkip ? 0.5f : 1f);
 
         if (action == null)
         {
@@ -276,6 +199,67 @@ public class UIManager : MonoBehaviour
         }
 
         isWriting = false;
+    }
+
+    public StoryText InstantiateStoryText()
+    {
+
+        StoryText storyText = Instantiate(storyTextTemp, storyTextTemp.transform.parent);
+
+        if (storyTextList.Count != 0)
+        {
+            int index = storyTextList.Count - 1;
+            storyTextList[index].NextText();
+        }
+
+        storyTextList.Add(storyText);
+        storyText.text = "";
+        storyText.gameObject.SetActive(true);
+        storyScrollRect.SetContentPos();
+
+        return storyText;
+    }
+
+    public StoryText InstantiateStoryText(string message)
+    {
+
+        StoryText storyText = Instantiate(storyTextTemp, storyTextTemp.transform.parent);
+
+        message = ReplaceMessage(message);
+
+        storyText.text = message;
+
+        if (storyTextList.Count != 0)
+        {
+            int index = storyTextList.Count - 1;
+            storyTextList[index].NextText();
+        }
+
+        storyTextList.Add(storyText);
+
+        storyText.gameObject.SetActive(true);
+        storyScrollRect.SetContentPos();
+
+        return storyText;
+    }
+
+    public string ReplaceMessage(string message)
+    {
+        message = message.Replace("&", GameManager.Inst.CurrentPlayer.nickname);
+        message = message.Replace("*", GameManager.Inst.CurrentPlayer.playerjob);
+
+        return message;
+    }
+
+    public void ResetStoryText()
+    {
+        int cnt = storyTextList.Count;
+        for (int i = 0; i < storyTextList.Count; i++)
+        {
+            Destroy(storyTextList[i].gameObject);
+        }
+
+        storyTextList.Clear();
     }
 
     public void ActiveNameInputField(bool isActive)
@@ -309,12 +293,21 @@ public class UIManager : MonoBehaviour
 
     public void ShowSelectBtn()
     {
+        int length = GameManager.Inst.Story.GetNowStory().selectLines.Length;
+
+        for (int i = 0; i < length; i++)
+        {
+            selectBtns[i].ActiveBtn(true);
+        }
+    }
+
+    public void SettingSelectBtn()
+    {
         SelectLine[] selectLines = GameManager.Inst.Story.GetNowStory().selectLines;
 
         for (int i = 0; i < selectLines.Length; i++)
         {
             selectBtns[i].SettingBtn(selectLines[i], i);
-            selectBtns[i].ActiveBtn(true);
         }
     }
 
@@ -331,14 +324,6 @@ public class UIManager : MonoBehaviour
 
         selectBtns[0].ActiveBtn(true);
         selectBtns[0].SettingBtn(selectLine);
-    }
-
-    public void CheckBGFade()
-    {
-        if(bgFadePanal.color.a <= 1f)
-        {
-            EffectBGFade(true);
-        }
     }
 
     public List<SeletingBtnBase> GetActiveSelectBtn()
@@ -428,12 +413,12 @@ public class UIManager : MonoBehaviour
 
     public void SetTime(int add)
     {
-        if(GameManager.Inst.Timer.minute + add >= 6)
+        if (GameManager.Inst.Timer.minute + add >= 6)
         {
             GameManager.Inst.Timer.minute = add - (6 - GameManager.Inst.Timer.minute);
             GameManager.Inst.Timer.hour++;
         }
-        else if(GameManager.Inst.Timer.minute + add < 0)
+        else if (GameManager.Inst.Timer.minute + add < 0)
         {
             GameManager.Inst.Timer.minute = (6 + GameManager.Inst.Timer.minute) + add;
             GameManager.Inst.Timer.hour--;
@@ -447,7 +432,7 @@ public class UIManager : MonoBehaviour
     }
     public void SetTimerUI()
     {
-        timerTimeText.text = string.Format("{00}:{1}0", GameManager.Inst.Timer.hour,GameManager.Inst.Timer.minute);
+        timerTimeText.text = string.Format("{00}:{1}0", GameManager.Inst.Timer.hour, GameManager.Inst.Timer.minute);
     }
     public void CreatePoints()
     {
@@ -467,7 +452,7 @@ public class UIManager : MonoBehaviour
 
     public void CheckPlayerPoint()
     {
-        if (points.transform.GetChild(currentPlayerPos+1) == null) return;
+        if (points.transform.GetChild(currentPlayerPos + 1) == null) return;
         points.transform.GetChild(currentPlayerPos).GetChild(0).gameObject.SetActive(false);
         currentPlayerPos++;
         points.transform.GetChild(currentPlayerPos).GetChild(0).gameObject.SetActive(true);
@@ -486,25 +471,10 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void EffectBGFade(bool isFadeIn)
+    public void EffectFlame()
     {
-        if(isFadeIn)
-        {
-            float addDelay = 0f;
-            if(bgFadePanal.color.a == 0f)
-            {
-                bgFadePanal.DOFade(1f, 1f);
-                addDelay = 1f;
-            }
-
-            bgFadePanal.DOFade(0f, 1f).SetDelay(addDelay + 0.5f).OnComplete(() => bgFadePanal.gameObject.SetActive(false));
-        }
-
-        else
-        {
-            bgFadePanal.gameObject.SetActive(true);
-            bgFadePanal.DOFade(1f, 1f).SetDelay(0.5f).OnComplete(()=>StartCoroutine(GameManager.Inst.Story.AutoSelectBtn()));
-        }
+        Animator flameEffect = Instantiate(flameEffectPrefab);
+        flameEffect.Play("Flame Effect Anim");
     }
 
     public IEnumerator PlayMessage(string message)
@@ -554,24 +524,18 @@ public class UIManager : MonoBehaviour
     {
         switch (effectNum)
         {
-            case 0:
-                EffectBGFade(true);
-                return 2f;
-
-            case 1:
-                EffectBGFade(false);
-                return 2f;
-
-
             case 2:
-                break;
+                EffectFlame();
+                return 1f;
 
             case 3:
                 break;
         }
-                return 0f;
+        return 0f;
 
     }
+
+
 
     #region Sound Setting
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class StoryScrollRect : ScrollRect
 {
@@ -23,5 +24,11 @@ public class StoryScrollRect : ScrollRect
         if (GameManager.Inst.UI.CheckWriting()) return;
 
         base.OnEndDrag(eventData);
+    }
+
+    public void SetContentPos()
+    {
+        Debug.Log("¾ÈµÇ´Ï");
+        content.DOAnchorPosY(0f, 0.3f).SetEase(Ease.OutBack);
     }
 }

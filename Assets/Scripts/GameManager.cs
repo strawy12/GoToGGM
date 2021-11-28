@@ -76,9 +76,9 @@ public class GameManager : MonoSingleTon<GameManager>
 
     private void Start()
     {
+        Story.SettingStory();
         UI.SetJobText();
         UI.SetStatText();
-
     }
 
     private void OnApplicationQuit()
@@ -115,6 +115,7 @@ public class GameManager : MonoSingleTon<GameManager>
         UI.SetEventToSelectBtn(false);
     }
 
+    
     public void SetPlayerJob(int jobNum)
     {
         if (jobNum == 0)

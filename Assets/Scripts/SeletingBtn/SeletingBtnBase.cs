@@ -108,8 +108,14 @@ public class SeletingBtnBase : MonoBehaviour
 
         else
         {
+
+            if(currentEventStory.usedEffect)
+            {
+                GameManager.Inst.Story.SetNowEffectSettings(currentEventStory.effectSettings);
+            }
+
             string storyLine = currentEventStory.eventMainStory;
-            GameManager.Inst.UI.StartWrite(storyLine, false, GameManager.Inst.UI.ActiveFinalSelectBtn);
+            GameManager.Inst.UI.StartWrite(storyLine, currentEventStory.usedEffect, GameManager.Inst.UI.ActiveFinalSelectBtn);
             GameManager.Inst.UI.UnShowSelectBtn();
 
             ChangeFinalSelect();

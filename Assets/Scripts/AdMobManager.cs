@@ -37,7 +37,7 @@ public class AdMobManager : MonoBehaviour
     void LoadBannerAd()
     {
         bannerAd = new BannerView(isTestMode ? bannerTestID : bannerID,
-            AdSize.SmartBanner, AdPosition.Bottom);
+            AdSize.Banner, AdPosition.Bottom);
         bannerAd.LoadAd(GetAdRequest());
     }
 

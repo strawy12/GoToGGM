@@ -101,9 +101,10 @@ public class MoveAnimScene : MonoBehaviour
 
         yield return new WaitForSeconds(1.3f);
         canvasGroup.DOFade(0f, 1f);
-        yield return new WaitForSeconds(0.5f);
-
         GameManager.Inst.Story.StartStory();
+
+        yield return new WaitForSeconds(1f);
+
         gameObject.SetActive(false);
     }
 }

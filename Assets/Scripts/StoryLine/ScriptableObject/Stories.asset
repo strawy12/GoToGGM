@@ -19,9 +19,6 @@ MonoBehaviour:
       storyID: 11
       usedFunc: 1
       effectSettings:
-      - usedEffect: 2
-        effectNum: 0
-        playStoryOrder: 0
       - usedEffect: 0
         effectNum: 0
         playStoryOrder: 0
@@ -45,13 +42,10 @@ MonoBehaviour:
       effectSettings:
       - usedEffect: 2
         effectNum: 2
-        playStoryOrder: 1
+        playStoryOrder: 2
       - usedEffect: 1
         effectNum: 1
-        playStoryOrder: 1
-      - usedEffect: 2
-        effectNum: 2
-        playStoryOrder: 4
+        playStoryOrder: 2
       mainStory: "\"\uB098, &\uC740 10415 \uBC88\uC9F8 \uC2B9\uB9AC\uB97C \uAE30\uB150\uD558\uC5EC
         \uC81C\uAD70\uB4E4\uC5D0\uAC8C \uC804\uB9AC\uD488\uC744 \uD558\uC0AC\uD558\uACA0\uB2E4!\"
         \r\n\n\uC790\uC2E0\uC758 \uBD80\uD558\uB4E4\uC5D0\uAC8C \uC804\uB9AC\uD488\uC744
@@ -72,9 +66,6 @@ MonoBehaviour:
       effectSettings:
       - usedEffect: 0
         effectNum: 1
-        playStoryOrder: 0
-      - usedEffect: 2
-        effectNum: 0
         playStoryOrder: 0
       - usedEffect: 3
         effectNum: 0
@@ -115,9 +106,6 @@ MonoBehaviour:
       - usedEffect: 0
         effectNum: 2
         playStoryOrder: 0
-      - usedEffect: 2
-        effectNum: 0
-        playStoryOrder: 0
       mainStory: "\uB2F9\uC2E0\uC740 \uC9C0\uAE08\uC774\uB77C\uB3C4 \uC11C\uB458\uB7EC
         \uAC00\uBC29\uC744 \uCC59\uAE30\uB824\uACE0 \uD569\uB2C8\uB2E4.\n\n\uB2F9\uC2E0
         \uC55E\uC5D0 \uB4DC\uB85C\uC789 \uC7A5\uAC11, \uD504\uB85C\uADF8\uB798\uBC0D
@@ -153,9 +141,6 @@ MonoBehaviour:
       - usedEffect: 0
         effectNum: 3
         playStoryOrder: 0
-      - usedEffect: 2
-        effectNum: 1
-        playStoryOrder: 1
       - usedEffect: 1
         effectNum: 3
         playStoryOrder: 0
@@ -288,10 +273,7 @@ MonoBehaviour:
     - storyName: "\uACE7 \uB3C4\uCC29\uD558\uB294 \uB300\uC911\uAD50\uD1B5"
       storyID: 24
       usedFunc: 1
-      effectSettings:
-      - usedEffect: 2
-        effectNum: 1
-        playStoryOrder: 1
+      effectSettings: []
       mainStory: "\uB2F9\uC2E0\uC774 \uBD95\uC5B4\uBE75\uC5D0\uB9CC \uB9E4\uC9C4\uD558\uB358
         \uB3C4\uC911 \uC9C0\uD558\uCCA0\uC774 \uC62C \uC2DC\uAC04\uC774 \uB418\uC5C8\uC2B5\uB2C8\uB2E4.\n&\uB2F9\uC2E0\uC774
         \uBD95\uC5B4\uBE75\uC5D0 \uB9E4\uC9C4\uD560\uB3D9\uC548 \uBC84\uC2A4\uB97C

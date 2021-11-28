@@ -56,6 +56,12 @@ public class StoryManager : MonoBehaviour
         return eventStory;
     }
 
+    public Story GetStory(int storyNum)
+    {
+        int scenarioNum = GetCurrentScenarioNum();
+        return stories.scenarios[scenarioNum].stories[storyNum];
+    }
+
     public Story GetNowStory()
     {
         int storyNum = GetCurrentScenarioNum();
@@ -86,27 +92,30 @@ public class StoryManager : MonoBehaviour
         }
 
         GameManager.Inst.UI.CheckPlayerPoint();
+        GameManager.Inst.UI.ResetStoryText();
         GameManager.Inst.CurrentPlayer.crtScenarioCnt++;
         GameManager.Inst.CurrentPlayer.crtStoryNum = 0;
         GameManager.Inst.CurrentPlayer.crtEventStoryCnt = 0;
     }
+
+
 
     public void SetSelectBtn(SeletingBtnBase seletingBtn)
     {
         nowSelectBtn = seletingBtn;
     }
 
-    public void StartEvent(int storyID)
+    public void StartEvent(Story story)
     {
-        switch (storyID)
+        switch (story.storyID)
         {
             case 11:
                 Action<bool> action = GameManager.Inst.UI.ActiveNameInputField;
-                GameManager.Inst.UI.StartWrite(GetNowStory().mainStory, action, true, GetNowStory().usedEffect);
+                GameManager.Inst.UI.StartWrite(story.mainStory, action, true, story.usedEffect);
                 break;
             case 13:
                 GameManager.Inst.SelectJob();
-                GameManager.Inst.UI.StartWrite(GetNowStory().mainStory, GetNowStory().usedEffect);
+                GameManager.Inst.UI.StartWrite(story.mainStory, story.usedEffect);
                 break;
             case 24:
                 CertainJobPlay("기획자&개발자", "아티스트");
@@ -127,6 +136,8 @@ public class StoryManager : MonoBehaviour
         string[] fJobs = firstJobs.Split('&');
         string[] sJobs = sencondJobs.Split('&');
 
+        Debug.Log(fJobs[0]);
+
         string[] messages = GetNowStory().mainStory.Split('&');
 
         string story = "";
@@ -135,8 +146,8 @@ public class StoryManager : MonoBehaviour
         {
             if (GameManager.Inst.CurrentPlayer.playerjob == fJobs[i])
             {
-                story = messages[1];
-                GameManager.Inst.UI.StartWrite(story, GameManager.Inst.UI.ShowSingleSelectBtn, 1, GetNowStory().usedEffect);
+                story = messages[0];
+                GameManager.Inst.UI.StartWrite(story, GameManager.Inst.UI.ShowSingleSelectBtn, 0, GetNowStory().usedEffect);
                 return;
             }
         }
@@ -145,8 +156,8 @@ public class StoryManager : MonoBehaviour
         {
             if (GameManager.Inst.CurrentPlayer.playerjob == sJobs[i])
             {
-                story = messages[0];
-                GameManager.Inst.UI.StartWrite(story, GameManager.Inst.UI.ShowSingleSelectBtn, 0, GetNowStory().usedEffect);
+                story = messages[1];
+                GameManager.Inst.UI.StartWrite(story, GameManager.Inst.UI.ShowSingleSelectBtn, 1, GetNowStory().usedEffect);
                 return;
             }
         }
@@ -182,6 +193,29 @@ public class StoryManager : MonoBehaviour
         }
     }
 
+    public void SettingStory()
+    {
+        int crtStoryNum = GameManager.Inst.CurrentPlayer.crtStoryNum;
+        Debug.Log(crtStoryNum);
+
+        if (crtStoryNum != 0)
+        {
+            Story story;
+            for (int i = 0; i < crtStoryNum; i++)
+            {
+                story = GetStory(i);
+                GameManager.Inst.UI.InstantiateStoryText(story.mainStory);
+
+                if(story.usedEffect)
+                {
+                    nowEffectSettings = story.effectSettings;
+
+                    SettingEffect();
+                }
+            }
+        }
+    }
+
     public void StartStory()
     {
         if (endStory)
@@ -192,8 +226,6 @@ public class StoryManager : MonoBehaviour
         {
             return;
         }
-
-        GameManager.Inst.UI.CheckBGFade();
 
         Story story = GetNowStory();
 
@@ -210,7 +242,7 @@ public class StoryManager : MonoBehaviour
 
         if (story.usedFunc)
         {
-            StartEvent(story.storyID);
+            StartEvent(story);
             return;
         }
         GameManager.Inst.UI.StartWrite(GetNowStory().mainStory, story.usedEffect);
@@ -234,6 +266,22 @@ public class StoryManager : MonoBehaviour
         }
 
         return delaySum;
+    }
+
+    public void SettingEffect()
+    {
+        for (int i = 0; i < nowEffectSettings.Length; i++)
+        {
+            if (nowEffectSettings[i].usedEffect == EEffectType.Effect) continue;
+            if (nowEffectSettings[i].usedEffect == EEffectType.Sound) continue;
+
+            PlayEffect(nowEffectSettings[i].usedEffect, nowEffectSettings[i].effectNum);
+        }
+    }
+
+    public void SetNowEffectSettings(EffectSetting[] effectSettings)
+    {
+        nowEffectSettings = effectSettings;
     }
 
     public float PlayEffect(EEffectType type, int effectNum)
