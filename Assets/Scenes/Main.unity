@@ -1973,6 +1973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storyTextTemp: {fileID: 3292109175303123810}
+  storyScrollRect: {fileID: 1293940901}
   jobStatusText: {fileID: 463018442}
   statText: {fileID: 18159617}
   arrivalTimeText: {fileID: 24551109}

@@ -141,6 +141,8 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator WriteText(string message, Action action)
     {
+        yield return new WaitForSeconds(0.05f);
+
         isWriting = true;
         ActiveTouchScreen(true);
 
@@ -172,6 +174,8 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator WriteText<T>(string message, Action<T> action, T param)
     {
+        yield return new WaitForSeconds(0.05f);
+
         isWriting = true;
         ActiveTouchScreen(true);
         StoryText storyText = InstantiateStoryText();

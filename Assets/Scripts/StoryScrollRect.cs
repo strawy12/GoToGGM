@@ -28,7 +28,6 @@ public class StoryScrollRect : ScrollRect
 
     public void SetContentPos()
     {
-        Debug.Log("¾ÈµÇ´Ï");
         content.DOAnchorPosY(0f, 0.3f).SetEase(Ease.OutBack);
     }
 }
