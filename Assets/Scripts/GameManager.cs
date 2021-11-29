@@ -221,4 +221,18 @@ public class GameManager : MonoSingleTon<GameManager>
         else
             achievementManager.CheckUnlucky();
     }
+
+    public void ClearEnding(int ID)
+    {
+        if (ID < 71) return;
+        ID -= 71;
+        if (player.playerjob == "프로그래머")
+        {
+            ID += 3;
+        }
+        else if (player.playerjob == "아티스튼")
+        {
+            ID += 6;
+        }
+    }
 }

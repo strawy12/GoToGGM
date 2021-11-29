@@ -244,6 +244,7 @@ public class StoryManager : MonoBehaviour
     {
         int enddingNum = GameManager.Inst.CheckArrivalTime();
         Story story = GetEnddingStory(enddingNum);
+        GameManager.Inst.ClearEnding(story.storyID);
         StartEvent(story);
     }
 
