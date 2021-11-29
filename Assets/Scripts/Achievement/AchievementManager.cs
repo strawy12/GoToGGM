@@ -31,9 +31,15 @@ public class AchievementManager : MonoBehaviour
     public void ShowPanels()
     {
         if (isShown)
+        {
             achievementScroll.SetActive(false);
+            isShown = false;
+        }
         else
+        {
             achievementScroll.SetActive(true);
+            isShown = true;
+        }
     }
 
     private void CreatePanels()
@@ -46,10 +52,11 @@ public class AchievementManager : MonoBehaviour
             newObject.SetActive(true);
 
             achievementPanels[i].isCleared = GameManager.Inst.CurrentPlayer.clears[i];
-            if (achievementPanels[i].isCleared)
-            {
+        }
+        for (int i = 0; i < 15; i++)
+        {
+            if (achievementPanels[i].isCleared == true)
                 achievementPanels[i].achievementPanel.Clear(i);
-            }
         }
     }
     private void Clear(int ID)
@@ -62,12 +69,6 @@ public class AchievementManager : MonoBehaviour
         clearNotice.ShowNotice(achievementPanels[ID].title);
 
         GameManager.Inst.SaveClears(ID);
-    }
-    public void Test()//실험용 클리어함수
-    {
-        Debug.Log(testID);
-        Clear(testID);
-        testID+=2;
     }
     public void ClearEnding(int endingID)
     {

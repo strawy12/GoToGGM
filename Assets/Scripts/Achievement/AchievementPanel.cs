@@ -19,5 +19,6 @@ public class AchievementPanel : MonoBehaviour
     {
         clearScreen.SetActive(true);
         transform.SetSiblingIndex(transform.GetSiblingIndex() + transform.parent.childCount);
+        Debug.Log(transform.GetSiblingIndex());
     }
 }

@@ -173,7 +173,6 @@ MonoBehaviour:
   textTitle: {fileID: 4615272901837368223}
   textExplanational: {fileID: 4823474116827694722}
   clearScreen: {fileID: 7650614842528115818}
-  clearUI: {fileID: 0}
 --- !u!1 &4053081569059064184
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,8 +207,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -324.35, y: -14}
-  m_SizeDelta: {x: 304.6, y: 70}
+  m_AnchoredPosition: {x: -5.1965, y: -33.54004}
+  m_SizeDelta: {x: 942.9067, y: 109.0801}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4418703869991474201
 CanvasRenderer:
