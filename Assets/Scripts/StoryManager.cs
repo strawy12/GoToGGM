@@ -21,8 +21,16 @@ public class StoryManager : MonoBehaviour
         }
     }
 
+    public bool isEndding = false;
+
+
+
     private void Start()
     {
+        if (GameManager.Inst.CurrentPlayer.crtScenarioCnt == 5 && !isEndding)
+        {
+            isEndding = true;
+        }
         StartSceneStory();
     }
 
@@ -39,7 +47,7 @@ public class StoryManager : MonoBehaviour
 
     public EventStory GetEventStory(int storyID, bool isGreed = false, bool isSuccess = false)
     {
-        
+
         EventStory eventStory = null;
         EventStoryLine[] eventStoryLines = eventStories.eventScenarios[GetCurrentScenarioNum()].eventStoryLines;
 
@@ -61,6 +69,11 @@ public class StoryManager : MonoBehaviour
     {
         int scenarioNum = GetCurrentScenarioNum();
         return stories.scenarios[scenarioNum].stories[storyNum];
+    }
+
+    public Story GetEnddingStory(int num)
+    {
+        return stories.scenarios[6].stories[num];
     }
 
     public Story GetNowStory()
@@ -95,6 +108,11 @@ public class StoryManager : MonoBehaviour
         GameManager.Inst.UI.CheckPlayerPoint();
         GameManager.Inst.UI.ResetStoryText();
         GameManager.Inst.CurrentPlayer.crtScenarioCnt++;
+        if(GameManager.Inst.CurrentPlayer.crtScenarioCnt == 5)
+        {
+            isEndding = true;
+        }
+
         GameManager.Inst.CurrentPlayer.crtStoryNum = 0;
         GameManager.Inst.CurrentPlayer.crtEventStoryCnt = 0;
     }
@@ -126,8 +144,14 @@ public class StoryManager : MonoBehaviour
                 CertainJobPlay("기획자", "개발자");
                 break;
 
-            case 64:
+            case 54:
                 CertainJobPlay("기획자", "아티스트");
+                break;
+
+            case 71:
+            case 72:
+            case 73:
+                GameManager.Inst.UI.StartWrite(story.mainStory);
                 break;
         }
     }
@@ -197,7 +221,6 @@ public class StoryManager : MonoBehaviour
     public void SettingStory()
     {
         int crtStoryNum = GameManager.Inst.CurrentPlayer.crtStoryNum;
-        Debug.Log(crtStoryNum);
 
         if (crtStoryNum != 0)
         {
@@ -207,7 +230,7 @@ public class StoryManager : MonoBehaviour
                 story = GetStory(i);
                 GameManager.Inst.UI.InstantiateStoryText(story.mainStory);
 
-                if(story.usedEffect)
+                if (story.usedEffect)
                 {
                     nowEffectSettings = story.effectSettings;
 
@@ -215,6 +238,13 @@ public class StoryManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void PlayEndding()
+    {
+        int enddingNum = GameManager.Inst.CheckArrivalTime();
+        Story story = GetEnddingStory(enddingNum);
+        StartEvent(story);
     }
 
     public void StartStory()
@@ -225,6 +255,12 @@ public class StoryManager : MonoBehaviour
         }
         if (storyLine.storyLines[GameManager.Inst.StoryLine].storyOrder.Length <= GameManager.Inst.CurrentPlayer.crtScenarioCnt)
         {
+            return;
+        }
+
+        if (isEndding)
+        {
+            PlayEndding();
             return;
         }
 

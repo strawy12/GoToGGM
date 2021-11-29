@@ -154,7 +154,10 @@ public class SeletingBtnBase : MonoBehaviour
     {
         if (isActive)
         {
-            currentButton.interactable = true;
+            if(currentSelectState != ESelectType.Special)
+            {
+                currentButton.interactable = true;
+            }
             gameObject.SetActive(true);
             canvasGroup.DOFade(1f, 1f);
         }

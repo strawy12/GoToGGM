@@ -17,6 +17,11 @@ public class MoveAnimScene : MonoBehaviour
 
     public void StartMoveAnim()
     {
+        if(GameManager.Inst.Story.isEndding)
+        {
+            GameManager.Inst.Story.StartStory();
+            return;
+        }
         isFirst = GameManager.Inst.CurrentPlayer.crtStoryNum == 0 || stageObjTemp.parent.childCount <= 1;
 
         if (rects != null && isFirst)
@@ -29,7 +34,6 @@ public class MoveAnimScene : MonoBehaviour
             playerobj.gameObject.SetActive(false);
 
         }
-
         canvasGroup.DOFade(1f, 1f);
         StartCoroutine(SpawnStage());
     }

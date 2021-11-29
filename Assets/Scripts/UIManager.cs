@@ -16,25 +16,24 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject touchScreen = null;
     [SerializeField] private CanvasGroup nicknameInputPanal = null;
     [SerializeField] private SeletingBtnBase[] selectBtns;
-    [SerializeField] private Sprite[] selectBtnSprites;
     [SerializeField] private SeletingBtnBase finalSelectBtn = null;
     [SerializeField] private MoveAnimScene MoveAnimScenePanal = null;
     [SerializeField] private GameObject points = null;
     [SerializeField] private GameObject pointPrefab = null;
-    [SerializeField] private Animator flameEffectPrefab = null;
-    [SerializeField] private Image bgFadePanal = null;
-    [SerializeField] private Image backGroundImage = null;
+    [SerializeField] private Image backgroundImage = null;
+    [SerializeField] private RectTransform hudObjects = null;
     [SerializeField] private RectTransform messagePanal = null;
+
     [SerializeField] private Sprite[] pointSprites = null;
-    [SerializeField] private Sprite[] backGroundArray = null;
     private int currentPlayerPos = 0;
 
+    private Sprite[] backGroundArray = null;
+    private Sprite[] selectBtnSprites;
     private Text messageText = null;
     private List<StoryText> storyTextList = new List<StoryText>();
 
     private InputField nicknameInputField = null;
     [SerializeField] private Text timerTimeText = null;
-
 
     private bool isWriting = false;
     private bool isSkip = false;
@@ -48,12 +47,15 @@ public class UIManager : MonoBehaviour
         {
             OnClickNickNameInput();
         });
+
+        selectBtnSprites = Resources.LoadAll<Sprite>("SelectBtns");
+        backGroundArray = Resources.LoadAll<Sprite>("backGrounds");
     }
     private void Start()
     {
-         CreatePoints();
-         limiterScaleY = timeLimiter.rectTransform.localScale.y;
-         timeLimiter.rectTransform.localScale = new Vector2(timeLimiter.rectTransform.localScale.x, 0f);
+        CreatePoints();
+        limiterScaleY = timeLimiter.rectTransform.localScale.y;
+        timeLimiter.rectTransform.localScale = new Vector2(timeLimiter.rectTransform.localScale.x, 0f);
     }
 
     public void StartWrite(string message, bool usedEffect = false, Action action = null)
@@ -133,12 +135,9 @@ public class UIManager : MonoBehaviour
     {
         if (!currentUsedEffect) yield break;
 
-        int lastCnt = (int)((message.Split('\n').Length - 1) * 0.5f);
+        int lastCnt = (int)((message.Split('\n').Length - 1) * 0.5f) + 1;
 
-        if (lastCnt < 1)
-        {
-            yield return CheckEffect(1);
-        }
+        yield return CheckEffect(lastCnt);
     }
 
 
@@ -206,6 +205,11 @@ public class UIManager : MonoBehaviour
         }
 
         isWriting = false;
+    }
+
+    public void ShakeEffect()
+    {
+        hudObjects.DOShakeAnchorPos(0.5f, 300);
     }
 
     public StoryText InstantiateStoryText()
@@ -320,10 +324,22 @@ public class UIManager : MonoBehaviour
 
     public void SettingSelectBtn()
     {
-        SelectLine[] selectLines = GameManager.Inst.Story.GetNowStory().selectLines;
+        SelectLine[] selectLines;
+        if (GameManager.Inst.Story.isEndding)
+        {
+            int enddingNum = GameManager.Inst.CheckArrivalTime();
+            selectLines = GameManager.Inst.Story.GetEnddingStory(enddingNum).selectLines;
+        }
+
+        else
+        {
+            selectLines = GameManager.Inst.Story.GetNowStory().selectLines;
+        }
+
+
         for (int i = 0; i < selectLines.Length; i++)
         {
-            
+
             selectBtns[i].SettingBtn(selectLines[i], i);
         }
     }
@@ -332,7 +348,7 @@ public class UIManager : MonoBehaviour
         float currentTime = time;
         float scaleX = timeLimiter.rectTransform.localScale.x;
         timeLimiter.rectTransform.DOScaleY(limiterScaleY, 0.5f);
-        while(currentTime > 0)//TimerLimit의 1 프레임마다 time 동안 x scale 줄이기
+        while (currentTime > 0)//TimerLimit의 1 프레임마다 time 동안 x scale 줄이기
         {
             currentTime -= Time.deltaTime;
             timeLimiter.rectTransform.localScale = new Vector2(currentTime / time * scaleX, timeLimiter.rectTransform.localScale.y);
@@ -421,6 +437,12 @@ public class UIManager : MonoBehaviour
     public void ChangeSelectBtnSprite(Image image, ESelectType type)
     {
         int num = (int)type;
+
+        if (num == 4)
+        {
+            num = 0;
+        }
+
         image.sprite = selectBtnSprites[num];
     }
 
@@ -501,12 +523,6 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void EffectFlame()
-    {
-        Animator flameEffect = Instantiate(flameEffectPrefab);
-        flameEffect.Play("Flame Effect Anim");
-    }
-
     public IEnumerator PlayMessage(string message)
     {
         messageText.text = message;
@@ -545,21 +561,24 @@ public class UIManager : MonoBehaviour
         return isWriting;
     }
 
+    public void StartEnddingCredit()
+    {
+
+    }
+
     public void ChangeBackGround(int backGroundNum)
     {
-        backGroundImage.sprite = backGroundArray[backGroundNum];
+        backgroundImage.sprite = backGroundArray[backGroundNum];
     }
 
     public float PlayEffect(int effectNum)
     {
         switch (effectNum)
         {
-            case 2:
-                EffectFlame();
+            case 0:
+                ShakeEffect();
                 return 1f;
 
-            case 3:
-                break;
         }
         return 0f;
 

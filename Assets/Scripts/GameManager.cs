@@ -27,9 +27,9 @@ public enum EStoryOrder
     Bus1,
     Bus2,
     Subway1,
-    Subway2,
     Transfer,
-    Walk
+    Walk,
+    Endding
 }
 
 public enum EEffectType
@@ -194,6 +194,24 @@ public class GameManager : MonoSingleTon<GameManager>
     public void SaveClears(int ID)
     {
         player.clears[ID] = true;
+    }
+
+    public int CheckArrivalTime()
+    {
+        if(player.arrivalTime > 0)
+        {
+            return 0;
+        }
+
+        else if(player.arrivalTime == 0)
+        {
+            return 1;
+        }
+
+        else
+        {
+            return 2;
+        }
     }
 
     public void CheckLucky(bool isSuccess)

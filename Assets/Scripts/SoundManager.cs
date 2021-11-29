@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoSingleTon<SoundManager>
 {
-    [SerializeField] AudioClip[] bgms = null;
-    [SerializeField] AudioClip[] effectSounds = null;
+    private AudioClip[] effectSounds = null;
+    private AudioClip[] bgms = null;
     private AudioSource bgmAudio;
     private AudioSource effectAudio;
     private void Awake()
@@ -21,6 +21,9 @@ public class SoundManager : MonoSingleTon<SoundManager>
         }
         bgmAudio = GetComponent<AudioSource>();
         effectAudio = transform.GetChild(0).GetComponent<AudioSource>();
+
+        bgms = Resources.LoadAll<AudioClip>("Audios/BGMs");
+        effectSounds = Resources.LoadAll<AudioClip>("Audios/Effects");
     }
 
     private void Start()
