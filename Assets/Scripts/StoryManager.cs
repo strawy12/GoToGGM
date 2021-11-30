@@ -47,12 +47,12 @@ public class StoryManager : MonoBehaviour
 
     public EventStory GetEventStory(int storyID, bool isGreed = false, bool isSuccess = false)
     {
-
         EventStory eventStory = null;
         EventStoryLine[] eventStoryLines = eventStories.eventScenarios[GetCurrentScenarioNum()].eventStoryLines;
 
         if (isGreed)
         {
+            Debug.Log(storyID);
             eventStory = Array.Find(eventStoryLines[GameManager.Inst.CurrentPlayer.crtEventStoryCnt].eventStories, x => x.eventStoryID == storyID && x.isSuccess == isSuccess);
         }
         else
@@ -105,10 +105,20 @@ public class StoryManager : MonoBehaviour
             return;
         }
 
+        SetScenraioNum();
+
+    }
+
+
+
+    public void SetScenraioNum()
+    {
         GameManager.Inst.UI.CheckPlayerPoint();
         GameManager.Inst.UI.ResetStoryText();
+        GameManager.Inst.SetNowTime();
         GameManager.Inst.CurrentPlayer.crtScenarioCnt++;
-        if(GameManager.Inst.CurrentPlayer.crtScenarioCnt == 5)
+
+        if (GameManager.Inst.CurrentPlayer.crtScenarioCnt == 5)
         {
             isEndding = true;
         }
@@ -116,7 +126,6 @@ public class StoryManager : MonoBehaviour
         GameManager.Inst.CurrentPlayer.crtStoryNum = 0;
         GameManager.Inst.CurrentPlayer.crtEventStoryCnt = 0;
     }
-
 
 
     public void SetSelectBtn(SeletingBtnBase seletingBtn)
@@ -312,7 +321,10 @@ public class StoryManager : MonoBehaviour
         {
             if (nowEffectSettings[i].effectNum == 0)
             {
-                nowEffectSettings[i].effectNum = 1;
+                if (GameManager.Inst.CurrentPlayer.crtStoryNum > 1)
+                {
+                    nowEffectSettings[i].effectNum = 1;
+                }
             }
         }
     }
@@ -346,7 +358,7 @@ public class StoryManager : MonoBehaviour
 
             case EEffectType.Sound:
                 GameManager.Inst.UI.SetEffectSound(effectNum);
-                return 0f;
+                return GameManager.Inst.UI.GetEffectSoundLength();
 
             case EEffectType.Effect:
                 return GameManager.Inst.UI.PlayEffect(effectNum);

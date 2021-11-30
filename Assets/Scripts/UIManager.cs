@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private Image timeLimiter = null; private float limiterScaleY;
+    [SerializeField] private Image timeLimiter = null;
     [SerializeField] private StoryText storyTextTemp = null;
     [SerializeField] private StoryScrollRect storyScrollRect = null;
     [SerializeField] private Text jobStatusText = null;
@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Sprite[] pointSprites = null;
     private int currentPlayerPos = 0;
+    private float limiterScaleY;
 
     private Sprite[] backGroundArray = null;
     private Sprite[] selectBtnSprites;
@@ -35,6 +36,8 @@ public class UIManager : MonoBehaviour
     private InputField nicknameInputField = null;
     [SerializeField] private Text timerTimeText = null;
 
+
+    private int fontSize = 49;
     private bool isWriting = false;
     private bool isSkip = false;
     private bool currentUsedEffect = false;
@@ -61,7 +64,10 @@ public class UIManager : MonoBehaviour
 
     public void StartWrite(string message, bool usedEffect = false, Action action = null)
     {
-        SettingSelectBtn();
+        if (action == null)
+        {
+            SettingSelectBtn();
+        }
         currentUsedEffect = usedEffect;
         StartCoroutine(WriteText(message, action));
     }
@@ -76,11 +82,9 @@ public class UIManager : MonoBehaviour
     public IEnumerator CheckEffect(int storyCnt)
     {
         if (!currentUsedEffect) yield break;
-
         float delay = 0f;
 
         delay = GameManager.Inst.Story.CheckEffect(storyCnt);
-
         yield return new WaitForSeconds(delay);
 
     }
@@ -109,9 +113,9 @@ public class UIManager : MonoBehaviour
                 {
                     cnt = 0;
                     storyCnt++;
+                    yield return DelayEnter(cnt, storyCnt);
                 }
 
-                yield return DelayEnter(cnt, storyCnt);
             }
         }
 
@@ -194,15 +198,7 @@ public class UIManager : MonoBehaviour
 
         yield return new WaitForSeconds(isSkip ? 0.5f : 1f);
 
-        if (action == null)
-        {
-            ShowSelectBtn();
-        }
-
-        else
-        {
-            action(param);
-        }
+        action(param);
 
         isWriting = false;
     }
@@ -214,7 +210,6 @@ public class UIManager : MonoBehaviour
 
     public StoryText InstantiateStoryText()
     {
-        Debug.Log("시발");
         StoryText storyText = Instantiate(storyTextTemp, storyTextTemp.transform.parent);
 
         if (storyTextList.Count != 0)
@@ -225,6 +220,7 @@ public class UIManager : MonoBehaviour
 
         storyTextList.Add(storyText);
         storyText.text = "";
+        storyText.SetFontSize(fontSize);
         storyText.gameObject.SetActive(true);
         storyScrollRect.SetContentPos();
 
@@ -233,8 +229,6 @@ public class UIManager : MonoBehaviour
 
     public StoryText InstantiateStoryText(string message)
     {
-        Debug.Log("시발");
-
         StoryText storyText = Instantiate(storyTextTemp, storyTextTemp.transform.parent);
 
         message = ReplaceMessage(message);
@@ -248,7 +242,7 @@ public class UIManager : MonoBehaviour
         }
 
         storyTextList.Add(storyText);
-
+        storyText.SetFontSize(fontSize);
         storyText.gameObject.SetActive(true);
         storyScrollRect.SetContentPos();
 
@@ -470,11 +464,18 @@ public class UIManager : MonoBehaviour
         int wit = GameManager.Inst.CurrentPlayer.stat_Wit;
         int knowledge = GameManager.Inst.CurrentPlayer.stat_Knowledge;
         int sencetive = GameManager.Inst.CurrentPlayer.stat_Sencetive;
-        int arrivalTime = GameManager.Inst.CurrentPlayer.arrivalTime;
 
         statText.text = string.Format("재치: {0} / 섬세: {1} / 지식: {2}", wit, sencetive, knowledge);
-        arrivalTimeText.text = string.Format("도착 시간: {0}{1}분", arrivalTime >= 0 ? "+" : "-", arrivalTime);
 
+    }
+
+    public void SetNowTimeText()
+    {
+        int nowTime = GameManager.Inst.CurrentPlayer.nowTime;
+        int hour = nowTime / 60;
+        nowTime -= hour * 60;
+
+        arrivalTimeText.text = string.Format("현재 시각\n{0} : {1:00}", hour, nowTime); // 숫자 두자리 고정
     }
 
     public void SetTime(int add)
@@ -529,7 +530,7 @@ public class UIManager : MonoBehaviour
         StartCoroutine(PlayMessage(message));
     }
 
-    public void ShowArriveTimeDangerMessage(int arrivalTime, string lastWord, bool isLating)
+    public void ShowArriveTimeDangerousMessage(int arrivalTime, string lastWord, bool isLating)
     {
         string message = string.Format("현재 도착 예정 시간 : {0} {1}", arrivalTime, lastWord);
 
@@ -599,6 +600,16 @@ public class UIManager : MonoBehaviour
     }
 
 
+    public void SetFontSize(float value)
+    {
+        fontSize = (int)value;
+
+        foreach (var storyText in storyTextList)
+        {
+            storyText.SetFontSize(fontSize);
+        }
+    }
+
 
     #region Sound Setting
 
@@ -628,6 +639,11 @@ public class UIManager : MonoBehaviour
     public void SetEffectSound(int effectNum)
     {
         SoundManager.Inst.SetEffectSound(effectNum);
+    }
+
+    public float GetEffectSoundLength()
+    {
+        return SoundManager.Inst.GetEffectSoundLength();
     }
 
     #endregion

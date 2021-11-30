@@ -21,7 +21,7 @@ public class EventStory
     {
         get
         {
-            return effectSettings.Length != 0;
+            return effectSettings != null && effectSettings.Length != 0;
         }
     }
 
