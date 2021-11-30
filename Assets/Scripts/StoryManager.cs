@@ -305,12 +305,26 @@ public class StoryManager : MonoBehaviour
         return delaySum;
     }
 
+    private void ReplaceRoomBGM(int i)
+    {
+        if (nowEffectSettings[i].usedEffect == EEffectType.BGM)
+        {
+            if (nowEffectSettings[i].effectNum == 0)
+            {
+                nowEffectSettings[i].effectNum = 1;
+            }
+        }
+    }
+
+
     public void SettingEffect()
     {
         for (int i = 0; i < nowEffectSettings.Length; i++)
         {
             if (nowEffectSettings[i].usedEffect == EEffectType.Effect) continue;
             if (nowEffectSettings[i].usedEffect == EEffectType.Sound) continue;
+
+            ReplaceRoomBGM(i);
 
             PlayEffect(nowEffectSettings[i].usedEffect, nowEffectSettings[i].effectNum);
         }
