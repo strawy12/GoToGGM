@@ -598,7 +598,7 @@ MonoBehaviour:
     eventStoryLines:
     - storyLineName: "\uC704\uD654\uAC10\uC774 \uB290\uAEF4\uC9C0\uB294 \uD615"
       eventStories:
-      - eventStoryID: 611
+      - eventStoryID: 511
         increaseTime: 0
         increaseStatType: 3
         increaseStat: 5
@@ -615,7 +615,7 @@ MonoBehaviour:
         eventFinalStory:
         - "\uB0B4\uAC00 \uC54C\uB358 \uD615\uC774 \uC544\uB2C8\uC57C.. [\uC7AC\uCE58
           +5]"
-      - eventStoryID: 611
+      - eventStoryID: 511
         increaseTime: 0
         increaseStatType: 2
         increaseStat: -5
@@ -631,7 +631,7 @@ MonoBehaviour:
           \uAC83\uC744 \uAE68\uB2EB\uC2B5\uB2C8\uB2E4"
         eventFinalStory:
         - "\uC774\uAC8C \uBB54..? [\uC9C0\uC2DD -5]"
-      - eventStoryID: 612
+      - eventStoryID: 512
         increaseTime: 0
         increaseStatType: 3
         increaseStat: 2
@@ -646,7 +646,7 @@ MonoBehaviour:
         eventFinalStory:
         - "\uBB34\uC2A8\uC77C\uC774 \uC77C\uC5B4\uB09C\uAC70\uC57C..? [\uC7AC\uCE58
           +2]"
-      - eventStoryID: 613
+      - eventStoryID: 513
         increaseTime: 0
         increaseStatType: 0
         increaseStat: 0

@@ -83,6 +83,7 @@ public class SeletingBtnBase : MonoBehaviour
     }
     public void OnClickBtn()
     {
+        GameManager.Inst.UI.isSelected = true;
         currentButton.interactable = false;
         if (currentSelectState == ESelectType.Final)
         {

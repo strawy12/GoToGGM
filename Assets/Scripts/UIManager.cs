@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
     private bool isWriting = false;
     private bool isSkip = false;
     private bool currentUsedEffect = false;
+    public bool isSelected = false;
 
     private void Awake()
     {
@@ -304,6 +305,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowSelectBtn()
     {
+        isSelected = false;
         SelectLine[] selectLines = GameManager.Inst.Story.GetNowStory().selectLines;
 
         for (int i = 0; i < selectLines.Length; i++)
@@ -347,15 +349,27 @@ public class UIManager : MonoBehaviour
     {
         float currentTime = time;
         float scaleX = timeLimiter.rectTransform.localScale.x;
+        timeLimiter.gameObject.SetActive(true);
         timeLimiter.rectTransform.DOScaleY(limiterScaleY, 0.5f);
         while (currentTime > 0)//TimerLimit의 1 프레임마다 time 동안 x scale 줄이기
         {
             currentTime -= Time.deltaTime;
             timeLimiter.rectTransform.localScale = new Vector2(currentTime / time * scaleX, timeLimiter.rectTransform.localScale.y);
+            if (isSelected)
+            {
+                ResetTimeLimiter(scaleX);
+                yield break;
+            }
             yield return null;
         }
+        ResetTimeLimiter(scaleX);
         selectBtns[btnNum].ActiveBtn(true);
         selectBtns[btnNum].OnClickBtn();
+        timeLimiter.gameObject.SetActive(false);
+    }
+    private void ResetTimeLimiter(float scaleX)
+    {
+        timeLimiter.rectTransform.localScale = new Vector2(scaleX, limiterScaleY);
     }
     public IEnumerator MoveAnimScene(float delay)
     {
