@@ -181,7 +181,6 @@ public class UIManager : MonoBehaviour
 
         isWriting = true;
         ActiveTouchScreen(true);
-        StoryText storyText = InstantiateStoryText();
 
         if (isSkip) isSkip = false;
 
@@ -215,7 +214,7 @@ public class UIManager : MonoBehaviour
 
     public StoryText InstantiateStoryText()
     {
-
+        Debug.Log("시발");
         StoryText storyText = Instantiate(storyTextTemp, storyTextTemp.transform.parent);
 
         if (storyTextList.Count != 0)
@@ -234,6 +233,7 @@ public class UIManager : MonoBehaviour
 
     public StoryText InstantiateStoryText(string message)
     {
+        Debug.Log("시발");
 
         StoryText storyText = Instantiate(storyTextTemp, storyTextTemp.transform.parent);
 
