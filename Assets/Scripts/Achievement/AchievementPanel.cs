@@ -8,7 +8,15 @@ public class AchievementPanel : MonoBehaviour
 {
     [SerializeField] Text textTitle = null;
     [SerializeField] Text textExplanational = null;
-    [SerializeField] GameObject clearScreen = null;
+    [SerializeField] Image CheckImage = null;
+    [SerializeField] Image clearImage = null;
+
+    Image image = null;
+
+    public void Start()
+    {
+        image = GetComponent<Image>();
+    }
 
     public void SetValue(string title, string explanation)
     {
@@ -17,7 +25,8 @@ public class AchievementPanel : MonoBehaviour
     }
     public void Clear(int ID)
     {
-        clearScreen.SetActive(true);
+        CheckImage.gameObject.SetActive(true);
+        clearImage.gameObject.SetActive(true);
         transform.SetSiblingIndex(transform.GetSiblingIndex() + transform.parent.childCount);
         Debug.Log(transform.GetSiblingIndex());
     }

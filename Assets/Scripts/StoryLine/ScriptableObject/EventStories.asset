@@ -713,7 +713,7 @@ MonoBehaviour:
         - "\uBB34\uC2A8 \uC77C\uC774\uC9C0..?"
     - storyLineName: "\uBCC0\uC2E0\uBCA8\uD2B8\uC758 \uC0AC\uB098\uC774"
       eventStories:
-      - eventStoryID: 621
+      - eventStoryID: 521
         increaseTime: 0
         increaseStatType: 1
         increaseStat: 3
@@ -736,7 +736,7 @@ MonoBehaviour:
         eventFinalStory:
         - "\"\uC88B\uC544, \uC774\uC81C \uD544\uC0B4\uAE30 \uC2DC\uAC04\uC774\uB2E4!\"
           [\uC12C\uC138 +3]"
-      - eventStoryID: 622
+      - eventStoryID: 522
         increaseTime: 0
         increaseStatType: 3
         increaseStat: 3
@@ -757,7 +757,7 @@ MonoBehaviour:
         eventFinalStory:
         - "\"\uD544\uC0B4\uAE30\uB85C \uB9C8\uBB34\uB9AC \uC9C0\uC5B4\uC8FC\uC9C0!\"
           [\uC7AC\uCE58 +3]"
-      - eventStoryID: 623
+      - eventStoryID: 523
         increaseTime: 0
         increaseStatType: 2
         increaseStat: 5
@@ -781,7 +781,7 @@ MonoBehaviour:
           [\uC9C0\uC2DD +5]"
     - storyLineName: "\uBB34\uC801\uC758 \uD544\uC0B4\uAE30!!"
       eventStories:
-      - eventStoryID: 631
+      - eventStoryID: 531
         increaseTime: 0
         increaseStatType: 4
         increaseStat: -30
@@ -807,7 +807,7 @@ MonoBehaviour:
           \uB2F9\uC2E0\uC740 \uC720\uC720\uD788 \uC790\uB9AC\uB97C \uB5A0\uB0A9\uB2C8\uB2E4"
         eventFinalStory:
         - "\uADF8\uB294.. \uC2E0\uC774\uC57C! [\uB3C4\uCC29\uC2DC\uAC04 -30\uBD84]"
-      - eventStoryID: 631
+      - eventStoryID: 531
         increaseTime: 0
         increaseStatType: 4
         increaseStat: 30
@@ -829,7 +829,7 @@ MonoBehaviour:
           \uC758\uC2DD\uC744 \uC783\uC2B5\uB2C8\uB2E4.."
         eventFinalStory:
         - "\uB0AF\uC120 \uCC9C\uC7A5\uC774\uB2E4.. [\uB3C4\uCC29\uC2DC\uAC04 +30\uBD84]"
-      - eventStoryID: 632
+      - eventStoryID: 532
         increaseTime: 0
         increaseStatType: 2
         increaseStat: 2
@@ -852,7 +852,7 @@ MonoBehaviour:
           \uBC1C\uAC78\uC74C\uC744 \uB0B4\uB51B\uC2B5\uB2C8\uB2E4"
         eventFinalStory:
         - "P E R F E C T! [\uC9C0\uC2DD +2]"
-      - eventStoryID: 633
+      - eventStoryID: 533
         increaseTime: 0
         increaseStatType: 3
         increaseStat: 3
