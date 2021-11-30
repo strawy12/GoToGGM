@@ -30,16 +30,7 @@ public class AchievementManager : MonoBehaviour
 
     public void ShowPanels()
     {
-        if (isShown)
-        {
-            achievementScroll.SetActive(false);
-            isShown = false;
-        }
-        else
-        {
             achievementScroll.SetActive(true);
-            isShown = true;
-        }
     }
 
     private void CreatePanels()
