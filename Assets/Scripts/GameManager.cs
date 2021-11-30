@@ -40,6 +40,7 @@ public enum EEffectType
     BGM
 }
 
+
 //public enum btnState { Special, Normal, Good }
 
 public class GameManager : MonoSingleTon<GameManager>
@@ -78,11 +79,17 @@ public class GameManager : MonoSingleTon<GameManager>
     private void Start()
     {
         Story.SettingStory();
+        UI.SetNowTimeText();
         UI.SetJobText();
         UI.SetStatText();
     }
 
     private void OnApplicationQuit()
+    {
+        SaveToJson();
+    }
+
+    private void OnApplicationPause(bool pause)
     {
         SaveToJson();
     }
@@ -106,14 +113,20 @@ public class GameManager : MonoSingleTon<GameManager>
         string stringJson = JsonUtility.ToJson(player, true);
         File.WriteAllText(SAVE_PATH + SAVE_FILE, stringJson, System.Text.Encoding.UTF8);
     }
-    public void SetPlayerStat(int stat/*Ω∫≈» ≈∏¿‘*/)
-    {
-        //player.stat[Ω∫≈»≈∏¿‘] += stat;
-    }
 
     public void SelectJob()
     {
-        UI.SetEventToSelectBtn(false);
+        UI.SetEventToSelectBtn(false);  
+    }
+
+    public void SetNowTime()
+    {
+        int index = player.usedTimeCnt;
+        player.usedTimeCnt++;
+        player.nowTime += player.arrivalTime;
+        player.arrivalTime = 0;
+        player.nowTime += Story.GetStoryLine().usedTimeArray[index];
+        UI.SetNowTimeText();
     }
 
     
@@ -167,7 +180,7 @@ public class GameManager : MonoSingleTon<GameManager>
 
             case EStatType.ArrivalTime:
                 player.arrivalTime += increaseStat;
-                UI.ShowArriveTimeDangerMessage(player.arrivalTime, player.GetLastWord(), player.arrivalTime > 0);
+                UI.ShowArriveTimeDangerousMessage(player.arrivalTime, player.GetLastWord(), player.arrivalTime > 0);
 
                 break;
         }

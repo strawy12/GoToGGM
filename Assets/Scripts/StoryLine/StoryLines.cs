@@ -11,6 +11,7 @@ public class StoryLine
     public string sceneName;
     public int sceneNum;
     public EStoryOrder[] storyOrder;
+    public int[] usedTimeArray;
 }
 
 

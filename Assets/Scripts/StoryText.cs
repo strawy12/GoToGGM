@@ -7,6 +7,7 @@ public class StoryText : MonoBehaviour
 {
     private Text storyText = null;
     private ContentSizeFitter contentSize = null;
+
     public string text
     {
         get
@@ -37,6 +38,11 @@ public class StoryText : MonoBehaviour
         contentSize = GetComponent<ContentSizeFitter>();
     }
 
+
+    public void SetFontSize(int fontSize)
+    {
+        storyText.fontSize = fontSize;
+    }
 
     public void NextText()
     {

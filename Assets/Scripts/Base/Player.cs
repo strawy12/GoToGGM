@@ -7,6 +7,8 @@ public class Player
     public string nickname;
     public string playerjob;
 
+    public int usedTimeCnt;
+
     //Story Info
     public int storyLineNum = 0; 
     public int crtScenarioCnt = 0;
@@ -19,6 +21,8 @@ public class Player
     public int stat_Wit;
     public int arrivalTime;
     public bool[] clears;
+
+    public int nowTime;
 
 
     //InGame Sound Info
@@ -33,6 +37,7 @@ public class Player
         this.stat_Sencetive = stat_Sencetive;
         this.stat_Knowledge = stat_Knowledge;
         this.stat_Wit = stat_Wit;
+        nowTime = 420;
         clears = new bool[15];
     }
 

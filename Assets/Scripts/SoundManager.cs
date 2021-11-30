@@ -111,4 +111,9 @@ public class SoundManager : MonoSingleTon<SoundManager>
         bgmAudio.Stop();
     }
 
+    public float GetEffectSoundLength()
+    {
+        return effectAudio.clip.length;
+    }
+
 }

@@ -42,6 +42,7 @@ public class SeletingBtnBase : MonoBehaviour
         else if (currentSelectState == ESelectType.Final)
         {
             GameManager.Inst.Story.EndStory();
+            currentEventStory = null;
         }
 
         else
