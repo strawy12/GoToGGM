@@ -599,8 +599,8 @@ MonoBehaviour:
         needStatType: 0
         needStat: 0
         eventStoryID: 513
-        timeLimit: 3
-        useTimer: 0
+        timeLimit: 2
+        useTimer: 1
         time: 0
     - storyName: "\uBCC0\uC2E0\uBCA8\uD2B8\uC758 \uC0AC\uB098\uC774"
       storyID: 52

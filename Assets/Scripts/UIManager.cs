@@ -576,9 +576,9 @@ public class UIManager : MonoBehaviour
         return isWriting;
     }
 
-    public void StartEnddingCredit()
+    public void OnClickDataResetBtn()
     {
-
+        GameManager.Inst.DataReset();
     }
 
     public void ChangeBackGround(int backGroundNum)

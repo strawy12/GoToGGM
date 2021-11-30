@@ -1,22 +1,7 @@
 fileFormatVersion: 2
-guid: 79b145d089968294cbabbddb62fe1254
+guid: 8fc48e6fac426d14fb985e46bcc7ea2b
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 7991222981877705094
-    second: SelectBtns_0
-  - first:
-      213: -8219915460353532737
-    second: SelectBtns_1
-  - first:
-      213: 4044805922824439426
-    second: SelectBtns_2
-  - first:
-      213: -7204624134772777464
-    second: SelectBtns_3
-  - first:
-      213: -3133800636231404263
-    second: SelectBtns_4
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -56,7 +41,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -128,91 +113,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: SelectBtns_0
-      rect:
-        serializedVersion: 2
-        x: 15
-        y: 24
-        width: 96
-        height: 19
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 68922c376f686ee60800000000000000
-      internalID: 7991222981877705094
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SelectBtns_1
-      rect:
-        serializedVersion: 2
-        x: 15
-        y: 73
-        width: 96
-        height: 19
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fbcd2e5907efced80800000000000000
-      internalID: -8219915460353532737
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SelectBtns_2
-      rect:
-        serializedVersion: 2
-        x: 15
-        y: 48
-        width: 96
-        height: 19
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 286c8577e89022830800000000000000
-      internalID: 4044805922824439426
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SelectBtns_3
-      rect:
-        serializedVersion: 2
-        x: 15
-        y: 0
-        width: 96
-        height: 19
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 80e99aa6588040c90800000000000000
-      internalID: -7204624134772777464
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []

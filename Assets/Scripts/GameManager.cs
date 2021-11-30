@@ -119,6 +119,14 @@ public class GameManager : MonoSingleTon<GameManager>
         UI.SetEventToSelectBtn(false);  
     }
 
+    public void DataReset()
+    {
+        player = new Player("고등학생", 0, 0, 0);
+        SaveToJson();
+
+        Application.Quit();
+    }
+
     public void SetNowTime()
     {
         int index = player.usedTimeCnt;
@@ -244,7 +252,7 @@ public class GameManager : MonoSingleTon<GameManager>
         {
             ID += 3;
         }
-        else if (player.playerjob == "아티스튼")
+        else if (player.playerjob == "아티스트")
         {
             ID += 6;
         }

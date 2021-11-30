@@ -25,7 +25,7 @@ public class ClearNoticeScript : MonoBehaviour
     public void ShowNotice(string title)
     {
         gameObject.SetActive(true);
-        textClearTitle.text = string.Format("업적 \" {0} \" 달성", title);
+        textClearTitle.text = string.Format( "\" {0} \" 달성", title);
         rectTransform.DOAnchorPosX(Mathf.Clamp(rectTransform.anchoredPosition.x - rectTransform.rect.width, minPos, maxPos), 0.8f).OnComplete(() =>
         checkMarkImage.DOFade(1f, 1f));
 
