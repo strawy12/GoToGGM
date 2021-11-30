@@ -224,6 +224,7 @@ public class GameManager : MonoSingleTon<GameManager>
 
     public void ClearEnding(int ID)
     {
+        Debug.Log(ID);
         if (ID < 71) return;
         ID -= 71;
         if (player.playerjob == "프로그래머")
@@ -234,5 +235,6 @@ public class GameManager : MonoSingleTon<GameManager>
         {
             ID += 6;
         }
+        achievementManager.ClearEnding(ID);
     }
 }

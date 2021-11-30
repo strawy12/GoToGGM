@@ -351,7 +351,7 @@ MonoBehaviour:
         needStatType: 0
         needStat: 0
         eventStoryID: 313
-        timeLimit: 0
+        timeLimit: 1
         useTimer: 0
         time: 0
     - storyName: "\uB208\uB098\uAC00 \uC5EC\uAE30\uC11C \uC65C \uB098\uC640...?"
@@ -389,7 +389,7 @@ MonoBehaviour:
         useTimer: 0
         time: 0
       - selectLine: "\uADF8..."
-        selectType: 3
+        selectType: 0
         needStatType: 0
         needStat: 0
         eventStoryID: 323
