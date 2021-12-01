@@ -93,7 +93,7 @@ public class SeletingBtnBase : MonoBehaviour
             GameManager.Inst.UI.UnShowSelectBtn();
             GameManager.Inst.Story.SetStoryNum();
 
-            if (GameManager.Inst.Story.IsEndScenario)
+            if (GameManager.Inst.Story.IsEndScenario || currentEventStory.increaseStatType == EStatType.ArrivalTime)
             {
                 GameManager.Inst.Story.StartSceneStory(4f);
             }
