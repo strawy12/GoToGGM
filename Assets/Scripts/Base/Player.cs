@@ -41,21 +41,27 @@ public class Player
         clears = new bool[15];
     }
 
+    public int GetArrivalTime()
+    {
+        return nowTime + arrivalTime;
+    }
+
+
     public string GetLastWord()
     {
-        if(arrivalTime < 0)
+        if (arrivalTime < 0)
         {
-            return "오? 예상보다 빨리 도착하네??";
+            return string.Format("예상보다 {0}분 일찍 도착하겠어!", arrivalTime * -1);
         }
 
         else if(arrivalTime == 0)
         {
-            return "다행이다. 늦진 않겠다.";
+            return "딱 맞춰서 도착하겠는걸!";
         }
 
         else
         {
-            return "이러다간 지각하겠어!!";
+            return string.Format("예상보다 {0}분 늦게 도착하겠어..", arrivalTime);
         }
     }
 }

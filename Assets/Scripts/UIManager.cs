@@ -16,13 +16,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject touchScreen = null;
     [SerializeField] private CanvasGroup nicknameInputPanal = null;
     [SerializeField] private SeletingBtnBase[] selectBtns;
-    [SerializeField] private SeletingBtnBase finalSelectBtn = null;
     [SerializeField] private MoveAnimScene MoveAnimScenePanal = null;
     [SerializeField] private GameObject points = null;
     [SerializeField] private GameObject pointPrefab = null;
     [SerializeField] private Image backgroundImage = null;
     [SerializeField] private RectTransform hudObjects = null;
     [SerializeField] private RectTransform messagePanal = null;
+
+    [SerializeField] private ParticleSystem missionClearParticle;
 
     [SerializeField] private Sprite[] pointSprites = null;
     private int currentPlayerPos = 0;
@@ -418,7 +419,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickTouchScreen()
     {
-        if (!GameManager.Inst.Story.IsEndStory && isWriting)
+        if (isWriting)
         {
             isSkip = true;
             ActiveTouchScreen(false);
@@ -430,6 +431,11 @@ public class UIManager : MonoBehaviour
     }
 
     public void ActiveTouchScreen(bool isActive)
+    {
+        touchScreen.SetActive(isActive);
+    }
+
+    public void ActiveQuitPanal(bool isActive)
     {
         touchScreen.SetActive(isActive);
     }
@@ -471,11 +477,11 @@ public class UIManager : MonoBehaviour
 
     public void SetNowTimeText()
     {
-        int nowTime = GameManager.Inst.CurrentPlayer.nowTime;
+        int nowTime = GameManager.Inst.CurrentPlayer.GetArrivalTime();
         int hour = nowTime / 60;
         nowTime -= hour * 60;
 
-        arrivalTimeText.text = string.Format("현재 시각\n{0} : {1:00}", hour, nowTime); // 숫자 두자리 고정
+        arrivalTimeText.text = string.Format("현재 시각\n{0:00} : {1:00}", hour, nowTime); // 숫자 두자리 고정
     }
 
     public void SetTime(int add)
@@ -530,9 +536,16 @@ public class UIManager : MonoBehaviour
         StartCoroutine(PlayMessage(message));
     }
 
-    public void ShowArriveTimeDangerousMessage(int arrivalTime, string lastWord, bool isLating)
+    public void ShowArriveTimeDangerousMessage()
     {
-        string message = string.Format("현재 도착 예정 시간 : {0} {1}", arrivalTime, lastWord);
+        int arrivalTime = GameManager.Inst.CurrentPlayer.GetArrivalTime();
+        string lastWord = GameManager.Inst.CurrentPlayer.GetLastWord();
+        bool isLating = GameManager.Inst.CurrentPlayer.arrivalTime < 0;
+
+        int hour = arrivalTime / 60;
+        arrivalTime -= hour * 60;
+
+        string message = string.Format("<color=#000000> 현재 도착 예정 시간\n{0:00} : {1:00}</color>\n\n{2}", hour, arrivalTime, lastWord);
 
         StartCoroutine(PlayMessage(message, isLating ? Color.blue : Color.red));
 
@@ -594,6 +607,10 @@ public class UIManager : MonoBehaviour
                 ShakeEffect();
                 return 1f;
 
+            case 1:
+                Transform target = storyScrollRect.transform.GetChild(6);
+                GameManager.Inst.Particle.PlayParticle(0, 1.2f, target);
+                return 1f;
         }
         return 0f;
 
@@ -609,6 +626,7 @@ public class UIManager : MonoBehaviour
             storyText.SetFontSize(fontSize);
         }
     }
+
 
 
     #region Sound Setting

@@ -10,7 +10,8 @@ public class MoveAnimScene : MonoBehaviour
     [SerializeField] RectTransform stageObjTemp;
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] Text currentStageText;
-
+    [SerializeField] Transform particlePos;
+    
     RectTransform[] rects;
     Queue<RectTransform> rectPoolQueue = new Queue<RectTransform>();
     private bool isFirst = true;
@@ -43,12 +44,17 @@ public class MoveAnimScene : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         Scenario scenario = GameManager.Inst.Story.GetNowScenario();
-        currentStageText.text = scenario.scenarioName;
-        currentStageText.DOFade(0f, 0f);
 
-        currentStageText.DOFade(1f,0.7f);
+        if(scenario.scenarioName != currentStageText.text)
+        {
+            currentStageText.text = scenario.scenarioName;
+            currentStageText.DOFade(0f, 0f);
 
-        yield return new WaitForSeconds(0.7f);
+            currentStageText.DOFade(1f, 0.7f);
+
+            yield return new WaitForSeconds(0.7f);
+        }
+
 
 
         if (isFirst)
@@ -96,9 +102,15 @@ public class MoveAnimScene : MonoBehaviour
             playerobj.localScale = Vector3.zero;
             playerobj.gameObject.SetActive(true);
             playerobj.DOScale(Vector3.one, 0.5f);
+
+            GameManager.Inst.Particle.PlayParticle(2, 2f, playerobj.transform);
             yield return new WaitForSeconds(0.8f);
         }
 
+        else
+        {
+            GameManager.Inst.Particle.PlayParticle(2, 2.3f, playerobj.transform);
+        }
 
 
         playerobj.DOAnchorPosX(rects[GameManager.Inst.CurrentPlayer.crtStoryNum].anchoredPosition.x, 1f);

@@ -90,11 +90,10 @@ public class SeletingBtnBase : MonoBehaviour
         {
             CheckInfo();
 
-            GameManager.Inst.Story.SetStoryNum();
             GameManager.Inst.UI.UnShowSelectBtn();
+            GameManager.Inst.Story.SetStoryNum();
 
-
-            if (currentEventStory != null && currentEventStory.increaseStatType == EStatType.ArrivalTime)
+            if (GameManager.Inst.Story.IsEndScenario)
             {
                 GameManager.Inst.Story.StartSceneStory(4f);
             }
@@ -103,16 +102,18 @@ public class SeletingBtnBase : MonoBehaviour
                 GameManager.Inst.Story.StartSceneStory();
             }
 
+
+
         }
 
         else
         {
-            if(currentSelectState == ESelectType.Gread)
+            if (currentSelectState == ESelectType.Gread)
             {
                 GameManager.Inst.CheckLucky(currentEventStory.isSuccess);
-            }    
+            }
 
-            if(currentEventStory.usedEffect)
+            if (currentEventStory.usedEffect)
             {
                 GameManager.Inst.Story.SetNowEffectSettings(currentEventStory.effectSettings);
             }
@@ -156,7 +157,7 @@ public class SeletingBtnBase : MonoBehaviour
     {
         if (isActive)
         {
-            if(currentSelectState != ESelectType.Special)
+            if (currentSelectState != ESelectType.Special)
             {
                 currentButton.interactable = true;
             }

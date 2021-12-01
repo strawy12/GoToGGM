@@ -51,12 +51,15 @@ public class GameManager : MonoSingleTon<GameManager>
     [SerializeField] private Player player;
     public Player CurrentPlayer { get { return player; } }
 
+    private ParticleManager particleManager;
     private AchievementManager achievementManager;
     private UIManager uiManager;
     private StoryManager storyManager;
     private Timer timer = new Timer();
 
     public int stat;
+    public ParticleManager Particle { get { return particleManager; } }
+    public AchievementManager Achivement { get { return achievementManager; } }
     public UIManager UI { get { return uiManager; } }
     public StoryManager Story { get { return storyManager; } }
     public Timer Timer { get { return timer; } }
@@ -70,6 +73,7 @@ public class GameManager : MonoSingleTon<GameManager>
             Directory.CreateDirectory(SAVE_PATH);
         }
         achievementManager = GetComponent<AchievementManager>();
+        particleManager = GetComponent<ParticleManager>();
         uiManager = GetComponent<UIManager>();
         storyManager = GetComponent<StoryManager>();
 
@@ -82,6 +86,14 @@ public class GameManager : MonoSingleTon<GameManager>
         UI.SetNowTimeText();
         UI.SetJobText();
         UI.SetStatText();
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            UI.ActiveQuitPanal(true);
+        }
     }
 
     private void OnApplicationQuit()
@@ -131,10 +143,9 @@ public class GameManager : MonoSingleTon<GameManager>
     {
         int index = player.usedTimeCnt;
         player.usedTimeCnt++;
-        player.nowTime += player.arrivalTime;
-        player.arrivalTime = 0;
         player.nowTime += Story.GetStoryLine().usedTimeArray[index];
         UI.SetNowTimeText();
+        UI.ShowArriveTimeDangerousMessage();
     }
 
     
@@ -188,7 +199,6 @@ public class GameManager : MonoSingleTon<GameManager>
 
             case EStatType.ArrivalTime:
                 player.arrivalTime += increaseStat;
-                UI.ShowArriveTimeDangerousMessage(player.arrivalTime, player.GetLastWord(), player.arrivalTime > 0);
 
                 break;
         }
