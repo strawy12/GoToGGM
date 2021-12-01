@@ -199,6 +199,7 @@ public class GameManager : MonoSingleTon<GameManager>
 
             case EStatType.ArrivalTime:
                 player.arrivalTime += increaseStat;
+                UI.ShowArriveTimeDangerousMessage();
 
                 break;
         }

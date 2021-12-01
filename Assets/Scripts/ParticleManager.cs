@@ -21,7 +21,7 @@ public class ParticleManager : MonoBehaviour
 
     private void ChangeParticle(int particleIndex)
     {
-        currentParticle = particles[particleIndex];
+        currentParticle = Instantiate(particles[particleIndex]);
     }
 
     private void SetTarget(Transform target)
@@ -41,7 +41,7 @@ public class ParticleManager : MonoBehaviour
     private void StopParticle()
     {
         isPlay = false;
-        currentParticle.gameObject.SetActive(false);
+        Destroy(currentParticle.gameObject);
     }
 
     public void PlayParticle(int particleIndex, float delay, Transform target)

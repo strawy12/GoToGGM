@@ -538,7 +538,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowArriveTimeDangerousMessage()
     {
-        int arrivalTime = GameManager.Inst.CurrentPlayer.GetArrivalTime();
+        int arrivalTime = 540 + GameManager.Inst.CurrentPlayer.arrivalTime;
         string lastWord = GameManager.Inst.CurrentPlayer.GetLastWord();
         bool isLating = GameManager.Inst.CurrentPlayer.arrivalTime < 0;
 
