@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using UnityEngine.UI;
 
 [System.Serializable]
@@ -30,7 +31,9 @@ public class AchievementManager : MonoBehaviour
 
     public void ShowPanels()
     {
-            achievementScroll.SetActive(true);
+        achievementScroll.transform.localScale = Vector3.zero;
+        achievementScroll.SetActive(true);
+        achievementScroll.transform.DOScale(Vector3.one, 0.4f);
     }
 
     private void CreatePanels()
@@ -50,7 +53,7 @@ public class AchievementManager : MonoBehaviour
                 achievementPanels[i].achievementPanel.Clear(i);
         }
     }
-    private void Clear(int ID)
+    public void Clear(int ID)
     {
         if (achievementPanels[ID].isCleared) return;
         achievementPanels[ID].isCleared = true;
@@ -138,4 +141,5 @@ public class AchievementManager : MonoBehaviour
             Clear(11);
         }
     }
+
 }

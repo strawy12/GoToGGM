@@ -26,7 +26,7 @@ MonoBehaviour:
         effectNum: 0
         playStoryOrder: 0
       - usedEffect: 3
-        effectNum: 1
+        effectNum: 0
         playStoryOrder: 0
       mainStory: "\uC548\uC580 \uC655\uAD6D\uC758 \uC6A9\uC0AC\uC778 \uB2F9\uC2E0\uC740
         \uB2E4\uC2DC\uD55C\uBC88 \uC801\uC9C4\uC5D0\uC11C \uC2B9\uB9AC\uB97C \uAC70\uB461\uB2C8\uB2E4.\n\n\"\uD558\uD558\uD558
@@ -41,6 +41,9 @@ MonoBehaviour:
       usedFunc: 0
       effectSettings:
       - usedEffect: 1
+        effectNum: 1
+        playStoryOrder: 2
+      - usedEffect: 2
         effectNum: 1
         playStoryOrder: 2
       mainStory: "\"\uB098, &\uC740 10415 \uBC88\uC9F8 \uC2B9\uB9AC\uB97C \uAE30\uB150\uD558\uC5EC

@@ -12,12 +12,12 @@ public class StoryManager : MonoBehaviour
     private SeletingBtnBase nowSelectBtn;
     private EffectSetting[] nowEffectSettings;
 
-    private bool endStory = false;
-    public bool IsEndStory
+    private bool endScenario = false;
+    public bool IsEndScenario
     {
         get
         {
-            return endStory;
+            return endScenario;
         }
     }
 
@@ -106,12 +106,11 @@ public class StoryManager : MonoBehaviour
         }
 
         SetScenraioNum();
-
     }
 
 
 
-    public void SetScenraioNum()
+    private void SetScenraioNum()
     {
         GameManager.Inst.UI.CheckPlayerPoint();
         GameManager.Inst.UI.ResetStoryText();
@@ -122,7 +121,7 @@ public class StoryManager : MonoBehaviour
         {
             isEndding = true;
         }
-
+        endScenario = true;
         GameManager.Inst.CurrentPlayer.crtStoryNum = 0;
         GameManager.Inst.CurrentPlayer.crtEventStoryCnt = 0;
     }
@@ -259,9 +258,9 @@ public class StoryManager : MonoBehaviour
 
     public void StartStory()
     {
-        if (endStory)
+        if (endScenario)
         {
-            endStory = false;
+            endScenario = false;
         }
         if (storyLine.storyLines[GameManager.Inst.StoryLine].storyOrder.Length <= GameManager.Inst.CurrentPlayer.crtScenarioCnt)
         {
@@ -297,7 +296,6 @@ public class StoryManager : MonoBehaviour
 
     public void EndStory()
     {
-        endStory = true;
         GameManager.Inst.UI.ActiveTouchScreen(true);
         GameManager.Inst.UI.SetStatText();
     }

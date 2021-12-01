@@ -38,6 +38,21 @@ TextureImporter:
   - first:
       213: -2065273316427765519
     second: UIAssets_11
+  - first:
+      213: -7688009649065767463
+    second: UIAssets_12
+  - first:
+      213: -8098221222616725499
+    second: UIAssets_13
+  - first:
+      213: -6595670686848939472
+    second: UIAssets_14
+  - first:
+      213: 7157934240362810900
+    second: UIAssets_15
+  - first:
+      213: 1000118945469895311
+    second: UIAssets_16
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -154,7 +169,7 @@ TextureImporter:
       name: UIAssets_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 80
         y: 96
         width: 32
         height: 32
@@ -175,7 +190,7 @@ TextureImporter:
       name: UIAssets_1
       rect:
         serializedVersion: 2
-        x: 0
+        x: 80
         y: 64
         width: 32
         height: 32
@@ -196,7 +211,7 @@ TextureImporter:
       name: UIAssets_3
       rect:
         serializedVersion: 2
-        x: 32
+        x: 112
         y: 96
         width: 32
         height: 32
@@ -217,7 +232,7 @@ TextureImporter:
       name: UIAssets_4
       rect:
         serializedVersion: 2
-        x: 64
+        x: 144
         y: 64
         width: 32
         height: 32
@@ -238,7 +253,7 @@ TextureImporter:
       name: UIAssets_5
       rect:
         serializedVersion: 2
-        x: 64
+        x: 144
         y: 96
         width: 32
         height: 32
@@ -259,7 +274,7 @@ TextureImporter:
       name: UIAssets_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 112
         y: 64
         width: 32
         height: 32
@@ -280,7 +295,7 @@ TextureImporter:
       name: UIAssets_6
       rect:
         serializedVersion: 2
-        x: 0
+        x: 80
         y: 32
         width: 32
         height: 32
@@ -301,7 +316,7 @@ TextureImporter:
       name: UIAssets_7
       rect:
         serializedVersion: 2
-        x: 32
+        x: 112
         y: 32
         width: 32
         height: 32
@@ -323,7 +338,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 71
         width: 80
         height: 32
       alignment: 0
@@ -343,13 +358,13 @@ TextureImporter:
       name: UIAssets_9
       rect:
         serializedVersion: 2
-        x: 68
-        y: 37
+        x: 146
+        y: 6
         width: 23
         height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 1, y: 1, z: 1, w: 1}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -364,8 +379,8 @@ TextureImporter:
       name: UIAssets_10
       rect:
         serializedVersion: 2
-        x: 72
-        y: 44
+        x: 147
+        y: 22
         width: 16
         height: 9
       alignment: 0
@@ -385,7 +400,7 @@ TextureImporter:
       name: UIAssets_11
       rect:
         serializedVersion: 2
-        x: 83
+        x: 163
         y: 13
         width: 11
         height: 10
@@ -398,6 +413,111 @@ TextureImporter:
       bones: []
       spriteID: 1f8ea3a6cdca653e0800000000000000
       internalID: -2065273316427765519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIAssets_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 46
+        width: 80
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ddc8adf4f3be4590800000000000000
+      internalID: -7688009649065767463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIAssets_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 103
+        width: 80
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 508866944b65d9f80800000000000000
+      internalID: -8098221222616725499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIAssets_14
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 4, y: 4, z: 4, w: 4}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03a89e6a4787774a0800000000000000
+      internalID: -6595670686848939472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIAssets_15
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 4, y: 4, z: 4, w: 4}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41e4e6a6447165360800000000000000
+      internalID: 7157934240362810900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIAssets_16
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 4, y: 4, z: 4, w: 4}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f821fddc1e221ed00800000000000000
+      internalID: 1000118945469895311
       vertices: []
       indices: 
       edges: []

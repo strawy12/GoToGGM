@@ -7,6 +7,7 @@ using DG.Tweening;
 public class ClearNoticeScript : MonoBehaviour
 {
     [SerializeField] Text textClearTitle = null;
+    [SerializeField] Transform particlePos = null;
     RectTransform rectTransform = null;
 
     Image checkMarkImage = null;
@@ -17,17 +18,23 @@ public class ClearNoticeScript : MonoBehaviour
     {
         rectTransform = GetComponent<RectTransform>();
         checkMarkImage = transform.GetChild(1).GetComponent<Image>();
-        minPos = rectTransform.anchoredPosition.x - rectTransform.rect.width;
+        minPos = rectTransform.anchoredPosition.x - (rectTransform.rect.width );
         maxPos = rectTransform.anchoredPosition.x;  
         gameObject.SetActive(false);
         checkMarkImage.DOFade(0f, 0f);
+
     }
+
+
     public void ShowNotice(string title)
     {
         gameObject.SetActive(true);
         textClearTitle.text = string.Format( "\" {0} \" ´Þ¼º", title);
         rectTransform.DOAnchorPosX(Mathf.Clamp(rectTransform.anchoredPosition.x - rectTransform.rect.width, minPos, maxPos), 0.8f).OnComplete(() =>
-        checkMarkImage.DOFade(1f, 1f));
+        {
+            checkMarkImage.DOFade(1f, 1f);
+            GameManager.Inst.Particle.PlayParticle(1, 1.25f, particlePos);
+        });
 
         Invoke(nameof(HideNotice), 2f);
     }
