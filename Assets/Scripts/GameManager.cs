@@ -64,7 +64,7 @@ public class GameManager : MonoSingleTon<GameManager>
     public StoryManager Story { get { return storyManager; } }
     public Timer Timer { get { return timer; } }
     public int StoryLine { get { return player.storyLineNum; } }
-    
+
     void Awake()
     {
         SAVE_PATH = Application.persistentDataPath + "/Save";
@@ -90,7 +90,7 @@ public class GameManager : MonoSingleTon<GameManager>
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             UI.ActiveQuitPanal(true);
         }
@@ -128,7 +128,7 @@ public class GameManager : MonoSingleTon<GameManager>
 
     public void SelectJob()
     {
-        UI.SetEventToSelectBtn(false);  
+        UI.SetEventToSelectBtn(false);
     }
 
     public void DataReset()
@@ -142,13 +142,15 @@ public class GameManager : MonoSingleTon<GameManager>
     public void SetNowTime()
     {
         int index = player.usedTimeCnt;
+        StoryLine storyLine = Story.GetStoryLine();
         player.usedTimeCnt++;
-        player.nowTime += Story.GetStoryLine().usedTimeArray[index];
+        player.nowTime += storyLine.usedTimeArray[index];
+
         UI.SetNowTimeText();
         UI.ShowArriveTimeDangerousMessage();
     }
 
-    
+
     public void SetPlayerJob(int jobNum)
     {
         if (jobNum == 0)
@@ -230,12 +232,12 @@ public class GameManager : MonoSingleTon<GameManager>
 
     public int CheckArrivalTime()
     {
-        if(player.arrivalTime > 0)
+        if (player.arrivalTime > 0)
         {
             return 0;
         }
 
-        else if(player.arrivalTime == 0)
+        else if (player.arrivalTime == 0)
         {
             return 1;
         }

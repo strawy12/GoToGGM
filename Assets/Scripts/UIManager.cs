@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Image timeLimiter = null;
     [SerializeField] private StoryText storyTextTemp = null;
-    [SerializeField] private StoryScrollRect storyScrollRect = null;
-    [SerializeField] private Text jobStatusText = null;
+    [SerializeField] private Image image = null;
+
     [SerializeField] private Text statText = null;
     [SerializeField] private Text arrivalTimeText = null;
     [SerializeField] private GameObject touchScreen = null;
@@ -20,17 +21,24 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject points = null;
     [SerializeField] private GameObject pointPrefab = null;
     [SerializeField] private Image backgroundImage = null;
+    [SerializeField] private Image darkBattlePanal = null;
     [SerializeField] private RectTransform hudObjects = null;
     [SerializeField] private RectTransform messagePanal = null;
 
-    [SerializeField] private ParticleSystem missionClearParticle;
 
-    [SerializeField] private Sprite[] pointSprites = null;
+    private StoryScrollRect storyScrollRect = null;
+
+    private Text jobStatusText = null;
+
+
     private int currentPlayerPos = 0;
-    private float limiterScaleY;
+
 
     private Sprite[] backGroundArray = null;
     private Sprite[] selectBtnSprites;
+    private Sprite[] pointSprites = null;
+
+    private List<Transform> particlePosArray = new List<Transform>();
     private Text messageText = null;
     private List<StoryText> storyTextList = new List<StoryText>();
 
@@ -38,7 +46,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text timerTimeText = null;
 
 
-    private int fontSize = 49;
+    private int fontSize = 72;
     private bool isWriting = false;
     private bool isSkip = false;
     private bool currentUsedEffect = false;
@@ -48,19 +56,32 @@ public class UIManager : MonoBehaviour
     {
         messageText = messagePanal.transform.GetChild(0).GetComponent<Text>();
         nicknameInputField = nicknameInputPanal.GetComponentInChildren<InputField>();
-        nicknameInputField.onEndEdit.AddListener(_ =>
-        {
-            OnClickNickNameInput();
-        });
+        storyScrollRect = storyTextTemp.transform.GetComponentInParent<StoryScrollRect>();
+        jobStatusText = storyScrollRect.transform.GetChild(1).GetComponent<Text>();
+        particlePosArray.Add(storyScrollRect.transform.GetChild(6));
+        particlePosArray.Add(storyScrollRect.transform.GetChild(7));
+        particlePosArray.Add(storyScrollRect.transform.GetChild(8));
+        particlePosArray.Add(hudObjects.transform.GetChild(0));
 
         selectBtnSprites = Resources.LoadAll<Sprite>("SelectBtns");
         backGroundArray = Resources.LoadAll<Sprite>("backGrounds");
     }
     private void Start()
     {
-        CreatePoints();
-        limiterScaleY = timeLimiter.rectTransform.localScale.y;
+        //CreatePoints();
         timeLimiter.rectTransform.localScale = new Vector2(timeLimiter.rectTransform.localScale.x, 0f);
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            DarkBattleEffect(true);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            DarkBattleEffect(false);
+        }
     }
 
     public void StartWrite(string message, bool usedEffect = false, Action action = null)
@@ -99,17 +120,21 @@ public class UIManager : MonoBehaviour
 
         string messageText = "";
 
+        yield return CheckEffect(0);
+
         foreach (var c in message)
         {
             if (isSkip) break;
 
             messageText = string.Format("{0}{1}", messageText, c);
             storyText.text = messageText;
+            storyText.CheckTextSize();
             yield return new WaitForSeconds(0.03f);
 
             if (c == '\n')
             {
                 cnt++;
+
                 if (cnt == 2)
                 {
                     cnt = 0;
@@ -158,7 +183,6 @@ public class UIManager : MonoBehaviour
 
         message = ReplaceMessage(message);
 
-        yield return CheckEffect(0);
 
         yield return WriteStoryText(message);
 
@@ -190,8 +214,6 @@ public class UIManager : MonoBehaviour
         if (isSkip) isSkip = false;
 
         message = ReplaceMessage(message);
-
-        yield return CheckEffect(0);
 
         yield return WriteStoryText(message);
 
@@ -261,7 +283,7 @@ public class UIManager : MonoBehaviour
     public void ResetStoryText()
     {
         int cnt = storyTextList.Count;
-        for (int i = 0; i < storyTextList.Count; i++)
+        for (int i = 0; i < cnt; i++)
         {
             Destroy(storyTextList[i].gameObject);
         }
@@ -321,6 +343,7 @@ public class UIManager : MonoBehaviour
 
     public void SettingSelectBtn()
     {
+        
         SelectLine[] selectLines;
         if (GameManager.Inst.Story.isEndding)
         {
@@ -345,7 +368,7 @@ public class UIManager : MonoBehaviour
         float currentTime = time;
         float scaleX = timeLimiter.rectTransform.localScale.x;
         timeLimiter.gameObject.SetActive(true);
-        timeLimiter.rectTransform.DOScaleY(limiterScaleY, 0.5f);
+        timeLimiter.rectTransform.DOScaleY(1f, 0.5f);
         while (currentTime > 0)//TimerLimit의 1 프레임마다 time 동안 x scale 줄이기
         {
             currentTime -= Time.deltaTime;
@@ -364,7 +387,8 @@ public class UIManager : MonoBehaviour
     }
     private void ResetTimeLimiter(float scaleX)
     {
-        timeLimiter.rectTransform.localScale = new Vector2(scaleX, limiterScaleY);
+        timeLimiter.rectTransform.localScale = Vector2.one;
+        timeLimiter.gameObject.SetActive(false);
     }
     public IEnumerator MoveAnimScene(float delay)
     {
@@ -589,6 +613,14 @@ public class UIManager : MonoBehaviour
         return isWriting;
     }
 
+    public void DarkBattleEffect(bool isTrue)
+    {
+        image.transform.DOScaleY(isTrue ? 1f : 0f, 0.5f);
+        //darkBattlePanal.DOFade(0f, 0f);
+        //darkBattlePanal.gameObject.SetActive(true);
+        //darkBattlePanal.DOFade(1f, 1f);
+    }
+
     public void OnClickDataResetBtn()
     {
         GameManager.Inst.DataReset();
@@ -601,16 +633,47 @@ public class UIManager : MonoBehaviour
 
     public float PlayEffect(int effectNum)
     {
+        Transform target;
         switch (effectNum)
         {
-            case 0:
+            case 0: // Shake
                 ShakeEffect();
                 return 1f;
 
-            case 1:
-                Transform target = storyScrollRect.transform.GetChild(6);
+            case 1: // Flame
+                target = particlePosArray[0];
                 GameManager.Inst.Particle.PlayParticle(0, 1.2f, target);
                 return 1f;
+
+            case 2: // Slash
+                target = particlePosArray[1];
+                GameManager.Inst.Particle.PlayParticle(1, 1.2f, target);
+                return 1f;
+
+            case 3: // Wind
+                target = particlePosArray[0];
+                GameManager.Inst.Particle.PlayParticle(2, 1.2f, target);
+                break;
+
+            case 4: // Falling
+                target = particlePosArray[3];
+                GameManager.Inst.Particle.PlayParticle(5, 1.2f, target);
+                break;
+
+            case 5: // Particle_LastFall
+                target = particlePosArray[3];
+                GameManager.Inst.Particle.PlayParticle(5, 1.2f, target);
+                //Invoke("LastFall", 1.2f);
+                break;
+
+            case 6: // Drawing
+                target = particlePosArray[2];
+                GameManager.Inst.Particle.PlayParticle(6, 1.2f, target);
+                break;
+
+            case 7:
+                //DarkBattleEffect();
+                break;
         }
         return 0f;
 

@@ -28,6 +28,5 @@ public class AchievementPanel : MonoBehaviour
         CheckImage.gameObject.SetActive(true);
         clearImage.gameObject.SetActive(true);
         transform.SetSiblingIndex(transform.GetSiblingIndex() + transform.parent.childCount);
-        Debug.Log(transform.GetSiblingIndex());
     }
 }

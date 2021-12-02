@@ -9,6 +9,7 @@ public class ParticleManager : MonoBehaviour
     private Transform targetTransform;
 
     private bool isPlay;
+    private bool isDestroy;
 
     private void Update()
     {
@@ -21,6 +22,12 @@ public class ParticleManager : MonoBehaviour
 
     private void ChangeParticle(int particleIndex)
     {
+        if(currentParticle != null)
+        {
+            Destroy(currentParticle.gameObject);
+            isDestroy = true;
+        }
+
         currentParticle = Instantiate(particles[particleIndex]);
     }
 
@@ -34,14 +41,19 @@ public class ParticleManager : MonoBehaviour
         isPlay = true;
         currentParticle.gameObject.SetActive(true);
         currentParticle.Play();
-
         Invoke("StopParticle", delay);
     }
 
     private void StopParticle()
     {
-        isPlay = false;
+        if(isDestroy)
+        {
+            isDestroy = false;
+            return;
+        } 
         Destroy(currentParticle.gameObject);
+        currentParticle = null;
+        isPlay = false;
     }
 
     public void PlayParticle(int particleIndex, float delay, Transform target)
