@@ -10274,7 +10274,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 459142901}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: BGMVolume
+        m_MethodName: SetFontSize
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
