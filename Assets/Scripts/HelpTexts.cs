@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "HelpTexts", menuName = "Sprictable Object/HelpTexts")]
 public class HelpTexts : ScriptableObject
 {
-    [TextArea] public List<string> helpTextList;
+    [TextArea(3, 10)] public List<string> helpTextList;
 }
