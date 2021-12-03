@@ -31,12 +31,20 @@ public class Player
     public bool bgmMute;
     public bool effectMute;
 
-    public Player(string playerjob, int stat_Sencetive, int stat_Knowledge, int stat_Wit)
+    public int fontSize;
+    public Player(string playerjob, int stat_Sencetive, int stat_Knowledge, int stat_Wit, float bgmVolume, float effectVolume, bool bgmMute, bool effectMute, int fontSize)
     {
         this.playerjob = playerjob;
         this.stat_Sencetive = stat_Sencetive;
         this.stat_Knowledge = stat_Knowledge;
         this.stat_Wit = stat_Wit;
+
+        this.bgmVolume = bgmVolume;
+        this.effectVolume = effectVolume;
+        this.bgmMute = bgmMute;
+        this.effectMute = effectMute;
+        this.fontSize = fontSize;
+
         nowTime = 420;
         clears = new bool[15];
     }

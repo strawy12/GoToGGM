@@ -23,7 +23,7 @@ public class MoveAnimScene : MonoBehaviour
             GameManager.Inst.Story.StartStory();
             return;
         }
-        isFirst = GameManager.Inst.CurrentPlayer.crtStoryNum == 0 || stageObjTemp.parent.childCount <= 1;
+        isFirst = DataManager.Inst.CurrentPlayer.crtStoryNum == 0 || stageObjTemp.parent.childCount <= 1;
 
         if (rects != null && isFirst)
         {
@@ -113,7 +113,7 @@ public class MoveAnimScene : MonoBehaviour
         }
 
 
-        playerobj.DOAnchorPosX(rects[GameManager.Inst.CurrentPlayer.crtStoryNum].anchoredPosition.x, 1f);
+        playerobj.DOAnchorPosX(rects[DataManager.Inst.CurrentPlayer.crtStoryNum].anchoredPosition.x, 1f);
 
         yield return new WaitForSeconds(1.3f);
         canvasGroup.DOFade(0f, 1f);

@@ -45,16 +45,12 @@ public enum EEffectType
 
 public class GameManager : MonoSingleTon<GameManager>
 {
-    private string SAVE_PATH = "";
-    private string SAVE_FILE = "/SaveFile.txt";
-
-    [SerializeField] private Player player;
-    public Player CurrentPlayer { get { return player; } }
 
     private ParticleManager particleManager;
     private AchievementManager achievementManager;
     private UIManager uiManager;
     private StoryManager storyManager;
+    private DataManager dataManager;
     private Timer timer = new Timer();
 
     public int stat;
@@ -63,21 +59,15 @@ public class GameManager : MonoSingleTon<GameManager>
     public UIManager UI { get { return uiManager; } }
     public StoryManager Story { get { return storyManager; } }
     public Timer Timer { get { return timer; } }
-    public int StoryLine { get { return player.storyLineNum; } }
+    public int StoryLine { get { return DataManager.Inst.CurrentPlayer.storyLineNum; } }
     
     void Awake()
     {
-        SAVE_PATH = Application.persistentDataPath + "/Save";
-        if (!Directory.Exists(SAVE_PATH))
-        {
-            Directory.CreateDirectory(SAVE_PATH);
-        }
         achievementManager = GetComponent<AchievementManager>();
         particleManager = GetComponent<ParticleManager>();
         uiManager = GetComponent<UIManager>();
         storyManager = GetComponent<StoryManager>();
-
-        LoadFromJson();
+        dataManager = GetComponent<DataManager>();
     }
 
     private void Start()
@@ -98,32 +88,12 @@ public class GameManager : MonoSingleTon<GameManager>
 
     private void OnApplicationQuit()
     {
-        SaveToJson();
+        DataManager.Inst.SaveToJson();
     }
 
     private void OnApplicationPause(bool pause)
     {
-        SaveToJson();
-    }
-
-    private void LoadFromJson()
-    {
-        if (File.Exists(SAVE_PATH + SAVE_FILE))
-        {
-            string stringJson = File.ReadAllText(SAVE_PATH + SAVE_FILE);
-            player = JsonUtility.FromJson<Player>(stringJson);
-        }
-        else
-        {
-            player = new Player("고등학생", 0, 0, 0);
-            SaveToJson();
-        }
-    }
-
-    private void SaveToJson()
-    {
-        string stringJson = JsonUtility.ToJson(player, true);
-        File.WriteAllText(SAVE_PATH + SAVE_FILE, stringJson, System.Text.Encoding.UTF8);
+        DataManager.Inst.SaveToJson();
     }
 
     public void SelectJob()
@@ -133,17 +103,13 @@ public class GameManager : MonoSingleTon<GameManager>
 
     public void DataReset()
     {
-        player = new Player("고등학생", 0, 0, 0);
-        SaveToJson();
-
-        Application.Quit();
     }
 
     public void SetNowTime()
     {
-        int index = player.usedTimeCnt;
-        player.usedTimeCnt++;
-        player.nowTime += Story.GetStoryLine().usedTimeArray[index];
+        int index = DataManager.Inst.CurrentPlayer.usedTimeCnt;
+        DataManager.Inst.CurrentPlayer.usedTimeCnt++;
+        DataManager.Inst.CurrentPlayer.nowTime += Story.GetStoryLine().usedTimeArray[index];
         UI.SetNowTimeText();
         UI.ShowArriveTimeDangerousMessage();
     }
@@ -153,24 +119,24 @@ public class GameManager : MonoSingleTon<GameManager>
     {
         if (jobNum == 0)
         {
-            player.playerjob = "기획자";
-            player.storyLineNum = 0;
+            DataManager.Inst.CurrentPlayer.playerjob = "기획자";
+            DataManager.Inst.CurrentPlayer.storyLineNum = 0;
             SetPlayerStat(EStatType.Sencetive, 5);
             SetPlayerStat(EStatType.Knowledge, 5);
             SetPlayerStat(EStatType.Wit, 10);
         }
         else if (jobNum == 1)
         {
-            player.playerjob = "프로그래머";
-            player.storyLineNum = 1;
+            DataManager.Inst.CurrentPlayer.playerjob = "프로그래머";
+            DataManager.Inst.CurrentPlayer.storyLineNum = 1;
             SetPlayerStat(EStatType.Sencetive, 5);
             SetPlayerStat(EStatType.Knowledge, 10);
             SetPlayerStat(EStatType.Wit, 5);
         }
         else if (jobNum == 2)
         {
-            player.playerjob = "아티스트";
-            player.storyLineNum = 2;
+            DataManager.Inst.CurrentPlayer.playerjob = "아티스트";
+            DataManager.Inst.CurrentPlayer.storyLineNum = 2;
             SetPlayerStat(EStatType.Sencetive, 10);
             SetPlayerStat(EStatType.Knowledge, 5);
             SetPlayerStat(EStatType.Wit, 5);
@@ -186,19 +152,19 @@ public class GameManager : MonoSingleTon<GameManager>
         switch (type)
         {
             case EStatType.Knowledge:
-                player.stat_Knowledge += increaseStat;
+                DataManager.Inst.CurrentPlayer.stat_Knowledge += increaseStat;
                 break;
 
             case EStatType.Wit:
-                player.stat_Wit += increaseStat;
+                DataManager.Inst.CurrentPlayer.stat_Wit += increaseStat;
                 break;
 
             case EStatType.Sencetive:
-                player.stat_Sencetive += increaseStat;
+                DataManager.Inst.CurrentPlayer.stat_Sencetive += increaseStat;
                 break;
 
             case EStatType.ArrivalTime:
-                player.arrivalTime += increaseStat;
+                DataManager.Inst.CurrentPlayer.arrivalTime += increaseStat;
 
                 break;
         }
@@ -211,30 +177,30 @@ public class GameManager : MonoSingleTon<GameManager>
         switch (type)
         {
             case EStatType.Knowledge:
-                return player.stat_Knowledge >= needStat;
+                return DataManager.Inst.CurrentPlayer.stat_Knowledge >= needStat;
 
             case EStatType.Wit:
-                return player.stat_Wit >= needStat;
+                return DataManager.Inst.CurrentPlayer.stat_Wit >= needStat;
 
             case EStatType.Sencetive:
-                return player.stat_Sencetive >= needStat;
+                return DataManager.Inst.CurrentPlayer.stat_Sencetive >= needStat;
         }
         return true;
     }
 
     public void SaveClears(int ID)
     {
-        player.clears[ID] = true;
+        DataManager.Inst.CurrentPlayer.clears[ID] = true;
     }
 
     public int CheckArrivalTime()
     {
-        if(player.arrivalTime > 0)
+        if(DataManager.Inst.CurrentPlayer.arrivalTime > 0)
         {
             return 0;
         }
 
-        else if(player.arrivalTime == 0)
+        else if(DataManager.Inst.CurrentPlayer.arrivalTime == 0)
         {
             return 1;
         }
@@ -258,11 +224,11 @@ public class GameManager : MonoSingleTon<GameManager>
         Debug.Log(ID);
         if (ID < 71) return;
         ID -= 71;
-        if (player.playerjob == "프로그래머")
+        if (DataManager.Inst.CurrentPlayer.playerjob == "프로그래머")
         {
             ID += 3;
         }
-        else if (player.playerjob == "아티스트")
+        else if (DataManager.Inst.CurrentPlayer.playerjob == "아티스트")
         {
             ID += 6;
         }
