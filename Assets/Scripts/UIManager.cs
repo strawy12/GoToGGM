@@ -10,8 +10,6 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private Image timeLimiter = null;
     [SerializeField] private StoryText storyTextTemp = null;
-    [SerializeField] private Image image = null;
-
     [SerializeField] private Text statText = null;
     [SerializeField] private Text arrivalTimeText = null;
     [SerializeField] private GameObject touchScreen = null;
@@ -24,6 +22,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image darkBattlePanal = null;
     [SerializeField] private RectTransform hudObjects = null;
     [SerializeField] private RectTransform messagePanal = null;
+    [SerializeField] private HelpBox helpBox = null;
+    [SerializeField] private HelpTexts helpTexts = null;
 
 
     private StoryScrollRect storyScrollRect = null;
@@ -58,9 +58,9 @@ public class UIManager : MonoBehaviour
         nicknameInputField = nicknameInputPanal.GetComponentInChildren<InputField>();
         storyScrollRect = storyTextTemp.transform.GetComponentInParent<StoryScrollRect>();
         jobStatusText = storyScrollRect.transform.GetChild(1).GetComponent<Text>();
+        particlePosArray.Add(storyScrollRect.transform.GetChild(5));
         particlePosArray.Add(storyScrollRect.transform.GetChild(6));
         particlePosArray.Add(storyScrollRect.transform.GetChild(7));
-        particlePosArray.Add(storyScrollRect.transform.GetChild(8));
         particlePosArray.Add(hudObjects.transform.GetChild(0));
 
         selectBtnSprites = Resources.LoadAll<Sprite>("SelectBtns");
@@ -70,18 +70,6 @@ public class UIManager : MonoBehaviour
     {
         //CreatePoints();
         timeLimiter.rectTransform.localScale = new Vector2(timeLimiter.rectTransform.localScale.x, 0f);
-    }
-
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            DarkBattleEffect(true);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            DarkBattleEffect(false);
-        }
     }
 
     public void StartWrite(string message, bool usedEffect = false, Action action = null)
@@ -228,7 +216,8 @@ public class UIManager : MonoBehaviour
 
     public void ShakeEffect()
     {
-        hudObjects.DOShakeAnchorPos(0.5f, 300);
+        Vector2 originPos = hudObjects.anchoredPosition;
+        hudObjects.DOShakeAnchorPos(0.5f, 300).OnComplete(() => hudObjects.DOAnchorPos(originPos, 0.3f));
     }
 
     public StoryText InstantiateStoryText()
@@ -307,6 +296,11 @@ public class UIManager : MonoBehaviour
         }
 
 
+    }
+
+    public void OnClickHelpBtn(int helpID)
+    {
+        helpBox.SetHelpText(helpTexts.helpTextList[helpID], helpID + 1);
     }
 
     public void OnClickNickNameInput()
@@ -452,6 +446,22 @@ public class UIManager : MonoBehaviour
         {
             return;
         }
+    }
+
+    public void ActivePanal(GameObject panal)
+    {
+        Time.timeScale = 0;
+        panal.SetActive(true);
+        panal.transform.DOKill();
+        panal.transform.DOScale(Vector3.one, 0.5f).SetUpdate(true);
+    }
+
+    public void UnActivePanal(GameObject panal)
+    {
+        Time.timeScale = 1;
+        panal.transform.DOKill();
+        panal.SetActive(true);
+        panal.transform.DOScale(Vector3.zero, 0.3f).OnComplete(() => panal.SetActive(false));
     }
 
     public void ActiveTouchScreen(bool isActive)
@@ -613,13 +623,6 @@ public class UIManager : MonoBehaviour
         return isWriting;
     }
 
-    public void DarkBattleEffect(bool isTrue)
-    {
-        image.transform.DOScaleY(isTrue ? 1f : 0f, 0.5f);
-        //darkBattlePanal.DOFade(0f, 0f);
-        //darkBattlePanal.gameObject.SetActive(true);
-        //darkBattlePanal.DOFade(1f, 1f);
-    }
 
     public void OnClickDataResetBtn()
     {

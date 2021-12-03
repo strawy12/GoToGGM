@@ -21,12 +21,14 @@ public class MoveAnimScene : MonoBehaviour
         if(GameManager.Inst.Story.isEndding)
         {
             GameManager.Inst.Story.StartStory();
+            gameObject.SetActive(false);
             return;
         }
         isFirst = GameManager.Inst.CurrentPlayer.crtStoryNum == 0 || stageObjTemp.parent.childCount <= 1;
 
         if (rects != null && isFirst)
         {
+            currentStageText.text = "";
             for (int i = 0; i < rects.Length; i++)
             {
                 rectPoolQueue.Enqueue(rects[i]);

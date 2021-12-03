@@ -143,8 +143,12 @@ public class GameManager : MonoSingleTon<GameManager>
     {
         int index = player.usedTimeCnt;
         StoryLine storyLine = Story.GetStoryLine();
-        player.usedTimeCnt++;
-        player.nowTime += storyLine.usedTimeArray[index];
+
+        if(player.crtScenarioCnt != 0)
+        {
+            player.usedTimeCnt++;
+            player.nowTime += storyLine.usedTimeArray[index];
+        }
 
         UI.SetNowTimeText();
         UI.ShowArriveTimeDangerousMessage();

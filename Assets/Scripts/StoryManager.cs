@@ -111,6 +111,7 @@ public class StoryManager : MonoBehaviour
 
     private void SetScenraioNum()
     {
+        GameManager.Inst.SetNowTime();
 
         GameManager.Inst.CurrentPlayer.crtScenarioCnt++;
 
@@ -119,10 +120,11 @@ public class StoryManager : MonoBehaviour
             isEndding = true;
         }
         endScenario = true;
+
         GameManager.Inst.CurrentPlayer.crtStoryNum = 0;
         GameManager.Inst.CurrentPlayer.crtEventStoryCnt = 0;
+
         GameManager.Inst.UI.ResetStoryText();
-        GameManager.Inst.SetNowTime();  
     }
 
 
@@ -158,7 +160,7 @@ public class StoryManager : MonoBehaviour
             case 71:
             case 72:
             case 73:
-                GameManager.Inst.UI.StartWrite(story.mainStory);
+                GameManager.Inst.UI.StartWrite(story.mainStory, story.usedEffect);
                 break;
         }
     }
@@ -228,7 +230,7 @@ public class StoryManager : MonoBehaviour
     {
         int crtStoryNum = GameManager.Inst.CurrentPlayer.crtStoryNum;
 
-        if (crtStoryNum != 0)
+        if (crtStoryNum != 0 && GameManager.Inst.CurrentPlayer.crtScenarioCnt != 5)
         {
             Story story;
             for (int i = 0; i < crtStoryNum; i++)
@@ -268,7 +270,6 @@ public class StoryManager : MonoBehaviour
         if (isEndding)
         {
             PlayEndding();
-            return;
         }
 
         Story story = GetNowStory();
@@ -305,9 +306,9 @@ public class StoryManager : MonoBehaviour
         {
             if (storyOrder != nowEffectSettings[i].playStoryOrder) continue;
 
-            delaySum += PlayEffect(nowEffectSettings[i].usedEffect, nowEffectSettings[i].effectNum);
+            delaySum = Mathf.Max(delaySum, PlayEffect(nowEffectSettings[i].usedEffect, nowEffectSettings[i].effectNum));
         }
-
+        transform.SetSiblingIndex(0);
         return delaySum;
     }
 
