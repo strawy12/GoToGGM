@@ -40,7 +40,12 @@ public enum EEffectType
     BGM
 }
 
-
+public enum EEnddingType
+{
+    Late,
+    Special,
+    Fast
+}
 //public enum btnState { Special, Normal, Good }
 
 public class GameManager : MonoSingleTon<GameManager>
@@ -157,6 +162,7 @@ public class GameManager : MonoSingleTon<GameManager>
 
     public void SetPlayerJob(int jobNum)
     {
+
         if (jobNum == 0)
         {
             player.playerjob = "기획자";
@@ -175,7 +181,7 @@ public class GameManager : MonoSingleTon<GameManager>
         }
         else if (jobNum == 2)
         {
-            player.playerjob = "아티스트";
+            player.playerjob = "게임 디자이너";
             player.storyLineNum = 2;
             SetPlayerStat(EStatType.Sencetive, 10);
             SetPlayerStat(EStatType.Knowledge, 5);
@@ -269,7 +275,7 @@ public class GameManager : MonoSingleTon<GameManager>
         {
             ID += 3;
         }
-        else if (player.playerjob == "아티스트")
+        else if (player.playerjob == "게임 디자이너")
         {
             ID += 6;
         }

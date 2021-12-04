@@ -18,8 +18,9 @@ public class SelectLine
     [Header("제한 시간")]
     public float timeLimit;
 
-    public bool useTimer;
-    public float time;
+    [Header("Greed 확률")]
+    public int percent;
+
 }
 
 [System.Serializable]
