@@ -52,6 +52,11 @@ public class StoryText : MonoBehaviour
         }
     }
 
+    public void OnContentFitter()
+    {
+        contentSize.enabled = true;
+    }
+
     public void NextText()
     {
         storyText.text = string.Format("{0}\n\n\n\n\n", storyText.text);

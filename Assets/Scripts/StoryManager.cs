@@ -34,6 +34,19 @@ public class StoryManager : MonoBehaviour
         StartSceneStory();
     }
 
+    private void CheckJobSelectScene()
+    {
+        Player player = GameManager.Inst.CurrentPlayer;
+        if(player.playerjob != "고등학생" && GetNowStory().storyID == 13)
+        {
+            player.playerjob = "고등학생";
+            player.stat_Knowledge = 0;
+            player.stat_Sencetive = 0;
+            player.stat_Wit = 0;
+            player.arrivalTime = 0;
+        }
+    }
+
     public StoryLine GetStoryLine()
     {
         return storyLine.storyLines[GameManager.Inst.StoryLine];
@@ -111,7 +124,11 @@ public class StoryManager : MonoBehaviour
 
     private void SetScenraioNum()
     {
+<<<<<<< HEAD
         DataManager.Inst.CurrentPlayer.crtScenarioCnt++;
+=======
+        GameManager.Inst.SetNowTime();
+>>>>>>> System/Particle
 
         if (DataManager.Inst.CurrentPlayer.crtScenarioCnt == 5)
         {
@@ -119,10 +136,17 @@ public class StoryManager : MonoBehaviour
         }
         endScenario = true;
 
+<<<<<<< HEAD
         DataManager.Inst.CurrentPlayer.crtStoryNum = 0;
         DataManager.Inst.CurrentPlayer.crtEventStoryCnt = 0;
         GameManager.Inst.UI.ResetStoryText();
         GameManager.Inst.SetNowTime();
+=======
+        GameManager.Inst.CurrentPlayer.crtStoryNum = 0;
+        GameManager.Inst.CurrentPlayer.crtEventStoryCnt = 0;
+
+        GameManager.Inst.UI.ResetStoryText();
+>>>>>>> System/Particle
     }
 
 
@@ -144,7 +168,7 @@ public class StoryManager : MonoBehaviour
                 GameManager.Inst.UI.StartWrite(story.mainStory, story.usedEffect);
                 break;
             case 24:
-                CertainJobPlay("기획자&개발자", "아티스트");
+                CertainJobPlay("기획자&개발자", "게임 디자이너");
                 break;
 
             case 44:
@@ -152,16 +176,12 @@ public class StoryManager : MonoBehaviour
                 break;
 
             case 54:
-                CertainJobPlay("기획자", "아티스트");
+                CertainJobPlay("기획자", "게임 디자이너");
                 break;
 
-            case 71:
-            case 72:
-            case 73:
-                GameManager.Inst.UI.StartWrite(story.mainStory);
-                break;
         }
     }
+
 
     public void CertainJobPlay(string firstJobs, string sencondJobs)
     {
@@ -228,7 +248,7 @@ public class StoryManager : MonoBehaviour
     {
         int crtStoryNum = DataManager.Inst.CurrentPlayer.crtStoryNum;
 
-        if (crtStoryNum != 0)
+        if (crtStoryNum != 0 && GameManager.Inst.CurrentPlayer.crtScenarioCnt != 5)
         {
             Story story;
             for (int i = 0; i < crtStoryNum; i++)
@@ -250,8 +270,9 @@ public class StoryManager : MonoBehaviour
     {
         int enddingNum = GameManager.Inst.CheckArrivalTime();
         Story story = GetEnddingStory(enddingNum);
+        nowEffectSettings = story.effectSettings;
         GameManager.Inst.ClearEnding(story.storyID);
-        StartEvent(story);
+        StartEndding(story);
     }
 
     public void StartStory()
@@ -284,6 +305,8 @@ public class StoryManager : MonoBehaviour
         }
 
 
+        
+
         if (story.usedFunc)
         {
             StartEvent(story);
@@ -301,13 +324,14 @@ public class StoryManager : MonoBehaviour
     public float CheckEffect(int storyOrder)
     {
         float delaySum = 0f;
+
         for (int i = 0; i < nowEffectSettings.Length; i++)
         {
             if (storyOrder != nowEffectSettings[i].playStoryOrder) continue;
 
-            delaySum += PlayEffect(nowEffectSettings[i].usedEffect, nowEffectSettings[i].effectNum);
+            delaySum = Mathf.Max(delaySum, PlayEffect(nowEffectSettings[i].usedEffect, nowEffectSettings[i].effectNum));
         }
-
+        transform.SetSiblingIndex(0);
         return delaySum;
     }
 
@@ -366,6 +390,35 @@ public class StoryManager : MonoBehaviour
         }
 
         return 0f;
+    }
+
+
+    private void StartEndding(Story story)
+    {
+        int num = story.storyID - 70;
+        Debug.Log(story.storyName);
+        GameManager.Inst.UI.StartWrite(story.mainStory, PlayEnddingCredit, num, true);
+    }
+
+
+   public void PlayEnddingCredit(int num)
+    {
+        switch (num)
+        {
+            case 1:
+                StartCoroutine(GameManager.Inst.UI.LateEnddingEffect());
+                break;
+
+            case 3:
+                StartCoroutine(GameManager.Inst.UI.FastEnddingEffect());
+                break;
+
+
+            case 2:
+                StartCoroutine(GameManager.Inst.UI.SpecialEnddingEffect());
+                break;
+
+        }
     }
 
 }

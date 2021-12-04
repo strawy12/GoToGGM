@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -18,20 +19,23 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Image timeLimiter = null;
     [SerializeField] private StoryText storyTextTemp = null;
-    [SerializeField] private Image image = null;
-
     [SerializeField] private Text statText = null;
     [SerializeField] private Text arrivalTimeText = null;
     [SerializeField] private GameObject touchScreen = null;
     [SerializeField] private CanvasGroup nicknameInputPanal = null;
+    [SerializeField] private GameObject particlePoses = null;
     [SerializeField] private SeletingBtnBase[] selectBtns;
-    [SerializeField] private MoveAnimScene MoveAnimScenePanal = null;
+    [SerializeField] private MoveAnimScene moveAnimScenePanal = null;
     [SerializeField] private GameObject points = null;
     [SerializeField] private GameObject pointPrefab = null;
     [SerializeField] private Image backgroundImage = null;
-    [SerializeField] private Image darkBattlePanal = null;
+    [SerializeField] private CanvasGroup darkBattlePanal = null;
+    [SerializeField] private RectTransform LastFallingPanal = null;
     [SerializeField] private RectTransform hudObjects = null;
+    [SerializeField] private CanvasGroup enddingCreditPanal = null;
     [SerializeField] private RectTransform messagePanal = null;
+    [SerializeField] private HelpBox helpBox = null;
+    [SerializeField] private HelpTexts helpTexts = null;
 
 
     private StoryScrollRect storyScrollRect = null;
@@ -66,10 +70,8 @@ public class UIManager : MonoBehaviour
         nicknameInputField = nicknameInputPanal.GetComponentInChildren<InputField>();
         storyScrollRect = storyTextTemp.transform.GetComponentInParent<StoryScrollRect>();
         jobStatusText = storyScrollRect.transform.GetChild(1).GetComponent<Text>();
-        particlePosArray.Add(storyScrollRect.transform.GetChild(6));
-        particlePosArray.Add(storyScrollRect.transform.GetChild(7));
-        particlePosArray.Add(storyScrollRect.transform.GetChild(8));
-        particlePosArray.Add(hudObjects.transform.GetChild(0));
+
+        AddParticlePosList();
 
         selectBtnSprites = Resources.LoadAll<Sprite>("SelectBtns");
         backGroundArray = Resources.LoadAll<Sprite>("backGrounds");
@@ -79,11 +81,22 @@ public class UIManager : MonoBehaviour
         SetSettingPanel();
         timeLimiter.rectTransform.localScale = new Vector2(timeLimiter.rectTransform.localScale.x, 0f);
     }
+<<<<<<< HEAD
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             msgBox.ShowMSGBox();
+=======
+
+    private void AddParticlePosList()
+    {
+        Transform[] posArray = particlePoses.transform.GetComponentsInChildren<Transform>();
+
+        for (int i = 1; i < posArray.Length; i++)
+        {
+            particlePosArray.Add(posArray[i]);
+>>>>>>> System/Particle
         }
     }
     public void ShowPanels(RectTransform gameObject)
@@ -158,6 +171,7 @@ public class UIManager : MonoBehaviour
         if (isSkip)
         {
             storyText.text = message;
+            storyText.CheckTextSize();
             isSkip = false;
         }
     }
@@ -187,6 +201,7 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
 
         isWriting = true;
+
         ActiveTouchScreen(true);
 
         if (isSkip) isSkip = false;
@@ -238,7 +253,8 @@ public class UIManager : MonoBehaviour
 
     public void ShakeEffect()
     {
-        hudObjects.DOShakeAnchorPos(0.5f, 300);
+        Vector2 originPos = hudObjects.anchoredPosition;
+        hudObjects.DOShakeAnchorPos(0.5f, 300).OnComplete(() => hudObjects.DOAnchorPos(originPos, 0.3f));
     }
 
     public StoryText InstantiateStoryText()
@@ -319,6 +335,11 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void OnClickHelpBtn(int helpID)
+    {
+        helpBox.SetHelpText(helpTexts.helpTextList[helpID], helpID + 1);
+    }
+
     public void OnClickNickNameInput()
     {
         if (nicknameInputField.text == "") return;
@@ -333,7 +354,16 @@ public class UIManager : MonoBehaviour
     public void ShowSelectBtn()
     {
         isSelected = false;
-        SelectLine[] selectLines = GameManager.Inst.Story.GetNowStory().selectLines;
+        SelectLine[] selectLines;
+        if (GameManager.Inst.Story.isEndding)
+        {
+            int enddingNum = GameManager.Inst.CheckArrivalTime();
+            selectLines = GameManager.Inst.Story.GetEnddingStory(enddingNum).selectLines;
+        }
+        else
+        {
+            selectLines = GameManager.Inst.Story.GetNowStory().selectLines;
+        }
 
         for (int i = 0; i < selectLines.Length; i++)
         {
@@ -353,7 +383,7 @@ public class UIManager : MonoBehaviour
 
     public void SettingSelectBtn()
     {
-        
+
         SelectLine[] selectLines;
         if (GameManager.Inst.Story.isEndding)
         {
@@ -403,8 +433,8 @@ public class UIManager : MonoBehaviour
     public IEnumerator MoveAnimScene(float delay)
     {
         yield return new WaitForSeconds(delay);
-        MoveAnimScenePanal.gameObject.SetActive(true);
-        MoveAnimScenePanal.StartMoveAnim();
+        moveAnimScenePanal.gameObject.SetActive(true);
+        moveAnimScenePanal.StartMoveAnim();
     }
 
     public void ShowSingleSelectBtn(int num)
@@ -464,8 +494,29 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void ActivePanal(GameObject panal)
+    {
+        Time.timeScale = 0;
+        panal.SetActive(true);
+        panal.transform.DOKill();
+        panal.transform.DOScale(Vector3.one, 0.5f).SetUpdate(true);
+    }
+
+    public void UnActivePanal(GameObject panal)
+    {
+        Time.timeScale = 1;
+        panal.transform.DOKill();
+        panal.SetActive(true);
+        panal.transform.DOScale(Vector3.zero, 0.3f).OnComplete(() => panal.SetActive(false));
+    }
+
     public void ActiveTouchScreen(bool isActive)
     {
+        if(GameManager.Inst.Story.isEndding)
+        {
+            touchScreen.SetActive(false);
+            return;
+        }
         touchScreen.SetActive(isActive);
     }
 
@@ -623,13 +674,6 @@ public class UIManager : MonoBehaviour
         return isWriting;
     }
 
-    public void DarkBattleEffect(bool isTrue)
-    {
-        image.transform.DOScaleY(isTrue ? 1f : 0f, 0.5f);
-        //darkBattlePanal.DOFade(0f, 0f);
-        //darkBattlePanal.gameObject.SetActive(true);
-        //darkBattlePanal.DOFade(1f, 1f);
-    }
 
     public void OnClickDataResetBtn()
     {
@@ -663,17 +707,15 @@ public class UIManager : MonoBehaviour
             case 3: // Wind
                 target = particlePosArray[0];
                 GameManager.Inst.Particle.PlayParticle(2, 1.2f, target);
-                break;
+                return 1f;
 
             case 4: // Falling
                 target = particlePosArray[3];
-                GameManager.Inst.Particle.PlayParticle(5, 1.2f, target);
-                break;
+                GameManager.Inst.Particle.PlayParticle(5, 2.5f, target);
+                return 1f;
 
             case 5: // Particle_LastFall
-                target = particlePosArray[3];
-                GameManager.Inst.Particle.PlayParticle(5, 1.2f, target);
-                //Invoke("LastFall", 1.2f);
+                LastFallingEffect();
                 break;
 
             case 6: // Drawing
@@ -681,12 +723,17 @@ public class UIManager : MonoBehaviour
                 GameManager.Inst.Particle.PlayParticle(6, 1.2f, target);
                 break;
 
-            case 7:
-                //DarkBattleEffect();
-                break;
         }
         return 0f;
 
+    }
+
+    private void LastFallingEffect()
+    {
+        Transform target = particlePosArray[3];
+        SetEffectSound(18);
+        GameManager.Inst.Particle.PlayParticle(7, 1.8f, target);
+        LastFallingPanal.transform.GetChild(0).DOScaleY(0f, 1.5f).SetDelay(0.3f);
     }
 
 
@@ -701,6 +748,135 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void DarkBattleEffect(bool isActive, bool isSceneChaged = false)
+    {
+        if(isActive)
+        {
+            darkBattlePanal.gameObject.SetActive(true);
+
+            if (isSceneChaged)
+            {
+                darkBattlePanal.DOFade(1f, 1f).OnComplete(() => SceneManager.LoadScene("Title"));
+            }
+            else
+            {
+                darkBattlePanal.DOFade(1f, 1f);
+            }
+        }
+
+        else
+        {
+            darkBattlePanal.DOFade(1f, 1f).OnComplete(() => darkBattlePanal.gameObject.SetActive(false));
+        }
+
+    }
+
+
+    public IEnumerator LateEnddingEffect()
+    {
+        hudObjects.DOAnchorPosY(-hudObjects.rect.height, 1f);
+
+        yield return new WaitForSeconds(0.5f);
+
+        DarkBattleEffect(true);
+
+        yield return new WaitForSeconds(1f);
+
+        yield return NormalEnddingEffect();
+    }
+
+    public IEnumerator FastEnddingEffect()
+    {
+        DarkBattleEffect(true);
+
+        yield return new WaitForSeconds(1f);
+
+        PlayEffect(5);
+
+        yield return new WaitForSeconds(2f);
+
+        yield return NormalEnddingEffect();
+    }
+
+    private IEnumerator NormalEnddingEffect()
+    {
+        
+
+        darkBattlePanal.transform.GetChild(0).gameObject.SetActive(false);
+        enddingCreditPanal.transform.GetChild(0).gameObject.SetActive(false);
+        enddingCreditPanal.transform.GetChild(1).gameObject.SetActive(false);
+        enddingCreditPanal.transform.GetChild(2).gameObject.SetActive(false);
+        enddingCreditPanal.transform.GetChild(3).gameObject.SetActive(true);
+
+        enddingCreditPanal.gameObject.SetActive(true);
+        enddingCreditPanal.DOFade(1f, 1f);
+
+        yield return new WaitForSeconds(3f);
+
+        enddingCreditPanal.DOFade(0f, 1f);
+
+        yield return new WaitForSeconds(1.5f);
+
+        enddingCreditPanal.transform.GetChild(2).gameObject.SetActive(true);
+        enddingCreditPanal.transform.GetChild(3).gameObject.SetActive(false);
+
+        enddingCreditPanal.DOFade(1f, 1f);
+
+        yield return new WaitForSeconds(3f);
+
+        enddingCreditPanal.DOFade(0f, 1f);
+
+        yield return new WaitForSeconds(1.2f);
+
+        Debug.Log("¿£µù!");
+        //SceneManager.LoadScene("Title");
+    }
+
+    public IEnumerator SpecialEnddingEffect()
+    {
+        DarkBattleEffect(true);
+
+        yield return new WaitForSeconds(1f);
+
+        PlayEffect(5);
+
+        yield return new WaitForSeconds(2f);
+
+        RectTransform enddingCreditText = enddingCreditPanal.transform.GetChild(1).GetComponent<RectTransform>();
+        RectTransform targetTransform = enddingCreditPanal.GetComponent<RectTransform>();
+        Vector2 targetPos = enddingCreditText.anchoredPosition;
+
+        darkBattlePanal.transform.GetChild(0).gameObject.SetActive(false);
+
+        targetPos.y = -targetTransform.rect.height;
+        enddingCreditText.anchoredPosition = targetPos;
+        targetPos.y *= -1;
+        enddingCreditPanal.transform.GetChild(0).gameObject.SetActive(true);
+        enddingCreditPanal.transform.GetChild(1).gameObject.SetActive(true);
+        enddingCreditPanal.transform.GetChild(2).gameObject.SetActive(false);
+        enddingCreditPanal.transform.GetChild(3).gameObject.SetActive(false);
+
+        enddingCreditPanal.gameObject.SetActive(true);
+        enddingCreditPanal.DOFade(1f, 1f);
+        yield return new WaitForSeconds(1f);
+        enddingCreditText.DOAnchorPosY(targetPos.y, 20f);
+
+        yield return new WaitForSeconds(18f);
+
+        enddingCreditPanal.transform.GetChild(4).gameObject.SetActive(true);
+        enddingCreditPanal.transform.GetChild(4).GetComponent<Image>().DOFade(1f, 2f);
+
+        yield return new WaitForSeconds(4f);
+
+        enddingCreditPanal.DOFade(0f, 1f);
+        yield return new WaitForSeconds(1.5f);
+        enddingCreditPanal.gameObject.SetActive(false);
+        DarkBattleEffect(false);
+
+        ShowSelectBtn();
+
+        //SceneManager.LoadScene("Title");
+    }
 
     public void SetSettingPanel()
     {

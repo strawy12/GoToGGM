@@ -28,13 +28,6 @@ public class AchievementManager : MonoBehaviour
         CreatePanels();
     }
 
-    public void ShowPanels()
-    {
-        achievementScroll.transform.localScale = Vector3.zero;
-        achievementScroll.SetActive(true);
-        achievementScroll.transform.DOScale(Vector3.one, 0.4f);
-    }
-
     private void CreatePanels()
     {
         for (int i = 0; i < 15; i++)

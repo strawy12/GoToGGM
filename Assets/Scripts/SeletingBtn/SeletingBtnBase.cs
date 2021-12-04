@@ -36,7 +36,8 @@ public class SeletingBtnBase : MonoBehaviour
 
         if (currentSelectState == ESelectType.Gread)
         {
-            currentEventStory = GameManager.Inst.Story.GetEventStory(currentSelectLine.eventStoryID, true, Random.Range(0, 2) == 0);
+            int randNum = Random.Range(1, 11);
+            currentEventStory = GameManager.Inst.Story.GetEventStory(currentSelectLine.eventStoryID, true, randNum <= selectLine.percent);
         }
 
         else if (currentSelectState == ESelectType.Final)
@@ -86,8 +87,16 @@ public class SeletingBtnBase : MonoBehaviour
     {
         GameManager.Inst.UI.isSelected = true;
         currentButton.interactable = false;
+
         if (currentSelectState == ESelectType.Final)
         {
+            if(GameManager.Inst.Story.isEndding)
+            {
+                GameManager.Inst.UI.UnShowSelectBtn();
+                GameManager.Inst.UI.DarkBattleEffect(true);
+
+                return;
+            }
             CheckInfo();
 
             GameManager.Inst.UI.UnShowSelectBtn();
