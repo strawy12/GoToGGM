@@ -35,6 +35,7 @@ public class MoveAnimScene : MonoBehaviour
             playerobj.gameObject.SetActive(false);
 
         }
+
         canvasGroup.DOFade(1f, 1f);
         StartCoroutine(SpawnStage());
     }
@@ -103,13 +104,13 @@ public class MoveAnimScene : MonoBehaviour
             playerobj.gameObject.SetActive(true);
             playerobj.DOScale(Vector3.one, 0.5f);
 
-            GameManager.Inst.Particle.PlayParticle(2, 2f, playerobj.transform);
+            GameManager.Inst.Particle.PlayParticle(4, 2f, playerobj.transform);
             yield return new WaitForSeconds(0.8f);
         }
 
         else
         {
-            GameManager.Inst.Particle.PlayParticle(2, 2.3f, playerobj.transform);
+            GameManager.Inst.Particle.PlayParticle(4, 2.3f, playerobj.transform);
         }
 
 
