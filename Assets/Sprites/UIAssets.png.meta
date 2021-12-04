@@ -53,6 +53,9 @@ TextureImporter:
   - first:
       213: 1000118945469895311
     second: UIAssets_16
+  - first:
+      213: 4911550635596170914
+    second: UIAssets_17
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -510,7 +513,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 4, y: 4, z: 4, w: 4}
       outline: []
       physicsShape: []
@@ -518,6 +521,27 @@ TextureImporter:
       bones: []
       spriteID: f821fddc1e221ed00800000000000000
       internalID: 1000118945469895311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIAssets_17
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a6cd03d745592440800000000000000
+      internalID: 4911550635596170914
       vertices: []
       indices: 
       edges: []

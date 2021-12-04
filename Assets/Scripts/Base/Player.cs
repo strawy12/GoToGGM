@@ -9,6 +9,8 @@ public class Player
 
     public int usedTimeCnt;
 
+    public bool isTuto;
+
     //Story Info
     public int storyLineNum = 0; 
     public int crtScenarioCnt = 0;

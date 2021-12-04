@@ -36,7 +36,7 @@ public class StoryManager : MonoBehaviour
 
     private void CheckJobSelectScene()
     {
-        Player player = GameManager.Inst.CurrentPlayer;
+        Player player = DataManager.Inst.CurrentPlayer;
         if(player.playerjob != "고등학생" && GetNowStory().storyID == 13)
         {
             player.playerjob = "고등학생";
@@ -124,11 +124,8 @@ public class StoryManager : MonoBehaviour
 
     private void SetScenraioNum()
     {
-<<<<<<< HEAD
         DataManager.Inst.CurrentPlayer.crtScenarioCnt++;
-=======
         GameManager.Inst.SetNowTime();
->>>>>>> System/Particle
 
         if (DataManager.Inst.CurrentPlayer.crtScenarioCnt == 5)
         {
@@ -136,17 +133,10 @@ public class StoryManager : MonoBehaviour
         }
         endScenario = true;
 
-<<<<<<< HEAD
         DataManager.Inst.CurrentPlayer.crtStoryNum = 0;
         DataManager.Inst.CurrentPlayer.crtEventStoryCnt = 0;
-        GameManager.Inst.UI.ResetStoryText();
-        GameManager.Inst.SetNowTime();
-=======
-        GameManager.Inst.CurrentPlayer.crtStoryNum = 0;
-        GameManager.Inst.CurrentPlayer.crtEventStoryCnt = 0;
 
         GameManager.Inst.UI.ResetStoryText();
->>>>>>> System/Particle
     }
 
 
@@ -168,7 +158,7 @@ public class StoryManager : MonoBehaviour
                 GameManager.Inst.UI.StartWrite(story.mainStory, story.usedEffect);
                 break;
             case 24:
-                CertainJobPlay("기획자&개발자", "게임 디자이너");
+                CertainJobPlay("기획자&개발자", "그래픽 아티스트");
                 break;
 
             case 44:
@@ -176,7 +166,7 @@ public class StoryManager : MonoBehaviour
                 break;
 
             case 54:
-                CertainJobPlay("기획자", "게임 디자이너");
+                CertainJobPlay("기획자", "그래픽 아티스트");
                 break;
 
         }
@@ -248,7 +238,7 @@ public class StoryManager : MonoBehaviour
     {
         int crtStoryNum = DataManager.Inst.CurrentPlayer.crtStoryNum;
 
-        if (crtStoryNum != 0 && GameManager.Inst.CurrentPlayer.crtScenarioCnt != 5)
+        if (crtStoryNum != 0 && DataManager.Inst.CurrentPlayer.crtScenarioCnt != 5)
         {
             Story story;
             for (int i = 0; i < crtStoryNum; i++)
@@ -258,8 +248,7 @@ public class StoryManager : MonoBehaviour
 
                 if (story.usedEffect)
                 {
-                    nowEffectSettings = story.effectSettings;
-
+                    CopyEffectSettings(story);
                     SettingEffect();
                 }
             }
@@ -270,7 +259,8 @@ public class StoryManager : MonoBehaviour
     {
         int enddingNum = GameManager.Inst.CheckArrivalTime();
         Story story = GetEnddingStory(enddingNum);
-        nowEffectSettings = story.effectSettings;
+        Array.Copy(story.effectSettings, nowEffectSettings, story.effectSettings.Length);
+
         GameManager.Inst.ClearEnding(story.storyID);
         StartEndding(story);
     }
@@ -296,7 +286,7 @@ public class StoryManager : MonoBehaviour
 
         if (story.usedEffect)
         {
-            nowEffectSettings = story.effectSettings;
+            CopyEffectSettings(story);
         }
 
         else
@@ -349,7 +339,12 @@ public class StoryManager : MonoBehaviour
         }
     }
 
-
+    private void CopyEffectSettings(Story story)
+    {
+        int length = story.effectSettings.Length;
+        nowEffectSettings = new EffectSetting[length];
+        Array.Copy(story.effectSettings, nowEffectSettings, length);
+    }
     public void SettingEffect()
     {
         for (int i = 0; i < nowEffectSettings.Length; i++)
@@ -365,7 +360,9 @@ public class StoryManager : MonoBehaviour
 
     public void SetNowEffectSettings(EffectSetting[] effectSettings)
     {
-        nowEffectSettings = effectSettings;
+        int length = effectSettings.Length;
+        nowEffectSettings = new EffectSetting[length];
+        Array.Copy(effectSettings, nowEffectSettings, effectSettings.Length);
     }
 
     public float PlayEffect(EEffectType type, int effectNum)

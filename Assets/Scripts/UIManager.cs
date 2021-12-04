@@ -15,7 +15,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Toggle bgmMute = null;
     [SerializeField] private Slider fontSlider = null;
 
-    [SerializeField] MSGBoxScript msgBox = null;
+    [SerializeField] private GameObject msgBox = null;
+    [SerializeField] private Text testText = null;
 
     [SerializeField] private Image timeLimiter = null;
     [SerializeField] private StoryText storyTextTemp = null;
@@ -35,7 +36,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CanvasGroup enddingCreditPanal = null;
     [SerializeField] private RectTransform messagePanal = null;
     [SerializeField] private HelpBox helpBox = null;
-    [SerializeField] private HelpTexts helpTexts = null;
+
 
 
     private StoryScrollRect storyScrollRect = null;
@@ -58,11 +59,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text timerTimeText = null;
 
 
-    private int fontSize = 72;
+    private int fontSize;
     private bool isWriting = false;
     private bool isSkip = false;
     private bool currentUsedEffect = false;
     public bool isSelected = false;
+
+    private List<GameObject> activePanals = new List<GameObject>();
 
     private void Awake()
     {
@@ -72,6 +75,7 @@ public class UIManager : MonoBehaviour
         jobStatusText = storyScrollRect.transform.GetChild(1).GetComponent<Text>();
 
         AddParticlePosList();
+        fontSize = DataManager.Inst.CurrentPlayer.fontSize;
 
         selectBtnSprites = Resources.LoadAll<Sprite>("SelectBtns");
         backGroundArray = Resources.LoadAll<Sprite>("backGrounds");
@@ -81,13 +85,21 @@ public class UIManager : MonoBehaviour
         SetSettingPanel();
         timeLimiter.rectTransform.localScale = new Vector2(timeLimiter.rectTransform.localScale.x, 0f);
     }
-<<<<<<< HEAD
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            msgBox.ShowMSGBox();
-=======
+            if (activePanals.Count != 0)
+            {
+                UnActivePanal(activePanals[activePanals.Count - 1]);
+                return;
+            }
+            else
+            {
+                ActivePanal(msgBox);
+            }
+        }
+    }
 
     private void AddParticlePosList()
     {
@@ -96,9 +108,9 @@ public class UIManager : MonoBehaviour
         for (int i = 1; i < posArray.Length; i++)
         {
             particlePosArray.Add(posArray[i]);
->>>>>>> System/Particle
         }
     }
+
     public void ShowPanels(RectTransform gameObject)
     {
         Vector2 Scale = new Vector2(gameObject.localScale.x, gameObject.localScale.y);
@@ -337,6 +349,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickHelpBtn(int helpID)
     {
+        HelpTexts helpTexts = DataManager.Inst.GetHelpTexts();
         helpBox.SetHelpText(helpTexts.helpTextList[helpID], helpID + 1);
     }
 
@@ -496,6 +509,7 @@ public class UIManager : MonoBehaviour
 
     public void ActivePanal(GameObject panal)
     {
+        activePanals.Add(panal);
         Time.timeScale = 0;
         panal.SetActive(true);
         panal.transform.DOKill();
@@ -504,6 +518,7 @@ public class UIManager : MonoBehaviour
 
     public void UnActivePanal(GameObject panal)
     {
+        activePanals.Remove(panal);
         Time.timeScale = 1;
         panal.transform.DOKill();
         panal.SetActive(true);
@@ -512,7 +527,7 @@ public class UIManager : MonoBehaviour
 
     public void ActiveTouchScreen(bool isActive)
     {
-        if(GameManager.Inst.Story.isEndding)
+        if (GameManager.Inst.Story.isEndding)
         {
             touchScreen.SetActive(false);
             return;
@@ -623,7 +638,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowArriveTimeDangerousMessage()
     {
-        int arrivalTime = DataManager.Inst.CurrentPlayer.GetArrivalTime();
+        int arrivalTime = 540 + DataManager.Inst.CurrentPlayer.arrivalTime;
         string lastWord = DataManager.Inst.CurrentPlayer.GetLastWord();
         bool isLating = DataManager.Inst.CurrentPlayer.arrivalTime < 0;
 
@@ -740,6 +755,7 @@ public class UIManager : MonoBehaviour
     public void SetFontSize(float value)
     {
         fontSize = (int)value;
+        testText.fontSize = (int)value;
         DataManager.Inst.CurrentPlayer.fontSize = fontSize;
 
         foreach (var storyText in storyTextList)
@@ -750,7 +766,7 @@ public class UIManager : MonoBehaviour
 
     public void DarkBattleEffect(bool isActive, bool isSceneChaged = false)
     {
-        if(isActive)
+        if (isActive)
         {
             darkBattlePanal.gameObject.SetActive(true);
 
@@ -800,7 +816,7 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator NormalEnddingEffect()
     {
-        
+
 
         darkBattlePanal.transform.GetChild(0).gameObject.SetActive(false);
         enddingCreditPanal.transform.GetChild(0).gameObject.SetActive(false);
@@ -828,8 +844,9 @@ public class UIManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.2f);
 
-        Debug.Log("¿£µù!");
-        //SceneManager.LoadScene("Title");
+        DataManager.Inst.InGameDataReset();
+
+        SceneManager.LoadScene("Title");
     }
 
     public IEnumerator SpecialEnddingEffect()
@@ -883,6 +900,8 @@ public class UIManager : MonoBehaviour
         effectSlider.value = DataManager.Inst.CurrentPlayer.effectVolume;
         bgmSlider.value = DataManager.Inst.CurrentPlayer.bgmVolume;
         fontSlider.value = DataManager.Inst.CurrentPlayer.fontSize;
+        testText.fontSize = DataManager.Inst.CurrentPlayer.fontSize;
+
         if (DataManager.Inst.CurrentPlayer.bgmMute)
             bgmMute.isOn = true;
         if (DataManager.Inst.CurrentPlayer.effectMute)

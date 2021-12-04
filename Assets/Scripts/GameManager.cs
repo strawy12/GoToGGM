@@ -101,6 +101,11 @@ public class GameManager : MonoSingleTon<GameManager>
         DataManager.Inst.SaveToJson();
     }
 
+    public void DataReset()
+    {
+        DataManager.Inst.DataReset();
+    }
+
     public void SelectJob()
     {
         UI.SetEventToSelectBtn(false);
@@ -108,21 +113,15 @@ public class GameManager : MonoSingleTon<GameManager>
 
     public void SetNowTime()
     {
-<<<<<<< HEAD
-        int index = DataManager.Inst.CurrentPlayer.usedTimeCnt;
-        DataManager.Inst.CurrentPlayer.usedTimeCnt++;
-        DataManager.Inst.CurrentPlayer.nowTime += Story.GetStoryLine().usedTimeArray[index];
-=======
-        int index = player.usedTimeCnt;
         StoryLine storyLine = Story.GetStoryLine();
 
-        if(player.crtScenarioCnt != 0)
+        if (DataManager.Inst.CurrentPlayer.crtScenarioCnt != 0)
         {
-            player.usedTimeCnt++;
-            player.nowTime += storyLine.usedTimeArray[index];
+            int index = DataManager.Inst.CurrentPlayer.usedTimeCnt;
+            DataManager.Inst.CurrentPlayer.usedTimeCnt++;
+            DataManager.Inst.CurrentPlayer.nowTime += storyLine.usedTimeArray[index];
         }
 
->>>>>>> System/Particle
         UI.SetNowTimeText();
         UI.ShowArriveTimeDangerousMessage();
     }
@@ -149,13 +148,8 @@ public class GameManager : MonoSingleTon<GameManager>
         }
         else if (jobNum == 2)
         {
-<<<<<<< HEAD
-            DataManager.Inst.CurrentPlayer.playerjob = "아티스트";
+            DataManager.Inst.CurrentPlayer.playerjob = "그래픽 아티스트";
             DataManager.Inst.CurrentPlayer.storyLineNum = 2;
-=======
-            player.playerjob = "게임 디자이너";
-            player.storyLineNum = 2;
->>>>>>> System/Particle
             SetPlayerStat(EStatType.Sencetive, 10);
             SetPlayerStat(EStatType.Knowledge, 5);
             SetPlayerStat(EStatType.Wit, 5);
@@ -247,11 +241,7 @@ public class GameManager : MonoSingleTon<GameManager>
         {
             ID += 3;
         }
-<<<<<<< HEAD
-        else if (DataManager.Inst.CurrentPlayer.playerjob == "아티스트")
-=======
-        else if (player.playerjob == "게임 디자이너")
->>>>>>> System/Particle
+        else if (DataManager.Inst.CurrentPlayer.playerjob == "그래픽 아티스트")
         {
             ID += 6;
         }

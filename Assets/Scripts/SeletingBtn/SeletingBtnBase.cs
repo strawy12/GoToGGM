@@ -93,8 +93,8 @@ public class SeletingBtnBase : MonoBehaviour
             if(GameManager.Inst.Story.isEndding)
             {
                 GameManager.Inst.UI.UnShowSelectBtn();
+                DataManager.Inst.InGameDataReset();
                 GameManager.Inst.UI.DarkBattleEffect(true);
-
                 return;
             }
             CheckInfo();

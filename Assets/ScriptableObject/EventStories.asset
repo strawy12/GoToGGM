@@ -46,7 +46,7 @@ MonoBehaviour:
           effectNum: 2
           playStoryOrder: 1
         eventMainStory: "\uB2F9\uC2E0\uC740 \uADF8\uB9BC\uC744 \uADF8\uB9B4\uB54C
-          \uC0AC\uC6A9\uD558\uB294 \uB4DC\uB85C\uC789 \uC7A5\uAC11\uC744 \uAC00\uBC29\uC548\uC5D0
+          \uC0AC\uC6A9\uD558\uB294 \uD39C \uD0C0\uBE14\uB81B\uC744 \uAC00\uBC29\uC548\uC5D0
           \uB123\uC2B5\uB2C8\uB2E4"
         eventFinalStory:
         - "\uBA4B\uC9C0\uAC8C \uC0DD\uAE34 \uC7A5\uAC11\uC774\uB2E4! [\uC12C\uC138
@@ -144,8 +144,8 @@ MonoBehaviour:
       eventStories:
       - eventStoryID: 221
         increaseTime: 0
-        increaseStatType: 4
-        increaseStat: -30
+        increaseStatType: 1
+        increaseStat: 3
         isSuccess: 1
         effectSettings:
         - usedEffect: 1
@@ -159,7 +159,7 @@ MonoBehaviour:
           \uBAA9\uC801\uC9C0\uC5D0 \uB3C4\uCC29\uD558\uAC8C \uB429\uB2C8\uB2E4..."
         eventFinalStory:
         - "\uC0C8..\uC0D0\uB7EC\uB9E8\uB354\uBCF4\uB2E4 \uD6E8\uC2E0 \uBE68\uB77C\u2026!
-          [\uB3C4\uCC29\uC2DC\uAC04 -30\uBD84]"
+          [\uC12C\uC138 +3]"
       - eventStoryID: 221
         increaseTime: 0
         increaseStatType: 1
@@ -921,7 +921,13 @@ MonoBehaviour:
           playStoryOrder: 8
         - usedEffect: 2
           effectNum: 2
+          playStoryOrder: 8
+        - usedEffect: 2
+          effectNum: 0
           playStoryOrder: 2
+        - usedEffect: 2
+          effectNum: 0
+          playStoryOrder: 8
         eventMainStory: "\uB2F9\uC2E0\uACFC \uC591\uC544\uCE58\uB294 \uB4C0\uC5BC\uC744
           \uC2DC\uC791\uD569\uB2C8\uB2E4!\r\n\n\"\uB098, \uC591\uC544\uCE58\uB294
           \uD328\uC5D0\uC11C \uBC8C\uB808\uC778\uAC04\uC744 \uC18C\uD658\uD558\uACE0

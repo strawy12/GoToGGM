@@ -28,6 +28,7 @@ public class SoundManager : MonoSingleTon<SoundManager>
             Destroy(gameObject);
             return;
         }
+        DontDestroyOnLoad(gameObject);
         bgmAudio = GetComponent<AudioSource>();
         effectAudio = transform.GetChild(0).GetComponent<AudioSource>();
 
