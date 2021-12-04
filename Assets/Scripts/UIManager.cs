@@ -86,6 +86,13 @@ public class UIManager : MonoBehaviour
             msgBox.ShowMSGBox();
         }
     }
+    public void ShowPanels(RectTransform gameObject)
+    {
+        Vector2 Scale = new Vector2(gameObject.localScale.x, gameObject.localScale.y);
+        gameObject.transform.localScale = Vector3.zero;
+        gameObject.gameObject.SetActive(true);
+        gameObject.transform.DOScale(Scale, 0.4f);
+    }
 
     public void Update()
     {
@@ -638,7 +645,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickDataResetBtn()
     {
-        GameManager.Inst.DataReset();
+        DataManager.Inst.DataReset();
     }
 
     public void ChangeBackGround(int backGroundNum)

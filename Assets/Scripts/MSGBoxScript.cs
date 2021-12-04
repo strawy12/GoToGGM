@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class MSGBoxScript : MonoBehaviour
 {
-    bool isShown=false;
+    bool isShown = false;
 
     public void ShowMSGBox()
     {
