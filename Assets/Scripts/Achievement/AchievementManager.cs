@@ -97,7 +97,7 @@ public class AchievementManager : MonoBehaviour
             CheckWeaponMaster();
             return;
         }
-        if(DataManager.Inst.CurrentPlayer.stat_Knowledge + DataManager.Inst.CurrentPlayer.stat_Sencetive + DataManager.Inst.CurrentPlayer.stat_Wit >= 30)
+        if(DataManager.Inst.CurrentPlayer.stat_Knowledge >= 10 && DataManager.Inst.CurrentPlayer.stat_Sencetive >= 10 && DataManager.Inst.CurrentPlayer.stat_Wit >= 10)
         {
             Clear(12);
         }
@@ -105,7 +105,7 @@ public class AchievementManager : MonoBehaviour
 
     public void CheckWeaponMaster()
     {
-        if (DataManager.Inst.CurrentPlayer.stat_Knowledge + DataManager.Inst.CurrentPlayer.stat_Sencetive + DataManager.Inst.CurrentPlayer.stat_Wit >= 45)
+        if (DataManager.Inst.CurrentPlayer.stat_Knowledge >= 15 && DataManager.Inst.CurrentPlayer.stat_Sencetive >= 15 && DataManager.Inst.CurrentPlayer.stat_Wit >= 15)
         {
             Clear(13);
         }
