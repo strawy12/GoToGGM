@@ -52,12 +52,7 @@ public class StoryManager : MonoBehaviour
 
         if (isGreed)
         {
-<<<<<<< HEAD
-            eventStory = Array.Find(eventStoryLines[GameManager.Inst.CurrentPlayer.crtEventStoryCnt].eventStories, x => x.eventStoryID == storyID && x.isSuccess == isSuccess);
-=======
-            Debug.Log(storyID);
             eventStory = Array.Find(eventStoryLines[DataManager.Inst.CurrentPlayer.crtEventStoryCnt].eventStories, x => x.eventStoryID == storyID && x.isSuccess == isSuccess);
->>>>>>> origin/UI/Title
         }
         else
         {
@@ -116,30 +111,18 @@ public class StoryManager : MonoBehaviour
 
     private void SetScenraioNum()
     {
-<<<<<<< HEAD
-
-        GameManager.Inst.CurrentPlayer.crtScenarioCnt++;
-=======
-        GameManager.Inst.UI.CheckPlayerPoint();
-        GameManager.Inst.UI.ResetStoryText();
-        GameManager.Inst.SetNowTime();
         DataManager.Inst.CurrentPlayer.crtScenarioCnt++;
->>>>>>> origin/UI/Title
 
         if (DataManager.Inst.CurrentPlayer.crtScenarioCnt == 5)
         {
             isEndding = true;
         }
         endScenario = true;
-<<<<<<< HEAD
-        GameManager.Inst.CurrentPlayer.crtStoryNum = 0;
-        GameManager.Inst.CurrentPlayer.crtEventStoryCnt = 0;
-        GameManager.Inst.UI.ResetStoryText();
-        GameManager.Inst.SetNowTime();  
-=======
+
         DataManager.Inst.CurrentPlayer.crtStoryNum = 0;
         DataManager.Inst.CurrentPlayer.crtEventStoryCnt = 0;
->>>>>>> origin/UI/Title
+        GameManager.Inst.UI.ResetStoryText();
+        GameManager.Inst.SetNowTime();
     }
 
 

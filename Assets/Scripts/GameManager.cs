@@ -59,13 +59,8 @@ public class GameManager : MonoSingleTon<GameManager>
     public UIManager UI { get { return uiManager; } }
     public StoryManager Story { get { return storyManager; } }
     public Timer Timer { get { return timer; } }
-<<<<<<< HEAD
-    public int StoryLine { get { return player.storyLineNum; } }
-
-=======
     public int StoryLine { get { return DataManager.Inst.CurrentPlayer.storyLineNum; } }
     
->>>>>>> origin/UI/Title
     void Awake()
     {
         achievementManager = GetComponent<AchievementManager>();
@@ -112,17 +107,9 @@ public class GameManager : MonoSingleTon<GameManager>
 
     public void SetNowTime()
     {
-<<<<<<< HEAD
-        int index = player.usedTimeCnt;
-        StoryLine storyLine = Story.GetStoryLine();
-        player.usedTimeCnt++;
-        player.nowTime += storyLine.usedTimeArray[index];
-
-=======
         int index = DataManager.Inst.CurrentPlayer.usedTimeCnt;
         DataManager.Inst.CurrentPlayer.usedTimeCnt++;
         DataManager.Inst.CurrentPlayer.nowTime += Story.GetStoryLine().usedTimeArray[index];
->>>>>>> origin/UI/Title
         UI.SetNowTimeText();
         UI.ShowArriveTimeDangerousMessage();
     }
@@ -177,13 +164,8 @@ public class GameManager : MonoSingleTon<GameManager>
                 break;
 
             case EStatType.ArrivalTime:
-<<<<<<< HEAD
-                player.arrivalTime += increaseStat;
-                UI.ShowArriveTimeDangerousMessage();
-=======
                 DataManager.Inst.CurrentPlayer.arrivalTime += increaseStat;
->>>>>>> origin/UI/Title
-
+                UI.ShowArriveTimeDangerousMessage();
                 break;
         }
         achievementManager.CheckMacGyver();
@@ -213,20 +195,12 @@ public class GameManager : MonoSingleTon<GameManager>
 
     public int CheckArrivalTime()
     {
-<<<<<<< HEAD
-        if (player.arrivalTime > 0)
-=======
         if(DataManager.Inst.CurrentPlayer.arrivalTime > 0)
->>>>>>> origin/UI/Title
         {
             return 0;
         }
 
-<<<<<<< HEAD
-        else if (player.arrivalTime == 0)
-=======
         else if(DataManager.Inst.CurrentPlayer.arrivalTime == 0)
->>>>>>> origin/UI/Title
         {
             return 1;
         }

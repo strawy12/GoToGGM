@@ -74,13 +74,7 @@ public class UIManager : MonoBehaviour
     }
     private void Start()
     {
-<<<<<<< HEAD
-        //CreatePoints();
-=======
         SetSettingPanel();
-        CreatePoints();
-        limiterScaleY = timeLimiter.rectTransform.localScale.y;
->>>>>>> origin/UI/Title
         timeLimiter.rectTransform.localScale = new Vector2(timeLimiter.rectTransform.localScale.x, 0f);
     }
 
@@ -574,15 +568,9 @@ public class UIManager : MonoBehaviour
 
     public void ShowArriveTimeDangerousMessage()
     {
-<<<<<<< HEAD
-        int arrivalTime = 540 + GameManager.Inst.CurrentPlayer.arrivalTime;
-        string lastWord = GameManager.Inst.CurrentPlayer.GetLastWord();
-        bool isLating = GameManager.Inst.CurrentPlayer.arrivalTime < 0;
-=======
         int arrivalTime = DataManager.Inst.CurrentPlayer.GetArrivalTime();
         string lastWord = DataManager.Inst.CurrentPlayer.GetLastWord();
         bool isLating = DataManager.Inst.CurrentPlayer.arrivalTime < 0;
->>>>>>> origin/UI/Title
 
         int hour = arrivalTime / 60;
         arrivalTime -= hour * 60;
