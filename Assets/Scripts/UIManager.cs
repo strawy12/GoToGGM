@@ -94,18 +94,6 @@ public class UIManager : MonoBehaviour
         gameObject.transform.DOScale(Scale, 0.4f);
     }
 
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            DarkBattleEffect(true);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            DarkBattleEffect(false);
-        }
-    }
-
     public void StartWrite(string message, bool usedEffect = false, Action action = null)
     {
         if (action == null)
