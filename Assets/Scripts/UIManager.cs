@@ -8,6 +8,12 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private Slider effectSlider = null;
+    [SerializeField] private Slider bgmSlider = null;
+    [SerializeField] private Toggle effectMute = null;
+    [SerializeField] private Toggle bgmMute = null;
+    [SerializeField] private Slider fontSlider = null;
+
     [SerializeField] private Image timeLimiter = null;
     [SerializeField] private StoryText storyTextTemp = null;
     [SerializeField] private Image image = null;
@@ -68,7 +74,13 @@ public class UIManager : MonoBehaviour
     }
     private void Start()
     {
+<<<<<<< HEAD
         //CreatePoints();
+=======
+        SetSettingPanel();
+        CreatePoints();
+        limiterScaleY = timeLimiter.rectTransform.localScale.y;
+>>>>>>> origin/UI/Title
         timeLimiter.rectTransform.localScale = new Vector2(timeLimiter.rectTransform.localScale.x, 0f);
     }
 
@@ -274,8 +286,8 @@ public class UIManager : MonoBehaviour
 
     public string ReplaceMessage(string message)
     {
-        message = message.Replace("&", GameManager.Inst.CurrentPlayer.nickname);
-        message = message.Replace("*", GameManager.Inst.CurrentPlayer.playerjob);
+        message = message.Replace("&", DataManager.Inst.CurrentPlayer.nickname);
+        message = message.Replace("*", DataManager.Inst.CurrentPlayer.playerjob);
 
         return message;
     }
@@ -313,7 +325,7 @@ public class UIManager : MonoBehaviour
     {
         if (nicknameInputField.text == "") return;
 
-        GameManager.Inst.CurrentPlayer.nickname = nicknameInputField.text;
+        DataManager.Inst.CurrentPlayer.nickname = nicknameInputField.text;
         ActiveNameInputField(false);
 
         GameManager.Inst.Story.SetStoryNum();
@@ -486,14 +498,14 @@ public class UIManager : MonoBehaviour
 
     public void SetJobText()
     {
-        jobStatusText.text = GameManager.Inst.CurrentPlayer.playerjob;
+        jobStatusText.text = DataManager.Inst.CurrentPlayer.playerjob;
     }
 
     public void SetStatText()
     {
-        int wit = GameManager.Inst.CurrentPlayer.stat_Wit;
-        int knowledge = GameManager.Inst.CurrentPlayer.stat_Knowledge;
-        int sencetive = GameManager.Inst.CurrentPlayer.stat_Sencetive;
+        int wit = DataManager.Inst.CurrentPlayer.stat_Wit;
+        int knowledge = DataManager.Inst.CurrentPlayer.stat_Knowledge;
+        int sencetive = DataManager.Inst.CurrentPlayer.stat_Sencetive;
 
         statText.text = string.Format("재치: {0} / 섬세: {1} / 지식: {2}", wit, sencetive, knowledge);
 
@@ -501,7 +513,7 @@ public class UIManager : MonoBehaviour
 
     public void SetNowTimeText()
     {
-        int nowTime = GameManager.Inst.CurrentPlayer.GetArrivalTime();
+        int nowTime = DataManager.Inst.CurrentPlayer.GetArrivalTime();
         int hour = nowTime / 60;
         nowTime -= hour * 60;
 
@@ -562,9 +574,15 @@ public class UIManager : MonoBehaviour
 
     public void ShowArriveTimeDangerousMessage()
     {
+<<<<<<< HEAD
         int arrivalTime = 540 + GameManager.Inst.CurrentPlayer.arrivalTime;
         string lastWord = GameManager.Inst.CurrentPlayer.GetLastWord();
         bool isLating = GameManager.Inst.CurrentPlayer.arrivalTime < 0;
+=======
+        int arrivalTime = DataManager.Inst.CurrentPlayer.GetArrivalTime();
+        string lastWord = DataManager.Inst.CurrentPlayer.GetLastWord();
+        bool isLating = DataManager.Inst.CurrentPlayer.arrivalTime < 0;
+>>>>>>> origin/UI/Title
 
         int hour = arrivalTime / 60;
         arrivalTime -= hour * 60;
@@ -683,11 +701,24 @@ public class UIManager : MonoBehaviour
     public void SetFontSize(float value)
     {
         fontSize = (int)value;
+        DataManager.Inst.CurrentPlayer.fontSize = fontSize;
 
         foreach (var storyText in storyTextList)
         {
             storyText.SetFontSize(fontSize);
         }
+    }
+
+
+    public void SetSettingPanel()
+    {
+        effectSlider.value = DataManager.Inst.CurrentPlayer.effectVolume;
+        bgmSlider.value = DataManager.Inst.CurrentPlayer.bgmVolume;
+        fontSlider.value = DataManager.Inst.CurrentPlayer.fontSize;
+        if (DataManager.Inst.CurrentPlayer.bgmMute)
+            bgmMute.isOn = true;
+        if (DataManager.Inst.CurrentPlayer.effectMute)
+            effectMute.isOn = true;
     }
 
 
@@ -726,6 +757,5 @@ public class UIManager : MonoBehaviour
     {
         return SoundManager.Inst.GetEffectSoundLength();
     }
-
     #endregion
 }

@@ -20,7 +20,6 @@ public class AchievementManager : MonoBehaviour
     [SerializeField] ClearNoticeScript clearNotice = null;
     [SerializeField] GameObject achievementScroll = null;
     public List<AchievementBase> achievementPanels = new List<AchievementBase>();
-    private AchievementPanel component = null;
     private int testID = 0;
     private int luckPoint = 0;
     private bool isShown = false;
@@ -45,7 +44,7 @@ public class AchievementManager : MonoBehaviour
             achievementPanels[i].achievementPanel.SetValue(achievementPanels[i].title, achievementPanels[i].explanation);
             newObject.SetActive(true);
 
-            achievementPanels[i].isCleared = GameManager.Inst.CurrentPlayer.clears[i];
+            achievementPanels[i].isCleared = DataManager.Inst.CurrentPlayer.clears[i];
         }
         for (int i = 0; i < 15; i++)
         {
@@ -105,7 +104,7 @@ public class AchievementManager : MonoBehaviour
             CheckWeaponMaster();
             return;
         }
-        if(GameManager.Inst.CurrentPlayer.stat_Knowledge + GameManager.Inst.CurrentPlayer.stat_Sencetive + GameManager.Inst.CurrentPlayer.stat_Wit >= 30)
+        if(DataManager.Inst.CurrentPlayer.stat_Knowledge + DataManager.Inst.CurrentPlayer.stat_Sencetive + DataManager.Inst.CurrentPlayer.stat_Wit >= 30)
         {
             Clear(12);
         }
@@ -113,7 +112,7 @@ public class AchievementManager : MonoBehaviour
 
     public void CheckWeaponMaster()
     {
-        if (GameManager.Inst.CurrentPlayer.stat_Knowledge + GameManager.Inst.CurrentPlayer.stat_Sencetive + GameManager.Inst.CurrentPlayer.stat_Wit >= 45)
+        if (DataManager.Inst.CurrentPlayer.stat_Knowledge + DataManager.Inst.CurrentPlayer.stat_Sencetive + DataManager.Inst.CurrentPlayer.stat_Wit >= 45)
         {
             Clear(13);
         }

@@ -11,6 +11,15 @@ public class SoundManager : MonoSingleTon<SoundManager>
     private AudioClip[] bgms = null;
     private AudioSource bgmAudio;
     private AudioSource effectAudio;
+
+    bool IsMain
+    {
+        get
+        {
+            return SceneManager.GetActiveScene().ToString() == "Main";
+        }
+    }
+
     private void Awake()
     {
         SoundManager[] smanagers = FindObjectsOfType<SoundManager>();
@@ -28,10 +37,11 @@ public class SoundManager : MonoSingleTon<SoundManager>
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name == "StartScene")
-        {
-            StartVolumeSetting();
-        }
+        VolumeSetting(DataManager.Inst.CurrentPlayer);
+        //if (SceneManager.GetActiveScene().name == "Title")
+        //{
+        //    StartVolumeSetting();
+        //}
     }
 
     public void StartVolumeSetting()
@@ -52,7 +62,6 @@ public class SoundManager : MonoSingleTon<SoundManager>
         }
 
         VolumeSetting();
-
     }
 
     public void VolumeSetting(Player player)
@@ -75,7 +84,11 @@ public class SoundManager : MonoSingleTon<SoundManager>
     {
         if (bgmAudio == null) return;
         bgmAudio.volume = value;
-        GameManager.Inst.CurrentPlayer.bgmVolume = value;
+
+        if (IsMain)
+        {
+            DataManager.Inst.CurrentPlayer.bgmVolume = value;
+        }
     }
 
     public void BGMMute(bool isMute)
@@ -91,7 +104,8 @@ public class SoundManager : MonoSingleTon<SoundManager>
     {
         if (effectAudio == null) return;
         effectAudio.volume = value;
-        GameManager.Inst.CurrentPlayer.effectVolume = value;
+
+        DataManager.Inst.CurrentPlayer.effectVolume = value;
     }
     public void SetBGM(int bgmNum)
     {

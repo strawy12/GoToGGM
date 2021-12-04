@@ -2634,6 +2634,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed58b4dc213f2b4d964193055e48d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectSlider: {fileID: 1475401409}
+  bgmSlider: {fileID: 1867347973}
+  effectMute: {fileID: 1788923239}
+  bgmMute: {fileID: 1156500803}
+  fontSlider: {fileID: 1212380224}
   timeLimiter: {fileID: 1264785852715243072}
   storyTextTemp: {fileID: 3292109175303123810}
   image: {fileID: 0}
@@ -2666,24 +2671,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555fc403f623e2d4f8e6ffaa3aa477ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player:
-    nickname: 
-    playerjob: 
-    usedTimeCnt: 0
-    storyLineNum: 0
-    crtScenarioCnt: 0
-    crtEventStoryCnt: 0
-    crtStoryNum: 0
-    stat_Sencetive: 0
-    stat_Knowledge: 0
-    stat_Wit: 0
-    arrivalTime: 0
-    clears: 
-    nowTime: 0
-    bgmVolume: 0
-    effectVolume: 0
-    bgmMute: 0
-    effectMute: 0
   stat: 0
 --- !u!114 &459142903
 MonoBehaviour:
@@ -5540,7 +5527,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 459142901}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: BGMVolume
+        m_MethodName: SetFontSize
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

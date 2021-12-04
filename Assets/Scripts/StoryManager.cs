@@ -27,7 +27,7 @@ public class StoryManager : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.Inst.CurrentPlayer.crtScenarioCnt == 5 && !isEndding)
+        if (DataManager.Inst.CurrentPlayer.crtScenarioCnt == 5 && !isEndding)
         {
             isEndding = true;
         }
@@ -41,7 +41,7 @@ public class StoryManager : MonoBehaviour
 
     public int GetCurrentScenarioNum()
     {
-        return (int)storyLine.storyLines[GameManager.Inst.StoryLine].storyOrder[GameManager.Inst.CurrentPlayer.crtScenarioCnt];
+        return (int)storyLine.storyLines[GameManager.Inst.StoryLine].storyOrder[DataManager.Inst.CurrentPlayer.crtScenarioCnt];
     }
 
 
@@ -52,11 +52,16 @@ public class StoryManager : MonoBehaviour
 
         if (isGreed)
         {
+<<<<<<< HEAD
             eventStory = Array.Find(eventStoryLines[GameManager.Inst.CurrentPlayer.crtEventStoryCnt].eventStories, x => x.eventStoryID == storyID && x.isSuccess == isSuccess);
+=======
+            Debug.Log(storyID);
+            eventStory = Array.Find(eventStoryLines[DataManager.Inst.CurrentPlayer.crtEventStoryCnt].eventStories, x => x.eventStoryID == storyID && x.isSuccess == isSuccess);
+>>>>>>> origin/UI/Title
         }
         else
         {
-            eventStory = Array.Find(eventStoryLines[GameManager.Inst.CurrentPlayer.crtEventStoryCnt].eventStories, x => x.eventStoryID == storyID);
+            eventStory = Array.Find(eventStoryLines[DataManager.Inst.CurrentPlayer.crtEventStoryCnt].eventStories, x => x.eventStoryID == storyID);
         }
 
 
@@ -78,7 +83,7 @@ public class StoryManager : MonoBehaviour
     public Story GetNowStory()
     {
         int storyNum = GetCurrentScenarioNum();
-        return stories.scenarios[storyNum].stories[GameManager.Inst.CurrentPlayer.crtStoryNum];
+        return stories.scenarios[storyNum].stories[DataManager.Inst.CurrentPlayer.crtStoryNum];
     }
 
     public Scenario GetNowScenario()
@@ -91,15 +96,15 @@ public class StoryManager : MonoBehaviour
     public void SetStoryNum()
     {
         int maxStoryNum = stories.scenarios[GetCurrentScenarioNum()].stories.Length - 1;
-        int crtStoryNum = GameManager.Inst.CurrentPlayer.crtStoryNum;
+        int crtStoryNum = DataManager.Inst.CurrentPlayer.crtStoryNum;
         bool usedEventStory = stories.scenarios[GetCurrentScenarioNum()].stories[crtStoryNum].selectLines.Length >= 3;
 
-        if (GameManager.Inst.CurrentPlayer.crtStoryNum < maxStoryNum)
+        if (DataManager.Inst.CurrentPlayer.crtStoryNum < maxStoryNum)
         {
-            GameManager.Inst.CurrentPlayer.crtStoryNum++;
+            DataManager.Inst.CurrentPlayer.crtStoryNum++;
             if (usedEventStory)
             {
-                GameManager.Inst.CurrentPlayer.crtEventStoryCnt++;
+                DataManager.Inst.CurrentPlayer.crtEventStoryCnt++;
             }
             return;
         }
@@ -111,18 +116,30 @@ public class StoryManager : MonoBehaviour
 
     private void SetScenraioNum()
     {
+<<<<<<< HEAD
 
         GameManager.Inst.CurrentPlayer.crtScenarioCnt++;
+=======
+        GameManager.Inst.UI.CheckPlayerPoint();
+        GameManager.Inst.UI.ResetStoryText();
+        GameManager.Inst.SetNowTime();
+        DataManager.Inst.CurrentPlayer.crtScenarioCnt++;
+>>>>>>> origin/UI/Title
 
-        if (GameManager.Inst.CurrentPlayer.crtScenarioCnt == 5)
+        if (DataManager.Inst.CurrentPlayer.crtScenarioCnt == 5)
         {
             isEndding = true;
         }
         endScenario = true;
+<<<<<<< HEAD
         GameManager.Inst.CurrentPlayer.crtStoryNum = 0;
         GameManager.Inst.CurrentPlayer.crtEventStoryCnt = 0;
         GameManager.Inst.UI.ResetStoryText();
         GameManager.Inst.SetNowTime();  
+=======
+        DataManager.Inst.CurrentPlayer.crtStoryNum = 0;
+        DataManager.Inst.CurrentPlayer.crtEventStoryCnt = 0;
+>>>>>>> origin/UI/Title
     }
 
 
@@ -175,7 +192,7 @@ public class StoryManager : MonoBehaviour
 
         for (int i = 0; i < fJobs.Length; i++)
         {
-            if (GameManager.Inst.CurrentPlayer.playerjob == fJobs[i])
+            if (DataManager.Inst.CurrentPlayer.playerjob == fJobs[i])
             {
                 story = messages[0];
                 GameManager.Inst.UI.StartWrite(story, GameManager.Inst.UI.ShowSingleSelectBtn, 0, GetNowStory().usedEffect);
@@ -185,7 +202,7 @@ public class StoryManager : MonoBehaviour
 
         for (int i = 0; i < sJobs.Length; i++)
         {
-            if (GameManager.Inst.CurrentPlayer.playerjob == sJobs[i])
+            if (DataManager.Inst.CurrentPlayer.playerjob == sJobs[i])
             {
                 story = messages[1];
                 GameManager.Inst.UI.StartWrite(story, GameManager.Inst.UI.ShowSingleSelectBtn, 1, GetNowStory().usedEffect);
@@ -226,7 +243,7 @@ public class StoryManager : MonoBehaviour
 
     public void SettingStory()
     {
-        int crtStoryNum = GameManager.Inst.CurrentPlayer.crtStoryNum;
+        int crtStoryNum = DataManager.Inst.CurrentPlayer.crtStoryNum;
 
         if (crtStoryNum != 0)
         {
@@ -260,7 +277,7 @@ public class StoryManager : MonoBehaviour
         {
             endScenario = false;
         }
-        if (storyLine.storyLines[GameManager.Inst.StoryLine].storyOrder.Length <= GameManager.Inst.CurrentPlayer.crtScenarioCnt)
+        if (storyLine.storyLines[GameManager.Inst.StoryLine].storyOrder.Length <= DataManager.Inst.CurrentPlayer.crtScenarioCnt)
         {
             return;
         }
@@ -317,7 +334,7 @@ public class StoryManager : MonoBehaviour
         {
             if (nowEffectSettings[i].effectNum == 0)
             {
-                if (GameManager.Inst.CurrentPlayer.crtStoryNum > 1)
+                if (DataManager.Inst.CurrentPlayer.crtStoryNum > 1)
                 {
                     nowEffectSettings[i].effectNum = 1;
                 }
