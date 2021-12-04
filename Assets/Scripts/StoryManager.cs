@@ -259,7 +259,7 @@ public class StoryManager : MonoBehaviour
     {
         int enddingNum = GameManager.Inst.CheckArrivalTime();
         Story story = GetEnddingStory(enddingNum);
-        Array.Copy(story.effectSettings, nowEffectSettings, story.effectSettings.Length);
+        CopyEffectSettings(story);
 
         GameManager.Inst.ClearEnding(story.storyID);
         StartEndding(story);

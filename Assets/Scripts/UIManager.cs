@@ -845,6 +845,7 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(1.2f);
 
         DataManager.Inst.InGameDataReset();
+        SetBGM(9);
 
         SceneManager.LoadScene("Title");
     }
