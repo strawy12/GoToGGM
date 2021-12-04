@@ -13,6 +13,7 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private Toggle effectMute = null;
     [SerializeField] private Toggle bgmMute = null;
     [SerializeField] private Slider fontSlider = null;
+    [SerializeField] private Text testText = null;
 
     [Header("업적 패널 관련")]
     [SerializeField] GameObject panelObject = null;
@@ -48,6 +49,11 @@ public class TitleManager : MonoBehaviour
         SceneManager.LoadScene("Main");
     }
 
+    public void DataReset()
+    {
+        DataManager.Inst.DataReset();
+    }
+
     #region SettingPanel
     public void SetSettingPanel()
     {
@@ -61,29 +67,31 @@ public class TitleManager : MonoBehaviour
     }
     public void BGMVolume(float value)
     {
-        DataManager.Inst.CurrentPlayer.bgmVolume = value;
+        //SoundManager.Inst.BGMVolume(value);
         DataManager.Inst.SaveToJson();
     }
 
     public void BGMMute(bool isMute)
     {
-        DataManager.Inst.CurrentPlayer.bgmMute = isMute;
+        //SoundManager.Inst.BGMMute(isMute);
         DataManager.Inst.SaveToJson();
     }
 
     public void EffectMute(bool isMute)
     {
-        DataManager.Inst.CurrentPlayer.effectMute = isMute;
+        //SoundManager.Inst.EffectMute(isMute);
         DataManager.Inst.SaveToJson();
     }
 
     public void EffectVolume(float value)
     {
-        DataManager.Inst.CurrentPlayer.effectVolume = value;
+        //SoundManager.Inst.EffectVolume(value);
         DataManager.Inst.SaveToJson();
     }
     public void SetFontSize(float value)
     {
+        Debug.Log(value);
+        testText.fontSize = (int)value;
         DataManager.Inst.CurrentPlayer.fontSize = (int)value;
         DataManager.Inst.SaveToJson();
     }

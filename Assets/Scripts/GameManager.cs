@@ -101,10 +101,6 @@ public class GameManager : MonoSingleTon<GameManager>
         UI.SetEventToSelectBtn(false);  
     }
 
-    public void DataReset()
-    {
-    }
-
     public void SetNowTime()
     {
         int index = DataManager.Inst.CurrentPlayer.usedTimeCnt;

@@ -40,7 +40,7 @@ public class DataManager : MonoSingleTon<DataManager>
         string stringJson = JsonUtility.ToJson(player, true);
         File.WriteAllText(SAVE_PATH + SAVE_FILE, stringJson, System.Text.Encoding.UTF8);
     }
-    public void ResetData()
+    public void DataReset()
     {
         player = new Player("고등학생", 0, 0, 0, defaultSound, defaultSound, false, false, defaultFontsize);
         SaveToJson();
