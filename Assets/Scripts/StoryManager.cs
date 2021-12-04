@@ -52,7 +52,6 @@ public class StoryManager : MonoBehaviour
 
         if (isGreed)
         {
-            Debug.Log(storyID);
             eventStory = Array.Find(eventStoryLines[DataManager.Inst.CurrentPlayer.crtEventStoryCnt].eventStories, x => x.eventStoryID == storyID && x.isSuccess == isSuccess);
         }
         else
@@ -112,9 +111,6 @@ public class StoryManager : MonoBehaviour
 
     private void SetScenraioNum()
     {
-        GameManager.Inst.UI.CheckPlayerPoint();
-        GameManager.Inst.UI.ResetStoryText();
-        GameManager.Inst.SetNowTime();
         DataManager.Inst.CurrentPlayer.crtScenarioCnt++;
 
         if (DataManager.Inst.CurrentPlayer.crtScenarioCnt == 5)
@@ -122,8 +118,11 @@ public class StoryManager : MonoBehaviour
             isEndding = true;
         }
         endScenario = true;
+
         DataManager.Inst.CurrentPlayer.crtStoryNum = 0;
         DataManager.Inst.CurrentPlayer.crtEventStoryCnt = 0;
+        GameManager.Inst.UI.ResetStoryText();
+        GameManager.Inst.SetNowTime();
     }
 
 
@@ -169,7 +168,6 @@ public class StoryManager : MonoBehaviour
         string[] fJobs = firstJobs.Split('&');
         string[] sJobs = sencondJobs.Split('&');
 
-        Debug.Log(fJobs[0]);
 
         string[] messages = GetNowStory().mainStory.Split('&');
 

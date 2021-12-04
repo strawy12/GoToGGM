@@ -44,9 +44,23 @@ public class StoryText : MonoBehaviour
         storyText.fontSize = fontSize;
     }
 
+    public void CheckTextSize()
+    {
+        if(storyText.preferredHeight >= storyText.rectTransform.rect.height)
+        {
+            contentSize.enabled = true;
+        }
+    }
+
     public void NextText()
     {
         storyText.text = string.Format("{0}\n\n\n\n\n", storyText.text);
         contentSize.enabled = true;
+    }
+
+    public void ResetText()
+    {
+        contentSize.enabled = false;
+        text = "";
     }
 }

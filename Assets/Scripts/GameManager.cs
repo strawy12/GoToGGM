@@ -80,7 +80,7 @@ public class GameManager : MonoSingleTon<GameManager>
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             UI.ActiveQuitPanal(true);
         }
@@ -98,7 +98,7 @@ public class GameManager : MonoSingleTon<GameManager>
 
     public void SelectJob()
     {
-        UI.SetEventToSelectBtn(false);  
+        UI.SetEventToSelectBtn(false);
     }
 
     public void SetNowTime()
@@ -110,7 +110,7 @@ public class GameManager : MonoSingleTon<GameManager>
         UI.ShowArriveTimeDangerousMessage();
     }
 
-    
+
     public void SetPlayerJob(int jobNum)
     {
         if (jobNum == 0)
@@ -161,7 +161,7 @@ public class GameManager : MonoSingleTon<GameManager>
 
             case EStatType.ArrivalTime:
                 DataManager.Inst.CurrentPlayer.arrivalTime += increaseStat;
-
+                UI.ShowArriveTimeDangerousMessage();
                 break;
         }
         achievementManager.CheckMacGyver();

@@ -33,7 +33,7 @@ public class ClearNoticeScript : MonoBehaviour
         rectTransform.DOAnchorPosX(Mathf.Clamp(rectTransform.anchoredPosition.x - rectTransform.rect.width, minPos, maxPos), 0.8f).OnComplete(() =>
         {
             checkMarkImage.DOFade(1f, 1f);
-            GameManager.Inst.Particle.PlayParticle(1, 1.25f, particlePos);
+            GameManager.Inst.Particle.PlayParticle(3, 1.25f, particlePos);
         });
 
         Invoke(nameof(HideNotice), 2f);

@@ -28,6 +28,9 @@ MonoBehaviour:
       - usedEffect: 3
         effectNum: 0
         playStoryOrder: 0
+      - usedEffect: 2
+        effectNum: 2
+        playStoryOrder: 0
       mainStory: "\uC548\uC580 \uC655\uAD6D\uC758 \uC6A9\uC0AC\uC778 \uB2F9\uC2E0\uC740
         \uB2E4\uC2DC\uD55C\uBC88 \uC801\uC9C4\uC5D0\uC11C \uC2B9\uB9AC\uB97C \uAC70\uB461\uB2C8\uB2E4.\n\n\"\uD558\uD558\uD558
         \uB0B4\uAC00 10415 \uBC88\uC9F8 \uC2B9\uB9AC\uD55C \uC774 \uD611\uACE1\uC758
@@ -46,7 +49,10 @@ MonoBehaviour:
       - usedEffect: 2
         effectNum: 1
         playStoryOrder: 2
-      mainStory: "\"\uB098, &\uC740 10415 \uBC88\uC9F8 \uC2B9\uB9AC\uB97C \uAE30\uB150\uD558\uC5EC
+      - usedEffect: 2
+        effectNum: 0
+        playStoryOrder: 2
+      mainStory: "\"\uC774\uBAB8, &. 10415\uBC88\uC9F8 \uC2B9\uB9AC\uB97C \uAE30\uB150\uD558\uC5EC
         \uC81C\uAD70\uB4E4\uC5D0\uAC8C \uC804\uB9AC\uD488\uC744 \uD558\uC0AC\uD558\uACA0\uB2E4!\"
         \r\n\n\uC790\uC2E0\uC758 \uBD80\uD558\uB4E4\uC5D0\uAC8C \uC804\uB9AC\uD488\uC744
         \uC8FC\uB824\uB358 \uB2F9\uC2E0\uC758 \uBC1C\uBC11\uC5D0 \uBD88\uAE38\uC774
@@ -355,7 +361,7 @@ MonoBehaviour:
         needStatType: 0
         needStat: 0
         eventStoryID: 313
-        timeLimit: 1
+        timeLimit: 3
         useTimer: 0
         time: 0
     - storyName: "\uB208\uB098\uAC00 \uC5EC\uAE30\uC11C \uC65C \uB098\uC640...?"
@@ -396,12 +402,12 @@ MonoBehaviour:
         useTimer: 0
         time: 0
       - selectLine: "\uADF8..."
-        selectType: 0
+        selectType: 4
         needStatType: 0
         needStat: 0
         eventStoryID: 323
-        timeLimit: 0
-        useTimer: 0
+        timeLimit: 3
+        useTimer: 1
         time: 0
     - storyName: "\uB4DC\uB514\uC5B4 \uB3C4\uCC29\uD55C \uD559\uAD50"
       storyID: 33
@@ -573,7 +579,7 @@ MonoBehaviour:
         effectNum: 5
         playStoryOrder: 0
       mainStory: "\uB2F9\uC2E0\uC740 \uBC84\uC2A4\uB97C \uAC08\uC544\uD0C0\uB824
-        \uBC1C\uAC78\uC74C\uC744 \uB0B4\uB51B\uC2B5\uB2C8\uB2E4\r.\n\n\uADF8\uB584,
+        \uBC1C\uAC78\uC74C\uC744 \uB0B4\uB51B\uC2B5\uB2C8\uB2E4\r.\n\n\uADF8\uB54C,
         \uC606\uC9D1\uC5D0 \uC0AC\uB294 \uCE5C\uD55C \uD615\uC774 \uBCF4\uC785\uB2C8\uB2E4\r.\n\n\uC778\uC0AC\uB97C
         \uD558\uAE30\uC704\uD574 \uADF8\uC5D0\uAC8C \uB2E4\uAC00\uB824\uD55C \uB2F9\uC2E0\uC740
         \uC57D\uAC04\uC758 \uC704\uD654\uAC10\uC744 \uB290\uB08D\uB2C8\uB2E4..!\r\n\n\uB2F9\uC2E0\uC740
@@ -814,6 +820,12 @@ MonoBehaviour:
       - usedEffect: 3
         effectNum: 8
         playStoryOrder: 0
+      - usedEffect: 0
+        effectNum: 16
+        playStoryOrder: 0
+      - usedEffect: 2
+        effectNum: 6
+        playStoryOrder: 4
       mainStory: "\uB2F9\uC2E0\uC740 \uB9C8\uCE68\uB0B4 \uD559\uAD50\uC5D0 \uB3C4\uCC29\uD588\uC2B5\uB2C8\uB2E4!\r\n\n\uD558\uC9C0\uB9CC
         \uC5ED\uC2DC \uC9C0\uAC01\uC744 \uD574\uBC84\uB9B0 \uAC83 \uAC19\uC2B5\uB2C8\uB2E4..\r\n\n\"\uC544\uC787..
         \uC774\uBC88\uC5D0 \uBC8C\uC810\uBA39\uC73C\uBA74 \uCCAD\uC18C\uD574\uC57C
@@ -836,22 +848,39 @@ MonoBehaviour:
       - usedEffect: 3
         effectNum: 7
         playStoryOrder: 0
-      - usedEffect: 2
-        effectNum: 0
-        playStoryOrder: 3
+      - usedEffect: 0
+        effectNum: 16
+        playStoryOrder: 0
+      - usedEffect: 0
+        effectNum: 17
+        playStoryOrder: 2
+      - usedEffect: 0
+        effectNum: 18
+        playStoryOrder: 4
+      - usedEffect: 1
+        effectNum: 21
+        playStoryOrder: 4
       - usedEffect: 1
         effectNum: 17
-        playStoryOrder: 3
-      - usedEffect: 1
-        effectNum: 18
         playStoryOrder: 5
+      - usedEffect: 2
+        effectNum: 0
+        playStoryOrder: 5
+      - usedEffect: 2
+        effectNum: 4
+        playStoryOrder: 7
       mainStory: "\uB2F9\uC2E0\uC740 \uB9C8\uCE68\uB0B4 \uD559\uAD50\uC5D0 \uB3C4\uCC29\uD588\uC2B5\uB2C8\uB2E4!\r\n\n\uD734!\uAC04\uC2E0\uD788
-        \uB531 \uB9DE\uCDB0 \uB3C4\uCC29\uD588\uAD70\uC694\r.\n\n\"\uC544\uC774\uACE0
+        \uB531 \uB9DE\uCDB0 \uB3C4\uCC29\uD588\uAD70\uC694\r\n\n\"\uC544\uC774\uACE0
         \uD798\uB4E4\uC5B4.. \uC774\uC81C \uBC29\uC5D0 \uAC00\uC11C \uC870\uAE08
-        \uC274..\"\r\n\n\uBB50\uC9C0? \uC9C0\uC9C4\uC778\uAC00..?"
+        \uC274.. \uC544\uB9DE\uB2E4 \uB178\uD2B8\uBD81!\"\r\n\n\uB2F9\uC2E0\uC740
+        \uC120\uC0DD\uB2D8\uAED8 \uD5C8\uB77D\uB9E1\uACE0 \uAE09\uD788 \uD559\uAD50\uB85C
+        \uB2EC\uB824\uAC11\uB2C8\uB2E4\r\n\n\"\uC5EC\uAE44\uB2E4! \uC774\uC81C \uB2E4\uC2DC
+        \uB3CC\uC544\uAC00\uC57C...\"\r\n\r\n\"\uAC11\uC790\uAE30 \uBC14\uB2E5\uC774
+        \uC65C\uC774\uB7EC.."
       selectLines:
-      - selectLine: "\uC2A4\uD398\uC15C\uC5D4\uB529 :\uB2F9\uC2E0\uC740 \uC54C \uB9DE\uAC8C
-          \uB3C4\uCC29\uD588\uC2B5\uB2C8\uB2E4!"
+      - selectLine: "\uBCF4\uB0B8\uC774 :  \uFF79\uFF8C\uFF7F\uFF75 - \uB2E4\uC74C
+          \uD3B8\uC744 \uAE30\uB300\uD574\uC918! [\uC2A4\uD398\uC15C \uC5D4\uB529
+          \uB2EC\uC131]"
         selectType: 3
         needStatType: 0
         needStat: 0
@@ -866,18 +895,23 @@ MonoBehaviour:
       - usedEffect: 3
         effectNum: 0
         playStoryOrder: 0
-      - usedEffect: 2
-        effectNum: 0
-        playStoryOrder: 3
+      - usedEffect: 0
+        effectNum: 16
+        playStoryOrder: 0
       - usedEffect: 1
         effectNum: 17
-        playStoryOrder: 3
-      - usedEffect: 1
-        effectNum: 18
-        playStoryOrder: 5
+        playStoryOrder: 4
+      - usedEffect: 2
+        effectNum: 0
+        playStoryOrder: 4
+      - usedEffect: 2
+        effectNum: 4
+        playStoryOrder: 4
       mainStory: "\uB2F9\uC2E0\uC740 \uB9C8\uCE68\uB0B4 \uD559\uAD50\uC5D0 \uB3C4\uCC29\uD588\uC2B5\uB2C8\uB2E4!\r\n\n\"\uC624\uB298\uC740
-        \uC77C\uCC0D \uB3C4\uCC29\uD588\uB124, \uBE68\uB9AC \uC26C\uC5B4\uC57C\uC9C0\"\r\n\n\uB4DC\uB974\uB801...\r\n\r\n.....\n\n\uC73C\uC74C..?
-        \uBB54\uC18C\uB9AC\uC9C0..?"
+        \uC77C\uCC0D \uB3C4\uCC29\uD588\uC73C\uB2C8\uAE4C, \uBE68\uB9AC \uC26C\uC5B4\uC57C\uC9C0\"\r\n\n\uB2F9\uC2E0\uC740
+        \uBC29\uC5D0 \uB4E4\uC5B4\uAC00 \uCE68\uB300\uC5D0 \uB204\uC6CC \uC7A0\uC744
+        \uCCAD\uD569\uB2C8\uB2E4\r\n\n\uB4DC\uB974\uB801...\r\n\r\n\n\n\uC73C\uC74C..?
+        \uBB54\uC18C\uB9AC\uC9C0..?\n"
       selectLines:
       - selectLine: "\uC2E0\uC18D\uB3C4\uCC29\uC5D4\uB529 : \uB2F9\uC2E0\uC740 \uC608\uC0C1\uBCF4\uB2E4
           \uC77C\uCC0D \uB3C4\uCC29\uD588\uC2B5\uB2C8\uB2E4."
