@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 
 public class DataManager : MonoSingleTon<DataManager>
 {
@@ -31,8 +32,8 @@ public class DataManager : MonoSingleTon<DataManager>
         else
         {
             player = new Player("고등학생", 0, 0, 0, defaultSound, defaultSound, false, false, defaultFontsize);
-            SaveToJson();
         }
+        SaveToJson();
     }
     public void SaveToJson()
     {

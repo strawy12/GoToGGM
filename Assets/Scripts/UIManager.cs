@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Toggle bgmMute = null;
     [SerializeField] private Slider fontSlider = null;
 
+    [SerializeField] MSGBoxScript msgBox = null;
+
     [SerializeField] private Image timeLimiter = null;
     [SerializeField] private StoryText storyTextTemp = null;
     [SerializeField] private StoryScrollRect storyScrollRect = null;
@@ -68,6 +70,13 @@ public class UIManager : MonoBehaviour
         CreatePoints();
         limiterScaleY = timeLimiter.rectTransform.localScale.y;
         timeLimiter.rectTransform.localScale = new Vector2(timeLimiter.rectTransform.localScale.x, 0f);
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            msgBox.ShowMSGBox();
+        }
     }
 
     public void StartWrite(string message, bool usedEffect = false, Action action = null)

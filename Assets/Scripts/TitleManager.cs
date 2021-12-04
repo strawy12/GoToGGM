@@ -7,15 +7,19 @@ using UnityEngine.UI;
 using DG.Tweening;
 public class TitleManager : MonoBehaviour
 {
+    [Header("설정 패널 관련")]
     [SerializeField] private Slider effectSlider = null;
     [SerializeField] private Slider bgmSlider = null;
     [SerializeField] private Toggle effectMute = null;
     [SerializeField] private Toggle bgmMute = null;
     [SerializeField] private Slider fontSlider = null;
 
+    [Header("업적 패널 관련")]
     [SerializeField] GameObject panelObject = null;
     [SerializeField] Transform contentTransform = null;
     public List<AchievementBase> achievementPanels = new List<AchievementBase>();
+
+    [SerializeField] MSGBoxScript msgBox = null;
 
 
     private void Start()
@@ -24,11 +28,19 @@ public class TitleManager : MonoBehaviour
         CreatePanels();
     }
 
-    public void ShowPanels(GameObject gameObject)
+    private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            msgBox.ShowMSGBox();
+        }
+    }
+    public void ShowPanels(RectTransform gameObject)
+    {
+        Vector2 Scale = new Vector2(gameObject.localScale.x, gameObject.localScale.y);
         gameObject.transform.localScale = Vector3.zero;
-        gameObject.SetActive(true);
-        gameObject.transform.DOScale(Vector3.one, 0.4f);
+        gameObject.gameObject.SetActive(true);
+        gameObject.transform.DOScale(Scale, 0.4f);
     }
 
     public void StartButtonOnClick()
@@ -85,8 +97,7 @@ public class TitleManager : MonoBehaviour
             achievementPanels[i].achievementPanel = newObject.GetComponent<AchievementPanel>();
             achievementPanels[i].achievementPanel.SetValue(achievementPanels[i].title, achievementPanels[i].explanation);
             newObject.SetActive(true);
-
-            achievementPanels[i].isCleared = DataManager.Inst.CurrentPlayer.clears[i];
+            //achievementPanels[i].isCleared = DataManager.Inst.CurrentPlayer.clears[i];
         }
         for (int i = 0; i < 15; i++)
         {
