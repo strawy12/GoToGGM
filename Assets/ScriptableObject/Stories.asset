@@ -417,6 +417,9 @@ MonoBehaviour:
       - usedEffect: 3
         effectNum: 3
         playStoryOrder: 0
+      - usedEffect: 0
+        effectNum: 7
+        playStoryOrder: 0
       mainStory: "\uB2F9\uC2E0\uC774 \uC9C0\uD558\uCCA0\uC5ED\uC5D0 \uB4E4\uC5B4\uC11C
         \uAE30\uB2E4\uB9AC\uB358 \uC911, \uC591\uBCF5\uC6B8 \uC785\uC740 \uB0A8\uC790\uAC00
         \uB2F9\uC2E0\uC5D0\uAC8C \uB2E4\uAC00\uAC11\uB2C8\uB2E4\n\n\uADF8 \uB0A8\uC790\uAC00
@@ -451,7 +454,10 @@ MonoBehaviour:
     - storyName: "\uB274\uAE30\uB2C8 \uBD88\uAF43\uBC14\uC6B0\uC5B4 \uC0C8"
       storyID: 42
       usedFunc: 0
-      effectSettings: []
+      effectSettings:
+      - usedEffect: 0
+        effectNum: 8
+        playStoryOrder: 0
       mainStory: "\uB2F9\uC2E0\uC774 \uC9C0\uD558\uCCA0\uC5D0 \uB4E4\uC5B4\uC11C\uC790
         \uC774\uC5B4\uD3F0\uC744 \uB080 \uC5EC\uC790\uAC00 \uCDA4\uC744 \uCD94\uACE0
         \uC788\uC2B5\uB2C8\uB2E4\n\n\uADF8 \uCDA4\uC740 \uB9C8\uCE58 \uB274\uAE30\uB2C8\uC5D0\uC11C
@@ -516,7 +522,10 @@ MonoBehaviour:
     - storyName: "\uAC08\uC544\uD0C8 \uC2DC\uAC04\uC774 \uC654\uB2E4!"
       storyID: 44
       usedFunc: 1
-      effectSettings: []
+      effectSettings:
+      - usedEffect: 0
+        effectNum: 9
+        playStoryOrder: 0
       mainStory: "\uC778\uD615 \uBF51\uAE30\uC5D0 \uC2DC\uC120\uC774 \uB04C\uB9B0
         \uC0AC\uC774 \uC9C0\uD558\uCCA0\uC744 \uAC08\uC544\uD0C8 \uC2DC\uAC04\uC774
         \uC654\uC2B5\uB2C8\uB2E4.\n&\uC778\uD615 \uBF51\uAE30\uC5D0 \uC2DC\uC120\uC774

@@ -4484,8 +4484,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2740d0d85a7cb44eab17cb6deb9630f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultFontsize: 72
-  defaultSound: 0.5
+  defaultFontsize: 49
+  defaultSound: 0.1
   player:
     nickname: 
     playerjob: 
@@ -4515,7 +4515,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1727648156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.060504608, y: 1.3866906, z: 82.62578}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
