@@ -18,8 +18,8 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private GameObject tutoMsgBox = null;
 
     [Header("업적 패널 관련")]
-    [SerializeField] GameObject panelObject = null;
-    [SerializeField] Transform contentTransform = null;
+    [SerializeField] private GameObject panelObject = null;
+    [SerializeField] private Transform contentTransform = null;
     public List<AchievementBase> achievementPanels = new List<AchievementBase>();
 
     [SerializeField] GameObject msgBox = null;
@@ -154,7 +154,7 @@ public class TitleManager : MonoBehaviour
             achievementPanels[i].achievementPanel = newObject.GetComponent<AchievementPanel>();
             achievementPanels[i].achievementPanel.SetValue(achievementPanels[i].title, achievementPanels[i].explanation);
             newObject.SetActive(true);
-            //achievementPanels[i].isCleared = DataManager.Inst.CurrentPlayer.clears[i];
+            achievementPanels[i].isCleared = DataManager.Inst.CurrentPlayer.clears[i];
         }
         for (int i = 0; i < 15; i++)
         {

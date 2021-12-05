@@ -201,11 +201,6 @@ public class GameManager : MonoSingleTon<GameManager>
         return true;
     }
 
-    public void SaveClears(int ID)
-    {
-        DataManager.Inst.CurrentPlayer.clears[ID] = true;
-    }
-
     public int CheckArrivalTime()
     {
         if(DataManager.Inst.CurrentPlayer.arrivalTime > 0)

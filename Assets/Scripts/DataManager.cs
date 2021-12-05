@@ -58,6 +58,12 @@ public class DataManager : MonoSingleTon<DataManager>
         Application.Quit();
     }
 
+    public void SaveClears(int ID)
+    {
+        player.clears[ID] = true;
+        SaveToJson();
+    }
+
     public void InGameDataReset()
     {
         player.stat_Knowledge = 0;

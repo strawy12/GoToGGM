@@ -54,7 +54,7 @@ public class AchievementManager : MonoBehaviour
 
         clearNotice.ShowNotice(achievementPanels[ID].title);
 
-        GameManager.Inst.SaveClears(ID);
+        DataManager.Inst.SaveClears(ID);
     }
     public void ClearEnding(int endingID)
     {
