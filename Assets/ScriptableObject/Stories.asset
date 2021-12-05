@@ -343,7 +343,7 @@ MonoBehaviour:
         needStatType: 0
         needStat: 0
         eventStoryID: 313
-        timeLimit: 6
+        timeLimit: 5
         percent: 0
     - storyName: "\uB208\uB098\uAC00 \uC5EC\uAE30\uC11C \uC65C \uB098\uC640...?"
       storyID: 32
@@ -388,7 +388,7 @@ MonoBehaviour:
         needStatType: 0
         needStat: 0
         eventStoryID: 323
-        timeLimit: 7
+        timeLimit: 5
         percent: 0
     - storyName: "\uB4DC\uB514\uC5B4 \uB3C4\uCC29\uD55C \uD559\uAD50"
       storyID: 33
@@ -586,7 +586,7 @@ MonoBehaviour:
         needStatType: 0
         needStat: 0
         eventStoryID: 513
-        timeLimit: 7
+        timeLimit: 5
         percent: 0
     - storyName: "\uBCC0\uC2E0\uBCA8\uD2B8\uC758 \uC0AC\uB098\uC774"
       storyID: 52
@@ -624,7 +624,7 @@ MonoBehaviour:
         needStatType: 0
         needStat: 0
         eventStoryID: 523
-        timeLimit: 7
+        timeLimit: 5
         percent: 0
     - storyName: "\uBB34\uC801\uC758 \uD544\uC0B4\uAE30!!"
       storyID: 53

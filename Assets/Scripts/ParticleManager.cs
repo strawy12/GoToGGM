@@ -15,9 +15,10 @@ public class ParticleManager : MonoBehaviour
     {
         if (!isPlay) return;
 
-        Vector3 targetPos = targetTransform.position;
-        targetPos.z = 0f;
-       currentParticle.transform.position = targetPos;
+            Vector3 targetPos = targetTransform.position;
+            targetPos.z = 0f;
+            currentParticle.transform.position = targetPos;
+
     }
 
     private void ChangeParticle(int particleIndex)
@@ -50,7 +51,7 @@ public class ParticleManager : MonoBehaviour
         {
             isDestroy = false;
             return;
-        } 
+        }
         Destroy(currentParticle.gameObject);
         currentParticle = null;
         isPlay = false;
