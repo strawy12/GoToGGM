@@ -291,8 +291,8 @@ MonoBehaviour:
       eventStories:
       - eventStoryID: 311
         increaseTime: 0
-        increaseStatType: 0
-        increaseStat: 0
+        increaseStatType: 2
+        increaseStat: 5
         isSuccess: 1
         effectSettings:
         - usedEffect: 1
@@ -312,18 +312,18 @@ MonoBehaviour:
           \uB3CC\uC9C4\uD558\uB294 \uAD34\uBB3C\uC5D0\uAC8C\uC11C \uB3C4\uB9DD\uCE58\uAE30
           \uC704\uD574 \uB354\uC6B1 \uBE68\uB9AC \uB2EC\uB824\uC57C \uD569\uB2C8\uB2E4!"
         eventFinalStory:
-        - "\uC870\uAE08 \uB354 \uBE68\uB9AC...!"
+        - "\uC870\uAE08 \uB354 \uBE68\uB9AC...! [\uC9C0\uC2DD +5]"
       - eventStoryID: 311
         increaseTime: 0
-        increaseStatType: 0
-        increaseStat: 0
+        increaseStatType: 4
+        increaseStat: 20
         isSuccess: 0
         effectSettings:
         - usedEffect: 1
           effectNum: 8
           playStoryOrder: 1
         - usedEffect: 2
-          effectNum: 3
+          effectNum: 0
           playStoryOrder: 1
         eventMainStory: "\uB2F9\uC2E0\uC740 \uC0C1\uD669\uC774 \uC2EC\uC0C1\uCE58
           \uC54A\uC74C\uC744 \uAE68\uB2EB\uACE0 \uCC3D\uBB38 \uBC16\uC73C\uB85C \uB6F0\uC5B4\uB0B4\uB9BD\uB2C8\uB2E4!\r\n\n\uCC29\uC9C0\uC5D0
@@ -333,7 +333,7 @@ MonoBehaviour:
           \uAC80\uC740 \uD615\uCC44\uC758 \uAD34\uBB3C\uB4E4\uC774 \uB2F9\uC2E0\uC5D0\uAC8C
           \uB3CC\uC9C4\uD558\uACE0 \uC788\uB2E4\uB294 \uAC83\uC744..."
         eventFinalStory:
-        - "\uB3C4\uB9DD\uCCD0!!!!!!"
+        - "\uB3C4\uB9DD\uCCD0!!!!!! [\uB3C4\uCC29\uC2DC\uAC04 +20\uBD84]"
       - eventStoryID: 312
         increaseTime: 0
         increaseStatType: 0
@@ -346,8 +346,8 @@ MonoBehaviour:
         - usedEffect: 2
           effectNum: 0
           playStoryOrder: 3
-        - usedEffect: 2
-          effectNum: 3
+        - usedEffect: 1
+          effectNum: 14
           playStoryOrder: 3
         eventMainStory: "\uB2F9\uC2E0\uC740 \uAC00\uBC29 \uC548 \uC5D0\uC11C \uBE44\uC0C1\uC6A9
           \uAE00\uB85D .10 AIS\uB97C \uAEBC\uB0B4 \uC8FC\uBCC0\uC744 \uACBD\uACC4\uD569\uB2C8\uB2E4...\r\n\n\uADF8\uB54C!

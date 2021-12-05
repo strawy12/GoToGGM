@@ -124,8 +124,8 @@ public class StoryManager : MonoBehaviour
 
     private void SetScenraioNum()
     {
-        DataManager.Inst.CurrentPlayer.crtScenarioCnt++;
         GameManager.Inst.SetNowTime();
+        DataManager.Inst.CurrentPlayer.crtScenarioCnt++;
 
         if (DataManager.Inst.CurrentPlayer.crtScenarioCnt == 5)
         {
