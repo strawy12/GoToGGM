@@ -112,7 +112,7 @@ public class MoveAnimScene : MonoBehaviour
 
         else
         {
-            GameManager.Inst.Particle.PlayParticle(4, 2.3f, playerobj.transform);
+            GameManager.Inst.Particle.PlayParticle(4, 2f, playerobj.transform);
         }
 
 

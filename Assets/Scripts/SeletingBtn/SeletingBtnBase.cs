@@ -95,7 +95,7 @@ public class SeletingBtnBase : MonoBehaviour
                 GameManager.Inst.UI.UnShowSelectBtn();
                 DataManager.Inst.InGameDataReset();
                 GameManager.Inst.UI.SetBGM(9);
-                GameManager.Inst.UI.DarkBattleEffect(true);
+                GameManager.Inst.UI.DarkBattleEffect(true, true);
                 return;
             }
             CheckInfo();
