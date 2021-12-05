@@ -1970,7 +1970,7 @@ RectTransform:
   m_GameObject: {fileID: 592949857}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 287093551}
   m_Father: {fileID: 440584668}
@@ -3971,9 +3971,9 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "<b>[ Game Info ]</b>\n\n<Size=72><b>BGM</b>\nhttps://musmus.main.jp/\n\n<b>Effect
-    Sound</b>\nhttps://www.zapsplat.com/\n\n<b>Thank you For</b>\nTeacher Shiba,\nGGM\n\n<b>Programming</b>\nOIF,
-    Choi WonBin\n\n<b>Main Game Design</b>\nJung JungBae\n\n\n<b> Made By Team UikJungWon
-    \n\u300EGo To GGM! \u300F</b>\n\n</Size>"
+    Sound</b>\nhttps://www.zapsplat.com/\n\n<b>Thank you For</b>\nTeacher Shiba,
+    GGM\nKim JungHoon\n\n<b>Programming</b>\nOIF, Choi WonBin\n\n<b>Main Game Design</b>\nJung
+    JungBae\n\n\n<b> Made By Team UikJungWon \n\u300EGo To GGM! \u300F</b>\n\n</Size>"
 --- !u!222 &1447794110
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8551,8 +8551,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a6e1a13d490fbb445980ee64b27917d6, type: 3}
-    m_FontSize: 120
+    m_Font: {fileID: 12800000, guid: 934f9c2cea2d90845a544c579fe9090b, type: 3}
+    m_FontSize: 83
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -8780,7 +8780,7 @@ MonoBehaviour:
         m_MethodName: UnActivePanal
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 7015952483632405776}
+          m_ObjectArgument: {fileID: 498720191}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -8960,11 +8960,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a6e1a13d490fbb445980ee64b27917d6, type: 3}
-    m_FontSize: 139
+    m_Font: {fileID: 12800000, guid: 934f9c2cea2d90845a544c579fe9090b, type: 3}
+    m_FontSize: 110
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 283
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -9066,8 +9066,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a6e1a13d490fbb445980ee64b27917d6, type: 3}
-    m_FontSize: 120
+    m_Font: {fileID: 12800000, guid: 934f9c2cea2d90845a544c579fe9090b, type: 3}
+    m_FontSize: 83
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -9155,11 +9155,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a6e1a13d490fbb445980ee64b27917d6, type: 3}
-    m_FontSize: 139
+    m_Font: {fileID: 12800000, guid: 934f9c2cea2d90845a544c579fe9090b, type: 3}
+    m_FontSize: 110
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 283
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -9234,8 +9234,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a6e1a13d490fbb445980ee64b27917d6, type: 3}
-    m_FontSize: 120
+    m_Font: {fileID: 12800000, guid: 934f9c2cea2d90845a544c579fe9090b, type: 3}
+    m_FontSize: 83
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -9313,8 +9313,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a6e1a13d490fbb445980ee64b27917d6, type: 3}
-    m_FontSize: 120
+    m_Font: {fileID: 12800000, guid: 934f9c2cea2d90845a544c579fe9090b, type: 3}
+    m_FontSize: 83
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1

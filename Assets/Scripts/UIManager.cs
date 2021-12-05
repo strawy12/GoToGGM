@@ -782,7 +782,7 @@ public class UIManager : MonoBehaviour
 
         else
         {
-            darkBattlePanal.DOFade(1f, 1f).OnComplete(() => darkBattlePanal.gameObject.SetActive(false));
+            darkBattlePanal.DOFade(0f, 1f).OnComplete(() => darkBattlePanal.gameObject.SetActive(false));
         }
 
     }
