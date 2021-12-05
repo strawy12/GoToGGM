@@ -95,10 +95,12 @@ public class SoundManager : MonoSingleTon<SoundManager>
     public void BGMMute(bool isMute)
     {
         bgmAudio.mute = isMute;
+        DataManager.Inst.CurrentPlayer.bgmMute = isMute;
     }
     public void EffectMute(bool isMute)
     {
         effectAudio.mute = isMute;
+        DataManager.Inst.CurrentPlayer.effectMute = isMute;
     }
 
     public void EffectVolume(float value)
