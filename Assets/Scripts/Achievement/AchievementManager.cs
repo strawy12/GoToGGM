@@ -119,7 +119,7 @@ public class AchievementManager : MonoBehaviour
         }
         else
         {
-            Clear(10);
+            Clear(11);
         }
     }
     public void CheckUnlucky()
@@ -130,7 +130,7 @@ public class AchievementManager : MonoBehaviour
         }
         else
         {
-            Clear(11);
+            Clear(10);
         }
     }
 
