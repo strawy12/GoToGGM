@@ -830,8 +830,6 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator NormalEnddingEffect()
     {
-
-
         darkBattlePanal.transform.GetChild(0).gameObject.SetActive(false);
         enddingCreditPanal.transform.GetChild(0).gameObject.SetActive(false);
         enddingCreditPanal.transform.GetChild(1).gameObject.SetActive(false);
@@ -867,12 +865,14 @@ public class UIManager : MonoBehaviour
     public IEnumerator SpecialEnddingEffect()
     {
         DarkBattleEffect(true);
-
+            
         yield return new WaitForSeconds(1f);
 
         PlayEffect(5);
 
         yield return new WaitForSeconds(2f);
+
+        SetBGM(10);
 
         RectTransform enddingCreditText = enddingCreditPanal.transform.GetChild(1).GetComponent<RectTransform>();
         RectTransform targetTransform = enddingCreditPanal.GetComponent<RectTransform>();
@@ -891,9 +891,9 @@ public class UIManager : MonoBehaviour
         enddingCreditPanal.gameObject.SetActive(true);
         enddingCreditPanal.DOFade(1f, 1f);
         yield return new WaitForSeconds(1f);
-        enddingCreditText.DOAnchorPosY(targetPos.y, 20f);
+        enddingCreditText.DOAnchorPosY(targetPos.y, 25f);
 
-        yield return new WaitForSeconds(18f);
+        yield return new WaitForSeconds(23f);
 
         enddingCreditPanal.transform.GetChild(4).gameObject.SetActive(true);
         enddingCreditPanal.transform.GetChild(4).GetComponent<Image>().DOFade(1f, 2f);
@@ -953,6 +953,11 @@ public class UIManager : MonoBehaviour
     public void SetEffectSound(int effectNum)
     {
         SoundManager.Inst.SetEffectSound(effectNum);
+    }
+
+    public void StopBGM()
+    {
+        SoundManager.Inst.StopBGM();
     }
 
     public float GetEffectSoundLength()

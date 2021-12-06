@@ -32,7 +32,7 @@ public class SoundManager : MonoSingleTon<SoundManager>
         bgmAudio = GetComponent<AudioSource>();
         effectAudio = transform.GetChild(0).GetComponent<AudioSource>();
 
-       bgms = Resources.LoadAll<AudioClip>("Audios/BGMs");
+        bgms = Resources.LoadAll<AudioClip>("Audios/BGMs");
         effectSounds = Resources.LoadAll<AudioClip>("Audios/Effects");
     }
 
@@ -86,10 +86,7 @@ public class SoundManager : MonoSingleTon<SoundManager>
         if (bgmAudio == null) return;
         bgmAudio.volume = value;
 
-        if (IsMain)
-        {
-            DataManager.Inst.CurrentPlayer.bgmVolume = value;
-        }
+        DataManager.Inst.CurrentPlayer.bgmVolume = value;
     }
 
     public void BGMMute(bool isMute)
