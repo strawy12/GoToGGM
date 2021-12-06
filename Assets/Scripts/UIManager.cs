@@ -640,14 +640,28 @@ public class UIManager : MonoBehaviour
     {
         int arrivalTime = 540 + DataManager.Inst.CurrentPlayer.arrivalTime;
         string lastWord = DataManager.Inst.CurrentPlayer.GetLastWord();
-        bool isLating = DataManager.Inst.CurrentPlayer.arrivalTime < 0;
+        
 
         int hour = arrivalTime / 60;
         arrivalTime -= hour * 60;
 
         string message = string.Format("<color=#000000> 현재 도착 예정 시간\n{0:00} : {1:00}</color>\n\n{2}", hour, arrivalTime, lastWord);
 
-        StartCoroutine(PlayMessage(message, isLating ? Color.blue : Color.red));
+        if(DataManager.Inst.CurrentPlayer.arrivalTime > 0)
+        {
+            StartCoroutine(PlayMessage(message, Color.red));
+        }
+
+        else if(DataManager.Inst.CurrentPlayer.arrivalTime == 0)
+        {
+            Color color = new Color(1f, 0.64f, 0f);
+            StartCoroutine(PlayMessage(message, color));
+        }
+
+        else
+        {
+            StartCoroutine(PlayMessage(message, Color.blue));
+        }
 
     }
 

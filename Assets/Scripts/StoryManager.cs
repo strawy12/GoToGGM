@@ -31,6 +31,7 @@ public class StoryManager : MonoBehaviour
         {
             isEndding = true;
         }
+        CheckJobSelectScene();
         StartSceneStory();
     }
 
