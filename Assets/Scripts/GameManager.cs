@@ -1,56 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
-public enum ESelectType
-{
-    Normal,
-    Gread,
-    Special,
-    Final,
-    Hidden
-}
 
-public enum EStatType
-{
-    None,
-    Sencetive,
-    Knowledge,
-    Wit,
-    ArrivalTime
-}
-
-public enum EStoryOrder
-{
-    Room,
-    Bus1,
-    Bus2,
-    Subway1,
-    Transfer,
-    Walk,
-    Endding
-}
-
-public enum EEffectType
-{
-    BackGround,
-    Sound,
-    Effect,
-    BGM
-}
-
-public enum EEnddingType
-{
-    Late,
-    Special,
-    Fast
-}
 //public enum btnState { Special, Normal, Good }
 
 public class GameManager : MonoSingleTon<GameManager>
 {
-
     private ParticleManager particleManager;
     private AchievementManager achievementManager;
     private UIManager uiManager;
@@ -65,6 +24,8 @@ public class GameManager : MonoSingleTon<GameManager>
     public StoryManager Story { get { return storyManager; } }
     public Timer Timer { get { return timer; } }
     public int StoryLine { get { return DataManager.Inst.CurrentPlayer.storyLineNum; } }
+
+    private UnityEvent<int> achievementEvent;
     
     void Awake()
     {
@@ -241,5 +202,15 @@ public class GameManager : MonoSingleTon<GameManager>
             ID += 6;
         }
         achievementManager.ClearEnding(ID);
+    }
+
+    public void AddListenerToAchievenmentEvent(UnityAction<int> action)
+    {
+        achievementEvent.AddListener(action);
+    }
+
+    public void CallAchievenmentEvent(EAchievenment id)
+    {
+        achievementEvent.Invoke((int)id);
     }
 }

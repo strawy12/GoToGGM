@@ -23,8 +23,10 @@ public class AchievementManager : MonoBehaviour
     private int testID = 0;
     private int luckPoint = 0;
     private bool isShown = false;
+
     private void Start()
     {
+        GameManager.Inst.AddListenerToAchievenmentEvent(Clear);
         CreatePanels();
     }
 
