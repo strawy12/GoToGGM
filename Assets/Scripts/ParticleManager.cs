@@ -9,11 +9,12 @@ public class ParticleManager : MonoBehaviour
     private Transform targetTransform;
 
     private bool isPlay;
+    private bool usedTaerget;
     private bool isDestroy;
 
     private void Update()
     {
-        if (!isPlay) return;
+        if (!isPlay || !usedTaerget) return;
 
             Vector3 targetPos = targetTransform.position;
             targetPos.z = 0f;
@@ -37,12 +38,16 @@ public class ParticleManager : MonoBehaviour
         targetTransform = target;
     }
 
-    private void PlayParticle(float delay)
+    private void PlayParticle(float delay, bool usedTaerget)
     {
         isPlay = true;
+        this.usedTaerget = usedTaerget;
         currentParticle.gameObject.SetActive(true);
         currentParticle.Play();
-        Invoke("StopParticle", delay);
+        if(delay > 0f)
+        {
+            Invoke("StopParticle", delay);
+        }
     }
 
     private void StopParticle()
@@ -61,6 +66,12 @@ public class ParticleManager : MonoBehaviour
     {
         GameManager.Inst.Particle.SetTarget(target);
         GameManager.Inst.Particle.ChangeParticle(particleIndex);
-        GameManager.Inst.Particle.PlayParticle(delay);
+        GameManager.Inst.Particle.PlayParticle(delay, true);
+    }
+
+    public void PlayParticle(int particleIndex, float delay)
+    {
+        GameManager.Inst.Particle.ChangeParticle(particleIndex);
+        GameManager.Inst.Particle.PlayParticle(delay, false);
     }
 }

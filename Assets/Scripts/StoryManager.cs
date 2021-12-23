@@ -13,6 +13,7 @@ public class StoryManager : MonoBehaviour
     private EffectSetting[] nowEffectSettings;
 
     private bool endScenario = false;
+    private bool enterEventStory = false;
     public bool IsEndScenario
     {
         get
@@ -38,7 +39,7 @@ public class StoryManager : MonoBehaviour
     private void CheckJobSelectScene()
     {
         Player player = DataManager.Inst.CurrentPlayer;
-        if(player.playerjob != "고등학생" && GetNowStory().storyID == 13)
+        if (player.playerjob != "고등학생" && GetNowStory().storyID == 13)
         {
             player.playerjob = "고등학생";
             player.stat_Knowledge = 0;
@@ -55,7 +56,8 @@ public class StoryManager : MonoBehaviour
 
     public int GetCurrentScenarioNum()
     {
-        return (int)storyLine.storyLines[GameManager.Inst.StoryLine].storyOrder[DataManager.Inst.CurrentPlayer.crtScenarioCnt];
+        int scenarioNum = (int)storyLine.storyLines[GameManager.Inst.StoryLine].storyOrder[DataManager.Inst.CurrentPlayer.crtScenarioCnt];
+        return scenarioNum;
     }
 
 
@@ -86,7 +88,7 @@ public class StoryManager : MonoBehaviour
 
     public Story GetEnddingStory(int num)
     {
-        return stories.scenarios[6].stories[num];
+        return stories.scenarios[(int)EStoryOrder.Endding].stories[num];
     }
 
     public Story GetNowStory()
@@ -104,18 +106,21 @@ public class StoryManager : MonoBehaviour
 
     public void SetStoryNum()
     {
-        int maxStoryNum = stories.scenarios[GetCurrentScenarioNum()].stories.Length - 1;
-        int crtStoryNum = DataManager.Inst.CurrentPlayer.crtStoryNum;
-        bool usedEventStory = stories.scenarios[GetCurrentScenarioNum()].stories[crtStoryNum].selectLines.Length >= 3;
-
-        if (DataManager.Inst.CurrentPlayer.crtStoryNum < maxStoryNum)
+        if (!isEndding)
         {
-            DataManager.Inst.CurrentPlayer.crtStoryNum++;
-            if (usedEventStory)
+            int maxStoryNum = stories.scenarios[GetCurrentScenarioNum()].stories.Length - 1;
+            int crtStoryNum = DataManager.Inst.CurrentPlayer.crtStoryNum;
+            bool usedEventStory = stories.scenarios[GetCurrentScenarioNum()].stories[crtStoryNum].selectLines.Length >= 3;
+
+            if (DataManager.Inst.CurrentPlayer.crtStoryNum < maxStoryNum)
             {
-                DataManager.Inst.CurrentPlayer.crtEventStoryCnt++;
+                DataManager.Inst.CurrentPlayer.crtStoryNum++;
+                if (usedEventStory)
+                {
+                    DataManager.Inst.CurrentPlayer.crtEventStoryCnt++;
+                }
+                return;
             }
-            return;
         }
 
         SetScenraioNum();
@@ -126,12 +131,27 @@ public class StoryManager : MonoBehaviour
     private void SetScenraioNum()
     {
         GameManager.Inst.SetNowTime();
-        DataManager.Inst.CurrentPlayer.crtScenarioCnt++;
+        if (!enterEventStory)
+        {
+            DataManager.Inst.CurrentPlayer.crtScenarioCnt++;
 
-        if (DataManager.Inst.CurrentPlayer.crtScenarioCnt == 5)
+            if (DataManager.Inst.CurrentPlayer.crtScenarioCnt == 5)
+            {
+                isEndding = true;
+            }
+        }
+
+        if (!enterEventStory && DataManager.Inst.CurrentPlayer.crtScenarioCnt > 6)
         {
             isEndding = true;
+            DataManager.Inst.CurrentPlayer.crtScenarioCnt = 5;
         }
+
+        if(enterEventStory)
+        {
+            enterEventStory = false;
+        }
+
         endScenario = true;
 
         DataManager.Inst.CurrentPlayer.crtStoryNum = 0;
@@ -140,6 +160,11 @@ public class StoryManager : MonoBehaviour
         GameManager.Inst.UI.ResetStoryText();
     }
 
+    public void EnterEventStory()
+    {
+        enterEventStory = true;
+        DataManager.Inst.CurrentPlayer.crtScenarioCnt = 6;
+    }
 
     public void SetSelectBtn(SeletingBtnBase seletingBtn)
     {
@@ -158,12 +183,15 @@ public class StoryManager : MonoBehaviour
                 GameManager.Inst.SelectJob();
                 GameManager.Inst.UI.StartWrite(story.mainStory, story.usedEffect);
                 break;
+            case 21:
+                CertainJobPlay("기획자", "그래픽 아티스트&프로그래머");
+                break;
             case 24:
-                CertainJobPlay("기획자&개발자", "그래픽 아티스트");
+                CertainJobPlay("기획자&프로그래머", "그래픽 아티스트");
                 break;
 
             case 44:
-                CertainJobPlay("기획자", "개발자");
+                CertainJobPlay("기획자", "프로그래머");
                 break;
 
             case 54:
@@ -178,35 +206,63 @@ public class StoryManager : MonoBehaviour
     {
         string[] fJobs = firstJobs.Split('&');
         string[] sJobs = sencondJobs.Split('&');
-
+        int num = 0;
+        bool isSelected = false;
 
         string[] messages = GetNowStory().mainStory.Split('&');
-
+        Debug.Log(messages.Length);
         string story = "";
 
         for (int i = 0; i < fJobs.Length; i++)
         {
             if (DataManager.Inst.CurrentPlayer.playerjob == fJobs[i])
             {
+                num = 0;
                 story = messages[0];
-                GameManager.Inst.UI.StartWrite(story, GameManager.Inst.UI.ShowSingleSelectBtn, 0, GetNowStory().usedEffect);
-                return;
+                isSelected = true;
             }
         }
 
-        for (int i = 0; i < sJobs.Length; i++)
+        if (!isSelected)
         {
-            if (DataManager.Inst.CurrentPlayer.playerjob == sJobs[i])
+            for (int i = 0; i < sJobs.Length; i++)
             {
-                story = messages[1];
-                GameManager.Inst.UI.StartWrite(story, GameManager.Inst.UI.ShowSingleSelectBtn, 1, GetNowStory().usedEffect);
+                if (DataManager.Inst.CurrentPlayer.playerjob == sJobs[i])
+                {
+                    num = 1;
+                    story = messages[1];
+
+                }
+            }
+        }
+
+        if (story != "")
+        {
+            if (messages.Length <= 2)
+            {
+                GameManager.Inst.UI.StartWrite(story, GameManager.Inst.UI.ShowSingleSelectBtn, num, GetNowStory().usedEffect);
+                return;
+            }
+
+            else
+            {
+                string additionStory = "";
+                for (int i = 2; i < messages.Length; i++)
+                {
+                    additionStory = string.Format("{0}{1}", additionStory, messages[i]);
+                }
+                story = string.Format("{0}{1}", story, additionStory);
+
+                GameManager.Inst.UI.StartWrite(story, GetNowStory().usedEffect);
                 return;
             }
         }
 
-        story = messages[0];
-        GameManager.Inst.UI.StartWrite(story, GameManager.Inst.UI.ShowSingleSelectBtn, 0, GetNowStory().usedEffect);
-
+        else
+        {
+            story = messages[0];
+            GameManager.Inst.UI.StartWrite(story, GameManager.Inst.UI.ShowSingleSelectBtn, num, GetNowStory().usedEffect);
+        }
     }
 
     public void StartSceneStory(float delay = 0f)
@@ -280,6 +336,7 @@ public class StoryManager : MonoBehaviour
         if (isEndding)
         {
             PlayEndding();
+
             return;
         }
 
@@ -296,11 +353,13 @@ public class StoryManager : MonoBehaviour
         }
 
 
-        
+
+
 
         if (story.usedFunc)
         {
             StartEvent(story);
+
             return;
         }
         GameManager.Inst.UI.StartWrite(GetNowStory().mainStory, story.usedEffect);
@@ -382,7 +441,7 @@ public class StoryManager : MonoBehaviour
                 return GameManager.Inst.UI.PlayEffect(effectNum);
 
             case EEffectType.BGM:
-                if(effectNum == -1)
+                if (effectNum == -1)
                 {
                     GameManager.Inst.UI.StopBGM();
                 }
@@ -401,12 +460,11 @@ public class StoryManager : MonoBehaviour
     private void StartEndding(Story story)
     {
         int num = story.storyID - 70;
-        Debug.Log(story.storyName);
         GameManager.Inst.UI.StartWrite(story.mainStory, PlayEnddingCredit, num, true);
     }
 
 
-   public void PlayEnddingCredit(int num)
+    public void PlayEnddingCredit(int num)
     {
         switch (num)
         {

@@ -52,15 +52,7 @@ public class GameManager : MonoSingleTon<GameManager>
         }
     }
 
-    private void OnApplicationQuit()
-    {
-        DataManager.Inst.SaveToJson();
-    }
-
-    private void OnApplicationPause(bool pause)
-    {
-        DataManager.Inst.SaveToJson();
-    }
+    
 
     public void DataReset()
     {
@@ -80,7 +72,11 @@ public class GameManager : MonoSingleTon<GameManager>
         {
             int index = DataManager.Inst.CurrentPlayer.usedTimeCnt;
             DataManager.Inst.CurrentPlayer.usedTimeCnt++;
-            DataManager.Inst.CurrentPlayer.nowTime += storyLine.usedTimeArray[index];
+
+            if(storyLine.usedTimeArray.Length > index)
+            {
+                DataManager.Inst.CurrentPlayer.nowTime += storyLine.usedTimeArray[index];
+            }
         }
 
         UI.SetNowTimeText();
@@ -158,6 +154,9 @@ public class GameManager : MonoSingleTon<GameManager>
 
             case EStatType.Sencetive:
                 return DataManager.Inst.CurrentPlayer.stat_Sencetive >= needStat;
+
+            case EStatType.ArrivalTime:
+                return DataManager.Inst.CurrentPlayer.arrivalTime <= -20;
         }
         return true;
     }
@@ -171,12 +170,26 @@ public class GameManager : MonoSingleTon<GameManager>
 
         else if(DataManager.Inst.CurrentPlayer.arrivalTime == 0)
         {
+            string playerJob = DataManager.Inst.CurrentPlayer.playerjob;
+
+            switch(playerJob)
+            {
+                case "기획자":
+                    return 1;
+
+                case "프로그래머":
+                    return 2;
+
+                case "그래픽 아티스트":
+                    return 3;
+            }
+
             return 1;
         }
 
         else
         {
-            return 2;
+            return 4;
         }
     }
 

@@ -34,6 +34,7 @@ public class Player
     public bool effectMute;
 
     public int fontSize;
+    public float writeSpeed = 0.03f;
     public Player(string playerjob, int stat_Sencetive, int stat_Knowledge, int stat_Wit, float bgmVolume, float effectVolume, bool bgmMute, bool effectMute, int fontSize)
     {
         this.playerjob = playerjob;

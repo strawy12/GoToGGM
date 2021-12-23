@@ -11,8 +11,7 @@ public class EventStory
     public int increaseTime;
 
     [Header("증가 스탯")]
-    public EStatType increaseStatType;
-    public int increaseStat;
+    public IncreaseStats[] increaseStats;
 
     [Header("욕심 선택지 전용")]
     public bool isSuccess;
@@ -31,6 +30,22 @@ public class EventStory
     [TextArea(6, 10)] public string eventMainStory;
 
     public string[] eventFinalStory;
+
+    public bool ExistIncreaseStats { get { return increaseStats.Length != 0; } }
+    public bool ExistIncreaseStat_ArrivalTime
+    { 
+        get 
+        { 
+            foreach(var increaseStat in increaseStats)
+            {
+                if(increaseStat.increaseStatType == EStatType.ArrivalTime)
+                {
+                    return true;
+                }
+            }
+            return false; 
+        } 
+    }
 }
 
 [System.Serializable]
@@ -38,6 +53,13 @@ public class EventStoryLine
 {
     public string storyLineName;
     public EventStory[] eventStories;
+}
+
+[System.Serializable]
+public class IncreaseStats
+{
+    public EStatType increaseStatType;
+    public int increaseStat;
 }
 
 [System.Serializable]

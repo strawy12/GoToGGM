@@ -13,6 +13,8 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private Toggle effectMute = null;
     [SerializeField] private Toggle bgmMute = null;
     [SerializeField] private Slider fontSlider = null;
+    [SerializeField] private Slider speedSlider = null;
+
     [SerializeField] private Text testText = null;
     [SerializeField] private HelpBox helpBox = null;
     [SerializeField] private GameObject tutoMsgBox = null;
@@ -105,6 +107,7 @@ public class TitleManager : MonoBehaviour
         bgmSlider.value = DataManager.Inst.CurrentPlayer.bgmVolume;
         fontSlider.value = DataManager.Inst.CurrentPlayer.fontSize;
         testText.fontSize = DataManager.Inst.CurrentPlayer.fontSize;
+        speedSlider.value = (0.1f - DataManager.Inst.CurrentPlayer.writeSpeed);
         if (DataManager.Inst.CurrentPlayer.bgmMute)
             bgmMute.isOn = true;
         if (DataManager.Inst.CurrentPlayer.effectMute)
@@ -125,6 +128,13 @@ public class TitleManager : MonoBehaviour
     {
         SoundManager.Inst.BGMMute(isMute);
         DataManager.Inst.SaveToJson();
+    }
+
+    public void SetWriteSpeed(float value)
+    {
+        float speed = 0.1f - value;
+
+        DataManager.Inst.CurrentPlayer.writeSpeed = speed;
     }
 
     public void EffectMute(bool isMute)

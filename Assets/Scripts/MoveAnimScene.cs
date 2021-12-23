@@ -24,6 +24,7 @@ public class MoveAnimScene : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
+
         isFirst = DataManager.Inst.CurrentPlayer.crtStoryNum == 0 || stageObjTemp.parent.childCount <= 1;
 
         if (rects != null && isFirst)

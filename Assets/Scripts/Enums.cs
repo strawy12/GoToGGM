@@ -6,7 +6,8 @@ public enum ESelectType
     Gread,
     Special,
     Final,
-    Hidden
+    Hidden,
+    Event
 }
 
 public enum EStatType
@@ -26,7 +27,11 @@ public enum EStoryOrder
     Subway1,
     Transfer,
     Walk,
+    Magic_BookStore,
+    VR_Arcade,
+    Battle_CandyShop,
     Endding
+
 }
 
 public enum EEffectType

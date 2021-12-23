@@ -19,7 +19,7 @@ public class SeletingBtnBase : MonoBehaviour
 
     protected int btnNum = 0;
 
-    public void Start()
+    public void Awake()
     {
         currentButton = GetComponent<Button>();
         btnImage = GetComponent<Image>();
@@ -34,6 +34,26 @@ public class SeletingBtnBase : MonoBehaviour
         currentSelectState = selectLine.selectType;
         btnNum = num;
 
+        if (currentSelectState == ESelectType.Event)
+        {
+            int additionNum = 0;
+            switch (DataManager.Inst.CurrentPlayer.playerjob)
+            {
+                case "기획자":
+                    additionNum = 0;
+                    break;
+
+                case "프로그래머":
+                    additionNum = 1;
+                    break;
+
+                case "그래픽 아티스트":
+                    additionNum = 2;
+                    break;
+            }
+            currentSelectLine.eventStoryID += additionNum;
+        }
+
         if (currentSelectState == ESelectType.Gread)
         {
             int randNum = Random.Range(1, 11);
@@ -45,13 +65,13 @@ public class SeletingBtnBase : MonoBehaviour
             GameManager.Inst.Story.EndStory();
             currentEventStory = null;
         }
-
+        
         else
         {
             currentEventStory = GameManager.Inst.Story.GetEventStory(currentSelectLine.eventStoryID);
         }
 
-        if (currentSelectState == ESelectType.Special)
+        if (currentSelectState == ESelectType.Special || currentSelectState == ESelectType.Event)
         {
             currentButton.interactable = GameManager.Inst.CheckPlayerStat(currentSelectLine.needStatType, currentSelectLine.needStat);
         }
@@ -68,9 +88,13 @@ public class SeletingBtnBase : MonoBehaviour
     {
         if (currentEventStory == null) return;
 
-        if (currentEventStory.increaseStatType != EStatType.None)
+        if (currentEventStory.ExistIncreaseStats)
         {
-            GameManager.Inst.SetPlayerStat(currentEventStory.increaseStatType, currentEventStory.increaseStat);
+            IncreaseStats[] increaseStats = currentEventStory.increaseStats;
+           foreach(var increaseStat in increaseStats)
+            {
+                GameManager.Inst.SetPlayerStat(increaseStat.increaseStatType, increaseStat.increaseStat);
+            }
         }
         if (currentEventStory.increaseTime != 0)
         {
@@ -90,21 +114,22 @@ public class SeletingBtnBase : MonoBehaviour
 
         if (currentSelectState == ESelectType.Final)
         {
-            if(GameManager.Inst.Story.isEndding)
+            if (GameManager.Inst.Story.isEndding)
             {
                 GameManager.Inst.UI.UnShowSelectBtn();
                 DataManager.Inst.InGameDataReset();
-                GameManager.Inst.UI.SetBGM(9);
+                GameManager.Inst.UI.SetBGM(11);
                 GameManager.Inst.UI.DarkBattleEffect(true, true);
                 return;
             }
+
             CheckInfo();
 
             GameManager.Inst.UI.UnShowSelectBtn();
             GameManager.Inst.Story.SetStoryNum();
 
-            if (GameManager.Inst.Story.IsEndScenario || 
-                (currentEventStory != null && currentEventStory.increaseStatType == EStatType.ArrivalTime))
+            if (GameManager.Inst.Story.IsEndScenario ||
+                (currentEventStory != null && currentEventStory.ExistIncreaseStat_ArrivalTime))
             {
                 GameManager.Inst.Story.StartSceneStory(4f);
             }
@@ -124,13 +149,18 @@ public class SeletingBtnBase : MonoBehaviour
                 GameManager.Inst.CheckLucky(currentEventStory.isSuccess);
             }
 
+            if(currentSelectState == ESelectType.Event)
+            {
+                GameManager.Inst.Story.EnterEventStory();
+            }
+
             if (currentEventStory.usedEffect)
             {
                 GameManager.Inst.Story.SetNowEffectSettings(currentEventStory.effectSettings);
             }
 
             string storyLine = currentEventStory.eventMainStory;
-            GameManager.Inst.UI.StartWrite(storyLine, currentEventStory.usedEffect, GameManager.Inst.UI.ActiveFinalSelectBtn);
+            GameManager.Inst.UI.StartWrite(storyLine, GameManager.Inst.UI.ActiveFinalSelectBtn, btnNum, currentEventStory.usedEffect);
             GameManager.Inst.UI.UnShowSelectBtn();
 
             ChangeFinalSelect();
@@ -168,7 +198,7 @@ public class SeletingBtnBase : MonoBehaviour
     {
         if (isActive)
         {
-            if (currentSelectState != ESelectType.Special)
+            if (currentSelectState != ESelectType.Special && currentSelectState != ESelectType.Event)
             {
                 currentButton.interactable = true;
             }

@@ -24,9 +24,8 @@ public class AchievementManager : MonoBehaviour
     private int luckPoint = 0;
     private bool isShown = false;
 
-    private void Start()
+    private void Awake()
     {
-        GameManager.Inst.AddListenerToAchievenmentEvent(Clear);
         CreatePanels();
     }
 
@@ -60,6 +59,7 @@ public class AchievementManager : MonoBehaviour
     }
     public void ClearEnding(int endingID)
     {
+        Debug.Log(endingID);
         Clear(endingID);
         CheckEndingCollector();
     }

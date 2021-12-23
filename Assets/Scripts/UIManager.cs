@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Toggle effectMute = null;
     [SerializeField] private Toggle bgmMute = null;
     [SerializeField] private Slider fontSlider = null;
+    [SerializeField] private Slider speedSlider = null;
 
     [SerializeField] private GameObject msgBox = null;
     [SerializeField] private Text testText = null;
@@ -66,6 +67,8 @@ public class UIManager : MonoBehaviour
     public bool isSelected = false;
 
     private List<GameObject> activePanals = new List<GameObject>();
+
+    private float CurrentWriteSpeed { get { return DataManager.Inst.CurrentPlayer.writeSpeed; } }
 
     private void Awake()
     {
@@ -164,7 +167,7 @@ public class UIManager : MonoBehaviour
             messageText = string.Format("{0}{1}", messageText, c);
             storyText.text = messageText;
             storyText.CheckTextSize();
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(CurrentWriteSpeed);
 
             if (c == '\n')
             {
@@ -195,7 +198,7 @@ public class UIManager : MonoBehaviour
             yield return CheckEffect(storyCnt);
         }
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(CurrentWriteSpeed);
     }
 
     public IEnumerator LastCheckEffect(string message)
@@ -312,7 +315,7 @@ public class UIManager : MonoBehaviour
 
     public string ReplaceMessage(string message)
     {
-        message = message.Replace("&", DataManager.Inst.CurrentPlayer.nickname);
+        message = message.Replace("$", DataManager.Inst.CurrentPlayer.nickname);
         message = message.Replace("*", DataManager.Inst.CurrentPlayer.playerjob);
 
         return message;
@@ -480,18 +483,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void ActiveFinalSelectBtn()
+    public void ActiveFinalSelectBtn(int btnNum)
     {
-        for (int i = 0; i < 3; i++)
-        {
-            if (selectBtns[i].SelectType == ESelectType.Final)
-            {
-                selectBtns[i].ActiveBtn(true);
+        selectBtns[btnNum].ActiveBtn(true);
 
-                GameManager.Inst.Story.EndStory();
-                return;
-            }
-        }
+        GameManager.Inst.Story.EndStory();
     }
 
     public void OnClickTouchScreen()
@@ -555,6 +551,10 @@ public class UIManager : MonoBehaviour
         if (num == 4)
         {
             num = 0;
+        }
+        if (num == 5)
+        {
+            num--;
         }
 
         image.sprite = selectBtnSprites[num];
@@ -640,19 +640,19 @@ public class UIManager : MonoBehaviour
     {
         int arrivalTime = 540 + DataManager.Inst.CurrentPlayer.arrivalTime;
         string lastWord = DataManager.Inst.CurrentPlayer.GetLastWord();
-        
+
 
         int hour = arrivalTime / 60;
         arrivalTime -= hour * 60;
 
         string message = string.Format("<color=#000000> 현재 도착 예정 시간\n{0:00} : {1:00}</color>\n\n{2}", hour, arrivalTime, lastWord);
 
-        if(DataManager.Inst.CurrentPlayer.arrivalTime > 0)
+        if (DataManager.Inst.CurrentPlayer.arrivalTime > 0)
         {
             StartCoroutine(PlayMessage(message, Color.red));
         }
 
-        else if(DataManager.Inst.CurrentPlayer.arrivalTime == 0)
+        else if (DataManager.Inst.CurrentPlayer.arrivalTime == 0)
         {
             Color color = new Color(1f, 0.64f, 0f);
             StartCoroutine(PlayMessage(message, color));
@@ -752,6 +752,13 @@ public class UIManager : MonoBehaviour
                 GameManager.Inst.Particle.PlayParticle(6, 1.2f, target);
                 break;
 
+            case 7:
+                Handheld.Vibrate();
+                break;
+
+            case 8: // Snow
+                GameManager.Inst.Particle.PlayParticle(8, 10f);
+                break;
         }
         return 0f;
 
@@ -776,6 +783,13 @@ public class UIManager : MonoBehaviour
         {
             storyText.SetFontSize(fontSize);
         }
+    }
+
+    public void SetWriteSpeed(float value)
+    {
+        float speed = 0.1f - value;
+
+        DataManager.Inst.CurrentPlayer.writeSpeed = speed;
     }
 
     public void DarkBattleEffect(bool isActive, bool isSceneChaged = false)
@@ -857,7 +871,7 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(1.2f);
 
         DataManager.Inst.InGameDataReset();
-        SetBGM(9);
+        SetBGM(11);
 
         SceneManager.LoadScene("Title");
     }
@@ -865,7 +879,7 @@ public class UIManager : MonoBehaviour
     public IEnumerator SpecialEnddingEffect()
     {
         DarkBattleEffect(true);
-            
+
         yield return new WaitForSeconds(1f);
 
         PlayEffect(5);
@@ -880,7 +894,7 @@ public class UIManager : MonoBehaviour
 
         darkBattlePanal.transform.GetChild(0).gameObject.SetActive(false);
 
-        targetPos.y = -targetTransform.rect.height;
+        targetPos.y = -enddingCreditText.rect.height;
         enddingCreditText.anchoredPosition = targetPos;
         targetPos.y *= -1;
         enddingCreditPanal.transform.GetChild(0).gameObject.SetActive(true);
@@ -891,9 +905,9 @@ public class UIManager : MonoBehaviour
         enddingCreditPanal.gameObject.SetActive(true);
         enddingCreditPanal.DOFade(1f, 1f);
         yield return new WaitForSeconds(1f);
-        enddingCreditText.DOAnchorPosY(targetPos.y, 25f);
+        enddingCreditText.DOAnchorPosY(targetPos.y, 30f);
 
-        yield return new WaitForSeconds(23f);
+        yield return new WaitForSeconds(28f);
 
         enddingCreditPanal.transform.GetChild(4).gameObject.SetActive(true);
         enddingCreditPanal.transform.GetChild(4).GetComponent<Image>().DOFade(1f, 2f);
@@ -916,6 +930,7 @@ public class UIManager : MonoBehaviour
         bgmSlider.value = DataManager.Inst.CurrentPlayer.bgmVolume;
         fontSlider.value = DataManager.Inst.CurrentPlayer.fontSize;
         testText.fontSize = DataManager.Inst.CurrentPlayer.fontSize;
+        speedSlider.value = (0.1f - DataManager.Inst.CurrentPlayer.writeSpeed);
 
         if (DataManager.Inst.CurrentPlayer.bgmMute)
             bgmMute.isOn = true;

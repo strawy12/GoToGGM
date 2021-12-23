@@ -84,4 +84,15 @@ public class DataManager : MonoSingleTon<DataManager>
     {
         return helpTexts;
     }
+    private void OnApplicationQuit()
+    {
+       SaveToJson();
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        SaveToJson();
+    }
+
+
 }
